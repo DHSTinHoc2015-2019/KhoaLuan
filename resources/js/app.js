@@ -15,6 +15,7 @@ require('../assets/plugins/font-awesome/css/font-awesome.css');
 // import '../assets/js/fastclick.js';
 // import '../assets/js/detect.js';
 import '../assets/plugins/datatable/jquery.dataTables.js';
+import Viewer from 'v-viewer'
 
 window.Vue = require('vue');
 
@@ -23,9 +24,13 @@ Vue.use(VueRoute);
 
 import App from './App.vue';
 
+// Vue.use(VueViewer.default);
+
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 Vue.use(VueAxios, axios);
+
+Vue.use(Viewer)
 
 /*===========Home==============*/
 import HomeComponent from './components/home/HomeComponent.vue';

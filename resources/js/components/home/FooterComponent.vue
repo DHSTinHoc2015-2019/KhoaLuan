@@ -8,10 +8,7 @@
                             <div class="card-block" style="min-height: 300px;">
                                 <!--Title-->
                                 <h3 class="text-center font-up font-bold pink-text pb-2"><strong>Facebook</strong></h3>
-
-                                <!-- <div class="embed-responsive embed-responsive-16by9"> -->
-                                   <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook&tabs=timeline&width=450&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="450" height="300" style="border:3px solid #e91e63;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
-                                <!-- </div> -->
+                                   <!-- <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook&tabs=timeline&width=450&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="450" height="300" style="border:3px solid #e91e63;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> -->
                             </div>
                         </div>
                         
@@ -22,10 +19,7 @@
                             <div class="card-block" style="min-height: 300px;">
                                 <!--Title-->
                                 <h3 class="text-center font-up font-bold pink-text pb-2"><strong style="color: #02bdd5">YouTube</strong></h3>
-
-                                <!-- <div class="embed-responsive embed-responsive-16by9"> -->
-                                   <iframe style="border: 3px solid #02bdd5;" width="450" height="300" src="https://www.youtube.com/embed/yMQiHJsePOM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                <!-- </div> -->
+                                   <!-- <iframe style="border: 3px solid #02bdd5;" width="450" height="300" src="https://www.youtube.com/embed/yMQiHJsePOM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
                             </div>
                         </div>
                     </div>

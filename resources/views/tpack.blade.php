@@ -12,7 +12,10 @@
         <link rel="stylesheet" href="assets/css/login/util.css">
         <link rel="stylesheet" href="assets/css/jquery-comments.css">
         <link rel="stylesheet" href="css/style.css">
-        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.css"> -->
+        <!-- library images -->
+        <!-- <link rel="stylesheet" href="bower_components/Responsive-Photo-Viewer/photoviewer.css"> -->
+        <link href="//unpkg.com/viewerjs/dist/viewer.css" rel="stylesheet">
+
         <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet" />
         <!-- include the style alertify-->
         <link rel="stylesheet" href="bower_components/alertifyjs/css/alertify.min.css" />
@@ -31,14 +34,18 @@
         <script>
              new WOW().init();
         </script>
-        <!-- <script src="js/popper.min.js"></script> -->
+        <!-- Admin -->
         <script src="assets/js/moment.min.js"></script>
         <script src="assets/js/detect.js"></script>
         <script src="assets/js/fastclick.js"></script>
         <script src="assets/js/jquery.blockUI.js"></script>
         <script src="assets/js/jquery.nicescroll.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
-        <!-- <script src="bower_components/popper.js/dist/popper1.12.js"></script> -->
+        
+        <!-- library image -->
+        <!-- <script src="bower_components/Responsive-Photo-Viewer/photoviewer.js"></script> -->
+        <!-- <script src="//unpkg.com/viewerjs/dist/viewer.js"></script>
+        <script src="//unpkg.com/v-viewer/dist/v-viewer.js"></script> -->
         
         <!-- <script src="assets/datatable/dataTables.bootstrap4.min.js"></script> -->
         <!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
@@ -47,8 +54,6 @@
         <script src="assets/js/pikeadmin.js"></script>
          <!-- include a js alertify-->
         <script src="bower_components/alertifyjs/alertify.min.js"></script>
-        <!-- <script>
-            
-        </script> -->
+
     </body>
 </html>
