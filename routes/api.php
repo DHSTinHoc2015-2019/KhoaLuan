@@ -24,12 +24,24 @@ Route::get('demolike/{like}', 'DemoLikeController@index');
 
 /*=========Homepage============*/
 Route::get('listhometpack', 'HomeTpackController@index');
+Route::get('/introduction','IntroductionController@index');
+Route::get('/news','NewsController@index');
+Route::get('/news/all','NewsController@showAll');
+Route::get('/news/readmore/{id}','NewsController@show');
 
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/hometpack/{id}', 'HomeTpackController@show');
 	Route::post('/hometpack/update/{id}', 'HomeTpackController@update');
 	Route::post('/hometpack/create', 'HomeTpackController@create');
 	Route::get('/hometpack/delete/{id}', 'HomeTpackController@delete');
+
+	Route::get('/news/edit/{id}','NewsController@showedit');
+	Route::post('/news/update/{id}','NewsController@update');
+	Route::post('/news/create','NewsController@create');
+	Route::get('/news/delete/{id}','NewsController@delete');
+
+	
+	Route::post('/introduction/update','IntroductionController@update');
 });
 
 /*=========Demo============*/

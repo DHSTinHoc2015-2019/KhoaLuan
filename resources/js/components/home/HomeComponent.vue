@@ -8,7 +8,7 @@
         <header id="navigation">
             <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #0eb493">
                 <div class="container">
-                    <router-link to="/" class="navbar-brand font-weight-bold">TPACK</router-link>
+                    <router-link to="/" class="navbar-brand font-weight-bold">Trang chủ</router-link>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar6">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -21,7 +21,7 @@
                                 <router-link to="/tintuc" class="nav-link active">Tin tức</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link to="/blog" class="nav-link active">Blog</router-link>
+                                <router-link to="/blog" class="nav-link active">Bài viết</router-link>
                             </li>
                             <li class="nav-item">
                                 <router-link class="nav-link active" to="/thuvien">Thư viện</router-link>

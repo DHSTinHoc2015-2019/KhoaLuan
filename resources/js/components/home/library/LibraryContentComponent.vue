@@ -35,7 +35,7 @@
   							<!-- <a href="javascript:void(0)" title="mô tả">
                 				<img :src="value" class="image card-img-top" height="150">
             				</a> -->
-            				<iframe style="border: 3px solid #02bdd5; width: 100%" height="" src="https://www.youtube.com/embed/yMQiHJsePOM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            				<!-- <iframe style="border: 3px solid #02bdd5; width: 100%" height="" src="https://www.youtube.com/embed/yMQiHJsePOM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 						</div>
                     </div> 
                 </div>

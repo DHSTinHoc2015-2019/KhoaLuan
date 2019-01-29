@@ -54,6 +54,8 @@
         <script src="assets/js/pikeadmin.js"></script>
          <!-- include a js alertify-->
         <script src="bower_components/alertifyjs/alertify.min.js"></script>
+        <!-- tinymce -->
+        <script src='bower_components/tinymce/tinymce.js'></script>
 
     </body>
 </html>

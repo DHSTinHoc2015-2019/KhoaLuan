@@ -15,20 +15,20 @@
 						</div>
 						
 						<!-- post -->
-						<div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="300ms">
+						<div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="300ms" v-for="(value, index) in news">
 							<div class="post post-row">
-								<a class="post-img imgover" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
+								<a class="post-img imgover" href="javascript:void(0)"><img v-bind:src="value.news_image" alt=""></a>
 								<div class="post-body">
 									
-									<h3 class="post-title news-title"><a href="javascript:void(0)">Tiêu đề tin tức</a></h3>
-									<p class="news-day"><span><i class="fa fa-clock-o" aria-hidden="true"></i></span> 19-01-2019</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
+									<h3 class="post-title news-title"><a href="javascript:void(0)">{{ value.title }}</a></h3>
+									<p class="news-day"><span><i class="fa fa-clock-o" aria-hidden="true"></i></span> {{ convertDate(value.created_at) }}</p>
+									<p>{{ value.description }}</p>
 								</div>
 							</div>
 						</div>
 						<!-- /post -->
 						<!-- post -->
-						<div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="500ms">
+						<!-- <div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="500ms">
 							<div class="post post-row">
 								<a class="post-img imgover" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
 								<div class="post-body">
@@ -37,10 +37,10 @@
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 						<!-- post -->
-						<div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="700ms">
+						<!-- <div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="700ms">
 							<div class="post post-row">
 								<a class="post-img imgover" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
 								<div class="post-body">
@@ -49,10 +49,10 @@
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 						<!-- post -->
-						<div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="900ms">
+						<!-- <div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="900ms">
 							<div class="post post-row">
 								<a class="post-img imgover" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
 								<div class="post-body">
@@ -61,10 +61,10 @@
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 						<!-- post -->
-						<div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="1100ms">
+						<!-- <div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="1100ms">
 							<div class="post post-row">
 								<a class="post-img imgover" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
 								<div class="post-body">
@@ -73,10 +73,10 @@
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 						<!-- post -->
-						<div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="1300ms">
+						<!-- <div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="1300ms">
 							<div class="post post-row">
 								<a class="post-img imgover" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
 								<div class="post-body">
@@ -85,7 +85,7 @@
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 						
 						<div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="1300ms">
@@ -156,6 +156,28 @@
 	export default {
 		components: {
 			appNewsRightComponent: NewsRightComponent
+		},
+		data(){
+			return {
+				news: {}
+			}
+		},
+		created(){
+			this.axios.get('/api/news').then((response) => {
+				this.news = response.data
+				console.log(this.news)
+			}).catch((error) => {
+				console.log(error)
+			})
+		},
+		methods:{
+			convertDate(inputFormat) {
+			var d = new Date(inputFormat);
+			return [this.pad(d.getDate()), this.pad(d.getMonth()+1), d.getFullYear()].join('/');
+			},
+			pad(s){
+				return (s < 10) ? '0' + s : s;
+			}
 		}
 	}
 </script>

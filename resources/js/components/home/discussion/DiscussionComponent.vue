@@ -1,10 +1,10 @@
 <template>
     <div>
         <app-discussion-breadcrumb-component></app-discussion-breadcrumb-component>
-        <app-discussion-content-component></app-discussion-content-component>
+        <!-- <app-discussion-content-component></app-discussion-content-component> -->
         <app-discussion-new-component></app-discussion-new-component>
 
-        <div class="container">
+        <!-- <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <nav style="display: block; margin-right: auto; margin-left: auto">
@@ -18,13 +18,13 @@
                     </nav>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
     import DiscussionBreadcrumbComponent from './DiscussionBreadcrumbComponent.vue';
-    import DiscussionContentComponent from './DiscussionContentComponent.vue';
+    // import DiscussionContentComponent from './DiscussionContentComponent.vue';
     import DiscussionNewComponent from './DiscussionNewComponent.vue';
 
     export default {
@@ -33,7 +33,7 @@
         },
         components:{
             appDiscussionBreadcrumbComponent: DiscussionBreadcrumbComponent,
-            appDiscussionContentComponent: DiscussionContentComponent,
+            // appDiscussionContentComponent: DiscussionContentComponent,
             appDiscussionNewComponent: DiscussionNewComponent
         }
     }

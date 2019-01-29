@@ -17,7 +17,11 @@
                     </li>
 
 					<li class="submenu">
-                        <a href="javascript:void(0)"><i class="fa fa-fw fa-tv"></i><span> Charts </span> </a>
+                        <router-link to="/admin/intro"><i class="fa fa-fw fa-tv"></i><span> Giới thiệu </span> </router-link>
+                    </li>
+
+                    <li class="submenu">
+                        <router-link to="/admin/news"><i class="fa fa-fw fa-tv"></i><span> Tin tức </span> </router-link>
                     </li>
 					
 					<li class="submenu">
@@ -46,6 +50,10 @@
 								<li><a href="tables-basic.html">Basic Tables</a></li>
 								<li><a href="tables-datatable.html">Data Tables</a></li>
 							</ul>
+                    </li>
+
+                    <li class="submenu">
+                        <a href="javascript:void(0)"><i class="fa fa-fw fa-tv"></i><span> Charts </span> </a>
                     </li>
 
 

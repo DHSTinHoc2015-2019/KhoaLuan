@@ -1,231 +1,300 @@
 <template>
-	<div>
-		<section id="discussion-type">
-		    <div class="container">
-		        <div class="row wow fadeInUp" data-wow-delay=".3s">
-		            <div class="col-md-4 col-lg-4 col-xs-12 p-4 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="500ms">
-		                <div class="abcd">
-		                	<div class="media">
-			                    <div class="media-body">
-			                    	<div class="icon mb-3">
-			                            CK
-			                        </div>
-			                        <h4 class="media-heading">Kiến thức về nội dung chuyên môn</h4>
-			                    </div>
-			                </div>
-		                </div>
-		            </div>
-		            <div class="col-md-4 col-lg-4 col-xs-12 p-4 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="500ms">
-		            	<div class="abcd">
-		            		<div class="media">
-			                    <div class="media-body">
-			                    	 <div class="icon mb-3">
-			                            TK
-			                        </div>
-			                        <h4 class="media-heading">Kiến thức công nghệ</h4>
-			                    </div>
-			                </div>
-		            	</div>
-		            </div>
-		            <div class="col-md-4 col-lg-4 col-xs-12 p-4 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="500ms">
-		                <div class="abcd">
-		                	<div class="media">
-			                    <div class="media-body">
-			                    	<div class="icon mb-3">
-			                           PK
-			                        </div>
-			                        <h4 class="media-heading">Kiến thức phương pháp sư phạm</h4>
-			                    </div>
-			                </div>
-		                </div>
-		            </div>
-		            <div class="col-md-4 col-lg-4 col-xs-12 p-4 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="500ms">
-						<div class="abcd">
-							<div class="media">
-			                    <div class="media-body">
-			                    	<div class="icon mb-3">
-			                            TCK
-			                        </div>
-			                        <h4 class="media-heading">Kiến thức nội dung công nghệ </h4>
-			                    </div>
-			                </div>
-						</div>
-		            </div>
-		            
-		            <div class="col-md-4 col-lg-4 col-xs-12 p-4 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="500ms">
-		                <div class="abcd">
-		                	<div class="media">
-			                    <div class="media-body">
-			                    	<div class="icon mb-3">
-			                            PCK
-			                        </div>
-			                        <h4 class="media-heading">Kiến thức nội dung phương pháp</h4>
-			                    </div>
-			                </div>
-		                </div>
-		            </div>
-		            <div class="col-md-4 col-lg-4 col-xs-12 p-4 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="500ms">
-		            	<div class="abcd">
-			                <div class="media">
-			                    <div class="media-body">
-			                    	<div class="icon mb-3">
-			                            TPK
-			                        </div>
-			                        <h4 class="media-heading">Kiến thức phương pháp công nghệ </h4>
-			                    </div>
-			                </div>
-			            </div>
-		            </div>
-		        </div>
-		    </div>
-		</section>
-	</div>
+	<section id="discussion-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-container" id="main">
+            <div class="popular-searches clearfix">
+                <ul class="results">
+                    <li>
+                        <a href="#" target="_blank" class="list clearfix first">
+                            <div class="num"><span>1</span></div>
+                            <div class="adTextWrap">
+                                <p class="title">Innocom Technologies</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank" class="list clearfix">
+                            <div class="num"><span>2</span></div>
+                            <div class="adTextWrap">
+                                <p class="title"><b>Car</b> FlixBus Pas Cher depuis - A&eacute;roport de B&acirc;le</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+                </div>
+            </div>
+        </div>
+	</section>
 </template>
-<script>
-	
 
-	export default {
-        mounted() {
-            // jQuery(document).ready(function(){
-            // "use strict";
-            // new WOW().init();
-            // });
-        },
-        components:{
-        	
-        }
-    }
-</script>
 <style scoped>
-
-.abcd {
-	display: inline;
-	float: left;
-	margin-bottom: 15px;
-	padding: 25px 20px;
-	position: relative;
-	text-align: left;
-	width: 100%;
-	-w-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
-    border-bottom: 5px solid #00d999;
-    /*background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);*/
-    background: #CAC531;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #F3F9A7, #CAC531);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #F3F9A7, #CAC531); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+/* *{
+    margin:0;
+     padding:0;
+}*/
+ a {
+    text-decoration:none;
+     outline:none
 }
-.abcd:after{
-	content: '';
-	position: absolute;
-	left: 0;
-	opacity: 0;
-	bottom: 0;
-	height: 24px;
-	width: 100%;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
+ a img {
+    border:none
 }
-.abcd:hover:after{
-	opacity: 1;
-	background-color: #00d999;
+ li {
+    list-style:none
 }
-.abcd:hover{
-	/*background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);*/
-	background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	/*color: #02bdd5;*/
-	color: #fff;
-	/*color: #00d999;*/
-	cursor: pointer;
+ .clear {
+    clear:both;
+     overflow:hidden;
+     line-height:0;
+     font-size:0;
+     height:0
 }
-/*.////*/
+ .clearfix:after{
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear: both;
+    height:0
+}
 
-    #discussion-type {
-		padding: 40px 0 0 0;
-		background-color: white;
-	}
+ .main-container{
+    /*width: 960px;*/
+     margin: 0 auto;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
 
-	#discussion-type .media {
-		margin: 0px 0 70px 0;
-	}
+ .popular-searches ul{
+     list-style: none;
+}
+ .popular-searches ul.last, .related-searches ul.last{
+     border-bottom:0
+}
 
-	#discussion-type .media .media-left {
-	  padding-right: 25px;
-	}
-
-	#discussion-type h3 {
-		color: #222222;
-		/*font-size: 18px;*/
-		text-transform: uppercase;
-		text-align: center;
-		/*margin-bottom: 20px;*/
-		margin: 0;
-		font-weight: 400;
-		font-family: "Roboto", sans-serif;
-	}
-
-	#discussion-type p {
-		/*line-height: 25px;*/
-		/*font-size: 14px;*/
-		color: #777777;
-		font-family: "Roboto", sans-serif;
-		font-weight: 300;
-	}
-
-	#discussion-type .icon {
-	    margin-right: auto;
-	    margin-left: auto;
-	    display: block;
-		text-decoration: none;
-		color: #fff;
-		background-color: #02bdd5;
-		height: 100px;
-		text-align: center;
-		width: 100px;
-		font-size: 50px;
-		line-height: 100px;
-		overflow: hidden;
-		-webkit-border-radius: 50%;
-		-moz-border-radius: 50%;
-		-ms-border-radius: 50%;
-		-o-border-radius: 50%;
-		text-shadow: #00a4ba 1px 1px, #00a4ba 2px 2px, #00a4ba 3px 3px, #00a4ba 4px 4px, #00a4ba 5px 5px, #00a4ba 6px 6px, #00a4ba 7px 7px, #00a4ba 8px 8px, #00a4ba 9px 9px, #00a4ba 10px 10px, #00a4ba 11px 11px, #00a4ba 12px 12px, #00a4ba 13px 13px, #00a4ba 14px 14px, #00a4ba 15px 15px, #00a4ba 16px 16px, #00a4ba 17px 17px, #00a4ba 18px 18px, #00a4ba 19px 19px, #00a4ba 20px 20px, #00a4ba 21px 21px, #00a4ba 22px 22px, #00a4ba 23px 23px, #00a4ba 24px 24px, #00a4ba 25px 25px, #00a4ba 26px 26px, #00a4ba 27px 27px, #00a4ba 28px 28px, #00a4ba 29px 29px, #00a4ba 30px 30px, #00a4ba 31px 31px, #00a4ba 32px 32px, #00a4ba 33px 33px, #00a4ba 34px 34px, #00a4ba 35px 35px, #00a4ba 36px 36px, #00a4ba 37px 37px, #00a4ba 38px 38px, #00a4ba 39px 39px, #00a4ba 40px 40px, #00a4ba 41px 41px, #00a4ba 42px 42px, #00a4ba 43px 43px, #00a4ba 44px 44px, #00a4ba 45px 45px, #00a4ba 46px 46px, #00a4ba 47px 47px, #00a4ba 48px 48px, #00a4ba 49px 49px, #00a4ba 50px 50px, #00a4ba 51px 51px, #00a4ba 52px 52px, #00a4ba 53px 53px, #00a4ba 54px 54px, #00a4ba 55px 55px, #00a4ba 56px 56px, #00a4ba 57px 57px, #00a4ba 58px 58px, #00a4ba 59px 59px, #00a4ba 60px 60px, #00a4ba 61px 61px, #00a4ba 62px 62px, #00a4ba 63px 63px, #00a4ba 64px 64px, #00a4ba 65px 65px, #00a4ba 66px 66px, #00a4ba 67px 67px, #00a4ba 68px 68px, #00a4ba 69px 69px, #00a4ba 70px 70px, #00a4ba 71px 71px, #00a4ba 72px 72px, #00a4ba 73px 73px, #00a4ba 74px 74px, #00a4ba 75px 75px, #00a4ba 76px 76px, #00a4ba 77px 77px, #00a4ba 78px 78px, #00a4ba 79px 79px, #00a4ba 80px 80px, #00a4ba 81px 81px, #00a4ba 82px 82px, #00a4ba 83px 83px, #00a4ba 84px 84px, #00a4ba 85px 85px, #00a4ba 86px 86px, #00a4ba 87px 87px, #00a4ba 88px 88px, #00a4ba 89px 89px, #00a4ba 90px 90px, #00a4ba 91px 91px, #00a4ba 92px 92px, #00a4ba 93px 93px, #00a4ba 94px 94px, #00a4ba 95px 95px, #00a4ba 96px 96px, #00a4ba 97px 97px, #00a4ba 98px 98px, #00a4ba 99px 99px, #00a4ba 100px 100px;
-	}
-	#discussion-type .media {
-		margin: 0;
-	}
-	#discussion-type .media-heading {
-		font-family: 'Roboto Condensed', sans-serif; 
-		margin-top: 0;
-		margin-bottom: 5px;
-		line-height: 1.1;
-		text-align: center;
-	    min-height: 2.1em;
-	}
-	#discussion-type .section-heading {
-		text-align: center;
-		margin-bottom: 65px;
-	}
-
-	#discussion-type .section-heading p {
-		font-weight: 300;
-		color: #727272;
-		line-height: 20px;
-	}
-
-	#discussion-type .title {
-		font-size: 2.5em;
-		line-height: 1.1;
-		font-weight: 300;
-		color: #231557;
-		text-transform: uppercase;
-		margin-bottom: 20px;
-	}
+ .popular-searches li{
+     -webkit-text-size-adjust: 100%;
+    color: #ffffff;
+     margin-bottom: 10px;
+    background: #344152;
+}
+ .popular-searches li a{
+    font-size: 20px;
+     color: #ffffff;
+     display:block;
+     line-height: 24px;
+     -webkit-text-size-adjust: 100%;
+    background: url(/images/views/arrow.png) 96% center no-repeat;
+     font-weight: 600;
+    position: relative;
+}
+ .popular-searches li a:hover{
+    color: #6aae2b
+}
+ ul{
+    list-style: none
+}
+ .results{
+     display: block;
+     margin: 0 auto
+}
+ .results li{
+     display: block;
+}
+ .results li:hover{
+    background: #22528a;
+}
+ .results li:hover .num{
+    background: url(/images/views/numbgh.png);
+}
+ .num{
+    font-size: 22px;
+     color: #ffffff;
+     float: left;
+     width: 48px;
+     line-height: 50px;
+     height: 59px;
+     text-align: center;
+    margin-top: -25px;
+    position:absolute;
+     top: 50%;
+     font-weight: 400;
+    background: url(/images/views/numbg.png);
+     margin-left:-10px;
+     background-size: 50px 59px;
+     font-weight: bold;
+}
+ .adTextWrap{
+    width: 85%;
+    line-height: 18px;
+     padding-left: 60px;
+}
+ a.list{
+     word-wrap:break-word;
+     display: block;
+    padding: 20px 70px 20px 0px;
+}
+ a.list .title{
+    font-size: 20px;
+    color: #ffffff;
+    line-height: 28px;
+    margin-bottom: 3px;
+    font-weight: 600
+}
+ a.list .url{
+    color: #437fbf;
+    display: block;
+    font-size: 15px;
+    line-height: 19px;
+    font-weight: 300
+}
+ a.list .desc{
+    color:#5f7188;
+     font-size: 15px;
+     line-height: 19px;
+    font-weight: 300;
+     display: block;
+     margin-bottom: 3px;
+}
+ a.list .sepr{
+    color:#919191;
+     font-size: 17px;
+    display: none;
+    font-weight: 300
+}
+ a.list.first{
+    border-top: 0px
+}
+ .custom-msg {
+     text-align: center;
+    background-color: #fff;
+}
+ .results li:hover .title{
+    color:#ffffff
+}
+ .results li:hover .url, .results li:hover .desc, .results li:hover .sepr{
+    color: #ffffff
+}
+ 
+ @media only screen and (max-width:990px) {
+     .popular-searches li a{
+        font-size: 16px
+    }
+     .main-container{
+        width: 760px;
+    }
+     .srchTxt{
+        width: 197px;
+        font-size: 16px;
+        line-height: 20px
+    }
+}
+ @media not all and (min-width: 880px){
+     .adTextWrap{
+        width: 80%
+    }
+}
+ @media only screen and (max-width:776px) {
+     #main{
+        width: 90%;
+        margin: 0px auto
+    }
+     .popular-searches li a{
+        font-size: 14px;
+    }
+}
+ @media only screen and (max-width:767px) {
+     .popular-searches li a, .related-searches li a{
+        margin-left: 0
+    }
+     .popular-searches li a{
+        padding-left: 0px
+    }
+     .popular-searches-wrap{
+        margin-bottom: 10px
+    }
+     .results li{
+         display: block;
+        padding: 0 5px
+    }
+    .main-container{
+        margin-bottom: 5px!important
+    }
+     .num{
+        margin-left: -15px;
+    }
+}
+ @media not all and (min-width: 736px) {
+     .adTextWrap{
+        width: 82%
+    }
+     a.list {
+        padding:15px 10px 15px 0;
+        padding-right: 40px
+    }
+     a.list .title{
+        font-size: 18px;
+        margin-bottom: 5px;
+        line-height: 23px
+    }
+     a.list .desc{
+        display: block;
+        font-size: 14px
+    }
+     a.list .url{
+        display: block;
+        font-size: 14px
+    }
+     a.list .sepr{
+        display: none
+    }
+}
+ @media not all and (min-width: 480px) {
+     a.list{
+        padding-right: 40px !important
+    }
+     .adTextWrap{
+        width: 78%
+    }
+     .results .num{
+        padding-left: 0
+    }
+}
+ @media only screen and (max-width:450px) {
+     .srchTxt{
+        width: 186px;
+        font-size: 16px;
+        line-height: 20px
+    }
+     .srchBtn{
+        width: 59px;
+        font-size: 13px
+    }
+}
+ @media not all and (min-width: 400px) {
+     .adTextWrap{
+        width: 76%
+    }
+}
+ @media not all and (min-width: 320px){
+     .results .num{
+        display: none
+    }
+     .results li{
+        background-image: none !important
+    }
+     a.list{
+        padding-left: 10px;
+        padding-right: 30px !important
+    }
+     .adTextWrap{
+        width: auto;
+        padding: 0;
+        float: none
+    }
+}
 </style>
-

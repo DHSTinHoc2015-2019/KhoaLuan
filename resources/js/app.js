@@ -51,6 +51,12 @@ import AdminHome from './components/admin/homeAdmin/AdminHome.vue';
 import ThanhPhanTpack from './components/admin/trangchu/ThanhPhanTpack.vue';
 import ThanhPhanTpackEdit from './components/admin/trangchu/ThanhPhanTpackEdit.vue';
 import ThanhPhanTpackCreate from './components/admin/trangchu/ThanhPhanTpackCreate.vue';
+import Intro from './components/admin/intro/Intro.vue';
+import IntroEdit from './components/admin/intro/IntroEdit.vue';
+import News from './components/admin/news/News.vue';
+import NewsMore from './components/admin/news/NewsMore.vue';
+import NewsEdit from './components/admin/news/NewsEdit.vue';
+import NewsCreate from './components/admin/news/NewsCreate.vue';
 
 /*===========Admin demo==============*/
 import DemoAdmin from './components/admin/demo/DemoAdmin.vue';
@@ -103,6 +109,54 @@ var routes = [
                 ]
             },
             {
+                path: 'intro',
+                component: {
+                    render (c) { return c('router-view') }
+                },
+                children: [
+                    {
+                        name: 'AdminIntro',
+                        path: '',
+                        component: Intro
+                    },
+                    {
+                        name: 'AdminIntroEdit',
+                        path: 'edit',
+                        component: IntroEdit,
+                        props: true
+                    }
+                ]
+            },
+            {
+                path: 'news',
+                component: {
+                    render (c) { return c('router-view') }
+                },
+                children: [
+                    {
+                        name: 'News',
+                        path: '',
+                        component: News
+                    },
+                    {
+                        name: 'NewsMore',
+                        path: 'newmore/:id',
+                        component: NewsMore
+                    },
+                    {
+                        name: 'NewsEdit',
+                        path: 'edit/:id',
+                        component: NewsEdit
+                    },
+                    {
+                        name: 'NewsCreate',
+                        path: 'create',
+                        component: NewsCreate
+                    }
+
+                ]
+            },
+            {
                 name: 'AdminTrangChu',
                 path: 'demotablechild',
                 component: DemoAdmin
@@ -151,13 +205,13 @@ var routes = [
 	        	component: HomeContentComponent,
         	},
             {
-                name: 'Intro',
+                name: 'IntroComponent',
                 path: 'gioithieu',
                 component: IntroComponent,
                 props: true
             },
         	{
-        		name: 'News',
+        		name: 'NewsComponent',
         		path: 'tintuc',
         		component: NewsComponent
         	},

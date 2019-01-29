@@ -80,11 +80,6 @@
 		data(){
 			return {
 				hometpacks: {}
-				// ,
-				// result: {
-				// 	'message': '',
-				// 	'status': false
-				// }
 			}
 		},
 		created: function(){
