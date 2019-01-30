@@ -46,8 +46,10 @@
 								 	<div class="col-md-6">
             							<label class="font-weight-bold">Chọn ảnh</label>
             							<div class="form-group">
-              								<input type="file" name="file" id="profile-img" v-on:change="onImageChange"> 
-              								<img v-bind:src="news.news_image" id="profile-img-tag" style="display: block; margin-left: auto; margin-right: auto; max-width: 200px" />                                        
+              								<input type="file" v-on:change="onFileChange" />
+											<div id="preview">
+												<img v-if="url" :src="url" style="display: block; margin-left: auto; margin-right: auto; max-width: 350px" />
+											</div>                                        
             							</div>
           							</div>
       
@@ -89,7 +91,8 @@
 	export default {
 		data(){
 			return {
-				news: {}
+				news: {},
+				url: null
 			}
 		},
 		mounted(){
@@ -138,21 +141,14 @@
 			});
 		},
 		methods: {
-			onImageChange(e){
-                this.news.news_image = e.target.files[0];
-                var input = document.getElementById('profile-img')
-                if (input.files && input.files[0]) {
-					var reader = new FileReader();
-					reader.onload = function (e) {
-						$('#profile-img-tag').attr('src', e.target.result);
-					}
-					reader.readAsDataURL(input.files[0]);
-				}
-            },
+			onFileChange(e) {
+				this.news.news_image = e.target.files[0];
+				this.url = URL.createObjectURL(this.news.news_image);
+			},
 			createNews(){
-				axios.defaults.headers.common['Content-Type'] = 'multipart/form-data'
-				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
-
+				//check file
+				this.news.hasImage = true
+				//content tinyMCE
 				var contentpost = tinymce.get("news_content").getContent();
 
 				let formData = new FormData();
@@ -160,21 +156,56 @@
                 formData.append('title', this.news.title);
                 formData.append('news_content', contentpost);
                 formData.append('description', this.news.description);
-				// console.log(formData)
-				let uri = `/api/news/create`;
-				this.axios.post(uri, formData).then((response) => {
-					// console.log(response.data)
-					if(response.data.status){
-						alertify.set('notifier','position', 'buttom-right');
-		 				alertify.success(response.data.message);
-						this.$router.push({ name: 'News'})
-					} else {
-						alertify.set('notifier','position', 'buttom-right');
-		 				alertify.error(response.data.message);
+                formData.append('hasImage', true);
+
+                for (let [key, value] of formData.entries()) {
+					if(key == 'news_image') {
+						if(value === 'undefined' || value === null){
+							this.news.hasImage = false
+						}
 					}
-				}).catch((error) => {
-					console.log(error)
-				})
+				}
+
+				if(this.news.hasImage){
+					axios.defaults.headers.common['Content-Type'] = 'multipart/form-data'
+					axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+					let uri = `/api/news/create`;
+					this.axios.post(uri, formData).then((response) => {
+						// console.log(response.data)
+						if(response.data.status){
+							alertify.set('notifier','position', 'buttom-right');
+			 				alertify.success(response.data.message);
+							this.$router.push({ name: 'News'})
+						} else {
+							alertify.set('notifier','position', 'buttom-right');
+			 				alertify.error(response.data.message);
+						}
+					}).catch((error) => {
+						console.log(error)
+					})
+				} else {
+					// console.log('khong co file')
+					this.news.news_content = contentpost
+					var color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+					this.news.news_image = '<svg width="100%" height="170"><rect x="5" y="5" rx="10" ry="10" width="97%" height="160" style="fill:'+ color + ';stroke:black;stroke-width:5;"></rect> </svg>';
+
+					axios.defaults.headers.common['Content-Type'] = 'application/json'
+					axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+					let uri = `/api/news/create`;
+					this.axios.post(uri, this.news).then((response) => {
+						// console.log(response.data)
+						if(response.data.status){
+							alertify.set('notifier','position', 'buttom-right');
+			 				alertify.success(response.data.message);
+							this.$router.push({ name: 'News'})
+						} else {
+							alertify.set('notifier','position', 'buttom-right');
+			 				alertify.error(response.data.message);
+						}
+					}).catch((error) => {
+						console.log(error)
+					})
+				}				
 			},
 			destroy(){
 				this.$router.push({name: 'News'});

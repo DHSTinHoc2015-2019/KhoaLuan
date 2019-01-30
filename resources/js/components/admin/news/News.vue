@@ -42,7 +42,13 @@
 										<tr v-for="(value, index) in news">
 											<td>{{ value.id }}</td>
 											<td>
-												<span style="float: left; margin-right:10px;"><a href=""><img v-bind:src="`images/news/${value.news_image}`" alt="" style="max-width: 10em"></a></span>
+												<span style="float: left; margin-right:10px;" v-if="!checkImageSVG(index)">
+													<a href=""><img v-bind:src="`images/news/${value.news_image}`" alt="" style="max-width: 10em">
+													</a>
+												</span>
+												<span style="float: left; margin-right:10px;" v-if="checkImageSVG(index)">
+													<div v-html="value.news_image" style="max-width: 10em;"></div>
+												</span>
 												<h4>{{ value.title }}</h4>
 												<p>{{ value.description }}<span>
 												<router-link :to="{ name: 'NewsMore', params: {id: value.id }}">
@@ -97,6 +103,14 @@
 			// END CODE FOR DATA TABLE 
 		},
 		methods:{
+			checkImageSVG(index){
+				if(this.news.length > 0){
+					if('news_image' in this.news[index]){
+						return this.news[index].news_image.toString().indexOf('<svg') != -1
+					}
+				}
+				return false;
+			},
 			deleteNews(index, id){
 				var vm = this
 				alertify.confirm('Thông báo', 'Bạn muốn xóa dữ liệu?', function(){ 

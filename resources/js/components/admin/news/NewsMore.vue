@@ -30,10 +30,13 @@
 
 							<div class="card-body">
 								<div class="row">
-									<div class="col-md-2">
+									<div class="col-md-3" v-if="!checkImageSVG()">
 										<img v-bind:src="`images/news/${news.news_image}`" alt="" style="max-width: 100%;">
 									</div>
-									<div class="col-md-10">
+									<div class="col-md-3" v-if="checkImageSVG()" v-html="news.news_image">
+										
+									</div>
+									<div class="col-md-9">
 										<h3>Mô tả</h3>
 										{{ news.description }}
 									</div>
@@ -71,8 +74,13 @@
 				console.log(error)
 			})
 		},
-		mounted(){
-			
+		methods:{
+			checkImageSVG(){
+				if('news_image' in this.news){
+					return this.news.news_image.toString().indexOf('<svg') != -1
+				}
+				return false;
+			},
 		}
 	}
 </script>

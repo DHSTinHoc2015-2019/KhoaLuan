@@ -28,6 +28,7 @@ Route::get('/introduction','IntroductionController@index');
 Route::get('/news','NewsController@index');
 Route::get('/news/all','NewsController@showAll');
 Route::get('/news/readmore/{id}','NewsController@show');
+Route::get('/blog/all','BlogController@showAll');
 
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/hometpack/{id}', 'HomeTpackController@show');

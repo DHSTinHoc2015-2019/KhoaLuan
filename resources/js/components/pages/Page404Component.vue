@@ -8,7 +8,6 @@
 	                    <h2 class="wow fadeInUp animated" data-wow-delay=".6s">Hmm. Chúng tôi gặp khó khăn khi tìm trang web</h2>
 	                    <p class="wow fadeInUp animated" data-wow-delay=".9s">Trang bạn đang tìm kiếm đã bị di chuyển, xóa, đổi tên hoặc có thể không bao giờ tồn tại.</p>
 	                    <router-link to="/" class="btn btn-dafault btn-home wow fadeInUp animated" data-wow-delay="1.1s">Quay về trang chủ</router-link>
-	                    
 	                </div>
 	            </div>
 	        </div>

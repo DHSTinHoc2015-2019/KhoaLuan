@@ -46,12 +46,20 @@
 									</div>
 								 	<div class="col-md-6">
             							<label class="font-weight-bold">Chọn ảnh</label>
-            							<div class="form-group">
-              								<input type="file" name="file" id="profile-img"> 
-              								<img v-bind:src="`images/news/${news.news_image}`" id="profile-img-tag" style="display: block; margin-left: auto; margin-right: auto; max-width: 200px" />                                        
+            							<div class="form-group" v-if="!checkSVG">
+            								<input type="file" v-on:change="onFileChange" />
+											<div id="preview">
+												<img v-if="url" :src="url" style="display: block; margin-left: auto; margin-right: auto; max-width: 350px" />
+											</div>                                        
+            							</div>
+            							<div class="form-group" v-if="checkSVG">
+            								<input type="file" v-on:change="onFileChange" />
+											<div id="preview">
+												<img v-if="url" :src="url" style="display: block; margin-left: auto; margin-right: auto; max-width: 350px" />
+											</div>         
             							</div>
           							</div>
-      
+
 									<div class="col-md-12">
 										<div class="form-group">
 											<label class="font-weight-bold">Nội dung</label>
@@ -90,7 +98,9 @@
 	export default {
 		data(){
 			return {
-				news: {}
+				news: {},
+				url: null,
+				checkSVG: null
 			}
 		},
 		created(){
@@ -98,13 +108,15 @@
 			axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
 			this.axios.get(`/api/news/edit/${this.$route.params.id}`).then((response) =>{
 				this.news = response.data
-				// console.log(this.news.news_content)
+				this.checkSVG = response.data.news_image.indexOf('<svg') != -1
+				if(!this.checkSVG){
+					this.url = `images/news/${this.news.news_image}`
+				}
 			}).catch((error) => {
 				console.log(error)
 			})
 		},
 		beforeUpdate(){
-			var contentnews = this.news.news_content
 			$(document).ready(function() {
 				if( tinymce.editors.length > 0 ){
 					for( i = 0; i < tinymce.editors.length; i++ ){
@@ -150,38 +162,71 @@
 			});
 		},
 		mounted(){
-			var vm = this
-			$("#profile-img").change(function () {
-				vm.readURL(this);
-			});
+			
 		},
 		methods: {
-			readURL(input) {
-				if (input.files && input.files[0]) {
-					var reader = new FileReader();
-					reader.onload = function (e) {
-						$('#profile-img-tag').attr('src', e.target.result);
-					}
-					reader.readAsDataURL(input.files[0]);
-				}
-		  	},
+			onFileChange(e) {
+				this.news.news_image = e.target.files[0];
+				this.url = URL.createObjectURL(this.news.news_image);
+			},
 			updateNews(){
 				var contentpost = tinymce.get("news_content").getContent();
-				axios.defaults.headers.common['Content-Type'] = 'application/json'
-				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
-				let uri = `/api/news/update/${this.$route.params.id}`;
-				this.axios.post(uri, { contentpost: contentpost, title: this.news.title, description: this.news.description}).then((response) => {
-					if(response.data.status){
-						alertify.set('notifier','position', 'buttom-right');
-		 				alertify.success(response.data.message);
-						this.$router.push({ name: 'News'})
-					} else {
-						alertify.set('notifier','position', 'buttom-right');
-		 				alertify.error(response.data.message);
+
+				this.news.hasImage = true
+
+				let formData = new FormData();
+                formData.append('news_image', this.news.news_image);
+                formData.append('title', this.news.title);
+                formData.append('news_content', contentpost);
+                formData.append('description', this.news.description);
+                formData.append('hasImage', true);
+
+                for (let [key, value] of formData.entries()) {
+					if(key == 'news_image') {
+						if(value === 'undefined' || value === null || value.toString().indexOf('<svg') != -1){
+							this.news.hasImage = false
+						}
 					}
-				}).catch((error) => {
-					console.log(error)
-				})
+				}
+
+				if(this.news.hasImage){
+					axios.defaults.headers.common['Content-Type'] = 'multipart/form-data'
+					axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+					let uri = `/api/news/update/${this.$route.params.id}`;
+					this.axios.post(uri, formData).then((response) => {
+						// console.log(response.data)
+						if(response.data.status){
+							alertify.set('notifier','position', 'buttom-right');
+			 				alertify.success(response.data.message);
+							this.$router.push({ name: 'News'})
+						} else {
+							alertify.set('notifier','position', 'buttom-right');
+			 				alertify.error(response.data.message);
+						}
+					}).catch((error) => {
+						console.log(error)
+					})
+				} else {
+					// console.log('khong co file')
+					this.news.news_content = contentpost
+					
+					axios.defaults.headers.common['Content-Type'] = 'application/json'
+					axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+					let uri = `/api/news/update/${this.$route.params.id}`;
+					this.axios.post(uri, this.news).then((response) => {
+						// console.log(response.data)
+						if(response.data.status){
+							alertify.set('notifier','position', 'buttom-right');
+			 				alertify.success(response.data.message);
+							this.$router.push({ name: 'News'})
+						} else {
+							alertify.set('notifier','position', 'buttom-right');
+			 				alertify.error(response.data.message);
+						}
+					}).catch((error) => {
+						console.log(error)
+					})
+				}
 			},
 			destroy(){
 				this.$router.push({name: 'News'});

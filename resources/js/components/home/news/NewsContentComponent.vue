@@ -17,7 +17,11 @@
 						<!-- post -->
 						<div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="300ms" v-for="(value, index) in news">
 							<div class="post post-row">
-								<a class="post-img imgover" href="javascript:void(0)"><img v-bind:src="value.news_image" alt=""></a>
+								<a class="post-img imgover" href="javascript:void(0)" v-if="!checkImageSVG(index)">
+									<img v-bind:src="`images/news/${value.news_image}`" alt="" style="max-height: 200px">
+								</a>
+								<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVG(index)" v-html="value.news_image">
+								</a>
 								<div class="post-body">
 									
 									<h3 class="post-title news-title"><a href="javascript:void(0)">{{ value.title }}</a></h3>
@@ -26,69 +30,8 @@
 								</div>
 							</div>
 						</div>
-						<!-- /post -->
-						<!-- post -->
-						<!-- <div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="500ms">
-							<div class="post post-row">
-								<a class="post-img imgover" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
-								<div class="post-body">
-									
-									<h3 class="post-title"><a href="javascript:void(0)">Tiêu đề tin tức</a></h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
-						<!-- post -->
-						<!-- <div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="700ms">
-							<div class="post post-row">
-								<a class="post-img imgover" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
-								<div class="post-body">
-									
-									<h3 class="post-title"><a href="javascript:void(0)">Tiêu đề tin tức</a></h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
-						<!-- post -->
-						<!-- <div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="900ms">
-							<div class="post post-row">
-								<a class="post-img imgover" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
-								<div class="post-body">
-									
-									<h3 class="post-title"><a href="javascript:void(0)">Tiêu đề tin tức</a></h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
-						<!-- post -->
-						<!-- <div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="1100ms">
-							<div class="post post-row">
-								<a class="post-img imgover" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
-								<div class="post-body">
-									
-									<h3 class="post-title"><a href="javascript:void(0)">Tiêu đề tin tức</a></h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
-						<!-- post -->
-						<!-- <div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="1300ms">
-							<div class="post post-row">
-								<a class="post-img imgover" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
-								<div class="post-body">
-									
-									<h3 class="post-title"><a href="javascript:void(0)">Tiêu đề tin tức</a></h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
-						
-						<div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="1300ms">
+
+						<div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="300ms">
 							<div class="section-row">
 								<button class="primary-button center-block">Xem thêm</button>
 							</div>
@@ -163,14 +106,22 @@
 			}
 		},
 		created(){
-			this.axios.get('/api/news').then((response) => {
+			this.axios.get('/api/news/all').then((response) => {
 				this.news = response.data
-				console.log(this.news)
+				// console.log(this.news)
 			}).catch((error) => {
 				console.log(error)
 			})
 		},
 		methods:{
+			checkImageSVG(index){
+				if(this.news.length > 0){
+					if('news_image' in this.news[index]){
+						return this.news[index].news_image.toString().indexOf('<svg') != -1
+					}
+				}
+				return false;
+			},
 			convertDate(inputFormat) {
 			var d = new Date(inputFormat);
 			return [this.pad(d.getDate()), this.pad(d.getMonth()+1), d.getFullYear()].join('/');

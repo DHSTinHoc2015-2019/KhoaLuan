@@ -2880,6 +2880,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2902,6 +2908,15 @@ __webpack_require__.r(__webpack_exports__);
     }); // END CODE FOR DATA TABLE 
   },
   methods: {
+    checkImageSVG: function checkImageSVG(index) {
+      if (this.news.length > 0) {
+        if ('news_image' in this.news[index]) {
+          return this.news[index].news_image.toString().indexOf('<svg') != -1;
+        }
+      }
+
+      return false;
+    },
     deleteNews: function deleteNews(index, id) {
       var vm = this;
       alertify.confirm('Thông báo', 'Bạn muốn xóa dữ liệu?', function () {
@@ -2942,6 +2957,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+//
+//
 //
 //
 //
@@ -3032,7 +3057,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      news: {}
+      news: {},
+      url: null
     };
   },
   mounted: function mounted() {
@@ -3079,49 +3105,99 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    onImageChange: function onImageChange(e) {
+    onFileChange: function onFileChange(e) {
       this.news.news_image = e.target.files[0];
-      var input = document.getElementById('profile-img');
-
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          $('#profile-img-tag').attr('src', e.target.result);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-      }
+      this.url = URL.createObjectURL(this.news.news_image);
     },
     createNews: function createNews() {
       var _this = this;
 
-      axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt');
+      //check file
+      this.news.hasImage = true; //content tinyMCE
+
       var contentpost = tinymce.get("news_content").getContent();
       var formData = new FormData();
       formData.append('news_image', this.news.news_image);
       formData.append('title', this.news.title);
       formData.append('news_content', contentpost);
-      formData.append('description', this.news.description); // console.log(formData)
+      formData.append('description', this.news.description);
+      formData.append('hasImage', true);
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-      var uri = "/api/news/create";
-      this.axios.post(uri, formData).then(function (response) {
-        // console.log(response.data)
-        if (response.data.status) {
-          alertify.set('notifier', 'position', 'buttom-right');
-          alertify.success(response.data.message);
+      try {
+        for (var _iterator = formData.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var _step$value = _slicedToArray(_step.value, 2),
+              key = _step$value[0],
+              value = _step$value[1];
 
-          _this.$router.push({
-            name: 'News'
-          });
-        } else {
-          alertify.set('notifier', 'position', 'buttom-right');
-          alertify.error(response.data.message);
+          if (key == 'news_image') {
+            if (value === 'undefined' || value === null) {
+              this.news.hasImage = false;
+            }
+          }
         }
-      }).catch(function (error) {
-        console.log(error);
-      });
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      if (this.news.hasImage) {
+        axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt');
+        var uri = "/api/news/create";
+        this.axios.post(uri, formData).then(function (response) {
+          // console.log(response.data)
+          if (response.data.status) {
+            alertify.set('notifier', 'position', 'buttom-right');
+            alertify.success(response.data.message);
+
+            _this.$router.push({
+              name: 'News'
+            });
+          } else {
+            alertify.set('notifier', 'position', 'buttom-right');
+            alertify.error(response.data.message);
+          }
+        }).catch(function (error) {
+          console.log(error);
+        });
+      } else {
+        // console.log('khong co file')
+        this.news.news_content = contentpost;
+        var color = 'rgb(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
+        this.news.news_image = '<svg width="100%" height="170"><rect x="5" y="5" rx="10" ry="10" width="97%" height="160" style="fill:' + color + ';stroke:black;stroke-width:5;"></rect> </svg>';
+        axios.defaults.headers.common['Content-Type'] = 'application/json';
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt');
+        var _uri = "/api/news/create";
+        this.axios.post(_uri, this.news).then(function (response) {
+          // console.log(response.data)
+          if (response.data.status) {
+            alertify.set('notifier', 'position', 'buttom-right');
+            alertify.success(response.data.message);
+
+            _this.$router.push({
+              name: 'News'
+            });
+          } else {
+            alertify.set('notifier', 'position', 'buttom-right');
+            alertify.error(response.data.message);
+          }
+        }).catch(function (error) {
+          console.log(error);
+        });
+      }
     },
     destroy: function destroy() {
       this.$router.push({
@@ -3142,6 +3218,22 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3233,7 +3325,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      news: {}
+      news: {},
+      url: null,
+      checkSVG: null
     };
   },
   created: function created() {
@@ -3242,13 +3336,17 @@ __webpack_require__.r(__webpack_exports__);
     axios.defaults.headers.common['Content-Type'] = 'application/json';
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt');
     this.axios.get("/api/news/edit/".concat(this.$route.params.id)).then(function (response) {
-      _this.news = response.data; // console.log(this.news.news_content)
+      _this.news = response.data;
+      _this.checkSVG = response.data.news_image.indexOf('<svg') != -1;
+
+      if (!_this.checkSVG) {
+        _this.url = "images/news/".concat(_this.news.news_image);
+      }
     }).catch(function (error) {
       console.log(error);
     });
   },
   beforeUpdate: function beforeUpdate() {
-    var contentnews = this.news.news_content;
     $(document).ready(function () {
       if (tinymce.editors.length > 0) {
         for (i = 0; i < tinymce.editors.length; i++) {
@@ -3291,50 +3389,99 @@ __webpack_require__.r(__webpack_exports__);
       });
     });
   },
-  mounted: function mounted() {
-    var vm = this;
-    $("#profile-img").change(function () {
-      vm.readURL(this);
-    });
-  },
+  mounted: function mounted() {},
   methods: {
-    readURL: function readURL(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          $('#profile-img-tag').attr('src', e.target.result);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-      }
+    onFileChange: function onFileChange(e) {
+      this.news.news_image = e.target.files[0];
+      this.url = URL.createObjectURL(this.news.news_image);
     },
     updateNews: function updateNews() {
       var _this2 = this;
 
       var contentpost = tinymce.get("news_content").getContent();
-      axios.defaults.headers.common['Content-Type'] = 'application/json';
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt');
-      var uri = "/api/news/update/".concat(this.$route.params.id);
-      this.axios.post(uri, {
-        contentpost: contentpost,
-        title: this.news.title,
-        description: this.news.description
-      }).then(function (response) {
-        if (response.data.status) {
-          alertify.set('notifier', 'position', 'buttom-right');
-          alertify.success(response.data.message);
+      this.news.hasImage = true;
+      var formData = new FormData();
+      formData.append('news_image', this.news.news_image);
+      formData.append('title', this.news.title);
+      formData.append('news_content', contentpost);
+      formData.append('description', this.news.description);
+      formData.append('hasImage', true);
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-          _this2.$router.push({
-            name: 'News'
-          });
-        } else {
-          alertify.set('notifier', 'position', 'buttom-right');
-          alertify.error(response.data.message);
+      try {
+        for (var _iterator = formData.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var _step$value = _slicedToArray(_step.value, 2),
+              key = _step$value[0],
+              value = _step$value[1];
+
+          if (key == 'news_image') {
+            if (value === 'undefined' || value === null || value.toString().indexOf('<svg') != -1) {
+              this.news.hasImage = false;
+            }
+          }
         }
-      }).catch(function (error) {
-        console.log(error);
-      });
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      if (this.news.hasImage) {
+        axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt');
+        var uri = "/api/news/update/".concat(this.$route.params.id);
+        this.axios.post(uri, formData).then(function (response) {
+          // console.log(response.data)
+          if (response.data.status) {
+            alertify.set('notifier', 'position', 'buttom-right');
+            alertify.success(response.data.message);
+
+            _this2.$router.push({
+              name: 'News'
+            });
+          } else {
+            alertify.set('notifier', 'position', 'buttom-right');
+            alertify.error(response.data.message);
+          }
+        }).catch(function (error) {
+          console.log(error);
+        });
+      } else {
+        // console.log('khong co file')
+        this.news.news_content = contentpost;
+        axios.defaults.headers.common['Content-Type'] = 'application/json';
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt');
+
+        var _uri = "/api/news/update/".concat(this.$route.params.id);
+
+        this.axios.post(_uri, this.news).then(function (response) {
+          // console.log(response.data)
+          if (response.data.status) {
+            alertify.set('notifier', 'position', 'buttom-right');
+            alertify.success(response.data.message);
+
+            _this2.$router.push({
+              name: 'News'
+            });
+          } else {
+            alertify.set('notifier', 'position', 'buttom-right');
+            alertify.error(response.data.message);
+          }
+        }).catch(function (error) {
+          console.log(error);
+        });
+      }
     },
     destroy: function destroy() {
       this.$router.push({
@@ -3414,6 +3561,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3429,7 +3579,15 @@ __webpack_require__.r(__webpack_exports__);
       console.log(error);
     });
   },
-  mounted: function mounted() {}
+  methods: {
+    checkImageSVG: function checkImageSVG() {
+      if ('news_image' in this.news) {
+        return this.news.news_image.toString().indexOf('<svg') != -1;
+      }
+
+      return false;
+    }
+  }
 });
 
 /***/ }),
@@ -4528,13 +4686,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {// jQuery(document).ready(function(){
-    // "use strict";
-    // new WOW().init();
-    // });
+  data: function data() {
+    return {
+      blogs: {}
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    this.axios.get('/api/blog/all').then(function (response) {
+      _this.blogs = response.data;
+      console.log(response.data);
+    });
+  },
+  methods: {
+    pad: function pad(s) {
+      return s < 10 ? '0' + s : s;
+    },
+    convertDate: function convertDate(inputFormat) {
+      var d = new Date(inputFormat);
+      return [this.pad(d.getDate()), this.pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    }
   }
 });
 
@@ -7557,63 +7730,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 // chỗ lấy file
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7628,14 +7744,22 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.axios.get('/api/news').then(function (response) {
-      _this.news = response.data;
-      console.log(_this.news);
+    this.axios.get('/api/news/all').then(function (response) {
+      _this.news = response.data; // console.log(this.news)
     }).catch(function (error) {
       console.log(error);
     });
   },
   methods: {
+    checkImageSVG: function checkImageSVG(index) {
+      if (this.news.length > 0) {
+        if ('news_image' in this.news[index]) {
+          return this.news[index].news_image.toString().indexOf('<svg') != -1;
+        }
+      }
+
+      return false;
+    },
     convertDate: function convertDate(inputFormat) {
       var d = new Date(inputFormat);
       return [this.pad(d.getDate()), this.pad(d.getMonth() + 1), d.getFullYear()].join('/');
@@ -7719,7 +7843,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -12322,7 +12445,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n#blogall-blog[data-v-488963e6] {\n        padding: 40px 0;\n        background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);\n}\n#blogall-blog .imgover[data-v-488963e6] {\n        display:inline-block; \n        position:relative; \n        max-width:100%;\n        overflow: hidden;\n        /*////////*/\n        background: #2f3238;\n        border-top-left-radius: 0.25rem;\n        border-top-right-radius: 0.25rem;\n}\n#blogall-blog .imgover[data-v-488963e6]::before, .imgover[data-v-488963e6]::after {\n        display:block; \n        position:absolute; \n        content:\"\"; \n        text-align:center; \n        opacity:0; \n        transition: all .5s ease-in-out;\n}\n#blogall-blog .imgover[data-v-488963e6]::before {\n        top:0; \n        right:0; \n        bottom:0; \n        left:0;\n}\n#blogall-blog .imgover[data-v-488963e6]::after {\n        top:50%; \n        left:50%; \n        width:50px; \n        height:50px; \n        line-height:50px; \n        margin:-25px 0 0 -25px; \n        font:normal normal normal 14px/1 FontAwesome; \n        font-weight:900; \n        content:\"\\F06E\";\n        font-size:28px;\n}\n#blogall-blog .imgover[data-v-488963e6]:hover::before, .imgover[data-v-488963e6]:hover::after {\n        opacity:1;\n}\n#blogall-blog .imgover[data-v-488963e6]:hover::before {\n        background:rgba(0,0,0,.55);\n}\n#blogall-blog .imgover[data-v-488963e6], #blogall-blog .imgover[data-v-488963e6]:hover::after {\n        color:#02bdd5;\n}\n#blogall-blog a[data-v-488963e6] {\n        text-decoration: none;\n}\n.blog-title[data-v-488963e6] {\n        color: #231557; text-transform: uppercase;\n}\n/*////////*/\n#blogall-blog .imgover img[data-v-488963e6] {\n        transition: opacity 1s, -webkit-transform 1s;\n        transition: opacity 1s, transform 1s;\n        transition: opacity 1s, transform 1s, -webkit-transform 1s;\n        -webkit-backface-visibility: hidden;\n        backface-visibility: hidden;\n}\n#blogall-blog .imgover:hover img[data-v-488963e6] {\n        -webkit-transform: scale3d(1.1,1.1,1);\n        transform: scale3d(1.1,1.1,1);\n        opacity: 0.4;\n        transition: all .5s ease-in-out;\n}\n#blogall-blog .home-blog-author[data-v-488963e6]{\n        font-size: 0.8em;\n        font-style: italic;\n}\n#blogall-blog .blog-footer[data-v-488963e6] {\n        display: inline; float: left;\n        padding: 12px 0 0 0; \n        width: 100%;\n        border-top: 1px solid #ccc;\n}\n#blogall-blog .blog-footer a[data-v-488963e6] {\n        font-size: 0.8em;\n        /*color: #818181;*/\n        /*margin-right: 35px*/\n}\n#blogall-blog .blog-footer a span[data-v-488963e6] {\n        border: 1px solid;\n        border-radius: 50%; \n        display: inline-block; \n        margin-right: 3px; \n        padding: 4px 5px;\n}\n#blogall-blog .blogall-blog-title[data-v-488963e6]{\n        color: black;\n}\n", ""]);
+exports.push([module.i, "\n#blogall-blog[data-v-488963e6] {\n    padding: 40px 0;\n    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);\n}\n#blogall-blog .imgover[data-v-488963e6] {\n    display:inline-block; \n    position:relative; \n    max-width:100%;\n    overflow: hidden;\n    background: #2f3238;\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem;\n}\n#blogall-blog .imgover[data-v-488963e6]::before, .imgover[data-v-488963e6]::after {\n    display:block; \n    position:absolute; \n    content:\"\"; \n    text-align:center; \n    opacity:0; \n    transition: all .5s ease-in-out;\n}\n#blogall-blog .imgover[data-v-488963e6]::before {\n    top:0; \n    right:0; \n    bottom:0; \n    left:0;\n}\n#blogall-blog .imgover[data-v-488963e6]::after {\n    top:50%; \n    left:50%; \n    width:50px; \n    height:50px; \n    line-height:50px; \n    margin:-25px 0 0 -25px; \n    font:normal normal normal 14px/1 FontAwesome; \n    font-weight:900; \n    content:\"\\F06E\";\n    font-size:28px;\n}\n#blogall-blog .imgover[data-v-488963e6]:hover::before, .imgover[data-v-488963e6]:hover::after {\n    opacity:1;\n}\n#blogall-blog .imgover[data-v-488963e6]:hover::before {\n    background:rgba(0,0,0,.55);\n}\n#blogall-blog .imgover[data-v-488963e6], #blogall-blog .imgover[data-v-488963e6]:hover::after {\n    color:#02bdd5;\n}\n#blogall-blog a[data-v-488963e6] {\n    text-decoration: none;\n}\n.blog-title[data-v-488963e6] {\n    color: #231557; text-transform: uppercase;\n}\n#blogall-blog .imgover img[data-v-488963e6] {\n    transition: opacity 1s, -webkit-transform 1s;\n    transition: opacity 1s, transform 1s;\n    transition: opacity 1s, transform 1s, -webkit-transform 1s;\n    -webkit-backface-visibility: hidden;\n    backface-visibility: hidden;\n}\n#blogall-blog .imgover:hover img[data-v-488963e6] {\n    -webkit-transform: scale3d(1.1,1.1,1);\n    transform: scale3d(1.1,1.1,1);\n    opacity: 0.4;\n    transition: all .5s ease-in-out;\n}\n#blogall-blog .home-blog-author[data-v-488963e6]{\n    font-size: 0.8em;\n    font-style: italic;\n}\n#blogall-blog .blog-footer[data-v-488963e6] {\n    display: inline; float: left;\n    padding: 12px 0 0 0; \n    width: 100%;\n    border-top: 1px solid #ccc;\n}\n#blogall-blog .blog-footer a[data-v-488963e6] {\n    font-size: 0.8em;\n    /*color: #818181;*/\n    /*margin-right: 35px*/\n}\n#blogall-blog .blog-footer a span[data-v-488963e6] {\n    border: 1px solid;\n    border-radius: 50%; \n    display: inline-block; \n    margin-right: 3px; \n    padding: 4px 5px;\n}\n#blogall-blog .blogall-blog-title[data-v-488963e6]{\n    color: black;\n}\n", ""]);
 
 // exports
 
@@ -49991,27 +50114,52 @@ var render = function() {
                               _c("td", [_vm._v(_vm._s(value.id))]),
                               _vm._v(" "),
                               _c("td", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      float: "left",
-                                      "margin-right": "10px"
-                                    }
-                                  },
-                                  [
-                                    _c("a", { attrs: { href: "" } }, [
-                                      _c("img", {
-                                        staticStyle: { "max-width": "10em" },
-                                        attrs: {
-                                          src:
-                                            "images/news/" + value.news_image,
-                                          alt: ""
+                                !_vm.checkImageSVG(index)
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticStyle: {
+                                          float: "left",
+                                          "margin-right": "10px"
                                         }
-                                      })
-                                    ])
-                                  ]
-                                ),
+                                      },
+                                      [
+                                        _c("a", { attrs: { href: "" } }, [
+                                          _c("img", {
+                                            staticStyle: {
+                                              "max-width": "10em"
+                                            },
+                                            attrs: {
+                                              src:
+                                                "images/news/" +
+                                                value.news_image,
+                                              alt: ""
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.checkImageSVG(index)
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticStyle: {
+                                          float: "left",
+                                          "margin-right": "10px"
+                                        }
+                                      },
+                                      [
+                                        _c("div", {
+                                          staticStyle: { "max-width": "10em" },
+                                          domProps: {
+                                            innerHTML: _vm._s(value.news_image)
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c("h4", [_vm._v(_vm._s(value.title))]),
                                 _vm._v(" "),
@@ -50267,26 +50415,23 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
                             _c("input", {
-                              attrs: {
-                                type: "file",
-                                name: "file",
-                                id: "profile-img"
-                              },
-                              on: { change: _vm.onImageChange }
+                              attrs: { type: "file" },
+                              on: { change: _vm.onFileChange }
                             }),
                             _vm._v(" "),
-                            _c("img", {
-                              staticStyle: {
-                                display: "block",
-                                "margin-left": "auto",
-                                "margin-right": "auto",
-                                "max-width": "200px"
-                              },
-                              attrs: {
-                                src: _vm.news.news_image,
-                                id: "profile-img-tag"
-                              }
-                            })
+                            _c("div", { attrs: { id: "preview" } }, [
+                              _vm.url
+                                ? _c("img", {
+                                    staticStyle: {
+                                      display: "block",
+                                      "margin-left": "auto",
+                                      "margin-right": "auto",
+                                      "max-width": "350px"
+                                    },
+                                    attrs: { src: _vm.url }
+                                  })
+                                : _vm._e()
+                            ])
                           ])
                         ]),
                         _vm._v(" "),
@@ -50550,28 +50695,51 @@ var render = function() {
                             _vm._v("Chọn ảnh")
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("input", {
-                              attrs: {
-                                type: "file",
-                                name: "file",
-                                id: "profile-img"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("img", {
-                              staticStyle: {
-                                display: "block",
-                                "margin-left": "auto",
-                                "margin-right": "auto",
-                                "max-width": "200px"
-                              },
-                              attrs: {
-                                src: "images/news/" + _vm.news.news_image,
-                                id: "profile-img-tag"
-                              }
-                            })
-                          ])
+                          !_vm.checkSVG
+                            ? _c("div", { staticClass: "form-group" }, [
+                                _c("input", {
+                                  attrs: { type: "file" },
+                                  on: { change: _vm.onFileChange }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { attrs: { id: "preview" } }, [
+                                  _vm.url
+                                    ? _c("img", {
+                                        staticStyle: {
+                                          display: "block",
+                                          "margin-left": "auto",
+                                          "margin-right": "auto",
+                                          "max-width": "350px"
+                                        },
+                                        attrs: { src: _vm.url }
+                                      })
+                                    : _vm._e()
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.checkSVG
+                            ? _c("div", { staticClass: "form-group" }, [
+                                _c("input", {
+                                  attrs: { type: "file" },
+                                  on: { change: _vm.onFileChange }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { attrs: { id: "preview" } }, [
+                                  _vm.url
+                                    ? _c("img", {
+                                        staticStyle: {
+                                          display: "block",
+                                          "margin-left": "auto",
+                                          "margin-right": "auto",
+                                          "max-width": "350px"
+                                        },
+                                        attrs: { src: _vm.url }
+                                      })
+                                    : _vm._e()
+                                ])
+                              ])
+                            : _vm._e()
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-12" }, [
@@ -50766,17 +50934,26 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-2" }, [
-                      _c("img", {
-                        staticStyle: { "max-width": "100%" },
-                        attrs: {
-                          src: "images/news/" + _vm.news.news_image,
-                          alt: ""
-                        }
-                      })
-                    ]),
+                    !_vm.checkImageSVG()
+                      ? _c("div", { staticClass: "col-md-3" }, [
+                          _c("img", {
+                            staticStyle: { "max-width": "100%" },
+                            attrs: {
+                              src: "images/news/" + _vm.news.news_image,
+                              alt: ""
+                            }
+                          })
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-10" }, [
+                    _vm.checkImageSVG()
+                      ? _c("div", {
+                          staticClass: "col-md-3",
+                          domProps: { innerHTML: _vm._s(_vm.news.news_image) }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-9" }, [
                       _c("h3", [_vm._v("Mô tả")]),
                       _vm._v(
                         "\n\t\t\t\t\t\t\t\t\t\t" +
@@ -52159,445 +52336,119 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { attrs: { id: "blogall-blog" } }, [
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        { staticClass: "row" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._l(_vm.blogs, function(value, index) {
+            return _c(
+              "div",
+              { staticClass: "col-md-4 col-xs-12 p-3 home-blog" },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "card wow fadeInDown animated",
+                    attrs: {
+                      "data-wow-duration": "500ms",
+                      "data-wow-delay": "300ms"
+                    }
+                  },
+                  [
+                    _vm._m(1, true),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-body" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "blogall-blog-title",
+                          attrs: { href: "javascript:void(0)" }
+                        },
+                        [
+                          _c(
+                            "h4",
+                            { staticClass: "card-title font-weight-bold" },
+                            [_vm._v(_vm._s(value.title))]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "home-blog-author" }, [
+                        _vm._v("Đăng bởi "),
+                        _c(
+                          "a",
+                          { staticClass: "blog-admin", attrs: { href: "#" } },
+                          [_vm._v(_vm._s(value.name))]
+                        ),
+                        _vm._v(" ngày "),
+                        _c("span", [
+                          _vm._v(_vm._s(_vm.convertDate(value.created_at)))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v(_vm._s(value.description))
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(2, true)
+                    ])
+                  ]
+                )
+              ]
+            )
+          })
+        ],
+        2
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "blogall-blog" } }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            {
-              staticClass: "col-md-12 pl-3 wow fadeInDown animated",
-              attrs: { "data-wow-duration": "500ms", "data-wow-delay": "900ms" }
-            },
-            [
-              _c("h2", [
-                _c("b", { staticClass: "blog-title" }, [
-                  _vm._v("Tất cả bài viết")
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4 col-xs-12 p-3 home-blog" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card wow fadeInDown animated",
-                attrs: {
-                  "data-wow-duration": "500ms",
-                  "data-wow-delay": "300ms"
-                }
-              },
-              [
-                _c("a", { staticClass: "imgover", attrs: { href: "#" } }, [
-                  _c("img", {
-                    staticClass: "card-img-top",
-                    attrs: { src: "images/blog/post.jpg", alt: "" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "blogall-blog-title",
-                      attrs: { href: "javascript:void(0)" }
-                    },
-                    [
-                      _c("h4", { staticClass: "card-title font-weight-bold" }, [
-                        _vm._v("Tiêu đề blog tiêu đề blog")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "home-blog-author" }, [
-                    _vm._v("Đăng bởi "),
-                    _c(
-                      "a",
-                      { staticClass: "blog-admin", attrs: { href: "#" } },
-                      [_vm._v("admin")]
-                    ),
-                    _vm._v(" ngày "),
-                    _c("span", [_vm._v("19-01-2019")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(
-                      "Some quick example text to build on the card title and make up the bulk of the card's content."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "blog-footer" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("span", { staticClass: "fa fa-comment" }),
-                      _vm._v("18 Bình luận")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      { staticClass: "float-right", attrs: { href: "#" } },
-                      [
-                        _c("span", { staticClass: "fa fa-thumbs-o-up" }),
-                        _vm._v("35 Thích")
-                      ]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4 col-xs-12 p-3 home-blog" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card wow fadeInDown animated",
-                attrs: {
-                  "data-wow-duration": "500ms",
-                  "data-wow-delay": "600ms"
-                }
-              },
-              [
-                _c("a", { staticClass: "imgover", attrs: { href: "#" } }, [
-                  _c("img", {
-                    staticClass: "card-img-top",
-                    attrs: { src: "images/blog/post.jpg", alt: "" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "blogall-blog-title",
-                      attrs: { href: "javascript:void(0)" }
-                    },
-                    [
-                      _c("h4", { staticClass: "card-title font-weight-bold" }, [
-                        _vm._v("Tiêu đề blog tiêu đề blog")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "home-blog-author" }, [
-                    _vm._v("Đăng bởi "),
-                    _c(
-                      "a",
-                      { staticClass: "blog-admin", attrs: { href: "#" } },
-                      [_vm._v("admin")]
-                    ),
-                    _vm._v(" ngày "),
-                    _c("span", [_vm._v("19-01-2019")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(
-                      "Some quick example text to build on the card title and make up the bulk of the card's content."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "blog-footer" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("span", { staticClass: "fa fa-comment" }),
-                      _vm._v("18 Bình luận")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      { staticClass: "float-right", attrs: { href: "#" } },
-                      [
-                        _c("span", { staticClass: "fa fa-thumbs-o-up" }),
-                        _vm._v("35 Thích")
-                      ]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4 col-xs-12 p-3 home-blog" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card wow fadeInDown animated",
-                attrs: {
-                  "data-wow-duration": "500ms",
-                  "data-wow-delay": "900ms"
-                }
-              },
-              [
-                _c("a", { staticClass: "imgover", attrs: { href: "#" } }, [
-                  _c("img", {
-                    staticClass: "card-img-top",
-                    attrs: { src: "images/blog/post.jpg", alt: "" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "blogall-blog-title",
-                      attrs: { href: "javascript:void(0)" }
-                    },
-                    [
-                      _c("h4", { staticClass: "card-title font-weight-bold" }, [
-                        _vm._v("Tiêu đề blog tiêu đề blog")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "home-blog-author" }, [
-                    _vm._v("Đăng bởi "),
-                    _c(
-                      "a",
-                      { staticClass: "blog-admin", attrs: { href: "#" } },
-                      [_vm._v("admin")]
-                    ),
-                    _vm._v(" ngày "),
-                    _c("span", [_vm._v("19-01-2019")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(
-                      "Some quick example text to build on the card title and make up the bulk of the card's content."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "blog-footer" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("span", { staticClass: "fa fa-comment" }),
-                      _vm._v("18 Bình luận")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      { staticClass: "float-right", attrs: { href: "#" } },
-                      [
-                        _c("span", { staticClass: "fa fa-thumbs-o-up" }),
-                        _vm._v("35 Thích")
-                      ]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4 col-xs-12 p-3 home-blog" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card wow fadeInDown animated",
-                attrs: {
-                  "data-wow-duration": "500ms",
-                  "data-wow-delay": "300ms"
-                }
-              },
-              [
-                _c("a", { staticClass: "imgover", attrs: { href: "#" } }, [
-                  _c("img", {
-                    staticClass: "card-img-top",
-                    attrs: { src: "images/blog/post.jpg", alt: "" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "blogall-blog-title",
-                      attrs: { href: "javascript:void(0)" }
-                    },
-                    [
-                      _c("h4", { staticClass: "card-title font-weight-bold" }, [
-                        _vm._v("Tiêu đề blog tiêu đề blog")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "home-blog-author" }, [
-                    _vm._v("Đăng bởi "),
-                    _c(
-                      "a",
-                      { staticClass: "blog-admin", attrs: { href: "#" } },
-                      [_vm._v("admin")]
-                    ),
-                    _vm._v(" ngày "),
-                    _c("span", [_vm._v("19-01-2019")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(
-                      "Some quick example text to build on the card title and make up the bulk of the card's content."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "blog-footer" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("span", { staticClass: "fa fa-comment" }),
-                      _vm._v("18 Bình luận")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      { staticClass: "float-right", attrs: { href: "#" } },
-                      [
-                        _c("span", { staticClass: "fa fa-thumbs-o-up" }),
-                        _vm._v("35 Thích")
-                      ]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4 col-xs-12 p-3 home-blog" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card wow fadeInDown animated",
-                attrs: {
-                  "data-wow-duration": "500ms",
-                  "data-wow-delay": "600ms"
-                }
-              },
-              [
-                _c("a", { staticClass: "imgover", attrs: { href: "#" } }, [
-                  _c("img", {
-                    staticClass: "card-img-top",
-                    attrs: { src: "images/blog/post.jpg", alt: "" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "blogall-blog-title",
-                      attrs: { href: "javascript:void(0)" }
-                    },
-                    [
-                      _c("h4", { staticClass: "card-title font-weight-bold" }, [
-                        _vm._v("Tiêu đề blog tiêu đề blog")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "home-blog-author" }, [
-                    _vm._v("Đăng bởi "),
-                    _c(
-                      "a",
-                      { staticClass: "blog-admin", attrs: { href: "#" } },
-                      [_vm._v("admin")]
-                    ),
-                    _vm._v(" ngày "),
-                    _c("span", [_vm._v("19-01-2019")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(
-                      "Some quick example text to build on the card title and make up the bulk of the card's content."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "blog-footer" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("span", { staticClass: "fa fa-comment" }),
-                      _vm._v("18 Bình luận")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      { staticClass: "float-right", attrs: { href: "#" } },
-                      [
-                        _c("span", { staticClass: "fa fa-thumbs-o-up" }),
-                        _vm._v("35 Thích")
-                      ]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4 col-xs-12 p-3 home-blog" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card wow fadeInDown animated",
-                attrs: {
-                  "data-wow-duration": "500ms",
-                  "data-wow-delay": "900ms"
-                }
-              },
-              [
-                _c("a", { staticClass: "imgover", attrs: { href: "#" } }, [
-                  _c("img", {
-                    staticClass: "card-img-top",
-                    attrs: { src: "images/blog/post.jpg", alt: "" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "blogall-blog-title",
-                      attrs: { href: "javascript:void(0)" }
-                    },
-                    [
-                      _c("h4", { staticClass: "card-title font-weight-bold" }, [
-                        _vm._v("Tiêu đề blog tiêu đề blog")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "home-blog-author" }, [
-                    _vm._v("Đăng bởi "),
-                    _c(
-                      "a",
-                      { staticClass: "blog-admin", attrs: { href: "#" } },
-                      [_vm._v("admin")]
-                    ),
-                    _vm._v(" ngày "),
-                    _c("span", [_vm._v("19-01-2019")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(
-                      "Some quick example text to build on the card title and make up the bulk of the card's content."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "blog-footer" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("span", { staticClass: "fa fa-comment" }),
-                      _vm._v("18 Bình luận")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      { staticClass: "float-right", attrs: { href: "#" } },
-                      [
-                        _c("span", { staticClass: "fa fa-thumbs-o-up" }),
-                        _vm._v("35 Thích")
-                      ]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ])
+    return _c(
+      "div",
+      {
+        staticClass: "col-md-12 pl-3 wow fadeInDown animated",
+        attrs: { "data-wow-duration": "500ms", "data-wow-delay": "900ms" }
+      },
+      [
+        _c("h2", [
+          _c("b", { staticClass: "blog-title" }, [_vm._v("Tất cả bài viết")])
         ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "imgover", attrs: { href: "#" } }, [
+      _c("img", {
+        staticClass: "card-img-top",
+        attrs: { src: "images/blog/post.jpg", alt: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "blog-footer" }, [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("span", { staticClass: "fa fa-comment" }),
+        _vm._v("18 Bình luận")
+      ]),
+      _vm._v(" "),
+      _c("a", { staticClass: "float-right", attrs: { href: "#" } }, [
+        _c("span", { staticClass: "fa fa-thumbs-o-up" }),
+        _vm._v("35 Thích")
       ])
     ])
   }
@@ -57902,18 +57753,34 @@ var render = function() {
                         },
                         [
                           _c("div", { staticClass: "post post-row" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "post-img imgover",
-                                attrs: { href: "javascript:void(0)" }
-                              },
-                              [
-                                _c("img", {
-                                  attrs: { src: value.news_image, alt: "" }
+                            !_vm.checkImageSVG(index)
+                              ? _c(
+                                  "a",
+                                  {
+                                    staticClass: "post-img imgover",
+                                    attrs: { href: "javascript:void(0)" }
+                                  },
+                                  [
+                                    _c("img", {
+                                      staticStyle: { "max-height": "200px" },
+                                      attrs: {
+                                        src: "images/news/" + value.news_image,
+                                        alt: ""
+                                      }
+                                    })
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.checkImageSVG(index)
+                              ? _c("a", {
+                                  staticClass: "post-img imgover",
+                                  attrs: { href: "javascript:void(0)" },
+                                  domProps: {
+                                    innerHTML: _vm._s(value.news_image)
+                                  }
                                 })
-                              ]
-                            ),
+                              : _vm._e(),
                             _vm._v(" "),
                             _c("div", { staticClass: "post-body" }, [
                               _c(
@@ -58008,7 +57875,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "col-md-12 wow fadeInLeft animated news-all",
-        attrs: { "data-wow-duration": "500ms", "data-wow-delay": "1300ms" }
+        attrs: { "data-wow-duration": "500ms", "data-wow-delay": "300ms" }
       },
       [
         _c("div", { staticClass: "section-row" }, [
