@@ -26,9 +26,13 @@ Route::get('demolike/{like}', 'DemoLikeController@index');
 Route::get('listhometpack', 'HomeTpackController@index');
 Route::get('/introduction','IntroductionController@index');
 Route::get('/news','NewsController@index');
+Route::get('/news/paginate', 'NewsController@paginate');
 Route::get('/news/all','NewsController@showAll');
 Route::get('/news/readmore/{id}','NewsController@show');
-Route::get('/blog/all','BlogController@showAll');
+
+Route::get('/blog','BlogController@index');
+Route::get('/blog/paginate', 'BlogController@paginate');
+Route::get('/blog/readmore/{id}','blogController@show');
 
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/hometpack/{id}', 'HomeTpackController@show');
@@ -40,6 +44,11 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('/news/update/{id}','NewsController@update');
 	Route::post('/news/create','NewsController@create');
 	Route::get('/news/delete/{id}','NewsController@delete');
+
+	Route::post('/blog/create','BlogController@create');
+	Route::get('/blog/delete/{id}','BlogController@delete');
+	Route::get('/blog/show/{id}','BlogController@show');
+	Route::post('/blog/update/{id}','BlogController@update');
 
 	
 	Route::post('/introduction/update','IntroductionController@update');

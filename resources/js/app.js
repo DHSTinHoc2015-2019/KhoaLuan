@@ -53,10 +53,16 @@ import ThanhPhanTpackEdit from './components/admin/trangchu/ThanhPhanTpackEdit.v
 import ThanhPhanTpackCreate from './components/admin/trangchu/ThanhPhanTpackCreate.vue';
 import Intro from './components/admin/intro/Intro.vue';
 import IntroEdit from './components/admin/intro/IntroEdit.vue';
+
 import News from './components/admin/news/News.vue';
 import NewsMore from './components/admin/news/NewsMore.vue';
 import NewsEdit from './components/admin/news/NewsEdit.vue';
 import NewsCreate from './components/admin/news/NewsCreate.vue';
+
+import AdminBlog from './components/admin/blog/AdminBlog.vue';
+import AdminBlogCreate from './components/admin/blog/AdminBlogCreate.vue';
+import AdminBlogEdit from './components/admin/blog/AdminBlogEdit.vue';
+import AdminBlogMore from './components/admin/blog/AdminBlogMore.vue';
 
 /*===========Admin demo==============*/
 import DemoAdmin from './components/admin/demo/DemoAdmin.vue';
@@ -154,6 +160,34 @@ var routes = [
                         component: NewsCreate
                     }
 
+                ]
+            },
+            {
+                path: 'blog',
+                component: {
+                    render(c) { return c('router-view') }
+                },
+                children:[
+                    {
+                        name: 'AdminBlog',
+                        path: '',
+                        component: AdminBlog
+                    },
+                    {
+                        name: 'AdminBlogCreate',
+                        path: 'create',
+                        component: AdminBlogCreate
+                    },
+                    {
+                        name: 'AdminBlogEdit',
+                        path: 'edit/:id',
+                        component: AdminBlogEdit
+                    },
+                    {
+                        name: 'AdminBlogMore',
+                        path: 'blogmore/:id',
+                        component: AdminBlogMore
+                    }
                 ]
             },
             {

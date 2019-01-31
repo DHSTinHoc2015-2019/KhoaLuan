@@ -28,13 +28,12 @@
 									<p class="news-day"><span><i class="fa fa-clock-o" aria-hidden="true"></i></span> {{ convertDate(value.created_at) }}</p>
 									<p>{{ value.description }}</p>
 								</div>
-								
 							</div>
 						</div>
 
 						<div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="300ms">
 							<div class="section-row">
-								<pagination v-bind:pagination="pagination" v-on:click.native="getNews(pagination.current_page)" :offset="4"></pagination>
+								<button class="primary-button center-block">Xem thêm</button>
 							</div>
 						</div>
 					</div>
@@ -96,46 +95,25 @@
 
 	// chỗ lấy file
 	import NewsRightComponent from './NewsRightComponent.vue';
-	import Pagination from '../../pages/Pagination.vue';
 
 	export default {
 		components: {
-			appNewsRightComponent: NewsRightComponent,
-			Pagination: Pagination
+			appNewsRightComponent: NewsRightComponent
 		},
 		data(){
 			return {
-				news: {},
-				counter: 0,
-                pagination: {
-                    total: 0,
-                    per_page: 2,
-                    from: 1,
-                    to: 0,
-                    current_page: 1
-                },
-                offset: 4
+				news: {}
 			}
 		},
 		created(){
-			this.axios.get('/api/news/paginate').then((response) => {
-				this.news = response.data.data
-				// console.log(response.data)
+			this.axios.get('/api/news/all').then((response) => {
+				this.news = response.data
+				// console.log(this.news)
 			}).catch((error) => {
 				console.log(error)
 			})
 		},
-		mounted(){
-			this.getNews(this.pagination.current_page);
-		},
 		methods:{
-			getNews (page) {
-                axios.get('/api/news/paginate?page='+page)
-                    .then((response) => {
-                        this.news = response.data.data
-                        this.pagination = response.data
-                    })
-            },
 			checkImageSVG(index){
 				if(this.news.length > 0){
 					if('news_image' in this.news[index]){

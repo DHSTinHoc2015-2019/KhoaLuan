@@ -23,7 +23,9 @@
                     <li class="submenu">
                         <router-link to="/admin/news"><i class="fa fa-fw fa-tv"></i><span> Tin tức </span> </router-link>
                     </li>
-					
+					<li class="submenu">
+                        <router-link to="/admin/blog"><i class="fa fa-fw fa-tv"></i><span> Bài viết </span> </router-link>
+                    </li>
 					<li class="submenu">
                         <a href="javascript:void(0)"><i class="fa fa-fw fa-table"></i> <span> Demo </span> <span class="menu-arrow"></span></a>
 							<ul class="list-unstyled">

@@ -83,4 +83,9 @@ class NewsController extends Controller
     		'message' => $status ? 'Xóa dữ liệu thành công' : "Xóa dữ liệu thất bại"
     	]);
     }
+
+    function paginate(){
+    	$news = News::paginate(6);
+    	return response()->json($news);
+    }
 }
