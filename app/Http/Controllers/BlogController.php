@@ -12,6 +12,7 @@ class BlogController extends Controller
 		$blog = DB::table('blogs')
     	->join('users', 'id_user', 'users.id')
     	->select('blogs.id', 'description', 'title', 'blog_content', 'blog_image', 'blogs.created_at', 'featured', 'users.name', 'blogs.id_user')
+    	->where('blogs.id', '<>', 1)
     	->get();
     	return response()->json($blog, 200);
 	}
@@ -24,6 +25,7 @@ class BlogController extends Controller
 		$blog = DB::table('blogs')
     	->join('users', 'id_user', 'users.id')
     	->select('blogs.id', 'description', 'title', 'blog_content', 'blog_image', 'blogs.created_at', 'featured', 'users.name', 'blogs.id_user')
+    	->where('blogs.id', '<>', 0)
     	->orderBy('blogs.id', 'desc')
     	->paginate(6);
     	return response()->json($blog, 200);

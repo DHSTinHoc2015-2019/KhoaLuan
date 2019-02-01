@@ -97,7 +97,6 @@
 			}
 		},
 		created: function(){
-
             this.axios.get('/api/blog').then((response) => {
 				this.blogs = response.data
 			}).catch(error => {
@@ -133,9 +132,11 @@
 				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
 				this.axios.get(`/api/blog/delete/${id}`).then((response) => {
 					if(response.data.status){
+						alertify.set('notifier','position', 'buttom-right');
 						alertify.success(response.data.message)
 						this.blogs.splice(index, 1)
 					} else {
+						alertify.set('notifier','position', 'buttom-right');
 						alertify.error(response.data.message)
 					}
 				}).catch((error) => {
@@ -144,6 +145,7 @@
 				
 			},
 			deleteError(){
+				alertify.set('notifier','position', 'buttom-right');
 				alertify.error('Dữ liệu của bạn không thay đổi')
 			},
 			pad(s){

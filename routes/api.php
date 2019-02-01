@@ -34,6 +34,13 @@ Route::get('/blog','BlogController@index');
 Route::get('/blog/paginate', 'BlogController@paginate');
 Route::get('/blog/readmore/{id}','blogController@show');
 
+Route::get('/discussiontype','DiscussionTypeController@index');
+
+Route::get('/discussion','DiscussionController@index');
+
+
+// Route::get('/discussiontype/delete/{id}', 'DiscussionTypeController@delete');
+
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/hometpack/{id}', 'HomeTpackController@show');
 	Route::post('/hometpack/update/{id}', 'HomeTpackController@update');
@@ -49,6 +56,18 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/blog/delete/{id}','BlogController@delete');
 	Route::get('/blog/show/{id}','BlogController@show');
 	Route::post('/blog/update/{id}','BlogController@update');
+
+	Route::post('/discussiontype/create', 'DiscussionTypeController@create');
+	Route::get('/discussiontype/delete/{id}', 'DiscussionTypeController@delete');
+	Route::get('/discussiontype/show/{id}','DiscussionTypeController@show');
+	Route::post('/discussiontype/update/{id}','DiscussionTypeController@update');
+
+	Route::get('/discussion/showall','DiscussionController@showAll');
+	Route::post('/discussion/create', 'DiscussionController@create');
+	Route::get('/discussion/delete/{id}', 'DiscussionController@delete');
+	Route::get('/discussion/show/{id}','DiscussionController@show');
+	Route::get('/discussion/showwithtype/{id}','DiscussionController@showWithType');
+	Route::post('/discussion/update/{id}','DiscussionController@update');
 
 	
 	Route::post('/introduction/update','IntroductionController@update');

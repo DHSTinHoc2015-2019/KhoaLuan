@@ -12,7 +12,7 @@
                             </div>
                             <div class="large-4 small-2 column lpad ar">
                                 <a data-connect>
-                                <i class="fa fa-caret-square-o-up"></i>
+                                <i class="icon-collapse-top"></i>
                                 </a>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
 			$(document).ready( function() {
                 $('a[data-connect]').click( function() {
                     var i = $(this).find('i');
-                    i.hasClass('fa-caret-square-o-up') ? i.removeClass('fa-caret-square-o-up').addClass('fa-caret-square-o-down') : i.removeClass('fa-caret-square-o-down').addClass('fa-caret-square-o-up');
+                    i.hasClass('icon-collapse-top') ? i.removeClass('icon-collapse-top').addClass('icon-collapse') : i.removeClass('icon-collapse').addClass('icon-collapse-top');
                     $(this).parent().parent().toggleClass('all').next().slideToggle();
                 });
             });
@@ -7389,7 +7389,6 @@
     }
 
     header {
-        /*background-image: url('https://subtlepatterns.com/patterns/use_your_illusion.png');*/
         margin: 0;
         border-bottom: 3px solid hsl(195, 73%, 58%);
     }

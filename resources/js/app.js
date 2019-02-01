@@ -64,6 +64,15 @@ import AdminBlogCreate from './components/admin/blog/AdminBlogCreate.vue';
 import AdminBlogEdit from './components/admin/blog/AdminBlogEdit.vue';
 import AdminBlogMore from './components/admin/blog/AdminBlogMore.vue';
 
+import AdminDiscussionType from './components/admin/discussiontype/AdminDiscussionType.vue';
+import AdminDiscussionTypeCreate from './components/admin/discussiontype/AdminDiscussionTypeCreate.vue';
+import AdminDiscussionTypeEdit from './components/admin/discussiontype/AdminDiscussionTypeEdit.vue';
+
+import AdminDiscussion from './components/admin/discussion/AdminDiscussion.vue';
+import AdminDiscussionCreate from './components/admin/discussion/AdminDiscussionCreate.vue';
+import AdminDiscussionEdit from './components/admin/discussion/AdminDiscussionEdit.vue';
+import AdminDiscussionWithType from './components/admin/discussion/AdminDiscussionWithType.vue';
+
 /*===========Admin demo==============*/
 import DemoAdmin from './components/admin/demo/DemoAdmin.vue';
 import DemoAdminKhongCo from './components/admin/demo/DemoAdminKhongCo.vue';
@@ -187,6 +196,57 @@ var routes = [
                         name: 'AdminBlogMore',
                         path: 'blogmore/:id',
                         component: AdminBlogMore
+                    }
+                ]
+            },
+            {
+                path: 'discussiontype',
+                component: {
+                    render (c) { return c('router-view') }
+                },
+                children:[
+                    {
+                        name: 'AdminDiscussionType',
+                        path: '',
+                        component: AdminDiscussionType
+                    },
+                    {
+                        name: 'AdminDiscussionTypeCreate',
+                        path: 'create',
+                        component: AdminDiscussionTypeCreate
+                    },
+                    {
+                        name: 'AdminDiscussionTypeEdit',
+                        path: 'edit/:id',
+                        component: AdminDiscussionTypeEdit
+                    }
+                ]
+            },
+            {
+                path: 'discussion',
+                component:{
+                    render (c) { return c('router-view') }
+                },
+                children:[
+                    {
+                        name: 'AdminDiscussion',
+                        path: '',
+                        component: AdminDiscussion
+                    },
+                    {
+                        name: 'AdminDiscussionCreate',
+                        path: 'create',
+                        component: AdminDiscussionCreate
+                    },
+                    {
+                        name: 'AdminDiscussionEdit',
+                        path: 'edit/:id',
+                        component: AdminDiscussionEdit
+                    },
+                    {
+                        name: 'AdminDiscussionWithType',
+                        path: 'type/:id',
+                        component: AdminDiscussionWithType
                     }
                 ]
             },

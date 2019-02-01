@@ -9,10 +9,10 @@
 				<div class="row">
 						<div class="col-xl-12">
 								<div class="breadcrumb-holder">
-										<h1 class="main-title float-left font-weight-bold text-uppercase">Thành phần Tpack</h1>
+										<h1 class="main-title float-left font-weight-bold text-uppercase">Đề tài thảo luận</h1>
 										<ol class="breadcrumb float-right">
 											<li class="breadcrumb-item">Admin</li>
-											<li class="breadcrumb-item active">Thành phần Tpack</li>
+											<li class="breadcrumb-item active">Đề tài thảo luận</li>
 										</ol>
 										<div class="clearfix"></div>
 								</div>
@@ -24,8 +24,8 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12">						
 						<div class="card mb-3">
 							<div class="card-header">
-								<h3><i class="fa fa-table"></i> Thành phần Tpack
-									<router-link class="btn btn-primary btn-sm float-right" :to="{ name: 'ThanhPhanTpackCreate' }">Thêm</router-link></h3>
+								<h3><i class="fa fa-table"></i> Đề tài thảo luận
+									<router-link class="btn btn-primary btn-sm float-right" :to="{ name: 'AdminDiscussionTypeCreate' }"><span><i class="fa fa-plus mr-2" aria-hidden="true"></i></span>Thêm</router-link></h3>
 							</div>
 
 							<div class="card-body">
@@ -34,20 +34,18 @@
 									<thead>
 										<tr>
 											<th>ID</th>
-											<th>Viết tắt</th>
-											<th>Tiêu đề</th>
-											<th>Nội dung</th>
+											<th>Đề tài thảo luận</th>
 											<th style="min-width: 4em;">Tùy chọn</th>
 										</tr>
 									</thead>										
 									<tbody>
-										<tr v-for="(value, index) in hometpacks">
+										<tr v-for="(value, index) in discussiontype">
 											<td>{{ value.id }}</td>
-											<td>{{ value.text }}</td>
-											<td>{{ value.title }}</td>
-											<td>{{ value.content }}</td>
 											<td>
-												<router-link :to="{ name: 'ThanhPhanTpackEdit', params: {id: value.id }}" class="btn btn-success btn-sm">
+												<router-link :to="{ name: 'AdminDiscussionWithType', params: { id: value.id } }">{{ value.name_discussion_type }}</router-link>
+											</td>
+											<td>
+												<router-link :to="{ name: 'AdminDiscussionTypeEdit', params: {id: value.id }}" class="btn btn-success btn-sm">
 													<i class="fa fa-pencil"></i>
 												</router-link>
 												<button role="button" v-on:click="deleteHomeTpack(index, value.id)" class="btn btn-danger btn-sm">
@@ -75,13 +73,13 @@
 	export default {
 		data(){
 			return {
-				hometpacks: []
+				discussiontype: []
 			}
 		},
 		created: function(){
-			var vm = this
-			this.axios.get('/api/listhometpack/').then(function(response){
-				vm.hometpacks = response.data
+            this.axios.get('/api/discussiontype').then((response) =>{
+				this.discussiontype = response.data
+				// console.log(response.data)
 			}).catch(error => {
                 console.error(error);
             }) 
@@ -103,14 +101,13 @@
 				})
 			},
 			deleteSuccess(index, id){
-				var vm = this
 				axios.defaults.headers.common['Content-Type'] = 'application/json'
 				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
-				this.axios.get(`/api/hometpack/delete/${id}`).then((response) => {
+				this.axios.get(`/api/discussiontype/delete/${id}`).then((response) => {
 					if(response.data.status){
 						alertify.set('notifier','position', 'buttom-right');
 						alertify.success(response.data.message)
-						vm.hometpacks.splice(index, 1)
+						this.discussiontype.splice(index, 1)
 					} else {
 						alertify.set('notifier','position', 'buttom-right');
 						alertify.error(response.data.message)

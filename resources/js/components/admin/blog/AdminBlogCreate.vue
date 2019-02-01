@@ -23,7 +23,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12">                      
                         <div class="card mb-3">
                             <div class="card-header">
-                                <h3><i class="fa fa-pencil"></i> Thêm</h3>
+                                <h3><i class="fa fa-plus" aria-hidden="true"></i> Thêm</h3>
                             </div>
                                 
                             <div class="card-body">

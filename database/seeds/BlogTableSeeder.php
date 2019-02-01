@@ -11,6 +11,15 @@ class BlogTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('blogs')->insert([
+            'title' => '0',
+            'description' => '0',
+            'blog_content' => '0',
+            'blog_image' => '0',
+            'id_user' => 1,
+            'created_at' => date("Y-m-d"),
+        ]);
+        
         for ($i = 1; $i <= 6; $i++) { 
         	DB::table('blogs')->insert([
 	            'title' => 'Tiêu đề bài viết '.$i,

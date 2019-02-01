@@ -52,5 +52,41 @@ class UsersTableSeeder extends Seeder
             'remember_token' => str_random(10),
             'created_at' => new DateTime,
         ]);
+        DB::table('users')->insert([
+            'name' => 'user3',
+            'email' => $faker->unique()->safeEmail,
+            'email_verified_at' => now(),
+            'password' => bcrypt('123123'),
+            'is_admin' => false,
+            'remember_token' => str_random(10),
+            'created_at' => new DateTime,
+        ]);
+        DB::table('users')->insert([
+            'name' => 'user4',
+            'email' => $faker->unique()->safeEmail,
+            'email_verified_at' => now(),
+            'password' => bcrypt('123123'),
+            'is_admin' => false,
+            'remember_token' => str_random(10),
+            'created_at' => new DateTime,
+        ]);
+        DB::table('users')->insert([
+            'name' => 'user5',
+            'email' => $faker->unique()->safeEmail,
+            'email_verified_at' => now(),
+            'password' => bcrypt('123123'),
+            'is_admin' => false,
+            'remember_token' => str_random(10),
+            'created_at' => new DateTime,
+        ]);
+        DB::table('users')->insert([
+            'name' => 'user6',
+            'email' => $faker->unique()->safeEmail,
+            'email_verified_at' => now(),
+            'password' => bcrypt('123123'),
+            'is_admin' => false,
+            'remember_token' => str_random(10),
+            'created_at' => new DateTime,
+        ]);
     }
 }
