@@ -3840,6 +3840,237 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      discussion: {},
+      comment: {},
+      commentdetail: {},
+      traloi: false,
+      edit: false
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.defaults.headers.common['Content-Type'] = 'application/json';
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt');
+    this.axios.get("/api/discussion/showwithcomment/".concat(this.$route.params.id)).then(function (response) {
+      console.log(response.data.commentdetail);
+      _this.discussion = response.data.discussion;
+      _this.comment = response.data.comment;
+      _this.commentdetail = response.data.commentdetail;
+    }).catch(function (error) {
+      console.log(error);
+    });
+  },
+  methods: {
+    onReply: function onReply(idcomment) {
+      this.onDestroy(idcomment);
+      this.traloi = true;
+    },
+    onDestroy: function onDestroy(idcomment) {
+      this.traloi = false;
+      this.edit = false;
+    },
+    onEdit: function onEdit(idcomment) {
+      this.onDestroy(idcomment);
+      this.edit = true;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/discussion/AdminDiscussionWithType.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/discussion/AdminDiscussionWithType.vue?vue&type=script&lang=js& ***!
@@ -14479,6 +14710,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 // module
 exports.push([module.i, "\n.home-blog-author[data-v-1cf4b84a]{\n        font-size: 0.9em;\n        font-style: italic;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=style&index=0&id=6e099160&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=style&index=0&id=6e099160&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.jquery-comments ul.navigation li.active[data-v-6e099160]:after {background: #2793e6 !important;}\n.jquery-comments ul.navigation ul.dropdown li.active[data-v-6e099160] {background: #2793e6 !important;}\n.jquery-comments .highlight-background[data-v-6e099160] {background: #2793e6 !important;}\n.jquery-comments .highlight-font[data-v-6e099160] {color: #2793e6 !important;}\n.jquery-comments .highlight-font-bold[data-v-6e099160] {color: #2793e6 !important;font-weight: bold;}\n.jquery-comments ul.main li.comment .wrapper .content p[data-v-6e099160]{\n\t\tmargin: 0;\n}\n    /*.jquery-comments .textarea-wrapper .textarea {\n    \toverflow: hidden;\n    }*/\n.content-page .content[data-v-6e099160] {\n    \tmargin-top: 0px;\n}\n", ""]);
 
 // exports
 
@@ -45699,6 +45949,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=style&index=0&id=6e099160&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=style&index=0&id=6e099160&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminDiscussionMore.vue?vue&type=style&index=0&id=6e099160&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=style&index=0&id=6e099160&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/discussion/AdminDiscussionWithType.vue?vue&type=style&index=0&id=5591561b&scoped=true&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/discussion/AdminDiscussionWithType.vue?vue&type=style&index=0&id=5591561b&scoped=true&lang=css& ***!
@@ -53425,7 +53705,7 @@ var render = function() {
                                         {
                                           attrs: {
                                             to: {
-                                              name: "AdminBlogMore",
+                                              name: "AdminDiscussionMore",
                                               params: { id: value.id }
                                             }
                                           }
@@ -54099,6 +54379,744 @@ var staticRenderFns = [
           _vm._v(" Lưu lại")
         ]
       )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=template&id=6e099160&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=template&id=6e099160&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-page" }, [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12" },
+            [
+              _c("div", { staticClass: "card mb-3" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c(
+                    "h3",
+                    [
+                      _c("i", { staticClass: "fa fa-table" }),
+                      _vm._v(
+                        " " +
+                          _vm._s(_vm.discussion.title) +
+                          "\n\t\t\t\t\t\t\t\t\t"
+                      ),
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-success btn-sm float-right",
+                          attrs: {
+                            to: {
+                              name: "AdminDiscussionEdit",
+                              params: { id: "" + this.$route.params.id }
+                            }
+                          }
+                        },
+                        [_vm._v("Chỉnh sửa")]
+                      )
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c("div", {
+                        domProps: {
+                          innerHTML: _vm._s(_vm.discussion.discussion_content)
+                        }
+                      })
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row mb-5" }, [
+          _c(
+            "div",
+            { staticClass: "col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12" },
+            [
+              _c("div", { staticClass: "card mb-3" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c(
+                        "div",
+                        { staticClass: "jquery-comments" },
+                        [
+                          _c("div", { staticClass: "commenting-field main" }, [
+                            _c("div", {
+                              staticClass: "profile-picture round",
+                              staticStyle: {
+                                "background-image":
+                                  'url("images/users/avatar.jpg")'
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "textarea-wrapper" }, [
+                              _vm._m(2),
+                              _vm._v(" "),
+                              _c("div", {
+                                staticClass: "textarea",
+                                staticStyle: { "min-height": "2.2em" },
+                                attrs: {
+                                  "data-placeholder": "Add a comment",
+                                  contenteditable: "true"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "control-row" }, [
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "send save highlight-background enabled"
+                                  },
+                                  [_vm._v("Đăng bình luận")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "delete enabled",
+                                    staticStyle: {
+                                      "background-color": "rgb(201, 48, 44)"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.onDestroy(1)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Hủy")]
+                                )
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _vm._l(_vm.comment, function(
+                            value_comment,
+                            index_comment
+                          ) {
+                            return _c(
+                              "div",
+                              { staticClass: "data-container" },
+                              [
+                                _c(
+                                  "ul",
+                                  {
+                                    staticClass: "main",
+                                    attrs: { id: "comment-list" }
+                                  },
+                                  [
+                                    _c(
+                                      "li",
+                                      {
+                                        staticClass: "comment by-current-user"
+                                      },
+                                      [
+                                        !_vm.edit
+                                          ? _c(
+                                              "div",
+                                              {
+                                                staticClass: "comment-wrapper"
+                                              },
+                                              [
+                                                _c("div", {
+                                                  staticClass:
+                                                    "profile-picture round",
+                                                  staticStyle: {
+                                                    "background-image":
+                                                      'url("images/users/avatar.jpg")'
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("time", [
+                                                  _vm._v("20/01/2019")
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "name" },
+                                                  [
+                                                    _c("span", [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          value_comment.name
+                                                        )
+                                                      )
+                                                    ])
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "wrapper" },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass: "content"
+                                                      },
+                                                      [
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              value_comment.comment_discussion_content
+                                                            )
+                                                          )
+                                                        ])
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "actions"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "button",
+                                                          {
+                                                            staticClass:
+                                                              "action reply",
+                                                            attrs: {
+                                                              type: "button"
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                _vm.onReply(1)
+                                                              }
+                                                            }
+                                                          },
+                                                          [_vm._v("Trả lời")]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "separator"
+                                                          },
+                                                          [_vm._v("·")]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _vm._m(4, true),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "separator"
+                                                          },
+                                                          [_vm._v("·")]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "button",
+                                                          {
+                                                            staticClass:
+                                                              "action edit",
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                _vm.onEdit(1)
+                                                              }
+                                                            }
+                                                          },
+                                                          [_vm._v("Sửa")]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "separator"
+                                                          },
+                                                          [_vm._v("·")]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "button",
+                                                          {
+                                                            staticClass:
+                                                              "action delete enabled"
+                                                          },
+                                                          [_vm._v("Xóa")]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.edit
+                                          ? _c(
+                                              "div",
+                                              {
+                                                staticClass: "commenting-field"
+                                              },
+                                              [
+                                                _c("div", {
+                                                  staticClass:
+                                                    "profile-picture round",
+                                                  staticStyle: {
+                                                    "background-image":
+                                                      'url("images/users/avatar.jpg")'
+                                                  },
+                                                  attrs: { "data-user-id": "1" }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "textarea-wrapper"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "close inline-button",
+                                                        on: {
+                                                          click: function(
+                                                            $event
+                                                          ) {
+                                                            _vm.onDestroy(1)
+                                                          }
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("span", {
+                                                          staticClass: "left"
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _c("span", {
+                                                          staticClass: "right"
+                                                        })
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _vm._m(5, true),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "control-row"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "update save highlight-background enabled"
+                                                          },
+                                                          [_vm._v("Lưu")]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "delete enabled",
+                                                            staticStyle: {
+                                                              "background-color":
+                                                                "rgb(201, 48, 44)"
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                _vm.onDestroy(1)
+                                                              }
+                                                            }
+                                                          },
+                                                          [_vm._v("Hủy")]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm._l(_vm.commentdetail, function(
+                                          value_detail,
+                                          index_detail
+                                        ) {
+                                          return _c(
+                                            "ul",
+                                            { staticClass: "child-comments" },
+                                            [
+                                              value_detail.id_comment_discussion ==
+                                              value_comment.id
+                                                ? _c(
+                                                    "li",
+                                                    { staticClass: "comment" },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "comment-wrapper"
+                                                        },
+                                                        [
+                                                          _c("div", {
+                                                            staticClass:
+                                                              "profile-picture round",
+                                                            staticStyle: {
+                                                              "background-image":
+                                                                'url("images/users/avatar.jpg")'
+                                                            }
+                                                          }),
+                                                          _vm._v(" "),
+                                                          _c("time", [
+                                                            _vm._v("22/01/2019")
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "name"
+                                                            },
+                                                            [
+                                                              _c("span", [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    value_detail.name
+                                                                  )
+                                                                )
+                                                              ])
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "wrapper"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "content"
+                                                                },
+                                                                [
+                                                                  _c("p", [
+                                                                    _vm._v(
+                                                                      _vm._s(
+                                                                        value_detail.comment_detail_discussion_content
+                                                                      )
+                                                                    )
+                                                                  ])
+                                                                ]
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _vm._m(6, true)
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                : _vm._e()
+                                            ]
+                                          )
+                                        }),
+                                        _vm._v(" "),
+                                        _vm.traloi
+                                          ? _c(
+                                              "ul",
+                                              { staticClass: "child-comments" },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "commenting-field"
+                                                  },
+                                                  [
+                                                    _c("div", {
+                                                      staticClass:
+                                                        "profile-picture round",
+                                                      staticStyle: {
+                                                        "background-image":
+                                                          'url("images/users/avatar.jpg")'
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "textarea-wrapper"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "close inline-button",
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                _vm.onDestroy(1)
+                                                              }
+                                                            }
+                                                          },
+                                                          [
+                                                            _c("span", {
+                                                              staticClass:
+                                                                "left"
+                                                            }),
+                                                            _vm._v(" "),
+                                                            _c("span", {
+                                                              staticClass:
+                                                                "right"
+                                                            })
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c("div", {
+                                                          staticClass:
+                                                            "textarea",
+                                                          staticStyle: {
+                                                            "min-height":
+                                                              "3.65em"
+                                                          },
+                                                          attrs: {
+                                                            "data-placeholder":
+                                                              "Add a comment",
+                                                            contenteditable:
+                                                              "true"
+                                                          }
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "control-row"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "span",
+                                                              {
+                                                                staticClass:
+                                                                  "send save highlight-background enabled"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "Đăng bình luận"
+                                                                )
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "span",
+                                                              {
+                                                                staticClass:
+                                                                  "delete enabled",
+                                                                staticStyle: {
+                                                                  "background-color":
+                                                                    "rgb(201, 48, 44)"
+                                                                },
+                                                                on: {
+                                                                  click: function(
+                                                                    $event
+                                                                  ) {
+                                                                    _vm.onDestroy(
+                                                                      1
+                                                                    )
+                                                                  }
+                                                                }
+                                                              },
+                                                              [_vm._v("Hủy")]
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      ],
+                                      2
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-xl-12" }, [
+        _c("div", { staticClass: "breadcrumb-holder" }, [
+          _c(
+            "h1",
+            {
+              staticClass:
+                "main-title float-left font-weight-bold text-uppercase"
+            },
+            [_vm._v("Thảo luận")]
+          ),
+          _vm._v(" "),
+          _c("ol", { staticClass: "breadcrumb float-right" }, [
+            _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Admin")]),
+            _vm._v(" "),
+            _c("li", { staticClass: "breadcrumb-item active" }, [
+              _vm._v("Thảo luận")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "clearfix" })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", [
+        _c("i", { staticClass: "fa fa-comment" }),
+        _vm._v(" 3 comments")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "span",
+      { staticClass: "close inline-button", staticStyle: { display: "none" } },
+      [
+        _c("span", { staticClass: "left" }),
+        _vm._v(" "),
+        _c("span", { staticClass: "right" })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "navigation" }, [
+      _c("div", { staticClass: "navigation-wrapper" }, [
+        _c("li", { staticClass: "active" }, [_vm._v("Mới nhất")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Cũ nhất")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "action upvote highlight-font" }, [
+      _c("span", { staticClass: "upvote-count" }, [_vm._v("2")]),
+      _vm._v(" "),
+      _c("i", { staticClass: "fa fa-thumbs-up" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "textarea",
+        staticStyle: { "min-height": "5.1em" },
+        attrs: { "data-placeholder": "Add a comment", contenteditable: "true" }
+      },
+      [
+        _c("p", [
+          _vm._v(
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis accusamus a, labore quis rem. Asperiores quos, consectetur beatae hic ipsa aliquid libero, voluptas sapiente rerum incidunt eveniet nostrum voluptatum facere."
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "actions" }, [
+      _c("button", { staticClass: "action upvote" }, [
+        _c("span", { staticClass: "upvote-count" }, [_vm._v("0")]),
+        _c("i", { staticClass: "fa fa-thumbs-up" })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "separator" }, [_vm._v("·")]),
+      _vm._v(" "),
+      _c("button", { staticClass: "action edit" }, [_vm._v("Sửa")])
     ])
   }
 ]
@@ -92184,15 +93202,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_admin_discussion_AdminDiscussion_vue__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./components/admin/discussion/AdminDiscussion.vue */ "./resources/js/components/admin/discussion/AdminDiscussion.vue");
 /* harmony import */ var _components_admin_discussion_AdminDiscussionCreate_vue__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./components/admin/discussion/AdminDiscussionCreate.vue */ "./resources/js/components/admin/discussion/AdminDiscussionCreate.vue");
 /* harmony import */ var _components_admin_discussion_AdminDiscussionEdit_vue__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./components/admin/discussion/AdminDiscussionEdit.vue */ "./resources/js/components/admin/discussion/AdminDiscussionEdit.vue");
-/* harmony import */ var _components_admin_discussion_AdminDiscussionWithType_vue__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./components/admin/discussion/AdminDiscussionWithType.vue */ "./resources/js/components/admin/discussion/AdminDiscussionWithType.vue");
-/* harmony import */ var _components_admin_demo_DemoAdmin_vue__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./components/admin/demo/DemoAdmin.vue */ "./resources/js/components/admin/demo/DemoAdmin.vue");
-/* harmony import */ var _components_admin_demo_DemoAdminKhongCo_vue__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./components/admin/demo/DemoAdminKhongCo.vue */ "./resources/js/components/admin/demo/DemoAdminKhongCo.vue");
-/* harmony import */ var _components_admin_demo_DemoUser_vue__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./components/admin/demo/DemoUser.vue */ "./resources/js/components/admin/demo/DemoUser.vue");
-/* harmony import */ var _components_admin_demo_DemoTableBasic_vue__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./components/admin/demo/DemoTableBasic.vue */ "./resources/js/components/admin/demo/DemoTableBasic.vue");
-/* harmony import */ var _components_admin_demo_DemoUserEdit_vue__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./components/admin/demo/DemoUserEdit.vue */ "./resources/js/components/admin/demo/DemoUserEdit.vue");
-/* harmony import */ var _components_pages_Page404Component_vue__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./components/pages/Page404Component.vue */ "./resources/js/components/pages/Page404Component.vue");
-/* harmony import */ var _components_home_login_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./components/home/login/LoginComponent.vue */ "./resources/js/components/home/login/LoginComponent.vue");
-/* harmony import */ var _components_home_login_RegisterComponent_vue__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./components/home/login/RegisterComponent.vue */ "./resources/js/components/home/login/RegisterComponent.vue");
+/* harmony import */ var _components_admin_discussion_AdminDiscussionWithType_vue__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./components/admin/discussion/AdminDiscussionWithType.vue */ "./resources/js/components/admin/discussion/AdminDiscussionWithType.vue");
+/* harmony import */ var _components_admin_discussion_AdminDiscussionMore_vue__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./components/admin/discussion/AdminDiscussionMore.vue */ "./resources/js/components/admin/discussion/AdminDiscussionMore.vue");
+/* harmony import */ var _components_admin_demo_DemoAdmin_vue__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./components/admin/demo/DemoAdmin.vue */ "./resources/js/components/admin/demo/DemoAdmin.vue");
+/* harmony import */ var _components_admin_demo_DemoAdminKhongCo_vue__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./components/admin/demo/DemoAdminKhongCo.vue */ "./resources/js/components/admin/demo/DemoAdminKhongCo.vue");
+/* harmony import */ var _components_admin_demo_DemoUser_vue__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./components/admin/demo/DemoUser.vue */ "./resources/js/components/admin/demo/DemoUser.vue");
+/* harmony import */ var _components_admin_demo_DemoTableBasic_vue__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./components/admin/demo/DemoTableBasic.vue */ "./resources/js/components/admin/demo/DemoTableBasic.vue");
+/* harmony import */ var _components_admin_demo_DemoUserEdit_vue__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./components/admin/demo/DemoUserEdit.vue */ "./resources/js/components/admin/demo/DemoUserEdit.vue");
+/* harmony import */ var _components_pages_Page404Component_vue__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./components/pages/Page404Component.vue */ "./resources/js/components/pages/Page404Component.vue");
+/* harmony import */ var _components_home_login_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./components/home/login/LoginComponent.vue */ "./resources/js/components/home/login/LoginComponent.vue");
+/* harmony import */ var _components_home_login_RegisterComponent_vue__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./components/home/login/RegisterComponent.vue */ "./resources/js/components/home/login/RegisterComponent.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ../assets/css/animate-css/animate.css */ "./resources/assets/css/animate-css/animate.css");
@@ -92240,6 +93259,7 @@ Vue.use(v_viewer__WEBPACK_IMPORTED_MODULE_1___default.a);
 
 
 /*===========Admin==============*/
+
 
 
 
@@ -92417,16 +93437,20 @@ var routes = [
     }, {
       name: 'AdminDiscussionWithType',
       path: 'type/:id',
-      component: _components_admin_discussion_AdminDiscussionWithType_vue__WEBPACK_IMPORTED_MODULE_47__["default"]
+      component: _components_admin_discussion_AdminDiscussionWithType_vue__WEBPACK_IMPORTED_MODULE_38__["default"]
+    }, {
+      name: 'AdminDiscussionMore',
+      path: 'discussionmore/:id',
+      component: _components_admin_discussion_AdminDiscussionMore_vue__WEBPACK_IMPORTED_MODULE_39__["default"]
     }]
   }, {
     name: 'AdminTrangChu',
     path: 'demotablechild',
-    component: _components_admin_demo_DemoAdmin_vue__WEBPACK_IMPORTED_MODULE_39__["default"]
+    component: _components_admin_demo_DemoAdmin_vue__WEBPACK_IMPORTED_MODULE_40__["default"]
   }, {
     name: 'DemoAdminKhongCo',
     path: 'demokhongconoidung',
-    component: _components_admin_demo_DemoAdminKhongCo_vue__WEBPACK_IMPORTED_MODULE_40__["default"]
+    component: _components_admin_demo_DemoAdminKhongCo_vue__WEBPACK_IMPORTED_MODULE_41__["default"]
   }, {
     path: 'demouser',
     component: {
@@ -92437,16 +93461,16 @@ var routes = [
     children: [{
       path: '',
       name: 'DemoUser',
-      component: _components_admin_demo_DemoUser_vue__WEBPACK_IMPORTED_MODULE_41__["default"]
+      component: _components_admin_demo_DemoUser_vue__WEBPACK_IMPORTED_MODULE_42__["default"]
     }, {
       name: 'DemoUserEdit',
       path: ':id',
-      component: _components_admin_demo_DemoUserEdit_vue__WEBPACK_IMPORTED_MODULE_43__["default"]
+      component: _components_admin_demo_DemoUserEdit_vue__WEBPACK_IMPORTED_MODULE_44__["default"]
     }]
   }, {
     name: 'DemoTableBasic',
     path: 'demotable',
-    component: _components_admin_demo_DemoTableBasic_vue__WEBPACK_IMPORTED_MODULE_42__["default"]
+    component: _components_admin_demo_DemoTableBasic_vue__WEBPACK_IMPORTED_MODULE_43__["default"]
   }]
 }, {
   /*===========Home==============*/
@@ -92533,11 +93557,11 @@ var routes = [
   }, {
     name: 'Login',
     path: 'login',
-    component: _components_home_login_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_45__["default"]
+    component: _components_home_login_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_46__["default"]
   }, {
     name: 'Register',
     path: 'register',
-    component: _components_home_login_RegisterComponent_vue__WEBPACK_IMPORTED_MODULE_46__["default"]
+    component: _components_home_login_RegisterComponent_vue__WEBPACK_IMPORTED_MODULE_47__["default"]
   }]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
@@ -93781,6 +94805,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminDiscussionEdit_vue_vue_type_template_id_35850785___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminDiscussionEdit_vue_vue_type_template_id_35850785___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/discussion/AdminDiscussionMore.vue":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/admin/discussion/AdminDiscussionMore.vue ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AdminDiscussionMore_vue_vue_type_template_id_6e099160_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdminDiscussionMore.vue?vue&type=template&id=6e099160&scoped=true& */ "./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=template&id=6e099160&scoped=true&");
+/* harmony import */ var _AdminDiscussionMore_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminDiscussionMore.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _AdminDiscussionMore_vue_vue_type_style_index_0_id_6e099160_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AdminDiscussionMore.vue?vue&type=style&index=0&id=6e099160&scoped=true&lang=css& */ "./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=style&index=0&id=6e099160&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _AdminDiscussionMore_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AdminDiscussionMore_vue_vue_type_template_id_6e099160_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AdminDiscussionMore_vue_vue_type_template_id_6e099160_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "6e099160",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/discussion/AdminDiscussionMore.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminDiscussionMore_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminDiscussionMore.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminDiscussionMore_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=style&index=0&id=6e099160&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************!*\
+  !*** ./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=style&index=0&id=6e099160&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminDiscussionMore_vue_vue_type_style_index_0_id_6e099160_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminDiscussionMore.vue?vue&type=style&index=0&id=6e099160&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=style&index=0&id=6e099160&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminDiscussionMore_vue_vue_type_style_index_0_id_6e099160_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminDiscussionMore_vue_vue_type_style_index_0_id_6e099160_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminDiscussionMore_vue_vue_type_style_index_0_id_6e099160_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminDiscussionMore_vue_vue_type_style_index_0_id_6e099160_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminDiscussionMore_vue_vue_type_style_index_0_id_6e099160_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=template&id=6e099160&scoped=true&":
+/*!*********************************************************************************************************************!*\
+  !*** ./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=template&id=6e099160&scoped=true& ***!
+  \*********************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminDiscussionMore_vue_vue_type_template_id_6e099160_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminDiscussionMore.vue?vue&type=template&id=6e099160&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/discussion/AdminDiscussionMore.vue?vue&type=template&id=6e099160&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminDiscussionMore_vue_vue_type_template_id_6e099160_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminDiscussionMore_vue_vue_type_template_id_6e099160_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

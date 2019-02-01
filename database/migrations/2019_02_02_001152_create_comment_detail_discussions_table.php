@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommentDetailsTable extends Migration
+class CreateCommentDetailDiscussionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCommentDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comment_details', function (Blueprint $table) {
+        Schema::create('comment_detail_discussions', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('conment_detail_content');
-            $table->integer('id_comment')->unsigned();
-            $table->foreign('id_comment')->references('id')->on('comments');
+             $table->text('comment_detail_discussion_content');
+            $table->integer('id_comment_discussion')->unsigned();
+            $table->foreign('id_comment_discussion')->references('id')->on('comment_discussions');
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateCommentDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comment_details');
+        Schema::dropIfExists('comment_detail_discussions');
     }
 }

@@ -11,13 +11,13 @@ class DiscussionTableSeeder extends Seeder
      */
     public function run()
     {
-    	DB::table('discussions')->insert([
-            'title' => '0',
-            'discussion_content' => '0',
-            'id_user' => 1,
-            'id_discussion_type' => 1,
-            'created_at' => date("Y-m-d"),
-        ]);
+    	// DB::table('discussions')->insert([
+     //        'title' => '0',
+     //        'discussion_content' => '0',
+     //        'id_user' => 1,
+     //        'id_discussion_type' => 1,
+     //        'created_at' => date("Y-m-d"),
+     //    ]);
 
         for ($i = 1; $i <= 20; $i++) { 
         	DB::table('discussions')->insert([

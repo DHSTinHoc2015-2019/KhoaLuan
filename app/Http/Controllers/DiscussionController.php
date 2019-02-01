@@ -12,18 +12,18 @@ class DiscussionController extends Controller
     	$discussion = DB::table('discussions')
     		->join('users', 'id_user', 'users.id')
     		->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name')
-    		->where('discussions.id', '<>', 1)
+    		// ->where('discussions.id', '<>', 1)
     		->get();
     	return response()->json($discussion, 200);
     }
 
     function show($id){
-    	$discussion = DB::table('discussions')
-    		->join('users', 'id_user', 'users.id')
-    		->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name')
-    		->where('discussions.id', $id)
-    		->first();
-    	return response()->json($discussion, 200);
+        $discussion = DB::table('discussions')
+            ->join('users', 'id_user', 'users.id')
+            ->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name')
+            ->where('discussions.id', $id)
+            ->first();
+        return response()->json($discussion, 200);
     }
 
     //Hiển thị toàn bộ discussion theo loại thảo luận (discussion_types)
@@ -32,7 +32,7 @@ class DiscussionController extends Controller
     		->join('users', 'id_user', 'users.id')
     		->join('discussion_types', 'id_discussion_type', 'discussion_types.id')
     		->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.discussion_view', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name', 'discussion_types.name_discussion_type')
-    		->where('discussions.id', '<>', 1)
+    		// ->where('discussions.id', '<>', 1)
     		->where('discussions.id_discussion_type', $id_discussion_type)
     		->get();
     	return response()->json($discussion, 200);
@@ -43,7 +43,7 @@ class DiscussionController extends Controller
     		->join('users', 'id_user', 'users.id')
     		->join('discussion_types', 'id_discussion_type', 'discussion_types.id')
     		->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.discussion_view', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name', 'discussion_types.name_discussion_type')
-    		->where('discussions.id', '<>', 1)
+    		// ->where('discussions.id', '<>', 1)
     		// ->orderBy('discussions.id', 'desc')
     		->get();
     	return response()->json($discussion, 200);
@@ -89,5 +89,33 @@ class DiscussionController extends Controller
     		'message' => $status ? 'Xóa dữ liệu thành công' : "Xóa dữ liệu thất bại",
     		'id' => $id
     	]);
+    }
+
+    function showWithComment($id){
+        $discussion = DB::table('discussions')
+            ->join('users', 'id_user', 'users.id')
+            ->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name')
+            ->where('discussions.id', $id)
+            ->first();
+
+        $comment = DB::table('comment_discussions')
+            ->join('users', 'id_user', 'users.id')
+            ->select('comment_discussions.id', 'comment_discussions.comment_discussion_content', 'comment_discussions.id_user', 'comment_discussions.created_at', 'users.name')
+            ->where('id_discussion', $id)
+            ->get();
+
+        $commentdetail = DB::table('comment_detail_discussions')
+            ->join('users', 'id_user', 'users.id')
+            ->join('comment_discussions', 'id_comment_discussion', 'comment_discussions.id')
+            ->select('comment_detail_discussions.id', 'comment_detail_discussion_content', 'id_comment_discussion', 'comment_detail_discussions.id_user', 'comment_detail_discussions.created_at', 'users.name')
+            ->where('id_discussion', $id)
+            ->get();
+
+        return response()->json([
+            'discussion' => $discussion,
+            'comment' => $comment,
+            'commentdetail' => $commentdetail
+
+        ], 200);
     }
 }

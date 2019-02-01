@@ -72,6 +72,7 @@ import AdminDiscussion from './components/admin/discussion/AdminDiscussion.vue';
 import AdminDiscussionCreate from './components/admin/discussion/AdminDiscussionCreate.vue';
 import AdminDiscussionEdit from './components/admin/discussion/AdminDiscussionEdit.vue';
 import AdminDiscussionWithType from './components/admin/discussion/AdminDiscussionWithType.vue';
+import AdminDiscussionMore from './components/admin/discussion/AdminDiscussionMore.vue';
 
 /*===========Admin demo==============*/
 import DemoAdmin from './components/admin/demo/DemoAdmin.vue';
@@ -247,6 +248,11 @@ var routes = [
                         name: 'AdminDiscussionWithType',
                         path: 'type/:id',
                         component: AdminDiscussionWithType
+                    },
+                    {
+                        name: 'AdminDiscussionMore',
+                        path: 'discussionmore/:id',
+                        component: AdminDiscussionMore
                     }
                 ]
             },
