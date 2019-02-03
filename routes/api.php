@@ -37,7 +37,6 @@ Route::get('/blog/readmore/{id}','blogController@show');
 Route::get('/discussiontype','DiscussionTypeController@index');
 
 Route::get('/discussion','DiscussionController@index');
-Route::get('/discussion/showwithcomment/{id}','DiscussionController@showWithComment');
 
 // Route::get('/discussiontype/delete/{id}', 'DiscussionTypeController@delete');
 
@@ -69,8 +68,12 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/discussion/showwithtype/{id}','DiscussionController@showWithType');
 	Route::post('/discussion/update/{id}','DiscussionController@update');
 	//Lấy toàn bộ commet, commentdetai, dicussion với id_discussion
-	// Route::get('/discussion/showwithcomment/{id}','DiscussionController@showWithComment');
+	Route::get('/discussion/showwithcomment/{id}','DiscussionController@showWithComment');
 
+	Route::post('/commentdiscussion/create', 'CommentDiscussionController@create');
+	Route::get('/commentdiscussion/delete/{id}','CommentDiscussionController@delete');
+	Route::post('/commentdiscussion/update','CommentDiscussionController@update');
+	// Route::get('/commentdiscussion/delete/{id_discussion}/{id}','CommentDiscussionController@delete');
 	
 	Route::post('/introduction/update','IntroductionController@update');
 });

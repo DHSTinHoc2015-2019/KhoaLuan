@@ -33,6 +33,8 @@
 	export default {
 		name: 'app',
 		mounted(){
+			localStorage.setItem('tpack.server', 'localhost:3000')
+
 			/* ----------------------------------------------------------- */
 			/*  6. SCROLL TOP BUTTON
 			/* ----------------------------------------------------------- */

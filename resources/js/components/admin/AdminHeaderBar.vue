@@ -146,22 +146,23 @@
 
                         <li class="list-inline-item dropdown notif">
                             <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="assets/images/avatars/admin.png" alt="Profile image" class="avatar-rounded">
+                                <img v-if="user.user_image != null" v-bind:src="`images/users/${user.user_image}`" alt="Profile image" class="avatar-rounded">
+                                <img v-else src="images/users/avatar.jpg" alt="Profile image" class="avatar-rounded">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                                 <!-- item-->
                                 <div class="dropdown-item noti-title">
-                                    <h5 class="text-overflow"><small>Hello, admin</small> </h5>
+                                    <h5 class="text-overflow"><small>Xin chào {{ user.name }}</small> </h5>
                                 </div>
 
                                 <!-- item-->
-                                <a href="pro-profile.html" class="dropdown-item notify-item">
-                                    <i class="fa fa-user"></i> <span>Profile</span>
+                                <a href="javascript:void(0)" class="dropdown-item notify-item">
+                                    <i class="fa fa-user"></i> <span>Trang cá nhân</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
-                                    <i class="fa fa-power-off"></i> <span>Logout</span>
+                                <a href="javascript:void(0)" class="dropdown-item notify-item" v-on:click="logout">
+                                    <i class="fa fa-power-off"></i> <span>Đăng xuất</span>
                                 </a>
 
 								<!-- item-->
@@ -189,6 +190,21 @@
 
 <script>
     export default {
+        data(){
+            return {
+                user: null
+            }
+        },
+        created(){
+            this.user = JSON.parse(localStorage.getItem('tpack.user'))
+        },
+        methods:{
+            logout(){
+                localStorage.removeItem('tpack.jwt')
+                localStorage.removeItem('tpack.user')
+                this.$router.push('/login')
+            }
+        },
         mounted: function () {
             var resizefunc = [];
             $( document ).ready(function() {

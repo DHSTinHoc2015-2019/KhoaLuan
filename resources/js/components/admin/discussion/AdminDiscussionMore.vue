@@ -1,11 +1,8 @@
 <template>
 	    <div class="content-page">
-	
 		<!-- Start content -->
         <div class="content">
-            
 			<div class="container-fluid">
-							
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="breadcrumb-holder">
@@ -43,30 +40,15 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12">						
 						<div class="card mb-3">
 							<div class="card-header">
-								<h3><i class="fa fa-comment"></i> 3 comments</h3>
+								<h3><i class="fa fa-comment"></i> {{ countComment }} bình luận</h3>
 							</div>
 
 							<div class="card-body">
 								<div class="row">
 									<div class="col-md-12">
 					<div class="jquery-comments">
-						<!-- conment cuối cùng -->
-			            <div class="commenting-field main">
-			                <div style="background-image: url(&quot;images/users/avatar.jpg&quot;);" class="profile-picture round"></div>
-			                <div class="textarea-wrapper">
-			                    <span class="close inline-button" style="display: none;">
-			                    	<span class="left"></span>
-			                    	<span class="right"></span>
-			                    </span>
-		                    	<div class="textarea" data-placeholder="Add a comment" style="min-height: 2.2em;" contenteditable="true">
-		                    	</div>
-			                    <!-- <div class="control-row" style="display: none;"> -->
-			                    <div class="control-row">
-			                    	<span class="send save highlight-background enabled">Đăng bình luận</span>
-			                    	<span class="delete enabled" style="background-color: rgb(201, 48, 44);" v-on:click="onDestroy(1)">Hủy</span>
-			                    </div>
-			                </div>
-			            </div>
+						<!-- Create Comment -->
+			            <!-- End Create Comment -->
 
 						<!-- Thanh navbar comment -->
 			            <ul class="navigation">
@@ -79,52 +61,52 @@
 <div class="data-container" v-for="(value_comment, index_comment) in comment">
     <ul id="comment-list" class="main">
         <li class="comment by-current-user">
-            <div class="comment-wrapper" v-if="!edit">
-                <div style="background-image: url(&quot;images/users/avatar.jpg&quot;);" class="profile-picture round"></div>
-                <time>20/01/2019</time>
+            <div class="comment-wrapper" v-if="!editComment[index_comment]">
+                <div v-if="value_comment.user_image != null" v-bind:style="{'background-image': `url(images/users/${value_comment.user_image})`}" class="profile-picture round"></div>
+                <div v-else v-bind:style="{'background-image': `url(images/users/avatar.jpg)`}" class="profile-picture round"></div>
+                <time>{{ convertDate(value_comment.created_at )}}</time>
                 <div class="name"><span>{{ value_comment.name }}</span></div>
                 <div class="wrapper">
-                    <div class="content">
-                    	<p>{{ value_comment.comment_discussion_content }}</p>
-                    </div>
+                    <div class="content" v-html="value_comment.comment_discussion_content"></div>
                     <span class="actions">
-                    	<button class="action reply" type="button" v-on:click="onReply(1)">Trả lời</button>
+                    	<button class="action reply" type="button" v-on:click="onReplyComment(index_comment)">Trả lời</button>
                     	<span class="separator">·</span>
                     	<button class="action upvote highlight-font">
                     		<span class="upvote-count">2</span>
                     		<i class="fa fa-thumbs-up"></i>
                     	</button>
+                    	<span class="separator" v-if="value_comment.id_user == users.id">·</span>
+                    	<button class="action edit" v-on:click="onEditComment(index_comment)" v-if="value_comment.id_user == users.id">Sửa</button>
                     	<span class="separator">·</span>
-                    	<button class="action edit" v-on:click="onEdit(1)">Sửa</button>
-                    	<span class="separator">·</span>
-                    	<button class="action delete enabled">Xóa</button>
+                    	<button class="action delete enabled" v-on:click="ClickDeleteComment(value_comment.id)">Xóa</button>
                     </span>
                 </div>
             </div>
-            <!-- Sửa comment -->
-            <div class="commenting-field" v-if="edit">
-            	<div style="background-image: url(&quot;images/users/avatar.jpg&quot;);" class="profile-picture round" data-user-id="1"></div>
+            <!-- edit comment -->
+            <div class="commenting-field" v-if="editComment[index_comment]">
+            	<div v-if="value_comment.user_image != null" v-bind:style="{'background-image': `url(images/users/${value_comment.user_image})`}" class="profile-picture round"></div>
+                <div v-else v-bind:style="{'background-image': `url(images/users/avatar.jpg)`}" class="profile-picture round"></div>
             	<div class="textarea-wrapper">
-            		<span class="close inline-button" v-on:click="onDestroy(1)">
+            		<span class="close inline-button" v-on:click="onDestroy()">
             			<span class="left"></span>
             			<span class="right"></span>
             		</span>
-            		<div class="textarea" data-placeholder="Add a comment" style="min-height: 5.1em;" contenteditable="true">
-            			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis accusamus a, labore quis rem. Asperiores quos, consectetur beatae hic ipsa aliquid libero, voluptas sapiente rerum incidunt eveniet nostrum voluptatum facere.</p>
-            		</div>
+            		<div class="textarea" data-placeholder="Nhập nội dung bình luận" style="min-height: 5.1em;" contenteditable="true" id="edit_comment" v-html="value_comment.comment_discussion_content"></div>
             		<div class="control-row">
-            			<span class="update save highlight-background enabled">Lưu</span>
-            			<span class="delete enabled" style="background-color: rgb(201, 48, 44);" v-on:click="onDestroy(1)">Hủy</span>
+            			<span class="update save highlight-background enabled" v-on:click="ClickEditComment(value_comment.id)">Lưu</span>
+            			<span class="delete enabled" style="background-color: rgb(201, 48, 44);" v-on:click="onDestroy()">Hủy</span>
             		</div>
         		</div>
         	</div>
-        	<!-- end Sửa comment -->
+        	<!-- end edit comment -->
 
             <ul class="child-comments" v-for="(value_detail, index_detail) in commentdetail">
-                <li class="comment" v-if="value_detail.id_comment_discussion == value_comment.id">
+            	<!-- commentdetail -->
+                <li class="comment" v-if="value_detail.id_comment_discussion == value_comment.id && !editDetail[index_detail]">
                     <div class="comment-wrapper">
-                        <div style="background-image: url(&quot;images/users/avatar.jpg&quot;);" class="profile-picture round"></div>
-                        <time>22/01/2019</time>
+                        <div v-if="value_detail.user_image != null" v-bind:style="{'background-image': `url(images/users/${value_detail.user_image})`}" class="profile-picture round"></div>
+                		<div v-else v-bind:style="{'background-image': `url(images/users/avatar.jpg)`}" class="profile-picture round"></div>
+                        <time>{{ convertDate(value_detail.created_at )}}</time>
                         <div class="name"><span>{{ value_detail.name }}</span></div>
                         <div class="wrapper">
                             <div class="content">
@@ -132,34 +114,86 @@
                             </div>
                             <div class="actions">
                             	<button class="action upvote"><span class="upvote-count">0</span><i class="fa fa-thumbs-up"></i></button>
-                            	<span class="separator">·</span>
-                    			<button class="action edit">Sửa</button>
+                            	<span class="separator" v-if="value_detail.id_user == users.id">·</span>
+                    			<button class="action edit" v-if="value_detail.id_user == users.id" v-on:click="onEditDetail(index_detail)">Sửa</button>
+                    			<span class="separator" v-if="value_detail.id_user == users.id">·</span>
+                    			<button class="action delete enabled" v-if="value_detail.id_user == users.id">Xóa</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+				<!-- edit commentdetails -->
+                <li class="comment by-current-user edit" v-if="value_detail.id_comment_discussion == value_comment.id && value_detail.id_user == users.id && editDetail[index_detail]">
+                    <div class="comment-wrapper">
+                        <div class="commenting-field">
+                            <div v-if="value_detail.user_image != null" v-bind:style="{'background-image': `url(images/users/${value_detail.user_image})`}" class="profile-picture round"></div>
+                			<div v-else v-bind:style="{'background-image': `url(images/users/avatar.jpg)`}" class="profile-picture round"></div>
+                            <div class="textarea-wrapper">
+                                <span class="close inline-button" v-on:click="onDestroy()">
+                                	<span class="left"></span>
+                                	<span class="right"></span>
+                                </span>
+                                <div class="textarea" placeholder="Nhập nội dung bình luận" style="min-height: 3.65em;" contenteditable="true">
+                                	<input type="button" data-role="none">&nbsp;{{ value_detail.comment_detail_discussion_content }}</div>
+                                <div class="control-row">
+                                	<span class="update save highlight-background enabled">Lưu lại</span>
+                                	<span class="delete enabled" style="background-color: rgb(201, 48, 44);" v-on:click="onDestroy()">Hủy</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </li>
             </ul>
-            <ul class="child-comments" v-if="traloi">
+
+            <!-- reply comment detail -->
+            <ul class="child-comments" v-if="replyComment[index_comment]">
                 <div class="commenting-field">
-                    <div style="background-image: url(&quot;images/users/avatar.jpg&quot;);" class="profile-picture round"></div>
+                    <div v-if="value_comment.user_image != null" v-bind:style="{'background-image': `url(images/users/${value_comment.user_image})`}" class="profile-picture round"></div>
+                	<div v-else v-bind:style="{'background-image': `url(images/users/avatar.jpg)`}" class="profile-picture round"></div>
                     <div class="textarea-wrapper">
-                        <span class="close inline-button" v-on:click="onDestroy(1)">
+                        <span class="close inline-button" v-on:click="onDestroy()">
                         	<span class="left"></span>
                         	<span class="right"></span>
                         </span>
-                        <div class="textarea" data-placeholder="Add a comment" style="min-height: 3.65em;" contenteditable="true"></div>
+                        <div class="textarea" data-placeholder="Nhập nội dung bình luận" style="min-height: 3.65em;" contenteditable="true"></div>
                         <div class="control-row">
                         	<span class="send save highlight-background enabled">Đăng bình luận</span>
-                        	<span class="delete enabled" style="background-color: rgb(201, 48, 44);" v-on:click="onDestroy(1)">Hủy</span>
+                        	<span class="delete enabled" style="background-color: rgb(201, 48, 44);" v-on:click="onDestroy()">Hủy</span>
                         </div>
                     </div>
                 </div>
             </ul>
         </li>
-
         <!-- comment 2 -->
     </ul>
 </div>
+						
+
+						<ul class="navigation mt-4 mb-4">
+			                <div class="navigation-wrapper">
+			                    <!-- <li class="active">Mới nhất</li>
+			                    <li>Cũ nhất</li> -->
+			                </div>
+			            </ul>
+						<!-- create comment -->
+						<div class="commenting-field main">
+			                <div v-if="users.user_image != null" v-bind:style="{'background-image': `url(images/users/${users.user_image})`}" class="profile-picture round"></div>
+                			<div v-else v-bind:style="{'background-image': `url(images/users/avatar.jpg)`}" class="profile-picture round"></div>
+			                <div class="textarea-wrapper">
+			                    <span class="close inline-button" style="display: none;">
+			                    	<span class="left"></span>
+			                    	<span class="right"></span>
+			                    </span>
+		                    	<div class="textarea" data-placeholder="Nhập nội dung bình luận" style="min-height: 2.2em;" contenteditable="true" id="create_comment">
+		                    	</div>
+			                    <!-- <div class="control-row" style="display: none;"> -->
+			                    <div class="control-row">
+			                    	<span class="send save highlight-background enabled" v-on:click="ClickCreateComment()">Đăng bình luận</span>
+			                    	<span class="delete enabled" style="background-color: rgb(201, 48, 44);" v-on:click="onDestroy(1)">Hủy</span>
+			                    </div>
+			                </div>
+			            </div>
 
 			        </div>
 			        <!-- end comments -->
@@ -179,40 +213,191 @@
 </template>
 
 <script>
+	import io from 'socket.io-client';
 	export default {
 		data(){
 			return {
 				discussion: {},
 				comment: {},
 				commentdetail: {},
-				traloi: false,
-				edit: false
+				users: null,
+				replyComment:[],
+				editComment:[],
+				editDetail:[],
+				countComment: 0,
+				socket : io(localStorage.getItem('tpack.server'))
 			}
 		},
 		created(){
+			this.users = JSON.parse(localStorage.getItem('tpack.user'))
 			axios.defaults.headers.common['Content-Type'] = 'application/json'
 			axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
 			this.axios.get(`/api/discussion/showwithcomment/${this.$route.params.id}`).then((response) => {
-				console.log(response.data.commentdetail)
+				// console.log(response.data.comment)
 				this.discussion = response.data.discussion
 				this.comment = response.data.comment
 				this.commentdetail = response.data.commentdetail
+				this.countComment = response.data.countComment
+
+				this.comment.forEach(() =>{
+					this.replyComment.push(false)
+					this.editComment.push(false)
+				})
+
+				this.commentdetail.forEach(() =>{
+					this.editDetail.push(false)
+				})
 			}).catch((error) => {
 				console.log(error)
 			})
 		},
+		mounted(){
+			this.socket.on('create_comment', (data) => {
+	            console.log("OK -- tin_hieu_ve" + data)
+	            //Kiem tra xem dang delete voi id_disccusion nao de render lai giao dien do
+				if(data == this.$route.params.id){
+					this.getData()
+				}
+	        });
+
+	        this.socket.on('delete_comment', (data) => {
+	            // console.log("OK -- tin_hieu_ve" + data)
+				if(data == this.$route.params.id){
+					this.getData()
+				}
+	        });
+
+	        this.socket.on('edit_comment', (data) => {
+	            // console.log("OK -- tin_hieu_ve" + data)
+				if(data == this.$route.params.id){
+					this.getData()
+				}
+	        });
+		},
 		methods:{
-			onReply(idcomment){
-				this.onDestroy(idcomment)
-				this.traloi = true
+			ClickCreateComment(){
+				var create_comment = {}
+				create_comment.comment_discussion_content = document.getElementById('create_comment').innerHTML
+				create_comment.id_discussion = this.$route.params.id
+				create_comment.id_user = this.users.id
+
+				axios.defaults.headers.common['Content-Type'] = 'application/json'
+				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+
+	            axios.post("api/commentdiscussion/create", create_comment).then((response) =>{
+					// console.log(response.data);
+					if (response.data.status) {
+						alertify.set('notifier','position', 'buttom-right');
+		 				alertify.success(response.data.message);
+						this.socket.emit("create_comment", response.data.id_discussion);
+					} else {
+						alertify.set('notifier','position', 'buttom-right');
+		 				alertify.error(response.data.message);
+					}
+				}).catch((error) => {
+					console.log(error)
+				})
+				document.getElementById('create_comment').innerHTML = ""
 			},
-			onDestroy(idcomment){
-				this.traloi = false;
-				this.edit = false;
+			ClickEditComment(id_comment){
+				var edit_comment = {}
+				edit_comment.comment_discussion_content = document.getElementById('edit_comment').innerHTML
+				edit_comment.id_discussion = this.$route.params.id
+				edit_comment.id_user = this.users.id
+				edit_comment.id_comment = id_comment
+				// console.log(edit_comment)
+				axios.defaults.headers.common['Content-Type'] = 'application/json'
+				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+
+	            axios.post("api/commentdiscussion/update", edit_comment).then((response) =>{
+					// console.log(response.data);
+					if(response.data.status){
+						alertify.set('notifier','position', 'buttom-right');
+		 				alertify.success(response.data.message);
+						this.onDestroy()
+						this.socket.emit("edit_comment", response.data.id_discussion);
+					} else {
+						alertify.set('notifier','position', 'buttom-right');
+		 				alertify.error(response.data.message);
+					}
+					
+				}).catch((error) => {
+					console.log(error)
+				})
 			},
-			onEdit(idcomment){
-				this.onDestroy(idcomment)
-				this.edit = true;
+			ClickDeleteComment(id_comment){
+				var vm = this
+				alertify.confirm('Thông báo', 'Bạn muốn xóa dữ liệu?', function(){ 
+					vm.deleteCommentSuccess(id_comment)
+				}, function(){ 
+					vm.deleteCommentError()
+				})
+			},
+			deleteCommentSuccess(id_comment){
+				axios.defaults.headers.common['Content-Type'] = 'application/json'
+				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+
+	            axios.get("api/commentdiscussion/delete/" + id_comment).then((response) =>{
+					// console.log(response.data);
+					if(response.data.status){
+						alertify.set('notifier','position', 'buttom-right');
+						alertify.success(response.data.message)
+						this.socket.emit("delete_comment", this.$route.params.id);
+					} else {
+						alertify.set('notifier','position', 'buttom-right');
+						alertify.error(response.data.message)
+					}
+				}).catch((error) => {
+					console.log(error)
+				})
+			},
+			deleteCommentError(){
+				alertify.set('notifier','position', 'buttom-right');
+				alertify.error('Dữ liệu của bạn không thay đổi')
+			},
+			pad(s){
+                return (s < 10) ? '0' + s : s;
+            },
+            convertDate(inputFormat) {
+              var d = new Date(inputFormat);
+              return [this.pad(d.getDate()), this.pad(d.getMonth()+1), d.getFullYear()].join('/');
+            },
+			onReplyComment(index_comment){
+				this.onDestroy()
+				this.$set(this.replyComment, index_comment, true)
+			},
+			onEditComment(index_comment){
+				this.onDestroy()
+				this.$set(this.editComment, index_comment, true)
+			},
+			onEditDetail(index_detail){
+				this.onDestroy()
+				this.$set(this.editDetail, index_detail, true)
+			},
+			onDestroy(){
+				for(var i = 0; i < this.replyComment.length; i++){
+					this.$set(this.replyComment, i, false)
+				}
+
+				for(var i = 0; i < this.editComment.length; i++){
+					this.$set(this.editComment, i, false)
+				}
+
+				for(var i = 0; i < this.editDetail.length; i++){
+					this.$set(this.editDetail, i, false)
+				}
+			},
+			getData(){
+				axios.defaults.headers.common['Content-Type'] = 'application/json'
+				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+				axios.get(`/api/discussion/showwithcomment/${this.$route.params.id}`).then((response) => {
+					this.discussion = response.data.discussion
+					this.comment = response.data.comment
+					this.commentdetail = response.data.commentdetail
+					this.countComment = response.data.countComment
+				}).catch((error) => {
+					console.log(error)
+				})
 			}
 		}
 	}
@@ -230,7 +415,7 @@
     /*.jquery-comments .textarea-wrapper .textarea {
     	overflow: hidden;
     }*/
-    .content-page .content {
+    .wrapper .content {
     	margin-top: 0px;
     }
 </style>

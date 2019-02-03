@@ -77,13 +77,6 @@
             }
         },
         mounted: function () {
-            // axios.get('api/demo1').then((response) => {
-            //     console.log(response.data);
-            //     this.userdemo = response.data;
-            // });
-            // axios.get('api/demo').then((response) => {
-            //     console.log(response.data);
-            // })
             setTimeout(() => {
                 this.loading = false
             }, 1000);
@@ -110,7 +103,6 @@
                 this.setDefaults()
             },
             logout(){
-                console.log("navbar: trang thai dang nhap khi dang xuat: " + localStorage.getItem('tpack.jwt') != null)
                 localStorage.removeItem('tpack.jwt')
                 localStorage.removeItem('tpack.user')
                 this.change()   

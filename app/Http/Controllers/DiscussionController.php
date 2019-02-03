@@ -94,27 +94,30 @@ class DiscussionController extends Controller
     function showWithComment($id){
         $discussion = DB::table('discussions')
             ->join('users', 'id_user', 'users.id')
-            ->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name')
+            ->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name', 'users.user_image')
             ->where('discussions.id', $id)
             ->first();
 
         $comment = DB::table('comment_discussions')
             ->join('users', 'id_user', 'users.id')
-            ->select('comment_discussions.id', 'comment_discussions.comment_discussion_content', 'comment_discussions.id_user', 'comment_discussions.created_at', 'users.name')
+            ->select('comment_discussions.id', 'comment_discussions.comment_discussion_content', 'comment_discussions.id_user', 'comment_discussions.created_at', 'users.name', 'users.user_image')
             ->where('id_discussion', $id)
             ->get();
 
         $commentdetail = DB::table('comment_detail_discussions')
             ->join('users', 'id_user', 'users.id')
             ->join('comment_discussions', 'id_comment_discussion', 'comment_discussions.id')
-            ->select('comment_detail_discussions.id', 'comment_detail_discussion_content', 'id_comment_discussion', 'comment_detail_discussions.id_user', 'comment_detail_discussions.created_at', 'users.name')
+            ->select('comment_detail_discussions.id', 'comment_detail_discussion_content', 'id_comment_discussion', 'comment_detail_discussions.id_user', 'comment_detail_discussions.created_at', 'users.name', 'users.user_image')
             ->where('id_discussion', $id)
             ->get();
+
+        $countComment = $comment->count() + $commentdetail->count();
 
         return response()->json([
             'discussion' => $discussion,
             'comment' => $comment,
-            'commentdetail' => $commentdetail
+            'commentdetail' => $commentdetail,
+            'countComment' => $countComment
 
         ], 200);
     }

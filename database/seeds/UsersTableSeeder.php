@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('123123'),
             'is_admin' => true,
+            'user_image' => '1.jpg',
             'remember_token' => str_random(10),
             'created_at' => date("Y-m-d"),
         ]);
@@ -29,6 +30,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('123123'),
             'is_admin' => true,
+            'user_image' => '2.jpg',
             'remember_token' => str_random(10),
             'created_at' => date("Y-m-d"),
         ]);
@@ -39,6 +41,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('123123'),
             'is_admin' => false,
+            'user_image' => '3.jpg',
             'remember_token' => str_random(10),
             'created_at' => new DateTime,
         ]);
@@ -49,6 +52,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('123123'),
             'is_admin' => false,
+            'user_image' => '4.jpg',
             'remember_token' => str_random(10),
             'created_at' => new DateTime,
         ]);
