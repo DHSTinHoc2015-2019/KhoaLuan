@@ -36,7 +36,16 @@ Route::get('/blog/readmore/{id}','blogController@show');
 
 Route::get('/discussiontype','DiscussionTypeController@index');
 
-Route::get('/discussion','DiscussionController@index');
+Route::get('/demo', function (){
+	try {
+		$blog = DB::table('like_discussions')->where('id_discussion', 1)->where('is_liked', true)->get();
+		return response()->json($blog, 200);
+	} catch (Exception $e) {
+		$blog = App\Blog::findOrFail(1);
+		return response()->json($blog, 200);
+	}
+	
+});
 
 // Route::get('/discussiontype/delete/{id}', 'DiscussionTypeController@delete');
 
@@ -75,6 +84,9 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('/commentdiscussion/update','CommentDiscussionController@update');
 	// Route::get('/commentdiscussion/delete/{id_discussion}/{id}','CommentDiscussionController@delete');
 	
+	Route::get('/likediscussion/admin/{id_user}/{id_discussion}','LikeDiscussionController@indexAdmin');
+	Route::post('/likediscussion/admin/change','LikeDiscussionController@change');
+
 	Route::post('/introduction/update','IntroductionController@update');
 });
 

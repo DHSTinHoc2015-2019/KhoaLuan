@@ -81,6 +81,7 @@
 				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
 				var vm = this
 				this.axios.post(`/api/discussiontype/update/${this.$route.params.id}`, this.discussiontype).then((response) => {
+					// console.log(response.data)
 					if(response.data.status){
 						alertify.set('notifier','position', 'buttom-right');
 		 				alertify.success(response.data.message);

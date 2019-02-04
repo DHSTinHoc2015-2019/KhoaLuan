@@ -31,7 +31,26 @@
 										<div v-html="discussion.discussion_content"></div>
 									</div>
 								</div>
-							</div>														
+							</div>
+							<div class="card-footer">
+								<p style="color: #999;">
+									<span>
+										<i class="fa fa-user-circle-o" aria-hidden="true"></i> 
+										<a href="#" class="mr-2">{{ discussion.name }}</a>
+									</span>
+									<span>
+										<span style="font-weight: bold;" class="mr-2">·</span>
+										<i class="fa fa-clock-o" aria-hidden="true"></i> 
+										<span class="mr-2"> {{ convertDate(discussion.created_at) }}</span>
+									</span>
+									<span>
+										<span style="font-weight: bold;" class="mr-2">·</span>
+										<i class="fa fa-thumbs-up" style="color: #2793e6;" v-if="isLikeDiscussion" v-on:click="ClickLikeDiscussion(isLikeDiscussion)"></i>
+										<i class="fa fa-thumbs-up" v-if="!isLikeDiscussion" v-on:click="ClickLikeDiscussion(isLikeDiscussion)"></i>
+										<span> {{ countLikeDiscussion }}</span>
+									</span>
+								</p>
+							</div>													
 						</div><!-- end card-->					
 					</div>
 				</div>
@@ -225,6 +244,8 @@
 				editComment:[],
 				editDetail:[],
 				countComment: 0,
+				countLikeDiscussion: 0,
+				isLikeDiscussion: false,
 				socket : io(localStorage.getItem('tpack.server'))
 			}
 		},
@@ -250,6 +271,8 @@
 			}).catch((error) => {
 				console.log(error)
 			})
+
+			this.getDataLikeDiscussion()
 		},
 		mounted(){
 			this.socket.on('create_comment', (data) => {
@@ -273,8 +296,37 @@
 					this.getData()
 				}
 	        });
+
+	        this.socket.on('like_discussion', (data) => {
+	        	// console.log("OK - tin_hieu_ve" + data)
+	        	if(data == this.$route.params.id){
+					this.getDataLikeDiscussion()
+				}
+	        })
 		},
 		methods:{
+			ClickLikeDiscussion(isLike){
+				// console.log(isLike)
+				axios.defaults.headers.common['Content-Type'] = 'application/json'
+				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+				var dataPost = {}
+				dataPost.isLike = isLike
+				dataPost.id_user = this.users.id
+				dataPost.id_discussion = this.$route.params.id
+				axios.post("api/likediscussion/admin/change", dataPost).then((response) =>{
+					// console.log(response.data);
+					if (response.data.status) {
+						// alertify.set('notifier','position', 'buttom-right');
+		 			// 	alertify.success(response.data.message);
+						this.socket.emit("like_discussion", response.data.id_discussion);
+					} else {
+						alertify.set('notifier','position', 'buttom-right');
+		 				alertify.error(response.data.message);
+					}
+				}).catch((error) => {
+					console.log(error)
+				})
+			},
 			ClickCreateComment(){
 				var create_comment = {}
 				create_comment.comment_discussion_content = document.getElementById('create_comment').innerHTML
@@ -398,6 +450,17 @@
 				}).catch((error) => {
 					console.log(error)
 				})
+			},
+			getDataLikeDiscussion(){
+				axios.defaults.headers.common['Content-Type'] = 'application/json'
+				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+				this.axios.get(`/api/likediscussion/admin/${this.users.id}/${this.$route.params.id}`).then((response)=>{
+					// console.log(response.data)
+					this.countLikeDiscussion = response.data.countLikeDiscussion
+					this.isLikeDiscussion = response.data.isLikeDiscussion
+				}).catch((error)=>{
+					console.log(error)
+				})
 			}
 		}
 	}
@@ -417,5 +480,8 @@
     }*/
     .wrapper .content {
     	margin-top: 0px;
+    }
+    .fa-thumbs-up{
+    	cursor: pointer;
     }
 </style>
