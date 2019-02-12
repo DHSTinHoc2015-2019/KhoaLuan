@@ -35,6 +35,7 @@ Route::get('/blog/paginate', 'BlogController@paginate');
 Route::get('/blog/readmore/{id}','blogController@show');
 
 Route::get('/discussiontype','DiscussionTypeController@index');
+Route::get('/discussion','DiscussionController@index');
 
 Route::get('/demo', function (){
 	try {
@@ -47,7 +48,7 @@ Route::get('/demo', function (){
 	
 });
 
-// Route::get('/discussiontype/delete/{id}', 'DiscussionTypeController@delete');
+
 
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/hometpack/{id}', 'HomeTpackController@show');
@@ -82,10 +83,13 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('/commentdiscussion/create', 'CommentDiscussionController@create');
 	Route::get('/commentdiscussion/delete/{id}','CommentDiscussionController@delete');
 	Route::post('/commentdiscussion/update','CommentDiscussionController@update');
-	// Route::get('/commentdiscussion/delete/{id_discussion}/{id}','CommentDiscussionController@delete');
 	
 	Route::get('/likediscussion/admin/{id_user}/{id_discussion}','LikeDiscussionController@indexAdmin');
 	Route::post('/likediscussion/admin/change','LikeDiscussionController@change');
+
+	Route::post('/commentdetaildiscussion/create','CommentDetailDiscussionController@create');
+	Route::post('/commentdetaildiscussion/update','CommentDetailDiscussionController@update');
+	Route::get('/commentdetaildiscussion/delete/{id}','CommentDetailDiscussionController@delete');
 
 	Route::post('/introduction/update','IntroductionController@update');
 });

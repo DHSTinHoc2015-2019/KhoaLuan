@@ -128,15 +128,15 @@
                         <time>{{ convertDate(value_detail.created_at )}}</time>
                         <div class="name"><span>{{ value_detail.name }}</span></div>
                         <div class="wrapper">
-                            <div class="content">
-                            	<p>{{ value_detail.comment_detail_discussion_content }}</p>
-                            </div>
+                            <div class="content" v-html="value_detail.comment_detail_discussion_content"></div>
                             <div class="actions">
                             	<button class="action upvote"><span class="upvote-count">0</span><i class="fa fa-thumbs-up"></i></button>
                             	<span class="separator" v-if="value_detail.id_user == users.id">·</span>
                     			<button class="action edit" v-if="value_detail.id_user == users.id" v-on:click="onEditDetail(index_detail)">Sửa</button>
-                    			<span class="separator" v-if="value_detail.id_user == users.id">·</span>
-                    			<button class="action delete enabled" v-if="value_detail.id_user == users.id">Xóa</button>
+                    			<span class="separator">·</span>
+                    			<button class="action delete enabled" v-on:click="ClickDeleteCommentDetail(value_detail.id)">Xóa</button>
+                    			<!-- <span class="separator" v-if="value_detail.id_user == users.id">·</span>
+                				<button class="action delete enabled" v-if="value_detail.id_user == users.id" v-on:click="ClickDeleteCommentDetail(value_detail.id)">Xóa</button> -->
                             </div>
                         </div>
                     </div>
@@ -153,10 +153,11 @@
                                 	<span class="left"></span>
                                 	<span class="right"></span>
                                 </span>
-                                <div class="textarea" placeholder="Nhập nội dung bình luận" style="min-height: 3.65em;" contenteditable="true">
-                                	<input type="button" data-role="none">&nbsp;{{ value_detail.comment_detail_discussion_content }}</div>
+                                <div class="textarea" placeholder="Nhập nội dung bình luận" style="min-height: 3.65em;" contenteditable="true" id="edit_comment_detail" v-html="value_detail.comment_detail_discussion_content">
+                                	<!-- <input type="button" data-role="none">ggg -->
+                                </div>
                                 <div class="control-row">
-                                	<span class="update save highlight-background enabled">Lưu lại</span>
+                                	<span class="update save highlight-background enabled" v-on:click="ClickEditCommentDetail(value_detail.id)">Lưu lại</span>
                                 	<span class="delete enabled" style="background-color: rgb(201, 48, 44);" v-on:click="onDestroy()">Hủy</span>
                                 </div>
                             </div>
@@ -175,9 +176,9 @@
                         	<span class="left"></span>
                         	<span class="right"></span>
                         </span>
-                        <div class="textarea" data-placeholder="Nhập nội dung bình luận" style="min-height: 3.65em;" contenteditable="true"></div>
+                        <div class="textarea" data-placeholder="Nhập nội dung bình luận" style="min-height: 3.65em;" contenteditable="true" id="create_comment_detail"></div>
                         <div class="control-row">
-                        	<span class="send save highlight-background enabled">Đăng bình luận</span>
+                        	<span class="send save highlight-background enabled" v-on:click="ClickCreateCommentDetail(value_comment.id)">Đăng bình luận</span>
                         	<span class="delete enabled" style="background-color: rgb(201, 48, 44);" v-on:click="onDestroy()">Hủy</span>
                         </div>
                     </div>
@@ -276,7 +277,7 @@
 		},
 		mounted(){
 			this.socket.on('create_comment', (data) => {
-	            console.log("OK -- tin_hieu_ve" + data)
+	            // console.log("OK -- tin_hieu_ve" + data)
 	            //Kiem tra xem dang delete voi id_disccusion nao de render lai giao dien do
 				if(data == this.$route.params.id){
 					this.getData()
@@ -303,8 +304,107 @@
 					this.getDataLikeDiscussion()
 				}
 	        })
+
+	        this.socket.on('create_comment_detail', (data) => {
+	        	// console.log("OK - tin_hieu_ve" + data)
+	        	if(data == this.$route.params.id){
+					this.getData()
+				}
+	        })
+
+	        this.socket.on('edit_comment_detail', (data) => {
+	        	// console.log("OK - tin_hieu_ve" + data)
+	        	if(data == this.$route.params.id){
+					this.getData()
+				}
+	        })
+
+	        this.socket.on('delete_comment_detail', (data) => {
+	        	// console.log("OK - tin_hieu_ve" + data)
+	        	if(data == this.$route.params.id){
+					this.getData()
+				}
+	        })
 		},
 		methods:{
+			ClickDeleteCommentDetail(id_comment_detail){
+				// console.log(id_comment_detail)
+				var vm = this
+				alertify.confirm('Thông báo', 'Bạn muốn xóa dữ liệu?', function(){ 
+					vm.deleteCommentDetailSuccess(id_comment_detail)
+				}, function(){ 
+					vm.deleteCommentError()
+				})
+			},
+			deleteCommentDetailSuccess(id_comment_detail){
+				axios.defaults.headers.common['Content-Type'] = 'application/json'
+				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+
+	            axios.get("api/commentdetaildiscussion/delete/" + id_comment_detail).then((response) =>{
+					// console.log(response.data);
+					if(response.data.status){
+						alertify.set('notifier','position', 'buttom-right');
+						alertify.success(response.data.message)
+						this.socket.emit("delete_comment_detail", this.$route.params.id);
+					} else {
+						alertify.set('notifier','position', 'buttom-right');
+						alertify.error(response.data.message)
+					}
+				}).catch((error) => {
+					console.log(error)
+				})
+			},
+			ClickEditCommentDetail(id_comment_detail){
+				var edit_comment_detail = {}
+				edit_comment_detail.comment_detail_discussion_content = document.getElementById('edit_comment_detail').innerHTML
+				edit_comment_detail.id_discussion = this.$route.params.id
+				edit_comment_detail.id_user = this.users.id
+				edit_comment_detail.id_comment_detail = id_comment_detail
+				// console.log(edit_comment_detail)
+				axios.defaults.headers.common['Content-Type'] = 'application/json'
+				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+
+	            axios.post("api/commentdetaildiscussion/update", edit_comment_detail).then((response) =>{
+					// console.log(response.data);
+					if(response.data.status){
+						// alertify.set('notifier','position', 'buttom-right');
+		 			// 	alertify.success(response.data.message);
+						this.onDestroy()
+						this.socket.emit("edit_comment_detail", response.data.id_discussion);
+					} else {
+						alertify.set('notifier','position', 'buttom-right');
+		 				alertify.error(response.data.message);
+					}
+					
+				}).catch((error) => {
+					console.log(error)
+				})
+			},
+			ClickCreateCommentDetail(id_comment){
+				var create_comment_detail = {}
+				create_comment_detail.comment_detail_discussion_content = document.getElementById('create_comment_detail').innerHTML
+				create_comment_detail.id_comment_discussion = id_comment
+				create_comment_detail.id_user = this.users.id
+				create_comment_detail.id_discussion = this.$route.params.id
+				// console.log(create_comment_detail)
+				axios.defaults.headers.common['Content-Type'] = 'application/json'
+				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+				axios.post("api/commentdetaildiscussion/create", create_comment_detail).then((response) =>{
+					// console.log(response.data);
+					if (response.data.status) {
+						// alertify.set('notifier','position', 'buttom-right');
+		 			// 	alertify.success(response.data.message);
+		 				this.onDestroy()
+						this.socket.emit("create_comment_detail", response.data.id_discussion);
+					} else {
+						alertify.set('notifier','position', 'buttom-right');
+		 				alertify.error(response.data.message);
+					}
+				}).catch((error) => {
+					console.log(error)
+				})
+				document.getElementById('create_comment').innerHTML = ""
+			},
 			ClickLikeDiscussion(isLike){
 				// console.log(isLike)
 				axios.defaults.headers.common['Content-Type'] = 'application/json'
@@ -339,8 +439,8 @@
 	            axios.post("api/commentdiscussion/create", create_comment).then((response) =>{
 					// console.log(response.data);
 					if (response.data.status) {
-						alertify.set('notifier','position', 'buttom-right');
-		 				alertify.success(response.data.message);
+						// alertify.set('notifier','position', 'buttom-right');
+		 			// 	alertify.success(response.data.message);
 						this.socket.emit("create_comment", response.data.id_discussion);
 					} else {
 						alertify.set('notifier','position', 'buttom-right');

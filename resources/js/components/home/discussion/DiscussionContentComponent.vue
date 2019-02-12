@@ -7,7 +7,7 @@
                         <div class="large-12">
                             <div class="large-12 forum-category rounded top">
                                 <div class="large-8 small-10 column lpad">
-                                {{ value_type.name_discussion_type }}
+                                <router-link :to="{ name: 'DiscussionTypeComponent', params: {id_type: value_type.id }}" class="name-discussion-type">{{ value_type.name_discussion_type }}</router-link>
                                 </div>
                                 <div class="large-4 small-2 column lpad ar">
                                     <!-- <a data-connect> -->
@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="large-7 small-8 column lpad">
                                         <span class="overflow-control">
-                                        <a href="#" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...'">{{ value.title }} </a>
+                                        <router-link :to="{ name: 'DiscussionDetailsComponent', params: {id_type: value_type.id, id_detail: value.id}}" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...'">{{ value.title }} </router-link>
                                         </span>
                                         <span class="overflow-control">
                                         {{ value.discussion_content }}
@@ -76,6 +76,7 @@
         created(){
             this.axios.get('/api/discussiontype').then((response) => {
                 this.discussiontype = response.data
+                 // console.log(response.data)
             }).catch((error) =>{
                 console.log(error)
             })
@@ -107,6 +108,10 @@
 </script>
 
 <style scoped>
+
+    .name-discussion-type:hover{
+        color: rgb(13, 63, 129);
+    }
 
     @import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
     meta.foundation-mq-small {
@@ -7583,7 +7588,9 @@
     }
 
     .forum-topic a:hover {
-        color: hsl(195, 73%, 48%);
+        /*color: hsl(195, 73%, 48%);*/
+        color: rgb(13, 63, 129);
+
     }
 
     .forum-topic span {

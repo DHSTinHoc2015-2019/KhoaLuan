@@ -39,7 +39,7 @@ import IntroComponent from './components/home/intro/IntroComponent.vue';
 import BlogComponent from './components/home/blog/BlogComponent.vue';
 import BlogDetailsComponent from './components/home/blog/blogDetails/BlogDetailsComponent.vue';
 import DiscussionComponent from './components/home/discussion/DiscussionComponent.vue';
-import DiscussionContentComponent from './components/home/discussion/discussion/DiscussionContentComponent.vue';
+import DiscussionTypeComponent from './components/home/discussion/discussion/DiscussionTypeComponent.vue';
 import DiscussionDetailsComponent from './components/home/discussion/DiscussionDetails/DiscussionDetailsComponent.vue';
 import NewsComponent from './components/home/news/NewsComponent.vue';
 import LibraryComponent from './components/home/library/LibraryComponent.vue';
@@ -352,22 +352,17 @@ var routes = [
                         name: 'Discussion',
 						path: '',
 						component: DiscussionComponent,
-
 					},
                     {
-                        name: 'DiscussionContent',
-                        path: ':id',
-                        meta: { label: 'DiscussionContent'},
-                        component: DiscussionContentComponent,
-                        props: true
-                    }
-                    ,
+                        name: 'DiscussionTypeComponent',
+                        path: ':id_type', //path cho discussiontype
+                        component: DiscussionTypeComponent,
+                    },
 					{
-						name: 'DiscussionDetail',
-						path: ':id/:id1',
-						meta: { label: 'DiscussionDetails'},
+						name: 'DiscussionDetailsComponent',
+						path: ':id_type/:id_detail',
+						// meta: { label: 'DiscussionDetails'},
 						component: DiscussionDetailsComponent,
-						props: true
 					}
         		]
         	},
