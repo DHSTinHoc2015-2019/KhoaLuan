@@ -135,8 +135,6 @@
                     			<button class="action edit" v-if="value_detail.id_user == users.id" v-on:click="onEditDetail(index_detail)">Sửa</button>
                     			<span class="separator">·</span>
                     			<button class="action delete enabled" v-on:click="ClickDeleteCommentDetail(value_detail.id)">Xóa</button>
-                    			<!-- <span class="separator" v-if="value_detail.id_user == users.id">·</span>
-                				<button class="action delete enabled" v-if="value_detail.id_user == users.id" v-on:click="ClickDeleteCommentDetail(value_detail.id)">Xóa</button> -->
                             </div>
                         </div>
                     </div>
@@ -278,7 +276,7 @@
 		mounted(){
 			this.socket.on('create_comment', (data) => {
 	            // console.log("OK -- tin_hieu_ve" + data)
-	            //Kiem tra xem dang delete voi id_disccusion nao de render lai giao dien do
+	            //Kiem tra xem dang delete voi id_discussion nao de render lai giao dien do
 				if(data == this.$route.params.id){
 					this.getData()
 				}

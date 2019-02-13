@@ -35,10 +35,10 @@
                         </ul>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <router-link to="register" class="nav-link active" v-if="!isLoggedIn">Đăng ký</router-link>
+                                <router-link to="/register" class="nav-link active" v-if="!isLoggedIn">Đăng ký</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link to="login" class="nav-link active" v-if="!isLoggedIn">Đăng nhập</router-link>
+                                <router-link to="/login" class="nav-link active" v-if="!isLoggedIn">Đăng nhập</router-link>
                             </li>
                             <!-- <span v-if="isLoggedIn"> -->
                             <li class="nav-item">

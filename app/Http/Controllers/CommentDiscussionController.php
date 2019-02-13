@@ -30,7 +30,7 @@ class CommentDiscussionController extends Controller
     	$commentDiscussion->id_discussion = $request->id_discussion;
     	$commentDiscussion->id_user = $request->id_user;
 
-    	$status = $commentDiscussion->save();
+        $status = $commentDiscussion->save();
     	return response()->json([
     		'status' => $status,
     		'message' => $status ? 'Cập nhật dữ liệu thành công' : "Cập nhật dữ liệu thất bại",
@@ -49,8 +49,6 @@ class CommentDiscussionController extends Controller
 		} catch (Exception $e) {}
     	
     	$status = $commentDiscussion->delete();
-    	// $status = true;
-
     	return response()->json([
     		'status' => $status,
     		'message' => $status ? 'Xóa dữ liệu thành công' : "Xóa dữ liệu thất bại"

@@ -36,6 +36,10 @@ Route::get('/blog/readmore/{id}','blogController@show');
 
 Route::get('/discussiontype','DiscussionTypeController@index');
 Route::get('/discussion','DiscussionController@index');
+//Lấy thảo luận biết đề tài thảo luận + id thảo luận
+Route::get('/discussion/user/{id_type}/{id_discussion}','DiscussionController@userDiscussionWithType');
+
+Route::get('/likediscussion/user/{id_discussion}','LikeDiscussionController@indexUser');
 
 Route::get('/demo', function (){
 	try {

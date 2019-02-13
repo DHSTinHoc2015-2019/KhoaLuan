@@ -38,6 +38,36 @@ class DiscussionController extends Controller
     	return response()->json($discussion, 200);
     }
 
+    function userDiscussionWithType($id_type, $id_discussion){
+        $discussion = DB::table('discussions')
+            ->join('users', 'id_user', 'users.id')
+            ->join('discussion_types', 'id_discussion_type', 'discussion_types.id')
+            ->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.discussion_view', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name', 'discussion_types.name_discussion_type')
+            // ->where('discussions.id', '<>', 1)
+            ->where('discussions.id_discussion_type', $id_type)
+            ->where('discussions.id', $id_discussion)
+            ->first();
+
+            $comment = DB::table('comment_discussions')
+            ->join('users', 'id_user', 'users.id')
+            ->select('comment_discussions.id', 'comment_discussions.comment_discussion_content', 'comment_discussions.id_user', 'comment_discussions.created_at', 'users.name', 'users.user_image')
+            ->where('id_discussion', $id_discussion)
+            ->get();
+
+            $commentdetail = DB::table('comment_detail_discussions')
+            ->join('users', 'id_user', 'users.id')
+            ->join('comment_discussions', 'id_comment_discussion', 'comment_discussions.id')
+            ->select('comment_detail_discussions.id', 'comment_detail_discussion_content', 'id_comment_discussion', 'comment_detail_discussions.id_user', 'comment_detail_discussions.created_at', 'users.name', 'users.user_image')
+            ->where('id_discussion', $id_discussion)
+            ->get();
+
+        return response()->json([
+            'discussion' => $discussion,
+            'comment' => $comment,
+            'commentdetail' => $commentdetail
+        ], 200);
+    }
+
     function showAll(){
     	$discussion = DB::table('discussions')
     		->join('users', 'id_user', 'users.id')

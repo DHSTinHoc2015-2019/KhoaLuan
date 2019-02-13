@@ -10,7 +10,6 @@
                                 <router-link :to="{ name: 'DiscussionTypeComponent', params: {id_type: value_type.id }}" class="name-discussion-type">{{ value_type.name_discussion_type }}</router-link>
                                 </div>
                                 <div class="large-4 small-2 column lpad ar">
-                                    <!-- <a data-connect> -->
                                     <a v-on:click="toggleIcon(value_type.id)" v-bind:id="`discussion-${value_type.id}`">
                                     <i class="fa fa-caret-square-o-up"></i>
                                     </a>
@@ -37,7 +36,7 @@
                                     </div>
                                     <div class="large-7 small-8 column lpad">
                                         <span class="overflow-control">
-                                        <router-link :to="{ name: 'DiscussionDetailsComponent', params: {id_type: value_type.id, id_detail: value.id}}" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...'">{{ value.title }} </router-link>
+                                        <router-link :to="{ name: 'DiscussionDetailsComponent', params: {id_type: value_type.id, id_discussion: value.id}}" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...'">{{ value.title }}</router-link>
                                         </span>
                                         <span class="overflow-control">
                                         {{ value.discussion_content }}
@@ -83,7 +82,7 @@
 
             this.axios.get('/api/discussion').then((response) => {
                 this.discussion = response.data
-                console.log(response.data)
+                // console.log(response.data)
             }).catch((error) =>{
                 console.log(error)
             })

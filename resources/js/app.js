@@ -360,7 +360,7 @@ var routes = [
                     },
 					{
 						name: 'DiscussionDetailsComponent',
-						path: ':id_type/:id_detail',
+						path: ':id_type/:id_discussion',
 						// meta: { label: 'DiscussionDetails'},
 						component: DiscussionDetailsComponent,
 					}

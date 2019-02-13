@@ -25,6 +25,23 @@ class LikeDiscussionController extends Controller
     	]);
     }
 
+    function indexUser($id_discussion){
+        $countLikeDiscussion = DB::table('like_discussions')
+            ->where('id_discussion', $id_discussion)
+            ->count();
+
+        // $isLikeDiscussion = DB::table('like_discussions')
+        //     ->where('id_discussion', $id_discussion)
+        //     ->where('id_user', $id_user)
+        //     ->where('is_liked', true)
+        //     ->count();
+
+        return response()->json([
+            'countLikeDiscussion' => $countLikeDiscussion,
+            // 'isLikeDiscussion' => $isLikeDiscussion == 1 ? true : false
+        ]);
+    }
+
     function change(Request $request){
     	$isLike = filter_var((string)$request->isLike, FILTER_VALIDATE_BOOLEAN)? true : false;
     	// $status = $request->isLike;

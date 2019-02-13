@@ -11,10 +11,6 @@
     import DiscussionDetailsContentComponent from './DiscussionDetailsContentComponent.vue';
 
     export default {
-        mounted() {
-            console.log('Component chi tiet binh luan.')
-        }
-        ,
         components: {
             appDiscussionDetailsBreadcrumbComponent: DiscussionDetailsBreadcrumbComponent,
             appDiscussionDetailsContentComponent: DiscussionDetailsContentComponent,
