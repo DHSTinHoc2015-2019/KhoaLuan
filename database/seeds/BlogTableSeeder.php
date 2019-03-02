@@ -26,9 +26,21 @@ class BlogTableSeeder extends Seeder
 	            'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...',
 	            'blog_content' => 'Nội dung Blog '.$i.'\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae quasi corrupti quis facilis porro deserunt perferendis assumenda eum corporis quisquam. Delectus magnam labore maxime veniam, natus accusantium, quasi tempore praesentium.',
 	            'blog_image' => $i.'.jpg',
+                'featured' => true,
 	            'id_user' => rand(1, 4),
 	            'created_at' => date("Y-m-d"),
 	        ]);
+        }
+
+        for ($i = 7; $i <= 12; $i++) { 
+            DB::table('blogs')->insert([
+                'title' => 'Tiêu đề bài viết '.$i,
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...',
+                'blog_content' => 'Nội dung Blog '.$i.'\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae quasi corrupti quis facilis porro deserunt perferendis assumenda eum corporis quisquam. Delectus magnam labore maxime veniam, natus accusantium, quasi tempore praesentium.',
+                'blog_image' => ($i - 6).'.jpg',
+                'id_user' => rand(1, 4),
+                'created_at' => date("Y-m-d"),
+            ]);
         }
     }
 }

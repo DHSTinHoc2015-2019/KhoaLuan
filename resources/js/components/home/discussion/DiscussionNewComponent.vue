@@ -4,87 +4,59 @@
 				<div class="row">
 
 					<div class="col-md-12 pt-5">
+                        <div class="large-12">
+                            <div class="large-12 forum-category rounded top">
+                                <div class="large-8 small-10 column lpad">
+                                    Thảo luận mới nhất
+                                </div>
+                                <div class="large-4 small-2 column lpad ar">
+                                    <a data-connect>
+                                    <i class="fa fa-caret-square-o-up"></i>
+                                    </a>
+                                </div>
+                            </div>
 
-                    <div class="large-12">
-                        <div class="large-12 forum-category rounded top">
-                            <div class="large-8 small-10 column lpad">
-                                Thảo luận mới nhất
-                            </div>
-                            <div class="large-4 small-2 column lpad ar">
-                                <a data-connect>
-                                <i class="fa fa-caret-square-o-up"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="toggleview">
-                            <div class="large-12 forum-head">
-                                <div class="large-8 small-8 column lpad">
-                                    ...
+                            <div class="toggleview">
+                                <div class="large-12 forum-head">
+                                    <div class="large-8 small-8 column lpad">
+                                        ...
+                                    </div>
+                                    <div class="large-1 column lpad">
+                                        Like
+                                    </div>
+                                    <div class="large-1 column lpad">
+                                        view
+                                    </div>
+                                    <div class="large-2 small-4 column lpad">
+                                        ...
+                                    </div>
                                 </div>
-                                <div class="large-1 column lpad">
-                                    Like
-                                </div>
-                                <div class="large-1 column lpad">
-                                    view
-                                </div>
-                                <div class="large-2 small-4 column lpad">
-                                    ...
-                                </div>
-                            </div>
-                            <div class="large-12 forum-topic">
-                                <div class="large-1 column lpad">
-                                    <i class="icon-file"></i>
-                                </div>
-                                <div class="large-7 small-8 column lpad">
-                                    <span class="overflow-control">
-                                    <a href="#" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...'">Title of the title Title of the title Title f the title Title f the title Title f the title Title f the title Title f the title Title </a>
-                                    </span>
-                                    <span class="overflow-control">
-                                    Description of the title of the topic(?) Description of the title of the topic(?) Description of the title of the topic(?) Description of the title of the topic(?)
-                                    </span>
-                                </div>
-                                <div class="large-1 column lpad">
-                                    <span class="center">96587</span>
-                                </div>
-                                <div class="large-1 column lpad">
-                                    <span class="center">678</span>
-                                </div>
-                                <div class="large-2 small-4 column pad">
-                                    <span>08-29-2013 7:29PM</span>
-                                    <span><a href="#" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';">Some user some user some user Some user</a></span>
-                                </div>
-                            </div>
-                            <div class="large-12 forum-topic">
-                                <div class="large-1 column lpad">
-                                    <i class="icon-file"></i>
-                                </div>
-                                <div class="large-7 small-8 column lpad">
-                                    <span class="overflow-control">
-                                    <a href="#" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...'">Title of the title Title of the title Title f the title Title f the title Title f the title Title f the title Title f the title Title </a>
-                                    </span>
-                                    <span class="overflow-control">
-                                    Description of the title of the topic(?) Description of the title of the topic(?) Description of the title of the topic(?) Description of the title of the topic(?)
-                                    </span>
-                                </div>
-                                <div class="large-1 column lpad">
-                                    <span class="center">96587</span>
-                                </div>
-                                <div class="large-1 column lpad">
-                                    <span class="center">678</span>
-                                </div>
-                                <div class="large-2 small-4 column pad">
-                                    <span>08-29-2013 7:29PM</span>
-                                    <span><a href="#" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';">Some user some user some user Some user</a></span>
+                                <div class="large-12 forum-topic" v-for="(value, index) in newdiscussion">
+                                    <div class="large-1 column lpad">
+                                        <i class="fa fa-comments" style="color: #0d3f81"></i>
+                                    </div>
+                                    <div class="large-7 small-8 column lpad">
+                                        <span class="overflow-control">
+                                        <router-link :to="{ name: 'DiscussionDetailsComponent', params: {id_type: value.id_discussion_type, id_discussion: value.id}}" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...'">{{ value.title }}</router-link>
+                                        </span>
+                                         <span class="overflow-control">
+                                        {{ value.discussion_content }}
+                                        </span>
+                                    </div>
+                                    <div class="large-1 column lpad">
+                                        <span class="center">{{ value.countLikeDiscussion }}</span>
+                                    </div>
+                                    <div class="large-1 column lpad">
+                                        <span class="center">678</span>
+                                    </div>
+                                    <div class="large-2 small-4 column pad">
+                                        <span>{{ convertDate(value.created_at) }}</span>
+                                        <span><a href="#" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';">{{ value.name }}</a></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
     
-
-
-
-
 					</div>
                     <!-- end col-md-12 -->
 
@@ -96,6 +68,11 @@
 
 <script>
 	export default {
+        data(){
+            return {
+                newdiscussion: {}
+            }
+        },
 		mounted (){
 			$(document).ready( function() {
                 $('a[data-connect]').click( function() {
@@ -104,7 +81,24 @@
                     $(this).parent().parent().toggleClass('all').next().slideToggle();
                 });
             });
-		}
+		},
+        created(){
+            this.axios.get('/api/newdiscussion').then((response) => {
+                this.newdiscussion = response.data.newdiscussion
+                 // console.log(response.data.newdiscussion)
+            }).catch((error) =>{
+                console.log(error)
+            })
+        },
+        methods:{
+            convertDate(inputFormat) {
+            var d = new Date(inputFormat);
+            return [this.pad(d.getDate()), this.pad(d.getMonth()+1), d.getFullYear()].join('/');
+            },
+            pad(s){
+                return (s < 10) ? '0' + s : s;
+            }
+        }
 	}
 </script>
 

@@ -43,7 +43,7 @@
                                         </span>
                                     </div>
                                     <div class="large-1 column lpad">
-                                        <span class="center">96587</span>
+                                        <span class="center">{{ value.countLikeDiscussion }}</span>
                                     </div>
                                     <div class="large-1 column lpad">
                                         <span class="center">678</span>
@@ -96,11 +96,11 @@
                 return (s < 10) ? '0' + s : s;
             },
             toggleIcon(index){
-                console.log(document.getElementById('discussion-' + index))
+                // console.log(document.getElementById('discussion-' + index))
                 var i = $('#discussion-' + index).find('i');
                 i.hasClass('fa-caret-square-o-up') ? i.removeClass('fa-caret-square-o-up').addClass('fa-caret-square-o-down') : i.removeClass('fa-caret-square-o-down').addClass('fa-caret-square-o-up');
                 $('#discussion-' + index).parent().parent().toggleClass('all').next().slideToggle();
-                console.log(index)
+                // console.log(index)
             }
         }
     }

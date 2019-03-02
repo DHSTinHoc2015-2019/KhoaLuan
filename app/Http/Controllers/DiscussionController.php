@@ -14,6 +14,13 @@ class DiscussionController extends Controller
     		->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name')
     		// ->where('discussions.id', '<>', 1)
     		->get();
+
+        foreach ($discussion as $value) {
+            $countLikeDiscussion = DB::table('like_discussions')
+            ->where('id_discussion', $value->id)
+            ->count();
+            $value->countLikeDiscussion = $countLikeDiscussion;
+        }
     	return response()->json($discussion, 200);
     }
 
@@ -149,6 +156,23 @@ class DiscussionController extends Controller
             'commentdetail' => $commentdetail,
             'countComment' => $countComment
 
+        ], 200);
+    }
+
+    function newDiscussion(){
+        $newdiscussion = DB::table('discussions')
+            ->join('users', 'id_user', 'users.id')
+            ->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name', 'users.user_image')->orderBy('id', 'desc')->take(10)->get();
+
+        foreach ($newdiscussion as $value) {
+            $countLikeDiscussion = DB::table('like_discussions')
+            ->where('id_discussion', $value->id)
+            ->count();
+            $value->countLikeDiscussion = $countLikeDiscussion;
+        }
+        
+        return response()->json([
+            'newdiscussion' => $newdiscussion
         ], 200);
     }
 }
