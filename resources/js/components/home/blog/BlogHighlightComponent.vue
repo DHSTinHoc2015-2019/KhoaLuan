@@ -5,110 +5,22 @@
                 <div class="col-md-12 pl-3 wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="900ms">
                     <h2><b class="blog-title">Bài viết nổi bật</b></h2>
                 </div>
-                <div class="col-md-4 col-xs-12 p-3 home-blog">
-                    <div class="card wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <a href="#" class="imgover">
-                            <img class="card-img-top" src="images/blog/post.jpg" alt="">
+                <div class="col-md-4 col-xs-12 p-3 home-blog" v-for="(value, index) in blogs">
+                    <div class="card wow fadeInDown animated" data-wow-duration="500ms" :data-wow-delay="(datawowdelay * index) + 'ms'">
+                        <a href="javascript:void(0)" class="imgover" v-if="!checkImageSVG(index)">
+                            <img class="card-img-top" :src="`images/blog/${value.blog_image}`" alt="" style="height: 210px">
+                        </a>
+                        <a href="javascript:void(0)" class="imgover" v-if="checkImageSVG(index)" v-html="value.blog_image">
                         </a>
                         <div class="card-body">
-                            <a href="javascript:void(0)" class="highlight-blog-title">
-                                <h4 class="card-title font-weight-bold">Tiêu đề blog tiêu đề blog</h4>
-                            </a>
-                            <p class="home-blog-author">Đăng bởi <a class="blog-admin" href="#">admin</a> ngày <span>19-01-2019</span></p>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <router-link :to="{ name: 'BlogDetails', params: {id: value.id }}" :title="value.title">
+                                <h4 class="font-weight-bold">{{value.title}}</h4>
+                            </router-link>
+                            <p class="home-blog-author">Đăng bởi <a class="blog-admin" href="javascript:void(0)">{{ value.name }}</a> ngày <span>{{ convertDate(value.created_at) }}</span></p>
+                            <p class="card-text">{{ value.description }}</p>
                             <div class="blog-footer">
-                                <a href="#"><span class="fa fa-comment"></span>18 Bình luận</a>
-                                <a href="#" class="float-right"><span class="fa fa-thumbs-o-up"></span>35 Thích</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-xs-12 p-3 home-blog">
-                    <div class="card wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="600ms">
-                        <a href="#" class="imgover">
-                            <img class="card-img-top" src="images/blog/post.jpg" alt="">
-                        </a>
-                        <div class="card-body">
-                            <a href="javascript:void(0)" class="highlight-blog-title">
-                                <h4 class="card-title font-weight-bold">Tiêu đề blog tiêu đề blog</h4>
-                            </a>
-                            <p class="home-blog-author">Đăng bởi <a class="blog-admin" href="#">admin</a> ngày <span>19-01-2019</span></p>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <div class="blog-footer">
-                                <a href="#"><span class="fa fa-comment"></span>18 Bình luận</a>
-                                <a href="#" class="float-right"><span class="fa fa-thumbs-o-up"></span>35 Thích</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-xs-12 p-3 home-blog">
-                    <div class="card wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="900ms">
-                        <a href="#" class="imgover">
-                            <img class="card-img-top" src="images/blog/post.jpg" alt="">
-                        </a>
-                        <div class="card-body">
-                            <a href="javascript:void(0)" class="highlight-blog-title">
-                                <h4 class="card-title font-weight-bold">Tiêu đề blog tiêu đề blog</h4>
-                            </a>
-                            <p class="home-blog-author">Đăng bởi <a class="blog-admin" href="#">admin</a> ngày <span>19-01-2019</span></p>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <div class="blog-footer">
-                                <a href="#"><span class="fa fa-comment"></span>18 Bình luận</a>
-                                <a href="#" class="float-right"><span class="fa fa-thumbs-o-up"></span>35 Thích</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-xs-12 p-3 home-blog">
-                    <div class="card wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <a href="#" class="imgover">
-                            <img class="card-img-top" src="images/blog/post.jpg" alt="">
-                        </a>
-                        <div class="card-body">
-                            <a href="javascript:void(0)" class="highlight-blog-title">
-                                <h4 class="card-title font-weight-bold">Tiêu đề blog tiêu đề blog</h4>
-                            </a>
-                            <p class="home-blog-author">Đăng bởi <a class="blog-admin" href="#">admin</a> ngày <span>19-01-2019</span></p>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <div class="blog-footer">
-                                <a href="#"><span class="fa fa-comment"></span>18 Bình luận</a>
-                                <a href="#" class="float-right"><span class="fa fa-thumbs-o-up"></span>35 Thích</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-xs-12 p-3 home-blog">
-                    <div class="card wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="600ms">
-                        <a href="#" class="imgover">
-                            <img class="card-img-top" src="images/blog/post.jpg" alt="">
-                        </a>
-                        <div class="card-body">
-                            <a href="javascript:void(0)" class="highlight-blog-title">
-                                <h4 class="card-title font-weight-bold">Tiêu đề blog tiêu đề blog</h4>
-                            </a>
-                            <p class="home-blog-author">Đăng bởi <a class="blog-admin" href="#">admin</a> ngày <span>19-01-2019</span></p>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <div class="blog-footer">
-                                <a href="#"><span class="fa fa-comment"></span>18 Bình luận</a>
-                                <a href="#" class="float-right"><span class="fa fa-thumbs-o-up"></span>35 Thích</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-xs-12 p-3 home-blog">
-                    <div class="card wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="900ms">
-                        <a href="#" class="imgover">
-                            <img class="card-img-top" src="images/blog/post.jpg" alt="">
-                        </a>
-                        <div class="card-body">
-                            <a href="javascript:void(0)" class="highlight-blog-title">
-                                <h4 class="card-title font-weight-bold">Tiêu đề blog tiêu đề blog</h4>
-                            </a>
-                            <p class="home-blog-author">Đăng bởi <a class="blog-admin" href="#">admin</a> ngày <span>19-01-2019</span></p>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <div class="blog-footer">
-                                <a href="#"><span class="fa fa-comment"></span>18 Bình luận</a>
-                                <a href="#" class="float-right"><span class="fa fa-thumbs-o-up"></span>35 Thích</a>
+                                <a href="javascript:void(0)"><span class="fa fa-comment"></span>{{ value.countComment }} Bình luận</a>
+                                <a href="javascript:void(0)" class="float-right"><span class="fa fa-thumbs-o-up"></span>{{ value.countLikeBlog }} Thích</a>
                             </div>
                         </div>
                     </div>
@@ -128,7 +40,7 @@
         position:relative; 
         max-width:100%;
         overflow: hidden;
-        /*////////*/
+
         background: #2f3238;
         border-top-left-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
@@ -175,7 +87,7 @@
     .blog-title {
         color: #231557; text-transform: uppercase;
     }
-/*////////*/
+
     #highlight-blog .imgover img {
         -webkit-transition: opacity 1s,
          -webkit-transform 1s;
@@ -221,11 +133,36 @@
 
 <script>
     export default {
-        mounted() {
-            // jQuery(document).ready(function(){
-            // "use strict";
-            // new WOW().init();
-            // });
+        data(){
+            return {
+                blogs: {},
+                datawowdelay: 150
+            }
+        },
+        created(){
+            this.axios.get('/api/blog/bloghighlight').then((response) =>{
+                this.blogs = response.data
+                // console.log(this.blogs)
+            }).catch(error => {
+                console.error(error);
+            }) 
+        },
+        methods: {
+            checkImageSVG(index){
+                if(this.blogs.length > 0){
+                    if('blog_image' in this.blogs[index]){
+                        return this.blogs[index].blog_image.toString().indexOf('<svg') != -1
+                    }
+                }
+                return false;
+            },
+            pad(s){
+                return (s < 10) ? '0' + s : s;
+            },
+            convertDate(inputFormat) {
+              var d = new Date(inputFormat);
+              return [this.pad(d.getDate()), this.pad(d.getMonth()+1), d.getFullYear()].join('/');
+            },
         }
     }
 </script>

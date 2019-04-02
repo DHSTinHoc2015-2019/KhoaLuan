@@ -15,7 +15,7 @@ class CreateCommentDetailBlogsTable extends Migration
     {
         Schema::create('comment_detail_blogs', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('conment_detail_blog_content');
+            $table->text('comment_detail_blog_content');
             $table->integer('id_comment_blog')->unsigned();
             $table->foreign('id_comment_blog')->references('id')->on('comment_blogs');
             $table->integer('id_user')->unsigned();

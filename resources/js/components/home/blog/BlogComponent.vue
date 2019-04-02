@@ -17,7 +17,7 @@
 
     export default {
         mounted() {
-            console.log('Component bai viet.')
+            // console.log('Component bai viet.')
         }
         ,
         components: {

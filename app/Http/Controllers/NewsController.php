@@ -85,7 +85,7 @@ class NewsController extends Controller
     }
 
     function paginate(){
-    	$news = News::paginate(6);
+    	$news = News::orderBy('id', 'desc')->paginate(6);
     	return response()->json($news);
     }
 }

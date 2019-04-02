@@ -167,7 +167,7 @@
             <!-- reply comment detail -->
             <ul class="child-comments" v-if="replyComment[index_comment]">
                 <div class="commenting-field">
-                    <div v-if="value_comment.user_image != null" v-bind:style="{'background-image': `url(images/users/${value_comment.user_image})`}" class="profile-picture round"></div>
+                    <div v-if="users.user_image != null" v-bind:style="{'background-image': `url(images/users/${users.user_image})`}" class="profile-picture round"></div>
                 	<div v-else v-bind:style="{'background-image': `url(images/users/avatar.jpg)`}" class="profile-picture round"></div>
                     <div class="textarea-wrapper">
                         <span class="close inline-button" v-on:click="onDestroy()">
@@ -190,8 +190,6 @@
 
 						<ul class="navigation mt-4 mb-4">
 			                <div class="navigation-wrapper">
-			                    <!-- <li class="active">Mới nhất</li>
-			                    <li>Cũ nhất</li> -->
 			                </div>
 			            </ul>
 						<!-- create comment -->

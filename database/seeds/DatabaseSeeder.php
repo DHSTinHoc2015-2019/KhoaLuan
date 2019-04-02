@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DiscussionTableSeeder::class);
         $this->call(CommentDiscussionTableSeeder::class);
         $this->call(CommentDiscussionDetailTableSeeder::class);
+        $this->call(CommentBlogTableSeeder::class);
+        $this->call(CommentDetailBlogTableSeeder::class);
     }
 }

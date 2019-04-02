@@ -327,8 +327,7 @@ var routes = [
 						component: BlogComponent,
         			},
         			{
-        				name: 'Blog',
-        				meta: { label: 'BlogDetails' },
+        				name: 'BlogDetails',
 						path: ':id',
 						component: BlogDetailsComponent,
 						props: true

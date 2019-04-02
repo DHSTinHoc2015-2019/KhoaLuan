@@ -28,6 +28,25 @@ class BlogController extends Controller
     	// ->where('blogs.id', '<>', 0)
     	->orderBy('blogs.id', 'desc')
     	->paginate(6);
+        
+        for ($i=0; $i < count($blog); $i++) {
+            $comment = DB::table('comment_blogs')
+                ->where('id_blog', $blog[$i]->id)
+                ->get();
+
+            $commentdetail = DB::table('comment_detail_blogs')
+                ->join('users', 'id_user', 'users.id')
+                ->join('comment_blogs', 'id_comment_blog', 'comment_blogs.id')
+                ->select('comment_detail_blogs.id', 'comment_detail_blogs.comment_detail_blog_content', 'comment_detail_blogs.id_comment_blog', 'comment_detail_blogs.id_user', 'comment_detail_blogs.created_at', 'users.name', 'users.user_image','comment_blogs.id_blog')
+                ->where('comment_blogs.id_blog', $blog[$i]->id)
+                ->get();
+
+            $blog[$i]->countComment = $comment->count() + $commentdetail->count();
+
+            $blog[$i]->countLikeBlog = DB::table('like_blogs')
+            ->where('id_blog', $blog[$i]->id)
+            ->count();
+        }
     	return response()->json($blog, 200);
 	}
 
@@ -89,12 +108,102 @@ class BlogController extends Controller
 
     	$blog->featured = filter_var((string)$request->featured, FILTER_VALIDATE_BOOLEAN)? 1 : 0;
     	$status = $blog->save();
-    	// $status = true;
 
     	return response()->json([
     		'status' => $status,
     		'message' => $status ? 'Cập nhật dữ liệu thành công' : "Cập nhật dữ liệu thất bại",
     		'blog' => $blog
     	]);
+    }
+
+    function showWithComment($id){
+
+        $blog = DB::table('blogs')
+            ->join('users', 'id_user', 'users.id')
+            ->select('blogs.id', 'blogs.title', 'blogs.description', 'blogs.id_user', 'blogs.blog_content', 'blogs.blog_image', 'blogs.featured', 'blogs.created_at', 'users.name', 'users.user_image')
+            ->where('blogs.id', $id)
+            ->first();
+
+        $comment = DB::table('comment_blogs')
+            ->join('users', 'id_user', 'users.id')
+            ->select('comment_blogs.id', 'comment_blogs.comment_blog_content', 'comment_blogs.id_user', 'comment_blogs.created_at', 'users.name', 'users.user_image')
+            ->where('id_blog', $id)
+            ->get();
+
+        $commentdetail = DB::table('comment_detail_blogs')
+            ->join('users', 'id_user', 'users.id')
+            ->join('comment_blogs', 'id_comment_blog', 'comment_blogs.id')
+            ->select('comment_detail_blogs.id', 'comment_detail_blogs.comment_detail_blog_content', 'comment_detail_blogs.id_comment_blog', 'comment_detail_blogs.id_user', 'comment_detail_blogs.created_at', 'users.name', 'users.user_image','comment_blogs.id_blog')
+            ->where('comment_blogs.id_blog', $id)
+            ->get();
+
+        $countComment = $comment->count() + $commentdetail->count();
+
+        return response()->json([
+            'blog' => $blog,
+            'comment' => $comment,
+            'commentdetail' => $commentdetail,
+            'countComment' => $countComment
+
+        ], 200);
+    }
+
+    function new(){
+        $blognew = DB::table('blogs')
+            ->join('users', 'id_user', 'users.id')
+            ->select('blogs.id', 'blogs.title', 'blogs.description', 'blogs.id_user', 'blogs.blog_content', 'blogs.blog_image', 'blogs.featured', 'blogs.created_at', 'users.name', 'users.user_image')
+            ->orderBy('id', 'desc')
+            ->take(6)
+            ->get();
+
+        for ($i=0; $i < count($blognew); $i++) {
+            $comment = DB::table('comment_blogs')
+                ->where('id_blog', $blognew[$i]->id)
+                ->get();
+
+            $commentdetail = DB::table('comment_detail_blogs')
+                ->join('users', 'id_user', 'users.id')
+                ->join('comment_blogs', 'id_comment_blog', 'comment_blogs.id')
+                ->select('comment_detail_blogs.id', 'comment_detail_blogs.comment_detail_blog_content', 'comment_detail_blogs.id_comment_blog', 'comment_detail_blogs.id_user', 'comment_detail_blogs.created_at', 'users.name', 'users.user_image','comment_blogs.id_blog')
+                ->where('comment_blogs.id_blog', $blognew[$i]->id)
+                ->get();
+
+            $blognew[$i]->countComment = $comment->count() + $commentdetail->count();
+
+            $blognew[$i]->countLikeBlog = DB::table('like_blogs')
+            ->where('id_blog', $blognew[$i]->id)
+            ->count();
+        }
+        return response()->json($blognew, 200);
+    }
+
+    function bloghighlight(){
+        $blog = DB::table('blogs')
+        ->join('users', 'id_user', 'users.id')
+        ->select('blogs.id', 'description', 'title', 'blog_content', 'blog_image', 'blogs.created_at', 'featured', 'users.name', 'blogs.id_user')
+        ->where('featured', true)
+        ->orderBy('blogs.id', 'desc')
+        ->take(6)
+        ->get();
+        
+        for ($i=0; $i < count($blog); $i++) {
+            $comment = DB::table('comment_blogs')
+                ->where('id_blog', $blog[$i]->id)
+                ->get();
+
+            $commentdetail = DB::table('comment_detail_blogs')
+                ->join('users', 'id_user', 'users.id')
+                ->join('comment_blogs', 'id_comment_blog', 'comment_blogs.id')
+                ->select('comment_detail_blogs.id', 'comment_detail_blogs.comment_detail_blog_content', 'comment_detail_blogs.id_comment_blog', 'comment_detail_blogs.id_user', 'comment_detail_blogs.created_at', 'users.name', 'users.user_image','comment_blogs.id_blog')
+                ->where('comment_blogs.id_blog', $blog[$i]->id)
+                ->get();
+
+            $blog[$i]->countComment = $comment->count() + $commentdetail->count();
+
+            $blog[$i]->countLikeBlog = DB::table('like_blogs')
+            ->where('id_blog', $blog[$i]->id)
+            ->count();
+        }
+        return response()->json($blog, 200);
     }
 }

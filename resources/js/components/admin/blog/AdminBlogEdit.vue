@@ -200,7 +200,7 @@
 							this.blogs.hasImage = false
 						}
 					}
-					// console.log(key + ' : ' + value)
+					console.log(key + ' : ' + value)
 				}
 
 				if(this.blogs.hasImage){
@@ -208,7 +208,7 @@
 					axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
 					let uri = `/api/blog/update/${this.$route.params.id}`;
 					this.axios.post(uri, formData).then((response) => {
-						// console.log(response.data)
+						console.log(response.data)
 						if(response.data.status){
 							alertify.set('notifier','position', 'buttom-right');
 			 				alertify.success(response.data.message);
@@ -221,7 +221,7 @@
 						console.log(error)
 					})
 				} else {
-					// console.log('khong co file')
+					console.log('khong co file')
 					this.blogs.blog_content = contentpost
 					
 					axios.defaults.headers.common['Content-Type'] = 'application/json'

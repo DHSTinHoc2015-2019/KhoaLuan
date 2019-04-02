@@ -47,7 +47,7 @@
 													<h4>{{ value.title }}</h4>
 													<p class="home-blog-author">Đăng bởi <a href="#">{{ value.name }}</a> ngày <span>{{ convertDate(value.created_at) }}</span></p>
 													<p>{{ value.discussion_content }}<span class="ml-2">
-													<router-link :to="{ name: 'AdminBlogMore', params: {id: value.id }}">
+													<router-link :to="{ name: 'AdminDiscussionMore', params: {id: value.id }}">
 														Xem thêm
 													</router-link></span>
 													</p>

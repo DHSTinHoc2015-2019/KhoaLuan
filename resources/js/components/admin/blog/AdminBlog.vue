@@ -49,7 +49,9 @@
 												<span style="float: left; margin-right:10px;" v-if="checkImageSVG(index)">
 													<div v-html="value.blog_image" style="max-width: 10em;"></div>
 												</span>
-												<h4>{{ value.title }}</h4>
+												<router-link :to="{ name: 'AdminBlogMore', params: {id: value.id }}">
+													<h4>{{ value.title }}</h4>
+												</router-link>
 												<p class="home-blog-author">Đăng bởi <a href="#">{{ value.name }}</a> ngày <span>{{ convertDate(value.created_at) }}</span></p>
 												<p>{{ value.description }}<span>
 												<router-link :to="{ name: 'AdminBlogMore', params: {id: value.id }}">

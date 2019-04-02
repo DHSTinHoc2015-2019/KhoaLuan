@@ -32,7 +32,9 @@ Route::get('/news/readmore/{id}','NewsController@show');
 
 Route::get('/blog','BlogController@index');
 Route::get('/blog/paginate', 'BlogController@paginate');
-Route::get('/blog/readmore/{id}','blogController@show');
+Route::get('/blog/readmore/{id}','BlogController@show');
+Route::get('/blog/new','BlogController@new');
+Route::get('/blog/bloghighlight','BlogController@bloghighlight');
 
 Route::get('/discussiontype','DiscussionTypeController@index');
 Route::get('/discussion','DiscussionController@index');
@@ -70,6 +72,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/blog/delete/{id}','BlogController@delete');
 	Route::get('/blog/show/{id}','BlogController@show');
 	Route::post('/blog/update/{id}','BlogController@update');
+	//Lấy toàn bộ comment, commentdetai, blog với id_blog
+	Route::get('/blog/showwithcomment/{id}','BlogController@showWithComment');
 
 	Route::post('/discussiontype/create', 'DiscussionTypeController@create');
 	Route::get('/discussiontype/delete/{id}', 'DiscussionTypeController@delete');
@@ -82,12 +86,16 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/discussion/show/{id}','DiscussionController@show');
 	Route::get('/discussion/showwithtype/{id}','DiscussionController@showWithType');
 	Route::post('/discussion/update/{id}','DiscussionController@update');
-	//Lấy toàn bộ commet, commentdetai, dicussion với id_discussion
+	//Lấy toàn bộ comment, commentdetai, dicussion với id_discussion
 	Route::get('/discussion/showwithcomment/{id}','DiscussionController@showWithComment');
 
 	Route::post('/commentdiscussion/create', 'CommentDiscussionController@create');
 	Route::get('/commentdiscussion/delete/{id}','CommentDiscussionController@delete');
 	Route::post('/commentdiscussion/update','CommentDiscussionController@update');
+
+	Route::post('/commentblog/create', 'CommentBlogController@create');
+	Route::get('/commentblog/delete/{id}','CommentBlogController@delete');
+	Route::post('/commentblog/update','CommentBlogController@update');
 	
 	Route::get('/likediscussion/admin/{id_user}/{id_discussion}','LikeDiscussionController@indexAdmin');
 	Route::post('/likediscussion/admin/change','LikeDiscussionController@change');
@@ -95,6 +103,13 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('/commentdetaildiscussion/create','CommentDetailDiscussionController@create');
 	Route::post('/commentdetaildiscussion/update','CommentDetailDiscussionController@update');
 	Route::get('/commentdetaildiscussion/delete/{id}','CommentDetailDiscussionController@delete');
+
+	Route::post('/commentdetailblog/create','CommentDetailBlogController@create');
+	Route::post('/commentdetailblog/update','CommentDetailBlogController@update');
+	Route::get('/commentdetailblog/delete/{id}','CommentDetailBlogController@delete');
+
+	Route::get('/likeblog/admin/{id_user}/{id_blog}','LikeBlogController@indexAdmin');
+	Route::post('/likeblog/admin/change','LikeBlogController@change');
 
 	Route::post('/introduction/update','IntroductionController@update');
 });

@@ -7,19 +7,22 @@
                 </div>
                 <div class="col-md-4 col-xs-12 p-3 home-blog" v-for="(value, index) in blogs">
                     <div class="card wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <a href="#" class="imgover" v-if="!checkImageSVG(index)">
+                        <a href="javascript:void(0)" class="imgover" v-if="!checkImageSVG(index)">
                             <img class="card-img-top" :src="`images/blog/${value.blog_image}`" alt="" style="height: 210px">
                         </a>
-                        <a href="#" class="imgover" v-if="checkImageSVG(index)" v-html="value.blog_image"></a>
+                        <a href="javascript:void(0)" class="imgover" v-if="checkImageSVG(index)" v-html="value.blog_image"></a>
                         <div class="card-body">
-                            <a href="javascript:void(0)" class="blogall-blog-title">
+<!--                             <a href="javascript:void(0)" class="blogall-blog-title">
                                 <h4 class="card-title font-weight-bold">{{ value.title }}</h4>
-                            </a>
-                            <p class="home-blog-author">Đăng bởi <a href="#">{{ value.name }}</a> ngày <span>{{ convertDate(value.created_at) }}</span></p>
+                            </a> -->
+                            <router-link :to="{ name: 'BlogDetails', params: {id: value.id }}" :title="value.title">
+                                <h4 class="font-weight-bold">{{value.title}}</h4>
+                            </router-link>
+                            <p class="home-blog-author">Đăng bởi <a href="javascript:void(0)">{{ value.name }}</a> ngày <span>{{ convertDate(value.created_at) }}</span></p>
                             <p class="card-text">{{ value.description }}</p>
                             <div class="blog-footer">
-                                <a href="#"><span class="fa fa-comment"></span>18 Bình luận</a>
-                                <a href="#" class="float-right"><span class="fa fa-thumbs-o-up"></span>35 Thích</a>
+                                <a href="javascript:void(0)"><span class="fa fa-comment"></span>{{ value.countComment }} Bình luận</a>
+                                <a href="javascript:void(0)" class="float-right"><span class="fa fa-thumbs-o-up"></span>{{ value.countLikeBlog }} Thích</a>
                             </div>
                         </div>
                     </div>
@@ -155,6 +158,7 @@
         created() {
             this.axios.get('/api/blog/paginate').then((response) => {
                 this.blogs = response.data.data
+                // console.log(this.blogs)
             })
         },
         mounted(){
