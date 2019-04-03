@@ -27,7 +27,7 @@ Route::get('listhometpack', 'HomeTpackController@index');
 Route::get('/introduction','IntroductionController@index');
 Route::get('/news','NewsController@index');
 Route::get('/news/paginate', 'NewsController@paginate');
-Route::get('/news/all','NewsController@showAll');
+Route::get('/news/showall','NewsController@showAll');
 Route::get('/news/readmore/{id}','NewsController@show');
 
 Route::get('/blog','BlogController@index');

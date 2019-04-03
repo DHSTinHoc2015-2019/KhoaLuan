@@ -7,16 +7,16 @@
 			<div class="container-fluid">
 							
 				<div class="row">
-						<div class="col-xl-12">
-								<div class="breadcrumb-holder">
-										<h1 class="main-title float-left font-weight-bold text-uppercase">Tin tức</h1>
-										<ol class="breadcrumb float-right">
-											<li class="breadcrumb-item">Admin</li>
-											<li class="breadcrumb-item active">Tin tức</li>
-										</ol>
-										<div class="clearfix"></div>
-								</div>
+					<div class="col-xl-12">
+						<div class="breadcrumb-holder">
+							<h1 class="main-title float-left font-weight-bold text-uppercase">Tin tức</h1>
+							<ol class="breadcrumb float-right">
+								<li class="breadcrumb-item">Admin</li>
+								<li class="breadcrumb-item active">Tin tức</li>
+							</ol>
+							<div class="clearfix"></div>
 						</div>
+					</div>
 				</div>
 				<!-- end row -->
 
@@ -34,6 +34,7 @@
 									<thead>
 										<tr>
 											<th>ID</th>
+											<th style="min-width: 4em;">Nổi bật</th>
 											<th></th>
 											<th style="min-width: 4em;">Tùy chọn</th>
 										</tr>
@@ -41,6 +42,11 @@
 									<tbody>
 										<tr v-for="(value, index) in news">
 											<td>{{ value.id }}</td>
+											<td v-if="value.featured == true">
+												<button class="btn btn-danger btn-block btn-sm">Có</button>
+											</td>
+											<td v-else>
+											</td>
 											<td>
 												<span style="float: left; margin-right:10px;" v-if="!checkImageSVG(index)">
 													<a href=""><img v-bind:src="`images/news/${value.news_image}`" alt="" style="max-width: 10em">
@@ -49,7 +55,9 @@
 												<span style="float: left; margin-right:10px;" v-if="checkImageSVG(index)">
 													<div v-html="value.news_image" style="max-width: 10em;"></div>
 												</span>
-												<h4>{{ value.title }}</h4>
+												<router-link :to="{ name: 'NewsMore', params: {id: value.id }}">
+													<h4 class="font-weight-bold">{{ value.title }}</h4>
+												</router-link>
 												<p>{{ value.description }}<span>
 												<router-link :to="{ name: 'NewsMore', params: {id: value.id }}">
 													Xem thêm
@@ -89,7 +97,7 @@
 			}
 		},
 		created: function(){
-			this.axios.get('/api/news/all').then((response) => {
+			this.axios.get('/api/news/showall').then((response) => {
 				this.news = response.data
 			}).catch(error => {
                 console.error(error);

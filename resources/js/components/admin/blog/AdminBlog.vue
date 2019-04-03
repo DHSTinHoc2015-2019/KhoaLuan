@@ -34,13 +34,19 @@
 									<thead>
 										<tr>
 											<th>ID</th>
+											<th style="min-width: 4em;">Nổi bật</th>
 											<th></th>
-											<th style="min-width: 4em;">Tùy chọn</th>
+											<th style="min-width: 5em;">Tùy chọn</th>
 										</tr>
 									</thead>										
 									<tbody>
 										<tr v-for="(value, index) in blogs">
 											<td>{{ value.id }}</td>
+											<td v-if="value.featured == true">
+												<button class="btn btn-danger btn-block btn-sm">Có</button>
+											</td>
+											<td v-else>
+											</td>
 											<td>
 												<span style="float: left; margin-right:10px;" v-if="!checkImageSVG(index)">
 													<a href=""><img v-bind:src="`images/blog/${value.blog_image}`" alt="" style="max-width: 10em">
