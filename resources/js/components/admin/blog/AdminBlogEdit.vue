@@ -58,13 +58,13 @@
 								 	<div class="col-md-6">
             							<label class="font-weight-bold">Chọn ảnh</label>
             							<div class="form-group" v-if="!checkSVG">
-            								<input type="file" v-on:change="onFileChange" />
+            								<input type="file" ref="file" id="file" v-on:change="onFileChange" />
 											<div id="preview">
 												<img v-if="url" :src="url" style="display: block; margin-left: auto; margin-right: auto; max-width: 350px" />
 											</div>                                        
             							</div>
             							<div class="form-group" v-if="checkSVG">
-            								<input type="file" v-on:change="onFileChange" />
+            								<input type="file" ref="file" id="file" v-on:change="onFileChange" />
 											<div id="preview">
 												<img v-if="url" :src="url" style="display: block; margin-left: auto; margin-right: auto; max-width: 350px" />
 											</div>         
@@ -111,7 +111,8 @@
 			return {
 				blogs: {},
 				url: null,
-				checkSVG: null
+				checkSVG: null,
+				file: ''
 			}
 		},
 		created(){
@@ -180,6 +181,8 @@
 			onFileChange(e) {
 				this.blogs.blog_image = e.target.files[0];
 				this.url = URL.createObjectURL(this.blogs.blog_image);
+				this.file = this.$refs.file.files[0];
+				// console.log(this.file)
 			},
 			updateBlog(){
 				var contentpost = tinymce.get("blogs_content").getContent();
@@ -193,6 +196,7 @@
                 formData.append('description', this.blogs.description);
                 formData.append('featured', this.blogs.featured);
                 formData.append('hasImage', true);
+                formData.append('file', this.file);
 
                 for (let [key, value] of formData.entries()) {
 					if(key == 'blog_image') {
@@ -200,15 +204,15 @@
 							this.blogs.hasImage = false
 						}
 					}
-					console.log(key + ' : ' + value)
+					// console.log(key + ' : ' + value)
 				}
 
 				if(this.blogs.hasImage){
 					axios.defaults.headers.common['Content-Type'] = 'multipart/form-data'
 					axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
 					let uri = `/api/blog/update/${this.$route.params.id}`;
-					this.axios.post(uri, formData).then((response) => {
-						console.log(response.data)
+					this.axios.post(uri, formData, {headers: {'Content-Type': 'multipart/form-data'}}).then((response) => {
+						// console.log(response.data)
 						if(response.data.status){
 							alertify.set('notifier','position', 'buttom-right');
 			 				alertify.success(response.data.message);
@@ -221,14 +225,14 @@
 						console.log(error)
 					})
 				} else {
-					console.log('khong co file')
+					// console.log('khong co file')
 					this.blogs.blog_content = contentpost
 					
 					axios.defaults.headers.common['Content-Type'] = 'application/json'
 					axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
 					let uri = `/api/blog/update/${this.$route.params.id}`;
 					this.axios.post(uri, this.blogs).then((response) => {
-						// console.log(response.data)
+						console.log(response.data)
 						if(response.data.status){
 							alertify.set('notifier','position', 'buttom-right');
 			 				alertify.success(response.data.message);

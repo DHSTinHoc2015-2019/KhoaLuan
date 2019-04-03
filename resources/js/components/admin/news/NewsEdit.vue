@@ -47,13 +47,13 @@
 								 	<div class="col-md-6">
             							<label class="font-weight-bold">Chọn ảnh</label>
             							<div class="form-group" v-if="!checkSVG">
-            								<input type="file" v-on:change="onFileChange" />
+            								<input type="file" ref="file" id="file" v-on:change="onFileChange" />
 											<div id="preview">
 												<img v-if="url" :src="url" style="display: block; margin-left: auto; margin-right: auto; max-width: 350px" />
 											</div>                                        
             							</div>
             							<div class="form-group" v-if="checkSVG">
-            								<input type="file" v-on:change="onFileChange" />
+            								<input type="file" ref="file" id="file" v-on:change="onFileChange" />
 											<div id="preview">
 												<img v-if="url" :src="url" style="display: block; margin-left: auto; margin-right: auto; max-width: 350px" />
 											</div>         
@@ -100,7 +100,8 @@
 			return {
 				news: {},
 				url: null,
-				checkSVG: null
+				checkSVG: null,
+				file: ''
 			}
 		},
 		created(){
@@ -168,6 +169,7 @@
 			onFileChange(e) {
 				this.news.news_image = e.target.files[0];
 				this.url = URL.createObjectURL(this.news.news_image);
+				this.file = this.$refs.file.files[0];
 			},
 			updateNews(){
 				var contentpost = tinymce.get("news_content").getContent();
@@ -180,6 +182,7 @@
                 formData.append('news_content', contentpost);
                 formData.append('description', this.news.description);
                 formData.append('hasImage', true);
+                formData.append('file', this.file);
 
                 for (let [key, value] of formData.entries()) {
 					if(key == 'news_image') {
@@ -193,7 +196,7 @@
 					axios.defaults.headers.common['Content-Type'] = 'multipart/form-data'
 					axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
 					let uri = `/api/news/update/${this.$route.params.id}`;
-					this.axios.post(uri, formData).then((response) => {
+					this.axios.post(uri, formData, {headers: {'Content-Type': 'multipart/form-data'}}).then((response) => {
 						// console.log(response.data)
 						if(response.data.status){
 							alertify.set('notifier','position', 'buttom-right');

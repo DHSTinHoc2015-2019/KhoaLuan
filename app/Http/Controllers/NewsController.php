@@ -31,12 +31,15 @@ class NewsController extends Controller
     	$news->news_content = $request->news_content;
 
     	if($request->hasImage){
-    		if (file_exists('images/news/' . $news->news_image)) {
-	            unlink('images/news/' . $news->news_image);
-	        }
-    		$imageName = time().$request->news_image->getClientOriginalName();
-        	$request->news_image->move(public_path('images/news/'), $imageName);
-        	$news->news_image = $imageName;
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                if (file_exists('images/news/' . $news->news_image)) {
+                    unlink('images/news/' . $news->news_image);
+                }
+                $imageName = time().$request->news_image->getClientOriginalName();
+                $request->news_image->move(public_path('images/news/'), $imageName);
+                $news->news_image = $imageName;
+            }    		
     	}
 
     	$status = $news->save();

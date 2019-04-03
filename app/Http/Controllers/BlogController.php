@@ -98,17 +98,21 @@ class BlogController extends Controller
     	$blog->blog_content = $request->blog_content;
 
     	if($request->hasImage){
-    		if (file_exists('images/blog/' . $blog->blog_image)) {
-	            unlink('images/blog/' . $blog->blog_image);
-	        }
-    		$imageName = time().$request->blog_image->getClientOriginalName();
-        	$request->blog_image->move(public_path('images/blog/'), $imageName);
-        	$blog->blog_image = $imageName;
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                if (file_exists('images/blog/' . $blog->blog_image)) {
+                    unlink('images/blog/' . $blog->blog_image);
+                }
+                $imageName = time().$request->blog_image->getClientOriginalName();
+                $request->blog_image->move(public_path('images/blog/'), $imageName);
+                $blog->blog_image = $imageName;
+            }
     	}
 
     	$blog->featured = filter_var((string)$request->featured, FILTER_VALIDATE_BOOLEAN)? 1 : 0;
     	$status = $blog->save();
-
+        
+        
     	return response()->json([
     		'status' => $status,
     		'message' => $status ? 'Cập nhật dữ liệu thành công' : "Cập nhật dữ liệu thất bại",
