@@ -20,7 +20,7 @@
                         <h2 class="fadeInUp animated">
                             Lý thuyết TPACK được sử dụng để đo những chuyển biến trong tư duy của giáo viên / giảng viên về ICT trong giáo dục.<br> Ba mảng kiến thức khi kết hợp lại với nhau sẽ tạo một mô hình tổng hợp <br>về năng lực cần có của giáo viên
                         </h2>
-                        <a class="btn-lines dark light fadeInUp animated smooth-scroll btn btn-default btn-green" href="#works" data-section="#works">Xem thêm</a>
+                        <router-link class="btn-lines dark light fadeInUp animated smooth-scroll btn btn-default btn-green" to="/gioithieu" data-section="#works">Xem thêm</router-link>
                     </div>
                 </div>
             </div>

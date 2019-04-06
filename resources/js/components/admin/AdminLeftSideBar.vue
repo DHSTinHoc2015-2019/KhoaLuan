@@ -33,6 +33,10 @@
 								<li><router-link to="/admin/discussion">Thảo luận</router-link></li>
 							</ul>
                     </li>
+					
+					<li class="submenu">
+                        <router-link :to="{path: '/admin/contact'}"><i class="fa fa-fw fa-tv"></i><span> Liên hệ </span> </router-link>
+                    </li>
 
 					<li class="submenu">
                         <a href="javascript:void(0)"><i class="fa fa-fw fa-table"></i> <span> Demo </span> <span class="menu-arrow"></span></a>

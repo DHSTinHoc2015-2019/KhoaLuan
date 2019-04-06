@@ -12,7 +12,7 @@ class DiscussionController extends Controller
     	$discussion = DB::table('discussions')
     		->join('users', 'id_user', 'users.id')
     		->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name')
-    		// ->where('discussions.id', '<>', 1)
+    		->orderBy('id', 'desc')
     		->get();
 
         foreach ($discussion as $value) {

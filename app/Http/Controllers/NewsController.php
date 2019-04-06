@@ -41,6 +41,7 @@ class NewsController extends Controller
                 $news->news_image = $imageName;
             }    		
     	}
+        $news->featured = filter_var((string)$request->featured, FILTER_VALIDATE_BOOLEAN)? 1 : 0;
 
     	$status = $news->save();
 
@@ -90,5 +91,10 @@ class NewsController extends Controller
     function paginate(){
     	$news = News::orderBy('id', 'desc')->paginate(6);
     	return response()->json($news);
+    }
+
+    function showFeatured(){
+        $news = News::where('featured', true)->orderBy('id', 'desc')->take(10)->get();
+        return response()->json($news, 200);
     }
 }

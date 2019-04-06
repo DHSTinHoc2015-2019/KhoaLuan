@@ -16,7 +16,7 @@ class CreateCommentBlogsTable extends Migration
         Schema::create('comment_blogs', function (Blueprint $table) {
             $table->increments('id');
             $table->text('comment_blog_content');
-            $table->integer('id_blog')->unsigned();
+            $table->bigInteger('id_blog')->unsigned();
             $table->foreign('id_blog')->references('id')->on('blogs');
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users');

@@ -156,9 +156,9 @@
                                 </div>
 
                                 <!-- item-->
-                                <a href="javascript:void(0)" class="dropdown-item notify-item">
+                                <router-link :to="{ name : 'AdminProfile' }" class="dropdown-item notify-item">
                                     <i class="fa fa-user"></i> <span>Trang cá nhân</span>
-                                </a>
+                                </router-link>
 
                                 <!-- item-->
                                 <a href="javascript:void(0)" class="dropdown-item notify-item" v-on:click="logout">

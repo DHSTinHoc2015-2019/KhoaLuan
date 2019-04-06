@@ -15,7 +15,7 @@ class CreateLikeBlogsTable extends Migration
     {
         Schema::create('like_blogs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_blog')->unsigned();
+            $table->bigInteger('id_blog')->unsigned();
             $table->foreign('id_blog')->references('id')->on('blogs');
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users');

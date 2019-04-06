@@ -14,7 +14,7 @@
                         </a>
                         <div class="card-body">
                             <router-link :to="{ name: 'BlogDetails', params: {id: value.id }}" :title="value.title">
-                                <h4 class="font-weight-bold">{{value.title}}</h4>
+                                <h4 class="font-weight-bold" v-on:click="incrementView(value.id)">{{value.title}}</h4>
                             </router-link>
                             <p class="home-blog-author">Đăng bởi <a class="blog-admin" href="javascript:void(0)">{{ value.name }}</a> ngày <span>{{ convertDate(value.created_at) }}</span></p>
                             <p class="card-text">{{ value.description }}</p>
@@ -163,6 +163,20 @@
               var d = new Date(inputFormat);
               return [this.pad(d.getDate()), this.pad(d.getMonth()+1), d.getFullYear()].join('/');
             },
+            incrementView(id){
+                this.axios.get('/api/blog/incrementview/' + id).then((response) =>{
+                    // this.blognew = response.data
+                    // if(response.data.status){
+                    //     alertify.set('notifier','position', 'buttom-right');
+                    //     alertify.success(response.data.message);
+                    // } else {
+                    //     alertify.set('notifier','position', 'buttom-right');
+                    //     alertify.error(response.data.message);
+                    // }
+                }).catch(error => {
+                    console.error(error);
+                })
+            }
         }
     }
 </script>

@@ -5,7 +5,7 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<div class="col-md-8" style="background-color: white;">
+				<div class="col-md-8" style="background-color: white; border-radius: 0.5rem;">
 					<div class="container">
 						<div class="row">
 						<div class="col-md-12" style="border-bottom: 1px solid #ccc">
@@ -23,8 +23,10 @@
 								<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVG(index)" v-html="value.news_image">
 								</a>
 								<div class="post-body">
+									<router-link :to="{ name: 'NewsDetails', params: { id: value.id }}">
+										<h3 class="post-title news-title">{{ value.title }}</h3>
+									</router-link>
 									
-									<h3 class="post-title news-title"><a href="javascript:void(0)">{{ value.title }}</a></h3>
 									<p class="news-day"><span><i class="fa fa-clock-o" aria-hidden="true"></i></span> {{ convertDate(value.created_at) }}</p>
 									<p>{{ value.description }}</p>
 								</div>

@@ -22,5 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CommentDiscussionDetailTableSeeder::class);
         $this->call(CommentBlogTableSeeder::class);
         $this->call(CommentDetailBlogTableSeeder::class);
+        $this->call(LibraryTypeTableSeedeer::class);
+        $this->call(LibraryTableSeedeer::class);
+        $this->call(ContactTableSeedeer::class);
     }
 }

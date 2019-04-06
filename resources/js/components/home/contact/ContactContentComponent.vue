@@ -6,13 +6,14 @@
 				<div class="col-sm-12 col-md-8">
 					<h3><b>GỬI TIN NHẮN ĐẾN CHÚNG TÔI</b></h3>
 					<p class="mb-30 mr-100 mr-sm-0">Chúng tôi rất thích nghe ý kiến ​​của bạn - vui lòng liên hệ để nhận xét, yêu cầu, quan hệ đối tác quảng cáo hoặc yêu cầu công việc.</p>
-					<form class="form-block form-bold form-mb-20 form-h-35 form-brdr-b-grey pr-50 pr-sm-0">
+					<form class="form-block form-bold form-mb-20 form-h-35 form-brdr-b-grey pr-50 pr-sm-0" v-on:submit.prevent="createContact">
 						<div class="row">
 						
 							<div class="col-sm-6">
 								<p class="color-ash">Tên đầy đủ*</p>
 								<div class="pos-relative">
-									<input class="pr-20" type="text" value="Tên người gửi...">
+									<!-- <input class="pr-20" type="text" value="Tên người gửi..." > -->
+									<input class="pr-20" type="text" required="" v-model="contact.name">
 									<i class="abs-tbr lh-35 font-13 color-green fa fa-check"></i>
 								</div><!-- pos-relative -->
 							</div><!-- col-sm-6 -->
@@ -20,7 +21,7 @@
 							<div class="col-sm-6">							
 								<p class="color-ash">Email*</p>
 								<div class="pos-relative">
-									<input class="pr-20" type="email">
+									<input class="pr-20" required="" type="email" v-model="contact.email">
 									<i class="dplay-none abs-tbr lh-35 font-13 color-green ion-android-done"></i>
 								</div><!-- pos-relative -->
 							</div><!-- col-sm-6 -->
@@ -28,7 +29,7 @@
 							<div class="col-sm-6">	
 								<p class="color-ash">Số điện thoại*</p>
 								<div class="pos-relative">
-									<input class="pr-20" type="text">
+									<input class="pr-20" type="text" required=""  v-model="contact.phone">
 									<i class="dplay-none abs-tbr lh-35 font-13 color-green ion-android-done"></i>
 								</div><!-- pos-relative -->
 							</div><!-- col-sm-6 -->
@@ -36,16 +37,16 @@
 							<div class="col-sm-6">	
 								<p class="color-ash">Công ty / Tổ chức*</p>
 								<div class="pos-relative">
-									<input class="pr-20" type="text">
+									<input class="pr-20" type="text" required="" v-model="contact.company">
 									<i class="dplay-none abs-tbr lh-35 font-13 color-green ion-android-done"></i>
 								</div><!-- pos-relative -->
 							</div><!-- col-sm-6 -->
 							
 							<div class="col-sm-12">
 								<div class="pos-relative pr-80">
-									<p class="color-ash">Tin nhắn*</p>
-									<h4><b>Nội dung tin nhắn</b></h4>
-									<textarea class="mb-0"></textarea>
+									<p class="color-ash">Nội dung tin nhắn*</p>
+									<!-- <h4><b>Nội dung tin nhắn</b></h4> -->
+									<textarea class="mb-0"  v-model="contact.content"></textarea>
 									<button class="abs-br font-20 plr-15 btn-fill-primary" type="submit"><i class="fa fa-telegram"></i></button>
 								</div><!-- pos-relative -->
 							</div><!-- col-sm-6 -->
@@ -71,6 +72,11 @@
 
 <script>
 	export default {
+		data(){
+			return {
+				contact: {}
+			}
+		},
 		mounted(){
 			$( document ).ready(function() {
 			    $('textarea').each(function () {
@@ -80,11 +86,31 @@
 				  this.style.height = (this.scrollHeight) + 'px';
 				});
 			});
+		},
+		methods:{
+			createContact(){
+				axios.defaults.headers.common['Content-Type'] = 'application/json'
+				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+				// console.log(this.contact)
+				this.axios.post('/api/contact/create', this.contact).then((response) => {
+					// console.log(response.data)
+					if (response.data.status) {
+						alertify.set('notifier','position', 'buttom-right');
+		 				alertify.success(response.data.message);
+						this.$router.push({ path: '/'})
+					} else {
+						alertify.set('notifier','position', 'buttom-right');
+		 				alertify.error(response.data.message);
+					}
+				}).catch((error) => {
+					console.log(error)
+				})
+			}
 		}
 	}
 </script>
 
-<style>
+<style scoped>
 	#content-contact {
 		background-color: white;
 		padding-bottom: 40px;
@@ -130,12 +156,14 @@
 .form-brdr-b-grey textarea{ outline: 0; border: 1px solid #ccc; }
 
 .form-brdr-b-grey input:focus{ 
-	border-bottom: 1px solid #E700FF; 
-	/*border-bottom: 1px solid #F9B500; */
+	border-bottom: 1px solid red; 
+	/*border-bottom: 1px solid #583ee0; */
+	/*border-bottom: 1px solid #E700FF; */
 }
 .form-brdr-b-grey textarea:focus{ 
-	border: 1px solid #E700FF; 
-	/*border-bottom: 1px solid #F9B500; */
+	border: 1px solid red; 
+	/*border: 1px solid #583ee0; */
+	/*border: 1px solid #E700FF; */
 }
 /* POSITION */
 
@@ -149,6 +177,17 @@
 .abs-tblr{ position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 1; }
 
 .z--1{ z-index: -1; }
-.btn-fill-primary{ text-align: center; height: 45px; line-height: 43px; border: 1px solid #F9B500; background: #F9B500; border-radius: 2px; color: #111; font-size: 2em;}
+.btn-fill-primary{ 
+	text-align: center; 
+	height: 45px; 
+	line-height: 43px;
+	border: 1px solid #000000;
+    background: #00e0f9;
+	/*border: 1px solid #F9B500; 
+	background: #F9B500;*/ 
+	border-radius: 2px; 
+	color: #111; 
+	font-size: 2em;
+}
 .btn-fill-primary:hover{ background: none; }
 </style>

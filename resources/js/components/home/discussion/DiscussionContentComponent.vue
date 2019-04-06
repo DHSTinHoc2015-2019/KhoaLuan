@@ -27,13 +27,15 @@
                                         view
                                     </div>
                                     <div class="large-2 small-4 column lpad">
-                                        ...
+                                        ... 
                                     </div>
                                 </div>
-                                <div class="large-12 forum-topic" v-for="(value, index) in discussion" v-if="value.id_discussion_type == value_type.id">
+                                <div style="display: none;">{{ loop = 0 }}</div>
+                                <div class="large-12 forum-topic" v-for="(value, index) in discussion" v-if="(value.id_discussion_type == value_type.id) && (++loop <= 5)">
                                     <div class="large-1 column lpad">
                                         <i class="fa fa-comments" style="color: #0d3f81"></i>
                                     </div>
+                                    <!-- <div style="display: hidden">{{ updateLoop() }}</div> -->
                                     <div class="large-7 small-8 column lpad">
                                         <span class="overflow-control">
                                         <router-link :to="{ name: 'DiscussionDetailsComponent', params: {id_type: value_type.id, id_discussion: value.id}}" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...'">{{ value.title }}</router-link>

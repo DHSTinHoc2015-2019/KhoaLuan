@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="block">
-                            <h2>Blog</h2>
+                            <h2>Bài viết</h2>
                         </div>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                     <div class="col-md-8 wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="600ms">
                         <ol class="breadcrumb mt-2">
                             <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Blog</li>
+                            <li class="breadcrumb-item active">Bài viết</li>
                         </ol>
                     </div>
                     <div class="col-md-4 wow fadeInRight animated" data-wow-duration="500ms" data-wow-delay="600ms">

@@ -127,7 +127,7 @@
             <!-- reply comment detail -->
             <ul class="child-comments" v-if="replyComment[index_comment]">
                 <div class="commenting-field">
-                    <div v-if="value_comment.user_image != null" v-bind:style="{'background-image': `url(images/users/${value_comment.user_image})`}" class="profile-picture round"></div>
+                    <div v-if="users.user_image != null" v-bind:style="{'background-image': `url(images/users/${users.user_image})`}" class="profile-picture round"></div>
                 	<div v-else v-bind:style="{'background-image': `url(images/users/avatar.jpg)`}" class="profile-picture round"></div>
                     <div class="textarea-wrapper">
                         <span class="close inline-button" v-on:click="onDestroy()">
@@ -523,7 +523,7 @@
 					axios.defaults.headers.common['Content-Type'] = 'application/json'
 					axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
 					this.axios.get(`/api/likediscussion/user/${this.$route.params.id_discussion}`).then((response)=>{
-						console.log(response.data)
+						// console.log(response.data)
 						this.countLikeDiscussion = response.data.countLikeDiscussion
 						// this.isLikeDiscussion = response.data.isLikeDiscussion
 					}).catch((error)=>{

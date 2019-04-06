@@ -3,23 +3,21 @@
 		<!-- Start content -->
         <div class="content">
 			<div class="container-fluid">
-
 				<div class="row">
-						<div class="col-xl-12">
-								<div class="breadcrumb-holder">
-										<h1 class="main-title float-left font-weight-bold text-uppercase">Tin tức</h1>
-										<ol class="breadcrumb float-right">
-											<li class="breadcrumb-item">Admin</li>
-											<li class="breadcrumb-item">Tin tức</li>
-											<li class="breadcrumb-item active">Chỉnh sửa</li>
-										</ol>
-										<div class="clearfix"></div>
-								</div>
+					<div class="col-xl-12">
+						<div class="breadcrumb-holder">
+							<h1 class="main-title float-left font-weight-bold text-uppercase">Tin tức</h1>
+							<ol class="breadcrumb float-right">
+								<li class="breadcrumb-item">Admin</li>
+								<li class="breadcrumb-item">Tin tức</li>
+								<li class="breadcrumb-item active">Chỉnh sửa</li>
+							</ol>
+							<div class="clearfix"></div>
 						</div>
+					</div>
 				</div>
 				<!-- end row -->
 
-				
 				<div class="row mb-5">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12">                      
                         <div class="card mb-3">
@@ -36,6 +34,17 @@
 											<input type="text" class="form-control" id="" aria-describedby="" placeholder="Nhập tiêu đề" required="" v-model="news.title">
 										</div>
 									</div>
+									<div class="col-md-12">
+          								<div class="form-check form-group">
+											<input class="form-check-input" type="checkbox" value="" id="defaultCheck1" v-model="news.featured">
+											<label class="form-check-label font-weight-bold" v-if="news.featured">
+											Nổi bật
+											</label>
+											<label class="form-check-label font-weight-bold" v-if="!news.featured">
+											Không nổi bật
+											</label>
+										</div>
+          							</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<div class="form-group">
@@ -182,6 +191,7 @@
                 formData.append('news_content', contentpost);
                 formData.append('description', this.news.description);
                 formData.append('hasImage', true);
+                formData.append('featured', this.news.featured);
                 formData.append('file', this.file);
 
                 for (let [key, value] of formData.entries()) {

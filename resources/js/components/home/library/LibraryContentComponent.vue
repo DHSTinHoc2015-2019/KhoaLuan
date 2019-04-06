@@ -12,7 +12,7 @@
                     <div class="card p-2">
                        <div class="card">
   							<a href="javascript:void(0)" title="mô tả">
-                				<img :src="value" class="image card-img-top" height="150">
+                				<img :src="'images/library/images/' + value.file_name" class="image card-img-top" height="150">
             				</a>
 						</div>
                     </div> 
@@ -29,13 +29,10 @@
                         <h2><b class="blog-title">VIDEO</b></h2>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-3 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="400ms" v-for="(value, index) in images">
+                <div class="col-md-3 col-sm-3 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="400ms" v-for="(value, index) in video">
                     <div class="card p-2">
                        <div class="card">
-  							<!-- <a href="javascript:void(0)" title="mô tả">
-                				<img :src="value" class="image card-img-top" height="150">
-            				</a> -->
-            				<!-- <iframe style="border: 3px solid #02bdd5; width: 100%" height="" src="https://www.youtube.com/embed/yMQiHJsePOM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+            				<!-- <iframe style="border: 3px solid #02bdd5; width: 100%" height="" :src="value.file_name" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 						</div>
                     </div> 
                 </div>
@@ -52,25 +49,25 @@
 	export default {
 		data() {
 		    return {
-				images: [
-		      		'images/library/images/1.png',
-		      		'images/library/images/2.png',
-		      		'images/library/images/3.jpg',
-		      		'images/library/images/4.png',
-		        	'images/library/images/5.jpg',
-		        	'images/library/images/6.jpg',
-		        	'images/library/images/7.png',
-		        	'images/library/images/anh.jpg',
-		        	'images/library/images/6.jpg',
-		        	'images/library/images/6.jpg',
-		        	'images/library/images/6.jpg',
-		        	'images/library/images/6.jpg',
-		      	]
+                images: {},
+                video: {},
+                document: {}
 		    }
 	  	},
-		mounted(){
+		created(){
+            this.axios.get('/api/library/all').then((response) => {
+                // console.log(response.data)
+                this.images = response.data.image
+                this.video = response.data.video
+                this.document = response.data.document
 
-		},
+                for (var i = this.video.length - 1; i >= 0; i--) {
+                    this.video[i].file_name = this.video[i].file_name.replace("watch?v=", "embed/")
+                }
+            }).catch((error) => {
+                console.log(error)
+            })
+        },
 		methods:{
 
 		}

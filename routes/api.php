@@ -29,12 +29,19 @@ Route::get('/news','NewsController@index');
 Route::get('/news/paginate', 'NewsController@paginate');
 Route::get('/news/showall','NewsController@showAll');
 Route::get('/news/readmore/{id}','NewsController@show');
+Route::get('/news/featured','NewsController@showFeatured');
 
 Route::get('/blog','BlogController@index');
 Route::get('/blog/paginate', 'BlogController@paginate');
 Route::get('/blog/readmore/{id}','BlogController@show');
 Route::get('/blog/new','BlogController@new');
 Route::get('/blog/bloghighlight','BlogController@bloghighlight');
+Route::get('/blog/mostview','BlogController@mostView');
+Route::get('/blog/{id}','BlogController@showWithId');
+Route::get('/blog/incrementview/{id}','BlogController@incrementView');
+//Chi tiết Blog với comment
+Route::get('/blog/user/{id}','BlogController@userBlogWithComment');
+
 
 Route::get('/discussiontype','DiscussionTypeController@index');
 Route::get('/discussion','DiscussionController@index');
@@ -43,6 +50,14 @@ Route::get('/newdiscussion','DiscussionController@newDiscussion');
 Route::get('/discussion/user/{id_type}/{id_discussion}','DiscussionController@userDiscussionWithType');
 
 Route::get('/likediscussion/user/{id_discussion}','LikeDiscussionController@indexUser');
+
+Route::get('/likeblog/user/{id}','LikeBlogController@indexUser');
+
+Route::get('/library/all','LibraryController@index');
+
+Route::post('/contact/create','ContactController@create');
+Route::get('/contact/index','ContactController@index');
+Route::get('/contact/delete/{id}','ContactController@delete');
 
 Route::get('/demo', function (){
 	try {
@@ -58,10 +73,10 @@ Route::get('/demo', function (){
 
 
 Route::group(['middleware' => 'auth:api'], function(){
-	Route::get('/hometpack/{id}', 'HomeTpackController@show');
 	Route::post('/hometpack/update/{id}', 'HomeTpackController@update');
 	Route::post('/hometpack/create', 'HomeTpackController@create');
 	Route::get('/hometpack/delete/{id}', 'HomeTpackController@delete');
+	Route::get('/hometpack/{id}', 'HomeTpackController@show');
 
 	Route::get('/news/edit/{id}','NewsController@showedit');
 	Route::post('/news/update/{id}','NewsController@update');

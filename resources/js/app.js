@@ -42,8 +42,10 @@ import DiscussionComponent from './components/home/discussion/DiscussionComponen
 import DiscussionTypeComponent from './components/home/discussion/discussion/DiscussionTypeComponent.vue';
 import DiscussionDetailsComponent from './components/home/discussion/DiscussionDetails/DiscussionDetailsComponent.vue';
 import NewsComponent from './components/home/news/NewsComponent.vue';
+import NewsDetailsComponent from './components/home/news/newsdetail/NewsDetailsComponent.vue';
 import LibraryComponent from './components/home/library/LibraryComponent.vue';
 import ContactComponent from './components/home/contact/ContactComponent.vue';
+import ProfileComponent from './components/home/profile/ProfileComponent.vue';
 
 /*===========Admin==============*/
 import AdminComponent from './components/admin/AdminComponent.vue';
@@ -73,6 +75,10 @@ import AdminDiscussionCreate from './components/admin/discussion/AdminDiscussion
 import AdminDiscussionEdit from './components/admin/discussion/AdminDiscussionEdit.vue';
 import AdminDiscussionWithType from './components/admin/discussion/AdminDiscussionWithType.vue';
 import AdminDiscussionMore from './components/admin/discussion/AdminDiscussionMore.vue';
+
+import AdminProfile from './components/admin/profile/AdminProfile.vue';
+
+import AdminContact from './components/admin/contact/AdminContact.vue';
 
 /*===========Admin demo==============*/
 import DemoAdmin from './components/admin/demo/DemoAdmin.vue';
@@ -257,6 +263,16 @@ var routes = [
                 ]
             },
             {
+                name: 'AdminProfile',
+                path: 'profile',
+                component: AdminProfile
+            },
+            {
+                name: 'AdminContact',
+                path: 'contact',
+                component: AdminContact
+            },
+            {
                 name: 'AdminTrangChu',
                 path: 'demotablechild',
                 component: DemoAdmin
@@ -311,9 +327,22 @@ var routes = [
                 props: true
             },
         	{
-        		name: 'NewsComponent',
         		path: 'tintuc',
-        		component: NewsComponent
+                component: {
+                    render (c) { return c('router-view') }
+                },
+                children:[
+                    {
+                        path: '',
+                        component: NewsComponent,
+                        name: 'NewsComponent',
+                    },
+                    {
+                        name: 'NewsDetails',
+                        path: ':id',
+                        component: NewsDetailsComponent,
+                    }
+                ]
         	},
         	{
         		path: 'blog',
@@ -365,6 +394,19 @@ var routes = [
 					}
         		]
         	},
+            {
+                path: 'trangcanhan',
+                component: {
+                    render (c) { return c('router-view') }
+                },
+                children:[
+                    {
+                        path: '',
+                        component: ProfileComponent,
+                        name: 'Profile'
+                    }
+                ]
+            },
             {
                 name: 'Contact',
                 path: 'lienhe',

@@ -1,5 +1,5 @@
 <template>
-	<div class="container" style="background-color: white;">
+	<div class="container" style="background-color: white; border-radius: 0.5rem;">
 		<div class="row">
 			<div class="col-md-12">
 				<!-- post widget -->
@@ -9,36 +9,32 @@
 					</div>
 
 					<div class="container">
-						<div class="post post-widget pt-4 pb-4">
-						<a class="post-img imgover-small" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="javascript:void(0)">Tiêu đề bài viết</a></h3>
+						<div class="post post-widget pt-4 pb-4" v-for="(value, index) in news" v-if="index != news.length - 1">
+							<a class="post-img imgover-small" href="javascript:void(0)" v-if="!checkImageSVG(index)">
+								<img v-bind:src="`images/news/${value.news_image}`" alt="" style="max-height: 200px">
+							</a>
+							<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVG(index)" v-html="value.news_image">
+							</a>
+							<div class="post-body">
+								<router-link :to="{ name: 'NewsDetails', params: { id: value.id }}">
+									<h3 class="post-title">{{ value.title }}</h3>
+								</router-link>
+							</div>
 						</div>
-					</div>
-					<div class="post post-widget pt-4 pb-4">
-						<a class="post-img imgover-small" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="javascript:void(0)">Tiêu đề bài viết</a></h3>
+
+						<div class="post post-widget pt-4 pb-4" style="border-bottom: 0px;" v-for="(value, index) in news" v-if="index == news.length - 1">
+							<a class="post-img imgover-small" href="javascript:void(0)" v-if="!checkImageSVG(index)">
+								<img v-bind:src="`images/news/${value.news_image}`" alt="" style="max-height: 200px">
+							</a>
+							<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVG(index)" v-html="value.news_image" style="max-height: 100px; max-width: 100px;border-right: 8px solid black;border-bottom: 8px solid black;">
+							</a>
+							<div class="post-body">
+								<router-link :to="{ name: 'NewsDetails', params: { id: value.id }}">
+									<h3 class="post-title">{{ value.title }}</h3>
+								</router-link>
+							</div>
 						</div>
-					</div>
-					<div class="post post-widget pt-4 pb-4">
-						<a class="post-img imgover-small" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="javascript:void(0)">Tiêu đề bài viết</a></h3>
-						</div>
-					</div>
-					<div class="post post-widget pt-4 pb-4">
-						<a class="post-img imgover-small" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="javascript:void(0)">Tiêu đề bài viết</a></h3>
-						</div>
-					</div>
-					<div class="post post-widget pt-4 pb-4" style="border-bottom: 0px;">
-						<a class="post-img imgover-small" href="javascript:void(0)"><img src="images/blog/post.jpg" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="javascript:void(0)">Tiêu đề bài viết</a></h3>
-						</div>
-					</div>
+
 					</div>
 				</div>
 				<!-- /post widget -->
@@ -49,7 +45,30 @@
 </template>
 <script>
 	export default {
-
+		data(){
+			return {
+				news: {}
+			}
+		},
+		created(){
+			this.axios.get('/api/news/featured').then((response) => {
+				// console.log(response.data)
+				this.news = response.data
+				
+			}).catch((error) => {
+				console.log(error)
+			})
+		},
+		methods: {
+			checkImageSVG(index){
+				if(this.news.length > 0){
+					if('news_image' in this.news[index]){
+						return this.news[index].news_image.toString().indexOf('<svg') != -1
+					}
+				}
+				return false;
+			},
+		}
 	}
 </script>
 <style scoped>

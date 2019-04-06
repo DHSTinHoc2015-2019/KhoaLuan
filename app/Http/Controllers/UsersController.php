@@ -30,4 +30,11 @@ class UsersController extends Controller
     	$user = User::all()->first();
     	return $user;
     }
+
+    function demorss(){
+        $xml = simplexml_load_file('http://matt-koehler.com/tpack2/feed/');
+        // echo '<pre>';
+        echo $xml->channel->item[0]->title;
+        // print_r($xml);
+    }
 }

@@ -11,9 +11,10 @@ class CommentDiscussionDetailTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker\Factory::create();
         for ($i = 1; $i <= 30; $i++) { 
         	DB::table('comment_detail_discussions')->insert([
-	            'comment_detail_discussion_content' => 'Nội dung bình luận thảo luận chi tiết '.$i.' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae quasi corrupti quis facilis porro deserunt perferendis assumenda eum corporis quisquam.',
+	            'comment_detail_discussion_content' => 'Nội dung bình luận thảo luận chi tiết '.$i.$faker->realText(100),
 	            'id_comment_discussion' => rand(1, 5),
 	            'id_user' => rand(1, 5),
 	            'created_at' => date("Y-m-d"),

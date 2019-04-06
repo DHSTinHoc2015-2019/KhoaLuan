@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="block">
-                            <h2>Blog</h2>
+                            <h2>Bài viết</h2>
                         </div>
                     </div>
                 </div>
@@ -16,9 +16,13 @@
                 <div class="row">
                     <div class="col-md-8 wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="600ms">
                         <ol class="breadcrumb mt-2">
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Trang chủ</a></li>
-                            <li class="breadcrumb-item"><a href="#">Blog</a></li>
-                            <li class="breadcrumb-item active">Chitiet1</li>
+                            <li class="breadcrumb-item">
+                                <router-link :to="{ path: '/' }"><i class="fa fa-home"></i> Trang chủ</router-link>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <router-link :to ="{ path: '/blog' }">Bài viết</router-link>
+                            </li>
+                            <li class="breadcrumb-item active">{{ blogs.title }}</li>
                         </ol>
                     </div>
                     <div class="col-md-4 wow fadeInRight animated" data-wow-duration="500ms" data-wow-delay="600ms">
@@ -32,3 +36,20 @@
     </section>
     </div>
 </template>
+
+<script>
+    export default {
+        data(){
+            return {
+                blogs: {}
+            }
+        },
+        created(){
+            this.axios.get(`/api/blog/${this.$route.params.id}`).then((response) =>{
+                this.blogs = response.data.blog
+            }).catch((error) => {
+                console.log(error)
+            })
+        }
+    }
+</script>

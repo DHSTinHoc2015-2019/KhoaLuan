@@ -50,4 +50,22 @@ class LikeBlogController extends Controller
     		'id_blog' => $request->id_blog
     	]);
     }
+
+    function indexUser($id_blog){
+        $countLikeBlog = DB::table('like_blogs')
+            ->where('id_blog', $id_blog)
+            ->count();
+
+        // $isLikeDiscussion = DB::table('like_discussions')
+        //     ->where('id_discussion', $id_discussion)
+        //     ->where('id_user', $id_user)
+        //     ->where('is_liked', true)
+        //     ->count();
+
+        return response()->json([
+            'countLikeBlog' => $countLikeBlog,
+            // 'isLikeDiscussion' => $isLikeDiscussion == 1 ? true : false
+        ]);
+    }
+
 }
