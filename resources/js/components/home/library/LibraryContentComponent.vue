@@ -32,7 +32,7 @@
                 <div class="col-md-3 col-sm-3 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="400ms" v-for="(value, index) in video">
                     <div class="card p-2">
                        <div class="card">
-            				<!-- <iframe style="border: 3px solid #02bdd5; width: 100%" height="" :src="value.file_name" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+            				<iframe style="border: 3px solid #02bdd5; width: 100%" height="" :src="value.file_name" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						</div>
                     </div> 
                 </div>
