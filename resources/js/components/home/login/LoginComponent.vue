@@ -22,10 +22,10 @@
 						<div class="p-t-25 p-b-9">
 							
 							<span class="txt1">
-								Email
+								Tên đăng nhập hoặc Email
 							</span>
 						</div>
-						<div class="wrap-input100 validate-input" data-validate = "Vui lòng nhập tên đăng nhập hoặc email">
+						<div class="wrap-input100 validate-input" :data-validate = "validation.name.data_validate">
 							<input class="input100" type="text" v-model="email">
 							<span class="focus-input100"></span>
 						</div>
@@ -39,7 +39,7 @@
 								Quên mật khẩu?
 							</a>
 						</div>
-						<div class="wrap-input100 validate-input" data-validate="Vui lòng nhập mật khẩu">
+						<div class="wrap-input100 validate-input" :data-validate="validation.password.data_validate">
 							<input class="input100" type="password" v-model="password">
 							<span class="focus-input100"></span>
 						</div>
@@ -76,94 +76,89 @@
             return {
                 email: "",
                 password: "",
-                check: true
+                input: document.getElementsByClassName("wrap-input100"),
+                check: true,
+                validation:{
+	            	name: {
+	            		check: false, data_validate: ''
+	            	},
+	            	password: {
+	            		check: false, data_validate: ''
+	            	}
+	            }
             }
         }, 
         methods: {
             handleSubmit() {
-                // e.preventDefault()
+            	if(!this.checkAll()){
+	            	return
+	            }
+
                 this.check = false;
-                if (this.password.length > 0) {
-                    let email = this.email
-                    let password = this.password
-                    var vm = this
-                    axios.post('api/login', {email, password}).then(response => {
-                        let user = response.data.user
-                        let is_admin = user.is_admin
-                        localStorage.setItem('tpack.user', JSON.stringify(user))
-                        localStorage.setItem('tpack.jwt', response.data.token)
-                        if (localStorage.getItem('tpack.jwt') != null) {
-                        	alertify.set('notifier','position', 'buttom-right');
-			 				alertify.success("Chúc mừng " + user.name + " đăng nhập thành công");
-                            this.$emit('loggedIn')
-                            if (this.$route.params.nextUrl != null) {
-                                this.$router.push(this.$route.params.nextUrl)
-                            } else {
-                                this.$router.push((is_admin == 1 ? 'admin' : '/'))
-                            }
+
+                let email = this.email
+                let password = this.password
+                var vm = this
+                axios.post('api/login', {email, password}).then(response => {
+                    let user = response.data.user
+                    let is_admin = user.is_admin
+                    localStorage.setItem('tpack.user', JSON.stringify(user))
+                    localStorage.setItem('tpack.jwt', response.data.token)
+                    if (localStorage.getItem('tpack.jwt') != null) {
+                    	alertify.set('notifier','position', 'buttom-right');
+		 				alertify.success("Chúc mừng " + user.name + " đăng nhập thành công");
+                        this.$emit('loggedIn')
+                        if (this.$route.params.nextUrl != null) {
+                            this.$router.push(this.$route.params.nextUrl)
+                        } else {
+                            this.$router.push((is_admin == 1 ? 'admin' : '/'))
                         }
-                    }).catch(function (error) {
-					    // console.log(error.response.data);
-					    // console.log(error.response.status);
-					    vm.check = true;
-					    alertify.set('notifier','position', 'top-center');
-					    alertify.error("Đăng nhập thất bại. Vui lòng kiểm tra lại");
-					});
-                }
-            }
-        },
-        mounted: function(){
-        	(function ($) {
-			    "use strict";
-			    /*==================================================================
-			    [ Validate ]*/
-			    var input = $('.validate-input .input100');
+                    }
+                }).catch(function (error) {
+				    vm.check = true;
+				    alertify.set('notifier','position', 'top-center');
+				    alertify.error("Đăng nhập thất bại. Vui lòng kiểm tra lại");
+				});
+            },
+            showValidate(index){
+   				this.input[index].classList.add('alert-validate')
+   			},
+   			checkAll(){
+   				// Username
+   				if(this.input[0].getElementsByTagName('input')[0].value == ''){
+   					this.validation.name.check = false
+   					this.showValidate(0)
+   					this.validation.name.data_validate = 'Bạn chưa nhập tên đăng nhập'
+   				} else {
+   					this.validation.name.check = true
+   					this.validation.name.data_validate = ''
+   					this.hideValidate(0)
+   				}
 
-			    $('.validate-form').on('submit',function(){
-			        var check = true;
-
-			        for(var i=0; i<input.length; i++) {
-			            if(validate(input[i]) == false){
-			                showValidate(input[i]);
-			                check=false;
-			            }
-			        }
-
-			        return check;
-			    });
-
-
-			    $('.validate-form .input100').each(function(){
-			        $(this).focus(function(){
-			           hideValidate(this);
-			        });
-			    });
-
-			    function validate (input) {
-			        if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
-			            if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
-			                return false;
-			            }
-			        }
-			        else {
-			            if($(input).val().trim() == ''){
-			                return false;
-			            }
-			        }
-			    }
-
-			    function showValidate(input) {
-			        var thisAlert = $(input).parent();
-
-			        $(thisAlert).addClass('alert-validate');
-			    }
-
-			    function hideValidate(input) {
-			        var thisAlert = $(input).parent();
-
-			        $(thisAlert).removeClass('alert-validate');
-			    }
-			})(jQuery);
+   				//Password
+   				if(this.input[1].getElementsByTagName('input')[0].value == ''){
+   					this.validation.password.check = false
+   					this.showValidate(1)
+   					this.validation.password.data_validate = 'Bạn chưa nhập mật khẩu'
+   				} else {
+   					if(this.checkPassword()){
+	   					this.validation.password.check = true
+	   					this.validation.password.data_validate = ''
+	   					this.hideValidate(1)
+	   				} else {
+	   					this.validation.password.check = false
+	   					this.showValidate(1)
+	   					this.validation.password.data_validate = 'Mật khẩu phải dài từ 6 ký tự trở lên'
+	   				}
+   				}
+   				return this.validation.name.check && this.validation.password.check
+   			},
+   			hideValidate(index){
+   				this.input[index].classList.remove('alert-validate')
+   			},
+   			checkPassword(){
+   				return this.input[1].getElementsByTagName('input')[0].value.length >= 6
+   			},
         }
     }
 </script>

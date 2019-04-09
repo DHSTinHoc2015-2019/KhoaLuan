@@ -6,6 +6,9 @@ use Auth;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
+use App\Mail\SendEmail;
+use Mail;
+use DB;
 
 class UserController extends Controller
 {
@@ -34,8 +37,17 @@ class UserController extends Controller
         return response()->json($response, $status);
     }
 
-    public function register(Request $request)
+    public function show(User $user)
     {
+        return response()->json($user);
+    }
+
+    protected function getToken()
+    {
+        return hash_hmac('sha256', str_random(40), config('app.key'));
+    }
+
+    public function register(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:50',
             'email' => 'required|email',
@@ -47,20 +59,43 @@ class UserController extends Controller
             return response()->json(['error' => $validator->errors()], 401);
         }
 
-        $data = $request->only(['name', 'email', 'password']);
-        $data['password'] = bcrypt($data['password']);
-
-        $user = User::create($data);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->activation_code = $this->getToken();
         $user->is_admin = 0;
+        $status = $user->save();
 
+        config(['mail.driver' => 'smtp', 'mail.host' => 'smtp.gmail.com', 'mail.port' => 587, 'mail.username' => 'tranquangtanqt1190@gmail.com', 'mail.password' => 'oxksatmagyoegxdb', 'mail.encryption' => null]);
+        
+        $newuser = DB::table('users')->where('email', $user->email)->first();
+        $name = $newuser->name;
+        $link_active = url("/active/{$newuser->id}/{$user->activation_code}/");
+        $to_email = $newuser->email;
+        $mailable = new SendEmail($name, $link_active, $newuser->activation_code, $newuser->id);
+        Mail::to($to_email)->send($mailable);
+
+        // remove key password in data
+        unset($user['activation_code']);
         return response()->json([
             'user' => $user,
             'token' => $user->createToken('tpack')->accessToken,
-        ]);
+        ], 200);
     }
 
-    public function show(User $user)
-    {
-        return response()->json($user);
+    public function activateUser($id, $activation_code){
+        $status = false;
+        $user = User::findOrFail($id);
+        if($user->activation_code == $activation_code){
+            $user->email_verified_at = date("Y-m-d");
+            $status = $user->save();
+            // $status = false;
+        }
+
+        return response()->json([
+            'status' => $status
+        ], 200);
     }
+   
 }

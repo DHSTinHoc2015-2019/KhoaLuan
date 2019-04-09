@@ -46,6 +46,7 @@ import NewsDetailsComponent from './components/home/news/newsdetail/NewsDetailsC
 import LibraryComponent from './components/home/library/LibraryComponent.vue';
 import ContactComponent from './components/home/contact/ContactComponent.vue';
 import ProfileComponent from './components/home/profile/ProfileComponent.vue';
+import ActiveEmailComponent from './components/home/activemail/ActiveEmailComponent.vue';
 
 /*===========Admin==============*/
 import AdminComponent from './components/admin/AdminComponent.vue';
@@ -79,6 +80,9 @@ import AdminDiscussionMore from './components/admin/discussion/AdminDiscussionMo
 import AdminProfile from './components/admin/profile/AdminProfile.vue';
 
 import AdminContact from './components/admin/contact/AdminContact.vue';
+
+
+import DemoEmailComponent from './components/home/demoemail/DemoEmailComponent.vue';
 
 /*===========Admin demo==============*/
 import DemoAdmin from './components/admin/demo/DemoAdmin.vue';
@@ -421,6 +425,16 @@ var routes = [
                 name: 'Register',
                 path: 'register',
                 component: RegisterComponent
+            },
+            {
+                name: 'ActiveEmail',
+                path: 'active/:id/:activation_code',
+                component: ActiveEmailComponent
+            },
+            {
+                name: 'DemoEmail',
+                path: 'demoemail',
+                component: DemoEmailComponent
             },
             /*===========Page404==============*/
             // {

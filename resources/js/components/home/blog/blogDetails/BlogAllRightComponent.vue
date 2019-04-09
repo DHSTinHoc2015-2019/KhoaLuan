@@ -9,11 +9,11 @@
 					</div>
 
 					<div class="container">
-						<div class="post post-widget pt-4 pb-4" v-for="(value, index) in blogs" v-if="index != blogs.length - 1">
-							<a class="post-img imgover-small" href="javascript:void(0)" v-if="!checkImageSVG(index)">
+						<div class="post post-widget pt-4 pb-4" v-for="(value, index) in blogMostView" v-if="index != blogMostView.length - 1">
+							<a class="post-img imgover-small" href="javascript:void(0)" v-if="!checkImageSVGMostView(index)">
 								<img v-bind:src="`images/blog/${value.blog_image}`" alt="" style="max-height: 200px">
 							</a>
-							<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVG(index)" v-html="value.blog_image" style="max-height: 100px; max-width: 100px;border-right: 8px solid black;border-bottom: 8px solid black;">
+							<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVGMostView(index)" v-html="value.blog_image" style="max-height: 100px; max-width: 100px;border-right: 8px solid black;border-bottom: 8px solid black;">
 							</a>
 							<div class="post-body">
 								<router-link :to="{ name: 'BlogDetails', params: { id: value.id }}">
@@ -22,19 +22,18 @@
 							</div>
 						</div>
 
-						<!-- <div class="post post-widget pt-4 pb-4" style="border-bottom: 0px;" v-for="(value, index) in news" v-if="index == news.length - 1">
-							<a class="post-img imgover-small" href="javascript:void(0)" v-if="!checkImageSVG(index)">
-								<img v-bind:src="`images/news/${value.news_image}`" alt="" style="max-height: 200px">
+						<div class="post post-widget pt-4 pb-4" style="border-bottom: 0px;" v-for="(value, index) in blogMostView" v-if="index == blogMostView.length - 1">
+							<a class="post-img imgover-small" href="javascript:void(0)" v-if="!checkImageSVGMostView(index)">
+								<img v-bind:src="`images/blog/${value.blog_image}`" alt="" style="max-height: 200px">
 							</a>
-							<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVG(index)" v-html="value.news_image">
+							<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVGMostView(index)" v-html="value.blog_image" style="max-height: 100px; max-width: 100px;border-right: 8px solid black;border-bottom: 8px solid black;">
 							</a>
 							<div class="post-body">
-								<router-link :to="{ name: 'NewsDetails', params: { id: value.id }}">
+								<router-link :to="{ name: 'BlogDetails', params: { id: value.id }}">
 									<h3 class="post-title">{{ value.title }}</h3>
 								</router-link>
 							</div>
-						</div> -->
-
+						</div>
 					</div>
 				</div>
 		<!-- /post widget -->
@@ -85,7 +84,7 @@
 	export default {
 		data(){
 			return {
-				blogs: {}
+				blogMostView: {}
 			}
 		},
 		created(){
@@ -93,14 +92,15 @@
 		},
 		watch: {
 			'$route' (to, from) {
+				console.log(this.$route.params.id)
 				this.getData()
 			}
 		},
 		methods: {
-			checkImageSVG(index){
-				if(this.blogs.length > 0){
-					if('blog_image' in this.blogs[index]){
-						return this.blogs[index].blog_image.toString().indexOf('<svg') != -1
+			checkImageSVGMostView(index){
+				if(this.blogMostView.length > 0){
+					if('blog_image' in this.blogMostView[index]){
+						return this.blogMostView[index].blog_image.toString().indexOf('<svg') != -1
 					}
 				}
 				return false;
@@ -108,7 +108,7 @@
 			getData(){
 				axios.get('/api/blog/mostview').then((response) => {
 					// console.log(response.data)
-					this.blogs = response.data
+					this.blogMostView = response.data
 					
 				}).catch((error) => {
 					console.log(error)

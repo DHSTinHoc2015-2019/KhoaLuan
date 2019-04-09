@@ -36,7 +36,7 @@
             background: url("../../../../assets/images/tpack.jpg") no-repeat 50%;
             background-size: cover;
             background-attachment: fixed;
-            padding: 230px 0;
+            padding: 190px 0;
             color: #fff;
             box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
             position: relative;

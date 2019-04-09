@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_admin')->default(false);
+            $table->string('activation_code')->nullable();
             $table->text('user_image')->nullable();
             $table->rememberToken();
             $table->timestamps();

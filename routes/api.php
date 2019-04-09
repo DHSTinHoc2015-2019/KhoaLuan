@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 /*=========Login-Resgister============*/
 Route::post('login', 'UserController@login');
 Route::post('register', 'UserController@register');
+Route::get('active/{id}/{activation_code}', 'UserController@activateUser');
 Route::get('demolike/{like}', 'DemoLikeController@index');
 
 /*=========Homepage============*/
@@ -70,6 +71,8 @@ Route::get('/demo', function (){
 	
 });
 
+Route::get('/demoemail', 'DemoEmailController@index');
+Route::get('/demosendemail', 'DemoEmailController@sendEmail');
 
 
 Route::group(['middleware' => 'auth:api'], function(){
