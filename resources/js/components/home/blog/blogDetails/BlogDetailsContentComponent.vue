@@ -9,8 +9,8 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="section-title wow fadeInDown" data-wow-delay=".3s">
-								<h2 class="text-uppercase font-weight-bold">{{ blogs.title }}</h2>
-								<div class="post-meta" style="font-size: 0.9em">
+									<h2 class="text-uppercase font-weight-bold">{{ blogs.title }} <span v-if="isLogin && (blogs.id_user == users.id)"><router-link :to="{ name: 'UserBlogEdit', parmas: {id: blogs.id}}" class="btn btn-success float-right">Chỉnh sửa</router-link></span></h2>
+								<div class="post-meta pt-2" style="font-size: 0.9em;">
 									<a class="post-category cat-3" href="javascript:void(0)">Tên danh mục</a>
 									<span>
 										<i class="fa fa-user-circle-o" aria-hidden="true"></i> 
@@ -35,12 +35,12 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-12 wow fadeInDown animated mb-3" data-wow-duration="500ms" data-wow-delay="300ms" style="text-align:justify">
-							{{ blogs.blog_content}}
+						<div class="col-md-12 wow fadeInDown animated mb-3 mt-2 pt-2" data-wow-duration="500ms" data-wow-delay="300ms" style="text-align:justify; border-top: 1px solid #ccc" v-html="blogs.blog_content">
+							
 						</div>
 
 						<div class="col-md-12">
-							<div class="section-row" style="border-top: 1px solid black">
+							<div class="section-row" style="border-top: 1px solid #ccc">
 								<div class="post-author pt-3">
 									<div class="media">
 										<div class="media-left">

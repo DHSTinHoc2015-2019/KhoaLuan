@@ -121,6 +121,36 @@ class BlogController extends Controller
     	]);
     }
 
+    function updateUser(Request $request, $id){
+        $blog = Blog::findOrFail($id);
+
+        $blog->description = $request->description;
+        $blog->title = $request->title;
+        $blog->blog_content = $request->blog_content;
+
+        if($request->hasImage){
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                if (file_exists('images/blog/' . $blog->blog_image)) {
+                    unlink('images/blog/' . $blog->blog_image);
+                }
+                $imageName = time().$request->blog_image->getClientOriginalName();
+                $request->blog_image->move(public_path('images/blog/'), $imageName);
+                $blog->blog_image = $imageName;
+            }
+        }
+
+        // $blog->featured = filter_var((string)$request->featured, FILTER_VALIDATE_BOOLEAN)? 1 : 0;
+        $status = $blog->save();
+        
+        
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Cập nhật bài viết thành công' : "Cập nhật bài viết thất bại",
+            'blog' => $blog
+        ]);
+    }
+
     function showWithComment($id){
 
         $blog = DB::table('blogs')

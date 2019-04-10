@@ -37,6 +37,7 @@ import HomeComponent from './components/home/HomeComponent.vue';
 import HomeContentComponent from './components/home/home/HomeContentComponent.vue';
 import IntroComponent from './components/home/intro/IntroComponent.vue';
 import BlogComponent from './components/home/blog/BlogComponent.vue';
+import UserBlogEdit from './components/home/blog/update/UserBlogEdit.vue';
 import BlogDetailsComponent from './components/home/blog/blogDetails/BlogDetailsComponent.vue';
 import DiscussionComponent from './components/home/discussion/DiscussionComponent.vue';
 import DiscussionTypeComponent from './components/home/discussion/discussion/DiscussionTypeComponent.vue';
@@ -359,6 +360,11 @@ var routes = [
 						path: '',
 						component: BlogComponent,
         			},
+                    {
+                        name: 'UserBlogEdit',
+                        path: 'edit/:id',
+                        component: UserBlogEdit,
+                    },
         			{
         				name: 'BlogDetails',
 						path: ':id',

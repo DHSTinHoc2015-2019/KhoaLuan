@@ -6,7 +6,8 @@
         <!--  Fixed Navigation
         ==================================== -->
         <header id="navigation">
-            <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #0eb493">
+            <!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #0eb493"> -->
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: teal; border: 1px solid">
                 <div class="container">
                     <router-link to="/" class="navbar-brand font-weight-bold">Trang chủ</router-link>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar6">

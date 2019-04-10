@@ -90,6 +90,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/blog/delete/{id}','BlogController@delete');
 	Route::get('/blog/show/{id}','BlogController@show');
 	Route::post('/blog/update/{id}','BlogController@update');
+	Route::post('/blog/updateuser/{id}','BlogController@updateUser');
 	//Lấy toàn bộ comment, commentdetai, blog với id_blog
 	Route::get('/blog/showwithcomment/{id}','BlogController@showWithComment');
 

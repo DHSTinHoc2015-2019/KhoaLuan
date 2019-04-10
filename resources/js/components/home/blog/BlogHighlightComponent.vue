@@ -3,7 +3,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 pl-3 wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="900ms">
-                    <h2><b class="blog-title">Bài viết nổi bật</b></h2>
+                    <!-- <h2><b class="blog-title">Bài viết nổi bật</b></h2> -->
+                    <div class="separator">
+                        <h1 class="one">
+                            <span class="title blog-title font-weight-bold">Bài viết nổi bật</span>
+                            <span><h5><a href="#" class="create">Tạo bài viết mới</a></h5></span>
+                        </h1>
+                    </div>
                 </div>
                 <div class="col-md-4 col-xs-12 p-3 home-blog" v-for="(value, index) in blogs">
                     <div class="card wow fadeInDown animated" data-wow-duration="500ms" :data-wow-delay="(datawowdelay * index) + 'ms'">
@@ -31,9 +37,47 @@
 </template>
 
 <style scoped>
+    .separator h1 {
+        position: relative;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .separator h1.one {
+        margin-top: 0;
+    }
+
+    .separator h1.one:before {
+        content: "";
+        display: block;
+        border-top: solid 1px black;
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+    }
+
+    .separator h1.one .title {
+        background: #fff;
+        padding: 0 20px;
+        position: relative;
+        z-index: 5;
+    }
+
+    .separator h1.one .create {
+        background: #fff;
+        padding: 0 20px;
+        position: relative;
+        z-index: 5;
+        float: right;
+        bottom: 2.2em;
+    }
+
     #highlight-blog {
         padding: 40px 0;
         background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        /*background-color: #008080;*/
     }
     #highlight-blog .imgover {
         display:inline-block; 

@@ -3,19 +3,18 @@
 		<!-- Start content -->
         <div class="content">
 			<div class="container-fluid">
-
 				<div class="row">
-						<div class="col-xl-12">
-								<div class="breadcrumb-holder">
-										<h1 class="main-title float-left font-weight-bold text-uppercase">Bài viết</h1>
-										<ol class="breadcrumb float-right">
-											<li class="breadcrumb-item">Admin</li>
-											<li class="breadcrumb-item">Bài viết</li>
-											<li class="breadcrumb-item active">Chỉnh sửa</li>
-										</ol>
-										<div class="clearfix"></div>
-								</div>
+					<div class="col-xl-12">
+						<div class="breadcrumb-holder">
+							<h1 class="main-title float-left font-weight-bold text-uppercase">Bài viết</h1>
+							<ol class="breadcrumb float-right">
+								<li class="breadcrumb-item">Admin</li>
+								<li class="breadcrumb-item">Bài viết</li>
+								<li class="breadcrumb-item active">Chỉnh sửa</li>
+							</ol>
+							<div class="clearfix"></div>
 						</div>
+					</div>
 				</div>
 				<!-- end row -->
 
@@ -132,7 +131,7 @@
 		beforeUpdate(){
 			$(document).ready(function() {
 				if( tinymce.editors.length > 0 ){
-					for( i = 0; i < tinymce.editors.length; i++ ){
+					for(var i = 0; i < tinymce.editors.length; i++ ){
             			tinymce.editors[ i ].remove();
          			}
       			}
