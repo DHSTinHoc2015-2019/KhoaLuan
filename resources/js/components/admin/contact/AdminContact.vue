@@ -135,7 +135,7 @@
 			},
 			getData(){
 				this.axios.get('/api/contact/index').then((response) =>{
-	            	console.log(response.data)
+	            	// console.log(response.data)
 					this.contact = response.data
 					// console.log(response.data)
 				}).catch(error => {

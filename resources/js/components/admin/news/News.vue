@@ -136,6 +136,23 @@
 						alertify.set('notifier','position', 'buttom-right');
 						alertify.success(response.data.message)
 						vm.news.splice(index, 1)
+
+						$('#example1').DataTable().destroy();
+						this.$nextTick(function() {
+							// console.log('a')
+						    $('#example1').DataTable({
+						        'destroy'     : true,
+						        'paging'      : true,
+						        'lengthChange': true,
+						        'searching'   : true,
+						        'ordering'    : true,
+						        // 'order'       : [[ 5, 'desc' ]],
+						        'info'        : true,
+						        'autoWidth'   : false,
+						        'dom'         : 'Blfrtip'
+						    });
+						});
+						
 					} else {
 						alertify.set('notifier','position', 'buttom-right');
 						alertify.error(response.data.message)
