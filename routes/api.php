@@ -46,12 +46,15 @@ Route::get('/blog/incrementview/{id}','BlogController@incrementView');
 //Chi tiết Blog với comment
 Route::get('/blog/user/{id}','BlogController@userBlogWithComment');
 
-
+Route::get('/discussionwithtype/{id_discussion_type}/paginate', 'DiscussionController@paginate');
+// Route::get('/discussion/user/showwithtype/{id}','DiscussionController@showWithType');
 Route::get('/discussiontype','DiscussionTypeController@index');
 Route::get('/discussion','DiscussionController@index');
 Route::get('/newdiscussion','DiscussionController@newDiscussion');
 //Lấy thảo luận biết đề tài thảo luận + id thảo luận
 Route::get('/discussion/user/{id_type}/{id_discussion}','DiscussionController@userDiscussionWithType');
+
+
 
 Route::get('/likediscussion/user/{id_discussion}','LikeDiscussionController@indexUser');
 

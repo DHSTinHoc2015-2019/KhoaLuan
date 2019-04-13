@@ -8,19 +8,13 @@ use DB;
 
 class DiscussionController extends Controller
 {
+    
     function index(){
     	$discussion = DB::table('discussions')
     		->join('users', 'id_user', 'users.id')
-    		->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name')
+    		->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name', 'discussion_view', 'discussion_like as countLikeDiscussion')
     		->orderBy('id', 'desc')
     		->get();
-
-        foreach ($discussion as $value) {
-            $countLikeDiscussion = DB::table('like_discussions')
-            ->where('id_discussion', $value->id)
-            ->count();
-            $value->countLikeDiscussion = $countLikeDiscussion;
-        }
     	return response()->json($discussion, 200);
     }
 
@@ -38,11 +32,23 @@ class DiscussionController extends Controller
     	$discussion = DB::table('discussions')
     		->join('users', 'id_user', 'users.id')
     		->join('discussion_types', 'id_discussion_type', 'discussion_types.id')
-    		->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.discussion_view', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name', 'discussion_types.name_discussion_type')
+    		->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name', 'discussion_types.name_discussion_type', 'discussions.discussion_view', 'discussions.discussion_like')
     		// ->where('discussions.id', '<>', 1)
     		->where('discussions.id_discussion_type', $id_discussion_type)
     		->get();
     	return response()->json($discussion, 200);
+    }
+
+    function paginate($id_discussion_type){
+        $discussion = DB::table('discussions')
+            ->join('users', 'id_user', 'users.id')
+            ->join('discussion_types', 'id_discussion_type', 'discussion_types.id')
+            ->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name', 'discussion_types.name_discussion_type', 'discussions.discussion_view', 'discussions.discussion_like as countLikeDiscussion')
+            // ->where('discussions.id', '<>', 1)
+            ->where('discussions.id_discussion_type', $id_discussion_type)
+            ->orderBy('discussions.id', 'desc')
+            ->paginate(10);
+        return response()->json($discussion, 200);
     }
 
     function userDiscussionWithType($id_type, $id_discussion){
@@ -162,14 +168,7 @@ class DiscussionController extends Controller
     function newDiscussion(){
         $newdiscussion = DB::table('discussions')
             ->join('users', 'id_user', 'users.id')
-            ->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name', 'users.user_image')->orderBy('id', 'desc')->take(10)->get();
-
-        foreach ($newdiscussion as $value) {
-            $countLikeDiscussion = DB::table('like_discussions')
-            ->where('id_discussion', $value->id)
-            ->count();
-            $value->countLikeDiscussion = $countLikeDiscussion;
-        }
+            ->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name', 'users.user_image', 'discussions.discussion_view', 'discussions.discussion_like as countLikeDiscussion')->orderBy('id', 'desc')->take(10)->get();
         
         return response()->json([
             'newdiscussion' => $newdiscussion

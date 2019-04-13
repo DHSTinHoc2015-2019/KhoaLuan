@@ -14,7 +14,7 @@
 								<div class="pos-relative">
 									<!-- <input class="pr-20" type="text" value="Tên người gửi..." > -->
 									<input class="pr-20" type="text" required="" v-model="contact.name">
-									<i class="abs-tbr lh-35 font-13 color-green fa fa-check"></i>
+									<!-- <i class="abs-tbr lh-35 font-13 color-green fa fa-check"></i> -->
 								</div><!-- pos-relative -->
 							</div><!-- col-sm-6 -->
 							
@@ -45,7 +45,6 @@
 							<div class="col-sm-12">
 								<div class="pos-relative pr-80">
 									<p class="color-ash">Nội dung tin nhắn*</p>
-									<!-- <h4><b>Nội dung tin nhắn</b></h4> -->
 									<textarea class="mb-0"  v-model="contact.content"></textarea>
 									<button class="abs-br font-20 plr-15 btn-fill-primary" type="submit"><i class="fa fa-telegram"></i></button>
 								</div><!-- pos-relative -->

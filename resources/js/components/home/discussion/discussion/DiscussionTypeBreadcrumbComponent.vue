@@ -17,8 +17,7 @@
                     <div class="col-md-8 wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="600ms">
                         <ol class="breadcrumb mt-2">
                             <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Trang chủ</a></li>
-                            <li class="breadcrumb-item">Thảo luận</li>
-                            <li class="breadcrumb-item active">TCP</li>
+                            <li class="breadcrumb-item active">Thảo luận</li>
                         </ol>
                     </div>
                     <div class="col-md-4 wow fadeInRight animated" data-wow-duration="500ms" data-wow-delay="600ms">

@@ -247,7 +247,7 @@ class BlogController extends Controller
     function showWithId($id){
         $blog = DB::table('blogs')
         ->join('users', 'id_user', 'users.id')
-        ->select('blogs.id', 'description', 'title', 'blog_content', 'blog_image', 'blogs.blog_view', 'blogs.created_at', 'featured', 'users.name', 'blogs.id_user', 'users.user_image')
+        ->select('blogs.id', 'description', 'title', 'blog_content', 'blog_image', 'blogs.blog_view', 'blog_like', 'blogs.created_at', 'featured', 'users.name', 'blogs.id_user', 'users.user_image')
         ->where('blogs.id', $id)
         ->first();
 
@@ -280,6 +280,19 @@ class BlogController extends Controller
     function incrementView($id){
         $blog = Blog::findOrFail($id);
         $blog->blog_view = $blog->blog_view + 1;
+
+        $status = $blog->save();
+
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Cập nhật dữ liệu thành công' : "Cập nhật dữ liệu thất bại",
+            'blog' => $blog
+        ]);
+    }
+
+    function incrementLike($id){
+        $blog = Blog::findOrFail($id);
+        $blog->blog_like = $blog->blog_like + 1;
 
         $status = $blog->save();
 

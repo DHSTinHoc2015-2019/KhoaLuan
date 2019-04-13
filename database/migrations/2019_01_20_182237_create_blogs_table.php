@@ -22,6 +22,7 @@ class CreateBlogsTable extends Migration
             $table->boolean('featured')->default(false);
             $table->integer('id_user')->unsigned();
             $table->bigInteger('blog_view')->unsigned()->default(0);
+            $table->bigInteger('blog_like')->unsigned()->default(0);
             $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
         });

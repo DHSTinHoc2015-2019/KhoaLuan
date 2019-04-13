@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\LikeBlog;
 use DB;
+use App\Blog;
 
 class LikeBlogController extends Controller
 {
@@ -35,6 +36,11 @@ class LikeBlogController extends Controller
     		->where('id_user', $request->id_user)
     		->where('is_liked', $isLike)
     		->first();
+
+            $blog = Blog::findOrFail($request->id_blog);
+            $blog->blog_like = $blog->blog_like - 1;
+
+            $blog->save();
     		$status = LikeBlog::findOrFail($likeBlog->id)->delete();
     	} else {
     		// $message = 'doi thanh true => create';
@@ -42,6 +48,12 @@ class LikeBlogController extends Controller
     		$likeBlog->id_user = $request->id_user;
     		$likeBlog->id_Blog = $request->id_blog;
     		$likeBlog->is_liked = true;
+
+            $blog = Blog::findOrFail($request->id_blog);
+            $blog->blog_like = $blog->blog_like + 1;
+
+            $blog->save();
+
     		$status = $likeBlog->save();
     	}
 
@@ -56,15 +68,8 @@ class LikeBlogController extends Controller
             ->where('id_blog', $id_blog)
             ->count();
 
-        // $isLikeDiscussion = DB::table('like_discussions')
-        //     ->where('id_discussion', $id_discussion)
-        //     ->where('id_user', $id_user)
-        //     ->where('is_liked', true)
-        //     ->count();
-
         return response()->json([
             'countLikeBlog' => $countLikeBlog,
-            // 'isLikeDiscussion' => $isLikeDiscussion == 1 ? true : false
         ]);
     }
 

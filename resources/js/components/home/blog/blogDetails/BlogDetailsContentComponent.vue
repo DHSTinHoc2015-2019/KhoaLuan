@@ -334,7 +334,6 @@
 				countLikeBlog: 0,
 				isLikeBlog: false,
 				countComment: 0,
-				countLikeBlog: 0,
 				socket : io(localStorage.getItem('tpack.server')),
 				blogMostView: {},
             }

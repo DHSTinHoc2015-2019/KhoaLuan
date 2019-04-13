@@ -267,7 +267,7 @@ a:hover{
 .ct-footer {
     background-color: #005c5c;
     /*padding-bottom: 70px;*/
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     position: relative;
 }
 

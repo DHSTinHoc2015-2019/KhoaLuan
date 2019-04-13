@@ -21,10 +21,10 @@
                                         ...
                                     </div>
                                     <div class="large-1 column lpad">
-                                        Like
+                                        Thích
                                     </div>
                                     <div class="large-1 column lpad">
-                                        view
+                                        Xem
                                     </div>
                                     <div class="large-2 small-4 column lpad">
                                         ... 

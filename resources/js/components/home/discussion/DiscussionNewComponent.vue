@@ -25,7 +25,7 @@
                                         Thích
                                     </div>
                                     <div class="large-1 column lpad">
-                                        Trả lời
+                                        Xem
                                     </div>
                                     <div class="large-2 small-4 column lpad">
                                         ...
@@ -59,9 +59,7 @@
     
 					</div>
                     <!-- end col-md-12 -->
-
 				</div>
-				
 			</div><!-- container -->
 	</section>
 </template>

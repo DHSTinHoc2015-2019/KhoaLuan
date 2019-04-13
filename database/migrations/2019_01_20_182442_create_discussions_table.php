@@ -18,6 +18,7 @@ class CreateDiscussionsTable extends Migration
             $table->string('title');
             $table->longText('discussion_content');
             $table->integer('discussion_view')->default(0);
+            $table->integer('discussion_like')->default(0);
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users');
             $table->integer('id_discussion_type')->unsigned();

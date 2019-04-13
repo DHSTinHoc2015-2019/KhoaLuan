@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\LikeDiscussion;
 use DB;
+use App\Discussion;
 
 class LikeDiscussionController extends Controller
 {
@@ -52,6 +53,9 @@ class LikeDiscussionController extends Controller
     		->where('id_user', $request->id_user)
     		->where('is_liked', $isLike)
     		->first();
+            $discussion = Discussion::findOrFail($request->id_discussion);
+            $discussion->discussion_like = $request->discussion_like - 1;
+            $discussion->save();
     		$status = LikeDiscussion::findOrFail($likeDiscussion->id)->delete();
     	} else {
     		// $message = 'doi thanh true => create';
@@ -59,6 +63,9 @@ class LikeDiscussionController extends Controller
     		$likeDiscussion->id_user = $request->id_user;
     		$likeDiscussion->id_discussion = $request->id_discussion;
     		$likeDiscussion->is_liked = true;
+            $discussion = Discussion::findOrFail($request->id_discussion);
+            $discussion->discussion_like = $request->discussion_like + 1;
+            $discussion->save();
     		$status = $likeDiscussion->save();
     	}
 
