@@ -132,3 +132,74 @@ textarea.input {
     border-radius: 5px;
     color: black;
 }
+
+/*Link*/
+.link-item-title {
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    /*font-weight: bold;*/
+    /*padding: 0 0 5px 0;*/
+    color: #005c5c;
+}
+.link-item-title:hover {
+    color: #eb5055;
+}
+
+.link-item-title:after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    left: 0;
+    bottom: 6px;
+    visibility: hidden;
+    background-color: #eb5055;
+    -webkit-transition: all .1s ease;
+    transition: all 0.3s ease;  
+    -webkit-transform: scaleX(0);
+    -ms-transform: scaleX(0);
+    transform: scaleX(0);
+}
+
+.link-item-title:hover:after {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    -ms-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+.link-item-normal {
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    /*font-weight: bold;*/
+    /*padding: 0 0 5px 0;*/
+    color: #005c5c;
+}
+.link-item-normal:hover {
+    color: #eb5055;
+}
+
+.link-item-normal:after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    left: 0;
+    bottom: 0px;
+    visibility: hidden;
+    background-color: #eb5055;
+    -webkit-transition: all .1s ease;
+    transition: all 0.3s ease;  
+    -webkit-transform: scaleX(0);
+    -ms-transform: scaleX(0);
+    transform: scaleX(0);
+}
+
+.link-item-normal:hover:after {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    -ms-transform: scaleX(1);
+    transform: scaleX(1);
+}

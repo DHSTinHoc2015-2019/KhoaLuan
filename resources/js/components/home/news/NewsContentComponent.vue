@@ -1,11 +1,12 @@
 <template>
 	<!-- section -->
-	<div class="section section-grey" id="news">
+	<!-- <div class="section section-grey pb-4" id="news" style="background-color: #ececec"> -->
+	<div class="section section-grey pb-5" id="news" style="background: #ececec">
 		<!-- container -->
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<div class="col-md-8" style="background-color: white; border-radius: 0.5rem;">
+				<div class="col-md-8" style="border-radius: 0.5rem; background: #fff;border-width: 1px; border-style: solid; border-top-color: #dfdfdf; border-right-color: #d8d8d8; border-bottom-color: #cbcbcb;border-left-color: #d8d8d8;">
 					<div class="container">
 						<div class="row">
 						<div class="col-md-12" style="border-bottom: 1px solid #ccc">
@@ -23,7 +24,7 @@
 								<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVG(index)" v-html="value.news_image">
 								</a>
 								<div class="post-body">
-									<router-link :to="{ name: 'NewsDetails', params: { id: value.id }}">
+									<router-link :to="{ name: 'NewsDetails', params: { id: value.id }}" class="link-item-normal font-weight-bold">
 										<h3 class="post-title news-title">{{ value.title }}</h3>
 									</router-link>
 									
@@ -73,7 +74,7 @@
         transition: all .5s ease-in-out;
     }
     .blog-title {
-        color: #231557; text-transform: uppercase;
+        color: #005c5c; text-transform: uppercase;
     }
     .news-all {
     	border-bottom: 1px solid #ccc;
@@ -92,6 +93,7 @@
 	}
 	#news .news-title {
 		margin-bottom: 0px;
+		font-weight: bold;
 	}
 </style>
 <script>

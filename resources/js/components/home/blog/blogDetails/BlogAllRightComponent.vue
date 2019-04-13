@@ -16,7 +16,7 @@
 							<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVGMostView(index)" v-html="value.blog_image" style="max-height: 100px; max-width: 100px;border-right: 8px solid black;border-bottom: 8px solid black;">
 							</a>
 							<div class="post-body">
-								<router-link :to="{ name: 'BlogDetails', params: { id: value.id }}">
+								<router-link :to="{ name: 'BlogDetails', params: { id: value.id }}" class="link-item-normal">
 									<h3 class="post-title">{{ value.title }}</h3>
 								</router-link>
 							</div>
@@ -29,7 +29,7 @@
 							<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVGMostView(index)" v-html="value.blog_image" style="max-height: 100px; max-width: 100px;border-right: 8px solid black;border-bottom: 8px solid black;">
 							</a>
 							<div class="post-body">
-								<router-link :to="{ name: 'BlogDetails', params: { id: value.id }}">
+								<router-link :to="{ name: 'BlogDetails', params: { id: value.id }}" class="link-item-normal">
 									<h3 class="post-title">{{ value.title }}</h3>
 								</router-link>
 							</div>
@@ -161,7 +161,7 @@
 		color:#02bdd5;
 	}
 	.blog-title {
-        color: #231557; text-transform: uppercase;
+        color: #005c5c; text-transform: uppercase;
     }
     .section .section-title {
     	margin-bottom: 0px;

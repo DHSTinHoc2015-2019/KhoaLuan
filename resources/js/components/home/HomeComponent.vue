@@ -7,7 +7,7 @@
         ==================================== -->
         <header id="navigation">
             <!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #0eb493"> -->
-            <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: teal; border: 1px solid">
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: teal; border-bottom: 1px solid #000">
                 <div class="container">
                     <router-link to="/" class="navbar-brand font-weight-bold">Trang chủ</router-link>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar6">
@@ -43,7 +43,7 @@
                             </li>
                             <!-- <span v-if="isLoggedIn"> -->
                             <li class="nav-item">
-                                <router-link to="trangcanhan" class="nav-link active" v-if="isLoggedIn">Xin chào {{ name }}</router-link>
+                                <router-link to="/trangcanhan" class="nav-link active" v-if="isLoggedIn">Chào {{ name }}</router-link>
                             </li>
                             <li class="nav-item">
                                 <a href="javascript:void(0)" class="nav-link active" v-on:click="logout" v-if="isLoggedIn">Đăng xuất</a>

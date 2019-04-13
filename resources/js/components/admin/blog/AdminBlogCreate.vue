@@ -175,6 +175,7 @@
                 formData.append('description', this.blogs.description);
                 formData.append('hasImage', true);
                 formData.append('id_user', this.user.id);
+                // formData.append('file', this.file);
 
                 for (let [key, value] of formData.entries()) {
 					if(key == 'blog_image') {

@@ -1,20 +1,20 @@
 <template>
 	<!-- section -->
-	<div class="section mb-3">
+	<div class="section mb-3" style="background: #ececec">
 		<!-- container -->
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<div class="col-md-8 p-4" style="background-color: white; border-radius: 0.5rem;">
+				<div class="col-md-8 p-4" style="border-radius: 0.5rem; background: #fff;border-width: 1px; border-style: solid; border-top-color: #dfdfdf; border-right-color: #d8d8d8; border-bottom-color: #cbcbcb;border-left-color: #d8d8d8;">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="section-title wow fadeInDown" data-wow-delay=".3s">
-									<h2 class="text-uppercase font-weight-bold">{{ blogs.title }} <span v-if="isLogin && (blogs.id_user == users.id)"><router-link :to="{ name: 'UserBlogEdit', parmas: {id: blogs.id}}" class="btn btn-success float-right">Chỉnh sửa</router-link></span></h2>
+									<h2 class="text-uppercase font-weight-bold" style="color: #005c5c">{{ blogs.title }} <span v-if="isLogin && (blogs.id_user == users.id)"><router-link :to="{ name: 'UserBlogEdit', parmas: {id: blogs.id}}" class="btn btn-success float-right">Chỉnh sửa</router-link></span></h2>
 								<div class="post-meta pt-2" style="font-size: 0.9em;">
 									<a class="post-category cat-3" href="javascript:void(0)">Tên danh mục</a>
 									<span>
 										<i class="fa fa-user-circle-o" aria-hidden="true"></i> 
-										<a href="javascript:void(0)" class="mr-2">{{ blogs.name }}</a>
+										<router-link to="javascript:void(0)" class="mr-2 link-item-normal">{{ blogs.name }}</router-link>
 									</span>
 									<span>
 										<span style="font-weight: bold;" class="mr-2">·</span>
@@ -223,7 +223,7 @@
 
 				<div class="col-md-4">
 					<!-- <app-blog-all-right-component></app-blog-all-right-component> -->
-					<div class="container" style="background-color: white; border-radius: 0.5rem;">
+					<div class="container" style="border-radius: 0.5rem; background: #fff;border-width: 1px; border-style: solid; border-top-color: #dfdfdf; border-right-color: #d8d8d8; border-bottom-color: #cbcbcb;border-left-color: #d8d8d8;">
 		<div class="row">
 			<div class="col-md-12">
 				<!-- post widget -->
@@ -241,7 +241,7 @@
 							</a>
 							<div class="post-body">
 								<router-link :to="{ name: 'BlogDetails', params: { id: value.id }}">
-									<h3 class="post-title">{{ value.title }}</h3>
+									<h3 class="post-title link-item-normal font-weight-bold">{{ value.title }}</h3>
 								</router-link>
 							</div>
 						</div>
@@ -254,7 +254,7 @@
 							</a>
 							<div class="post-body">
 								<router-link :to="{ name: 'BlogDetails', params: { id: value.id }}">
-									<h3 class="post-title">{{ value.title }}</h3>
+									<h3 class="post-title link-item-normal font-weight-bold">{{ value.title }}</h3>
 								</router-link>
 							</div>
 						</div>
@@ -336,10 +336,11 @@
 				countComment: 0,
 				countLikeBlog: 0,
 				socket : io(localStorage.getItem('tpack.server')),
-				blogMostView: {}
+				blogMostView: {},
             }
         },
         created(){
+        	this.users = JSON.parse(localStorage.getItem('tpack.user'))
 			this.getDataCreate()
         },
 		watch: {
@@ -761,7 +762,7 @@
 		color:#02bdd5;
 	}
 	.blog-title {
-        color: #231557; text-transform: uppercase;
+        color: #005c5c; text-transform: uppercase;
     }
     .section .section-title {
     	margin-bottom: 0px;

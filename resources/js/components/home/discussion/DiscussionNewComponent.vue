@@ -1,12 +1,12 @@
 <template>
-	<section style="padding-bottom: 40px;" class="wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="300ms">
+	<section style="padding-bottom: 40px; background: #ececec" class="wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="300ms">
 			<div class="container">
 				<div class="row">
 
 					<div class="col-md-12 pt-5">
                         <div class="large-12">
                             <div class="large-12 forum-category rounded top">
-                                <div class="large-8 small-10 column lpad">
+                                <div class="large-8 small-10 column lpad" style="padding: 10px 10px 10px 40px;">
                                     Thảo luận mới nhất
                                 </div>
                                 <div class="large-4 small-2 column lpad ar">
@@ -22,22 +22,22 @@
                                         ...
                                     </div>
                                     <div class="large-1 column lpad">
-                                        Like
+                                        Thích
                                     </div>
                                     <div class="large-1 column lpad">
-                                        view
+                                        Trả lời
                                     </div>
                                     <div class="large-2 small-4 column lpad">
                                         ...
                                     </div>
                                 </div>
-                                <div class="large-12 forum-topic" v-for="(value, index) in newdiscussion">
+                                <div class="large-12 forum-topic" v-for="(value, index) in newdiscussion" style="background: #fff">
                                     <div class="large-1 column lpad">
                                         <i class="fa fa-comments" style="color: #0d3f81"></i>
                                     </div>
                                     <div class="large-7 small-8 column lpad">
                                         <span class="overflow-control">
-                                        <router-link :to="{ name: 'DiscussionDetailsComponent', params: {id_type: value.id_discussion_type, id_discussion: value.id}}" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...'">{{ value.title }}</router-link>
+                                        <router-link :to="{ name: 'DiscussionDetailsComponent', params: {id_type: value.id_discussion_type, id_discussion: value.id}}" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion">{{ value.title }}</router-link>
                                         </span>
                                          <span class="overflow-control">
                                         {{ value.discussion_content }}
@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="large-2 small-4 column pad">
                                         <span>{{ convertDate(value.created_at) }}</span>
-                                        <span><a href="#" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';">{{ value.name }}</a></span>
+                                        <span><a href="#" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion">{{ value.name }}</a></span>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,16 @@
 </script>
 
 <style scoped>
+    .link-item-discussion{
+        color: #005c5c !important;
+    }
 
+    .link-item-discussion:hover{
+        color: #eb5055 !important;
+    }
+    .name-discussion-type:hover{
+        color: #e2e61a;
+    }
     @import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
     meta.foundation-mq-small {
         font-family: "/only screen and (max-width: 40em)/";
@@ -7411,7 +7420,7 @@
     }
 
     .lpad {
-        padding: 20px;
+        padding: 10px;
     }
 
     .ar {
@@ -7550,9 +7559,10 @@
     }
 
     .forum-topic>.column {
-        min-height: 90px;
-        max-height: 90px;
-        background-color: hsl(0, 0%, 96%);
+        min-height: 75px;
+        max-height: 75px;
+        /*background-color: hsl(0, 0%, 96%);*/
+        background-color: #fff;
         border-bottom: 1px solid hsl(0, 0%, 90%);
         color: hsl(0, 0%, 50%);
         /*font-size: 12px;*/

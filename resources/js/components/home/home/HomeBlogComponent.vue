@@ -2,11 +2,20 @@
 	<div id="homeblog">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
+<!-- 				<div class="col-md-12">
 					<div class="section-heading">
 			            <h1 class="title font-weight-bold wow fadeInDown" data-wow-delay=".3s">Bài viết nổi bật</h1>
 			        </div>
-				</div>
+				</div> -->
+				
+				<div class="col-md-12 pl-3 wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="900ms">
+                    <div class="separator">
+                        <h1 class="one">
+                            <span class="title blog-title font-weight-bold">Bài viết nổi bật</span>
+                            <!-- <span><h5><a href="#" class="create">Tạo bài viết mới</a></h5></span> -->
+                        </h1>
+                    </div>
+                </div>
 
 				<div class="col-md-4 col-xs-12 p-4 home-blog" v-for="(value, index) in blogs">
 					<div class="card wow fadeInDown animated" data-wow-duration="500ms" :data-wow-delay="(datawowdelay * index) + 'ms'">
@@ -16,10 +25,10 @@
                         <a href="javascript:void(0)" class="imgover" v-if="checkImageSVG(index)" v-html="value.blog_image">
                         </a>
 						<div class="card-body">
-							<router-link :to="{ name: 'BlogDetails', params: {id: value.id }}" :title="value.title">
+							<router-link :to="{ name: 'BlogDetails', params: {id: value.id }}" :title="value.title" class="link-item-title">
                                 <h4 class="font-weight-bold">{{value.title}}</h4>
                             </router-link>
-							<p class="home-blog-author">Đăng bởi <a class="blog-admin" href="javascript:void(0)">{{ value.name }}</a> ngày <span>{{ convertDate(value.created_at) }}</span></p>
+							<p class="home-blog-author">Đăng bởi <a class="blog-admin link-item-normal" href="javascript:void(0)">{{ value.name }}</a> ngày <span>{{ convertDate(value.created_at) }}</span></p>
                             <p class="card-text">{{ value.description }}</p>
 							<div class="blog-footer">
                                 <a href="javascript:void(0)"><span class="fa fa-comment"></span>{{ value.countComment }} Bình luận</a>
@@ -34,8 +43,97 @@
 </template>
 
 <style>
+	.separator h1 {
+        position: relative;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .separator h1.one {
+        margin-top: 0;
+    }
+    
+    .separator h1.one a{
+        text-decoration: none;
+        display: inline-block;
+        position: relative;
+        font-family: Arial;
+        font-weight: bold;
+        padding: 0 0 5px 0;
+        /*color: #e2e61a;*/
+        color: #005c5c;
+    }
+    .separator h1.one a:hover{
+        /*color: #e8ce0e;*/
+        color: #eb5055;
+    }
+    .separator h1.one a:after {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        visibility: hidden;
+        background-color: #eb5055;
+        /*background-color: #e8ce0e;*/
+        color:#e8ce0e;
+        -webkit-transition: all .1s ease;
+        transition: all 0.3s ease;  
+        -webkit-transform: scaleX(0);
+        -ms-transform: scaleX(0);
+        transform: scaleX(0);
+    }
+
+    .separator h1.one a:hover:after {
+        visibility: visible;
+        -webkit-transform: scaleX(1);
+        -ms-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+
+    .separator h1.one:before {
+        content: "";
+        display: block;
+        border-top: solid 1px #fff;
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+    }
+
+    .separator h1.one:before {
+        content: "";
+        display: block;
+        border-top: solid 1px black;
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+    }
+
+    .separator h1.one .title {
+        background: #ececec;
+        padding: 0 20px;
+        position: relative;
+        z-index: 5;
+        text-transform: uppercase;
+        color: #005c5c;
+    }
+
+    .separator h1.one .create {
+        background: #ececec;
+        padding: 0 20px;
+        position: relative;
+        z-index: 5;
+        float: right;
+        bottom: 2.2em;
+    }
+
 	#homeblog {
-		padding: 80px 0;
+		padding: 40px 0;
 		background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 	}
 	.imgover {
@@ -98,15 +196,6 @@
 		line-height: 20px;
 	}
 
-	#homeblog .title {
-		font-size: 2.5em;
-		line-height: 1.1;
-		font-weight: 300;
-		color: #231557;
-		text-transform: uppercase;
-		margin-bottom: 20px;
-	}
-
 	#homeblog .imgover img {
 		-webkit-transition: opacity 1s,
 		 -webkit-transform 1s;
@@ -134,8 +223,7 @@
 	}
 	#homeblog .blog-footer a {
 		font-size: 0.8em;
-	    /*color: #818181;*/
-    	/*margin-right: 35px*/
+	    color: #005c5c;
 	}
 	#homeblog .blog-footer a span {
 		border: 1px solid;

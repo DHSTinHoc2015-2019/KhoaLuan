@@ -54,13 +54,15 @@ class BlogController extends Controller
 	function create(Request $request){
     	$blog = new Blog();
 
-    	if($request->hasImage){
-    		$imageName = time().$request->blog_image->getClientOriginalName();
-        	$request->blog_image->move(public_path('images/blog/'), $imageName);
-        	$blog->blog_image = $imageName;
-    	} else {
-    		$blog->blog_image = $request->blog_image;
-    	}
+        if($request->hasImage){
+            if ($request->hasFile('file')) {
+                $imageName = time().$request->blog_image->getClientOriginalName();
+                $request->blog_image->move(public_path('images/blog/'), $imageName);
+                $blog->blog_image = $imageName;
+            }
+        } else {
+            $blog->blog_image = $request->blog_image;
+        }
 
     	$blog->description = $request->description;
     	$blog->title = $request->title;
@@ -72,7 +74,7 @@ class BlogController extends Controller
 
     	return response()->json([
     		'status' => $status,
-    		'message' => $status ? 'Thêm dữ liệu thành công' : "Thêm dữ liệu thất bại",
+    		'message' => $status ? 'Đăng bài viết thành công' : "Đăng bài viết thất bại",
     		'blogs' => $blog
     	]);
     }
@@ -116,7 +118,7 @@ class BlogController extends Controller
         
     	return response()->json([
     		'status' => $status,
-    		'message' => $status ? 'Cập nhật dữ liệu thành công' : "Cập nhật dữ liệu thất bại",
+    		'message' => $status ? 'Cập nhật bài viết thành công' : "Cập nhật bài viết thất bại",
     		'blog' => $blog
     	]);
     }

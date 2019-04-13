@@ -4,7 +4,7 @@
 			<div class="row">
 			
 				<div class="col-sm-12 col-md-8">
-					<h3><b>GỬI TIN NHẮN ĐẾN CHÚNG TÔI</b></h3>
+					<h3><b style="color: #005c5c;">GỬI TIN NHẮN ĐẾN CHÚNG TÔI</b></h3>
 					<p class="mb-30 mr-100 mr-sm-0">Chúng tôi rất thích nghe ý kiến ​​của bạn - vui lòng liên hệ để nhận xét, yêu cầu, quan hệ đối tác quảng cáo hoặc yêu cầu công việc.</p>
 					<form class="form-block form-bold form-mb-20 form-h-35 form-brdr-b-grey pr-50 pr-sm-0" v-on:submit.prevent="createContact">
 						<div class="row">
@@ -56,7 +56,7 @@
 				</div><!-- col-md-6 -->
 				
 				<div class="col-sm-12 col-md-4">
-					<h3 class="mb-20 mt-sm-50"><b>THÔNG TIN LIÊN HỆ</b></h3>
+					<h3 class="mb-20 mt-sm-50"><b style="color: #005c5c;">THÔNG TIN LIÊN HỆ</b></h3>
 					
 					Địa chỉ: abc TP Huế
 					Điện thoại: 0876543210

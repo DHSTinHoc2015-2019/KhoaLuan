@@ -23,6 +23,9 @@ Route::post('register', 'UserController@register');
 Route::get('active/{id}/{activation_code}', 'UserController@activateUser');
 Route::get('demolike/{like}', 'DemoLikeController@index');
 
+Route::get('/redirect/{social}', 'SocialAuthController@redirect');
+Route::get('/callback/{social}', 'SocialAuthController@callback');
+
 /*=========Homepage============*/
 Route::get('listhometpack', 'HomeTpackController@index');
 Route::get('/introduction','IntroductionController@index');

@@ -1,11 +1,11 @@
 <template>
 	<!-- section -->
-	<div class="section section-grey" id="news">
+	<div class="section section-grey pb-5" id="news" style="background: #ececec">
 		<!-- container -->
 		<div class="container">
 			<!-- row -->
-			<div class="row mb-3">
-				<div class="col-md-8" style="background-color: white;">
+			<div class="row">
+				<div class="col-md-8" style="border-radius: 0.5rem; background: #fff;border-width: 1px; border-style: solid; border-top-color: #dfdfdf; border-right-color: #d8d8d8; border-bottom-color: #cbcbcb;border-left-color: #d8d8d8;">
 					<div class="container">
 						<div class="row">
 							<div class="col-md-12" style="border-bottom: 1px solid #ccc">
@@ -52,7 +52,7 @@
         transition: all .5s ease-in-out;
     }
     .blog-title {
-        color: #231557; text-transform: uppercase;
+        color: #005c5c; text-transform: uppercase;
     }
     .news-all {
     	border-bottom: 1px solid #ccc;

@@ -9,7 +9,7 @@
 							ĐĂNG NHẬP
 						</span>
 
-						<a href="javascript:void(0)" class="btn-face m-b-20">
+						<a href="javascript:void(0)" class="btn-face m-b-20" v-on:click="loginFacebook()">
 							<i class="fa fa-facebook-official"></i>
 							Facebook
 						</a>
@@ -89,6 +89,15 @@
             }
         }, 
         methods: {
+        	loginFacebook(){
+        		axios.defaults.headers.get['Accepts'] = 'application/json';
+        		axios.defaults.headers.common['Content-Type'] = 'application/json'
+				axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+				axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
+        		this.axios.get('redirect/facebook').then((response) => {
+        			console.log('ok')
+        		})
+        	},
             handleSubmit() {
             	if(!this.checkAll()){
 	            	return

@@ -38,6 +38,7 @@ import HomeContentComponent from './components/home/home/HomeContentComponent.vu
 import IntroComponent from './components/home/intro/IntroComponent.vue';
 import BlogComponent from './components/home/blog/BlogComponent.vue';
 import UserBlogEdit from './components/home/blog/update/UserBlogEdit.vue';
+import UserBlogCreate from './components/home/blog/update/UserBlogCreate.vue';
 import BlogDetailsComponent from './components/home/blog/blogDetails/BlogDetailsComponent.vue';
 import DiscussionComponent from './components/home/discussion/DiscussionComponent.vue';
 import DiscussionTypeComponent from './components/home/discussion/discussion/DiscussionTypeComponent.vue';
@@ -96,7 +97,7 @@ import DemoUserEdit from './components/admin/demo/DemoUserEdit.vue';
 import Page404Component from './components/pages/Page404Component.vue';
 import LoginComponent from './components/home/login/LoginComponent.vue';
 import RegisterComponent from './components/home/login/RegisterComponent.vue';
-
+import LoginFacebookComponent from './components/home/login/LoginFacebookComponent.vue';
 
 var routes = [
     /*===========Admin==============*/
@@ -351,7 +352,7 @@ var routes = [
         	},
         	{
         		path: 'blog',
-        		meta: { label: 'Blog' },
+        		// meta: { label: 'Blog' },
         		component: {
         			render (c) { return c('router-view') }
         		},
@@ -359,11 +360,17 @@ var routes = [
         			{
 						path: '',
 						component: BlogComponent,
+                        name: 'Blog'
         			},
                     {
                         name: 'UserBlogEdit',
                         path: 'edit/:id',
                         component: UserBlogEdit,
+                    },
+                    {
+                        name: 'UserBlogCreate',
+                        path: 'create',
+                        component: UserBlogCreate,
                     },
         			{
         				name: 'BlogDetails',
@@ -431,6 +438,11 @@ var routes = [
                 name: 'Register',
                 path: 'register',
                 component: RegisterComponent
+            },
+            {
+                name: 'LoginFacebook',
+                path: 'callback/facebook',
+                component: LoginFacebookComponent
             },
             {
                 name: 'ActiveEmail',

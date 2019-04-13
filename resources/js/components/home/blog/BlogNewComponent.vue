@@ -1,9 +1,14 @@
 <template>
-    <div id="new-blog">
+    <div id="new-blog" style="background: teal">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 pl-3 wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="900ms">
-                    <h2><b class="blog-title">Bài viết mới nhất</b></h2>
+                    <div class="separator">
+                        <h1 class="one">
+                            <span class="title font-weight-bold">Bài viết mới nhất</span>
+                            <span><h5><a href="javascript:void(0)" class="create" v-on:click="CreateBlog()">Tạo bài viết mới</a></h5></span>
+                        </h1>
+                    </div>
                 </div>
                 <div class="col-md-4 col-xs-12 p-3 home-blog" v-for="(value, index) in blognew">
                     <div class="card wow fadeInDown animated" data-wow-duration="500ms" :data-wow-delay="(datawowdelay * index) + 'ms'">
@@ -12,10 +17,10 @@
                         </a>
                         <a href="javascript:void(0)" class="imgover" v-if="checkImageSVG(index)" v-html="value.blog_image"></a>
                         <div class="card-body">
-                            <router-link :to="{ name: 'BlogDetails', params: {id: value.id }}" :title="value.title">
+                            <router-link :to="{ name: 'BlogDetails', params: {id: value.id }}" :title="value.title" class="link-item-title">
                                 <h4 class="font-weight-bold" v-on:click="incrementView(value.id)">{{value.title}}</h4>
                             </router-link>
-                            <p class="home-blog-author">Đăng bởi <a class="blog-admin" href="javascript:void(0)">{{ value.name }}</a> ngày <span>{{ convertDate(value.created_at) }}</span></p>
+                            <p class="home-blog-author">Đăng bởi <a class="blog-admin link-item-normal" href="javascript:void(0)">{{ value.name }}</a> ngày <span>{{ convertDate(value.created_at) }}</span></p>
                             <p class="card-text">{{ value.description }}</p>
                             <div class="blog-footer">
                                 <a href="javascript:void(0)"><span class="fa fa-comment"></span>{{ value.countComment }} Bình luận</a>
@@ -30,6 +35,85 @@
 </template>
 
 <style scoped>
+    .separator h1 {
+        position: relative;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .separator h1.one {
+        margin-top: 0;
+    }
+
+    .separator h1.one a {
+        text-decoration: none;
+        display: inline-block;
+        position: relative;
+        font-family: Arial;
+        font-weight: bold;
+        padding: 0 0 5px 0;
+        /*color: #e2e61a;*/
+        color: #fff;
+    }
+    .separator h1.one a:hover{
+        color: #e8ce0e;
+    }
+    .separator h1.one a:after {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        visibility: hidden;
+        background-color: #e8ce0e;
+        /*background-color: #e8ce0e;*/
+        color:#e8ce0e;
+        -webkit-transition: all .1s ease;
+        transition: all 0.3s ease;  
+        -webkit-transform: scaleX(0);
+        -ms-transform: scaleX(0);
+        transform: scaleX(0);
+    }
+
+    .separator h1.one a:hover:after {
+        visibility: visible;
+        -webkit-transform: scaleX(1);
+        -ms-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+
+    .separator h1.one:before {
+        content: "";
+        display: block;
+        border-top: solid 1px #fff;
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+    }
+
+    .separator h1.one .title {
+        /*background: #ececec;*/
+        background: teal;
+        padding: 0 20px;
+        position: relative;
+        z-index: 5;
+        color: #fff;
+        text-transform: uppercase;
+    }
+
+    .separator h1.one .create {
+        /*background: #ececec;*/
+        background: teal;
+        padding: 0 20px;
+        position: relative;
+        z-index: 5;
+        float: right;
+        bottom: 2.2em;
+    }
+
     #new-blog {
         padding: 40px 0;
         background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -85,10 +169,6 @@
         text-decoration: none;
     }
 
-    .blog-title {
-        color: #231557; text-transform: uppercase;
-    }
-
     #new-blog .imgover img {
         -webkit-transition: opacity 1s,
          -webkit-transform 1s;
@@ -116,8 +196,7 @@
     }
     #new-blog .blog-footer a {
         font-size: 0.8em;
-        /*color: #818181;*/
-        /*margin-right: 35px*/
+        color: #005c5c;
     }
     #new-blog .blog-footer a span {
         border: 1px solid;
@@ -137,10 +216,13 @@
         data(){
             return {
                 blognew: {},
-                datawowdelay: 150
+                datawowdelay: 150,
+                isLogin: localStorage.getItem('tpack.jwt') != null,
+                users: null
             }
         },
         created(){
+            this.users = JSON.parse(localStorage.getItem('tpack.user'))
             this.axios.get('/api/blog/new').then((response) =>{
                 this.blognew = response.data
                 // console.log(response.data)
@@ -183,6 +265,19 @@
                 }).catch(error => {
                     console.error(error);
                 })
+            },
+            CreateBlog(){
+                if(this.isLogin){
+                    if(this.users.email_verified_at == '' || this.users.email_verified_at == null || this.users.email_verified_at == undefined){
+                        alertify.set('notifier','position', 'buttom-right');
+                        alertify.error('Xin chào '+ this.users.name +'.\n Bạn cần xem thư đến trong '+ this.users.email +' để kích hoạt tài khoản trước khi đăng bài');
+                    } else {
+                        this.$router.push({ name: 'UserBlogCreate'})
+                    }
+                } else {
+                    alertify.set('notifier','position', 'buttom-right');
+                    alertify.error('Bạn cần đăng nhập để thực hiện chức năng này');
+                }
             }
         }
     }
