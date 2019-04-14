@@ -140,6 +140,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('/likeblog/admin/change','LikeBlogController@change');
 
 	Route::post('/introduction/update','IntroductionController@update');
+
+	Route::post('/changepassword/{id}', 'UserController@changePassword');
 });
 
 /*=========Demo============*/

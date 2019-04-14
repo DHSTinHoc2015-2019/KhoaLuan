@@ -175,10 +175,34 @@
 			            </div>
 			        </div>
 
-			        <div class="row">
+			        <div class="row pt-3">
 			        	<div class="col-md-4"></div>
-			        	<div class="col-md-8">
-			        		<h1>Đổi mật khẩu</h1>
+			        	<div class="col-md-8 pt-3" style="border-top: 1px solid #ccc">
+			        		<form v-on:submit.prevent="changePassword">
+			        			<div class="row">
+				        			<div class="col-md-12">
+				        				<h4 style="text-align: center;">ĐỔI MẬT KHẨU</h4>
+				        			</div>
+				        			<div class="col-md-6">
+						        		<div class="form-group">
+											<label class="font-weight-bold">Mật khẩu mới</label>
+											<input type="password" class="form-control" aria-describedby="" placeholder="Nhập mật khẩu" required="" v-model="password">
+										</div>
+						        	</div>
+						        	<div class="col-md-6">
+						        		<div class="form-group">
+											<label class="font-weight-bold">Nhập lại mật khẩu mới</label>
+											<input type="password" class="form-control" aria-describedby="" placeholder="Nhập mật khẩu" required="" v-model="password_again">
+										</div>
+						        	</div>
+						        	<div class="col-md-3"></div>
+						        	<div class="col-md-3">
+						        		<button type="submit" class="btn btn-primary float-right"><span class="btn-label"><i class="fa fa-save"></i></span> Lưu lại</button>
+						        	</div>
+						        	<div class="col-md-3"></div>
+						        	<div class="col-md-3"></div>
+				        		</div>
+			        		</form>
 			        	</div>
 			        </div>
 			    </form>
@@ -195,7 +219,9 @@
 		data() {
 			return {
 				users: {},
-				complete: false
+				complete: false,
+				password: '',
+				password_again: ''
 			}
 		},
 		created(){
@@ -210,6 +236,38 @@
             convertDate(inputFormat) {
               var d = new Date(inputFormat);
               return [this.pad(d.getDate()), this.pad(d.getMonth()+1), d.getFullYear()].join('/');
+            },
+            changePassword(){
+            	if((this.password.length < 6) || (this.password_again.length < 6 )){
+            		alertify.set('notifier','position', 'buttom-right');
+	 				alertify.error('Mật khẩu phải dài từ 6 ký tự trở lên');
+            		this.password_again = ''
+            		this.password = ''
+            	} else {
+            		if(this.password_again == this.password){
+            			axios.defaults.headers.common['Content-Type'] = 'application/json'
+						axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
+            			this.axios.post('/api/changepassword/' + this.users.id, {password: this.password}).then((response) => {
+            				// console.log(response.data)
+            				if(response.data.status){
+								alertify.set('notifier','position', 'buttom-right');
+				 				alertify.success(response.data.message);
+							} else {
+								alertify.set('notifier','position', 'buttom-right');
+				 				alertify.error(response.data.message);
+							}
+            			})
+            			this.password_again = ''
+            			this.password = ''
+            		} else {
+            			alertify.set('notifier','position', 'buttom-right');
+		 				alertify.error('Mật khẩu không khớp');
+            			this.password_again = ''
+        				this.password = ''
+            		}
+            		
+            	}
+            	
             },
 		}
 	}

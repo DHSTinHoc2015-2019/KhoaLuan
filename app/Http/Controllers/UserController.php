@@ -100,5 +100,15 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         return response()->json($user, 200);
     }
+
+    function changePassword($id, Request $request){
+        $user = User::findOrFail($id);
+        $user->password = bcrypt($request->password);
+        $status = $user->save();
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Đổi mật khẩu thành công' : "Đổi mật khẩu thất bại"
+        ], 200);
+    }
    
 }
