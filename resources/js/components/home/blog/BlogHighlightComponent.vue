@@ -24,7 +24,7 @@
                             <router-link :to="{ name: 'BlogDetails', params: {id: value.id }}" :title="value.title" class="link-item-title">
                                 <h4 class="font-weight-bold" v-on:click="incrementView(value.id)">{{value.title}}</h4>
                             </router-link>
-                            <p class="home-blog-author">Đăng bởi <a class="blog-admin link-item-normal" href="javascript:void(0)">{{ value.name }}</a> ngày <span>{{ convertDate(value.created_at) }}</span></p>
+                            <p class="home-blog-author">Đăng bởi <router-link class="blog-admin link-item-normal" :to="{ name: 'ProfileUser', params: {id: value.id_user}}">{{ value.name }}</router-link> ngày <span>{{ convertDate(value.created_at) }}</span></p>
                             <p class="card-text">{{ value.description }}</p>
                             <div class="blog-footer">
                                 <a href="javascript:void(0)"><span class="fa fa-comment"></span>{{ value.countComment }} Bình luận</a>

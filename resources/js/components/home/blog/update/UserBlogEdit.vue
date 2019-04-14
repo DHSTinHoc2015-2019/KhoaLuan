@@ -1,7 +1,10 @@
 <template>
 	<div>
     	<app-user-blog-edit-breadcrumb-component></app-user-blog-edit-breadcrumb-component>
-		<div class="container mt-5">
+    	<div v-if="!complete" class="pt-5" style="min-height: 50vh">
+            <div class="loading-spinner"></div>
+        </div>
+		<div class="container mt-5" v-if="complete">
 
 			<div class="row mb-5">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12">                      
@@ -19,17 +22,6 @@
 										<input type="text" class="form-control" id="" aria-describedby="" placeholder="Nhập tiêu đề" required="" v-model="blogs.title">
 									</div>
 								</div>
-								<!-- <div class="col-md-12">
-      								<div class="form-check form-group">
-										<input class="form-check-input" type="checkbox" value="" id="defaultCheck1" v-model="blogs.featured">
-										<label class="form-check-label font-weight-bold" v-if="blogs.featured">
-										Nổi bật
-										</label>
-										<label class="form-check-label font-weight-bold" v-if="!blogs.featured">
-										Không nổi bật
-										</label>
-									</div>
-      							</div> -->
 								<div class="col-md-6">
 									<div class="form-group">
 										<div class="form-group">
@@ -96,7 +88,8 @@
 				url: null,
 				checkSVG: null,
 				file: '',
-				blogid: this.$route.params.id
+				blogid: this.$route.params.id,
+				complete: false
 			}
 		},
 		created(){
@@ -106,6 +99,7 @@
 			this.axios.get(`/api/blog/show/${this.$route.params.id}`).then((response) =>{
 				// console.log(response.data)
 				this.blogs = response.data
+				this.complete = true
 				this.checkSVG = response.data.blog_image.indexOf('<svg') != -1
 				if(!this.checkSVG){
 					this.url = `images/blog/${this.blogs.blog_image}`

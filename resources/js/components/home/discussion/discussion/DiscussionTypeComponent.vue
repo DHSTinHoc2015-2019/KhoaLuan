@@ -59,7 +59,7 @@
                                             </div>
                                             <div class="large-2 small-4 column pad">
                                                 <span>{{ convertDate(value.created_at) }}</span>
-                                                <span><a href="#" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion">{{ value.name }}</a></span>
+                                                <span><router-link :to="{ name: 'ProfileUser', params: {id: value.id_user }}" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion">{{ value.name }}</router-link></span>
                                             </div>
                                         </div>
                                     </div>

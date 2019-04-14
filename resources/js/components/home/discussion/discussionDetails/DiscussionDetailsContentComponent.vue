@@ -10,12 +10,12 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="section-title wow fadeInDown" data-wow-delay=".3s" style="margin-bottom: 0px;">
-						<!-- <h2>CÂU HỎI Ở ĐÂY</h2> -->
+						<h2>{{ discussion.title }} <span v-if="isLogin && (discussion.id_user == users.id)"><router-link :to="{ path: '/thaoluan/edit/' + discussion.id}" class="btn btn-success float-right">Chỉnh sửa</router-link></span></h2>
 						<p>{{ discussion.discussion_content }}</p>
 						<p style="color: #999;">
 							<span>
 								<i class="fa fa-user-circle-o" aria-hidden="true"></i> 
-								<a href="#" class="mr-2">{{ discussion.name }}</a>
+								<router-link :to="{ name: 'ProfileUser', params: {id: discussion.id_user}}" class="mr-2">{{ discussion.name }}</router-link>
 							</span>
 							<span>
 								<span style="font-weight: bold;" class="mr-2">·</span>
@@ -58,11 +58,11 @@
                     <div class="content" v-html="value_comment.comment_discussion_content"></div>
                     <span class="actions">
                     	<button class="action reply" type="button" v-on:click="onReplyComment(index_comment)" v-if="isLogin">Trả lời</button>
-                    	<span class="separator" v-if="isLogin">·</span>
+                    	<!-- <span class="separator" v-if="isLogin">·</span>
                     	<button class="action upvote highlight-font">
                     		<span class="upvote-count">2</span>
                     		<i class="fa fa-thumbs-up"></i>
-                    	</button>
+                    	</button> -->
                     	<span class="separator" v-if="isLogin && value_comment.id_user == users.id">·</span>
                     	<button class="action edit" v-on:click="onEditComment(index_comment)" v-if="isLogin && value_comment.id_user == users.id">Sửa</button>
                     	<span class="separator" v-if="isLogin && value_comment.id_user == users.id">·</span>
@@ -99,8 +99,8 @@
                         <div class="wrapper">
                             <div class="content" v-html="value_detail.comment_detail_discussion_content"></div>
                             <div class="actions">
-                            	<button class="action upvote"><span class="upvote-count">0</span><i class="fa fa-thumbs-up"></i></button>
-                            	<span class="separator" v-if="isLogin && value_detail.id_user == users.id">·</span>
+                            	<!-- <button class="action upvote"><span class="upvote-count">0</span><i class="fa fa-thumbs-up"></i></button>
+                            	<span class="separator" v-if="isLogin && value_detail.id_user == users.id">·</span> -->
                     			<button class="action edit" v-if="isLogin && value_detail.id_user == users.id" v-on:click="onEditDetail(index_detail)">Sửa</button>
                     			<span class="separator" v-if="isLogin && value_detail.id_user == users.id">·</span>
                     			<button class="action delete enabled" v-if="isLogin && value_detail.id_user == users.id" v-on:click="ClickDeleteCommentDetail(value_detail.id)">Xóa</button>
@@ -216,6 +216,7 @@
 			this.axios.get(`/api/discussion/user/${this.$route.params.id_type}/${this.$route.params.id_discussion}`).then((response) => {
 				// console.log(response.data)
 				this.discussion = response.data.discussion
+				// console.log(this.discussion)
 				this.comment = response.data.comment
 				this.commentdetail = response.data.commentdetail
 				// console.log(response.data.commentdetail)

@@ -128,19 +128,22 @@
                         <h2 class="ct-footer-list-header">TPACK</h2>
                         <ul>
                             <li>
-                                <a href="">Giới thiệu</a>
+                                <router-link :to="{ path: '/gioithieu'}">Giới thiệu</router-link>
                             </li>
                             <li>
-                                <a href="">Tin tức</a>
+                                <router-link :to="{ path: '/tintuc' }">Tin tức</router-link>
                             </li>
                             <li>
-                                <a href="">Bài viết</a>
+                                <router-link :to="{ path: '/blog' }">Bài viết</router-link>
                             </li>
                             <li>
-                                <a href="">Thảo luận</a>
+                                <router-link :to="{ path: '/thaoluan' }">Thảo luận</router-link>
                             </li>
                             <li>
-                                <a href="">Liên hệ</a>
+                                <router-link :to="{ path: '/thuvien' }">Thư viện</router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{ path: '/lienhe' }">Liên hệ</router-link>
                             </li>
                         </ul>
                     </li>
@@ -161,9 +164,9 @@
                     <li>
                         <h2 class="ct-footer-list-header">Liên kết</h2>
                         <ul>
-                            <li>
-                                <a href="">link liên kết</a>
-                            </li>
+                            <!-- <li>
+                                <router-link :to="">link liên kết</router-link>
+                            </li> -->
                             <li>
                                 <a href="">link liên kết</a>
                             </li>

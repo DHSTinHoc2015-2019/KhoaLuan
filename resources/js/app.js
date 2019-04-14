@@ -43,12 +43,15 @@ import BlogDetailsComponent from './components/home/blog/blogDetails/BlogDetails
 import DiscussionComponent from './components/home/discussion/DiscussionComponent.vue';
 import DiscussionTypeComponent from './components/home/discussion/discussion/DiscussionTypeComponent.vue';
 import DiscussionDetailsComponent from './components/home/discussion/DiscussionDetails/DiscussionDetailsComponent.vue';
+import UserDiscussionCreate from './components/home/discussion/update/UserDiscussionCreate.vue';
+import UserDiscussionEdit from './components/home/discussion/update/UserDiscussionEdit.vue';
 import NewsComponent from './components/home/news/NewsComponent.vue';
 import NewsDetailsComponent from './components/home/news/newsdetail/NewsDetailsComponent.vue';
 import LibraryComponent from './components/home/library/LibraryComponent.vue';
 import ContactComponent from './components/home/contact/ContactComponent.vue';
 import ProfileComponent from './components/home/profile/ProfileComponent.vue';
-import ActiveEmailComponent from './components/home/activemail/ActiveEmailComponent.vue';
+import ProfileUserComponent from './components/home/profile/user/ProfileUserComponent.vue';
+import ActiveEmailComponent from './components/home/login/ActiveEmailComponent.vue';
 
 /*===========Admin==============*/
 import AdminComponent from './components/admin/AdminComponent.vue';
@@ -399,6 +402,16 @@ var routes = [
 						component: DiscussionComponent,
 					},
                     {
+                        name: 'UserDiscussionCreate',
+                        path: 'create',
+                        component: UserDiscussionCreate,
+                    },
+                    {
+                        name: 'UserDiscussionEdit',
+                        path: 'edit/:id',
+                        component: UserDiscussionEdit,
+                    },
+                    {
                         name: 'DiscussionTypeComponent',
                         path: ':id_type', //path cho discussiontype
                         component: DiscussionTypeComponent,
@@ -421,7 +434,13 @@ var routes = [
                         path: '',
                         component: ProfileComponent,
                         name: 'Profile'
-                    }
+                    },
+                    {
+                        name: 'ProfileUser',
+                        path: ':id',
+                        component: ProfileUserComponent
+                    },
+
                 ]
             },
             {

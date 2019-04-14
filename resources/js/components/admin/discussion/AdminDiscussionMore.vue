@@ -94,11 +94,11 @@
                     <div class="content" v-html="value_comment.comment_discussion_content"></div>
                     <span class="actions">
                     	<button class="action reply" type="button" v-on:click="onReplyComment(index_comment)">Trả lời</button>
-                    	<span class="separator">·</span>
+                    	<!-- <span class="separator">·</span>
                     	<button class="action upvote highlight-font">
                     		<span class="upvote-count">2</span>
                     		<i class="fa fa-thumbs-up"></i>
-                    	</button>
+                    	</button> -->
                     	<span class="separator" v-if="value_comment.id_user == users.id">·</span>
                     	<button class="action edit" v-on:click="onEditComment(index_comment)" v-if="value_comment.id_user == users.id">Sửa</button>
                     	<span class="separator">·</span>
@@ -135,8 +135,8 @@
                         <div class="wrapper">
                             <div class="content" v-html="value_detail.comment_detail_discussion_content"></div>
                             <div class="actions">
-                            	<button class="action upvote"><span class="upvote-count">0</span><i class="fa fa-thumbs-up"></i></button>
-                            	<span class="separator" v-if="value_detail.id_user == users.id">·</span>
+                            	<!-- <button class="action upvote"><span class="upvote-count">0</span><i class="fa fa-thumbs-up"></i></button>
+                            	<span class="separator" v-if="value_detail.id_user == users.id">·</span> -->
                     			<button class="action edit" v-if="value_detail.id_user == users.id" v-on:click="onEditDetail(index_detail)">Sửa</button>
                     			<span class="separator">·</span>
                     			<button class="action delete enabled" v-on:click="ClickDeleteCommentDetail(value_detail.id)">Xóa</button>

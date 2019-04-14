@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 /*=========Login-Resgister============*/
 Route::post('login', 'UserController@login');
 Route::post('register', 'UserController@register');
+Route::get('showuser/{id}', 'UserController@showWithId');
 Route::get('active/{id}/{activation_code}', 'UserController@activateUser');
 Route::get('demolike/{like}', 'DemoLikeController@index');
 

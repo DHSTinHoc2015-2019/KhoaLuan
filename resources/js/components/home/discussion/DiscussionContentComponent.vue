@@ -10,6 +10,7 @@
                                 <router-link :to="{ name: 'DiscussionTypeComponent', params: {id_type: value_type.id }}" class="name-discussion-type">{{ value_type.name_discussion_type }}</router-link>
                                 </div>
                                 <div class="large-4 small-2 column lpad ar">
+                                    <a href="javascript:void(0)" class="create_discussion" v-on:click="createNewDiscussion()">Tạo thảo luận mới</a>
                                     <a v-on:click="toggleIcon(value_type.id)" v-bind:id="`discussion-${value_type.id}`">
                                     <i class="fa fa-caret-square-o-up"></i>
                                     </a>
@@ -51,7 +52,7 @@
                                     </div>
                                     <div class="large-2 small-4 column pad">
                                         <span>{{ convertDate(value.created_at) }}</span>
-                                        <span><a href="#" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion">{{ value.name }}</a></span>
+                                        <span><router-link :to="{ name: 'ProfileUser', params: {id: value.id_user}}" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion">{{ value.name }}</router-link></span>
                                     </div>
                                 </div>
                             </div>
@@ -70,10 +71,13 @@
         data(){
             return {
                 discussiontype: {},
-                discussion: {}
+                discussion: {},
+                isLogin: localStorage.getItem('tpack.jwt') != null,
+                users: null
             }
         },
         created(){
+            this.users = JSON.parse(localStorage.getItem('tpack.user'))
             this.axios.get('/api/discussiontype').then((response) => {
                 this.discussiontype = response.data
                  // console.log(response.data)
@@ -109,12 +113,31 @@
                 i.hasClass('fa-caret-square-o-up') ? i.removeClass('fa-caret-square-o-up').addClass('fa-caret-square-o-down') : i.removeClass('fa-caret-square-o-down').addClass('fa-caret-square-o-up');
                 $('#discussion-' + index).parent().parent().toggleClass('all').next().slideToggle();
                 // console.log(index)
+            },
+            createNewDiscussion(){
+                if(this.isLogin){
+                    if(this.users.email_verified_at == '' || this.users.email_verified_at == null || this.users.email_verified_at == undefined){
+                        alertify.set('notifier','position', 'buttom-right');
+                        alertify.error('Xin chào '+ this.users.name +'.\n Bạn cần xem thư đến trong '+ this.users.email +' để kích hoạt tài khoản trước khi đăng bài');
+                    } else {
+                        this.$router.push({ name: 'UserDiscussionCreate'})
+                    }
+                } else {
+                    alertify.set('notifier','position', 'buttom-right');
+                    alertify.error('Bạn cần đăng nhập để thực hiện chức năng này');
+                }
             }
         }
     }
 </script>
 
 <style scoped>
+    .create_discussion {
+        margin-right: 10px;
+    }
+    .create_discussion:hover{
+        color: #e8ce0e;
+    }
     .link-item-discussion{
         color: #005c5c !important;
     }

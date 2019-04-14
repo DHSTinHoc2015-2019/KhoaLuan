@@ -17,8 +17,7 @@ class UserController extends Controller
         return response()->json(User::all()->get());
     }
 
-    public function login(Request $request)
-    {
+    public function login(Request $request){
         $status = 401;
         $response = ['error' => 'Unauthorised'];
 
@@ -37,13 +36,11 @@ class UserController extends Controller
         return response()->json($response, $status);
     }
 
-    public function show(User $user)
-    {
+    public function show(User $user){
         return response()->json($user);
     }
 
-    protected function getToken()
-    {
+    protected function getToken(){
         return hash_hmac('sha256', str_random(40), config('app.key'));
     }
 
@@ -94,8 +91,14 @@ class UserController extends Controller
         }
 
         return response()->json([
+            'user' => $user,
             'status' => $status
         ], 200);
+    }
+
+    function showWithId($id){
+        $user = User::findOrFail($id);
+        return response()->json($user, 200);
     }
    
 }

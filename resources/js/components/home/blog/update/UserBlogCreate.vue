@@ -1,7 +1,10 @@
 <template>
 	<div>
     	<app-user-blog-create-breadcrumb-component></app-user-blog-create-breadcrumb-component>
-		<div class="container mt-5">
+    	<div v-if="!complete" class="pt-5" style="min-height: 50vh">
+            <div class="loading-spinner"></div>
+        </div>
+		<div class="container mt-5" v-if="complete">
 
 			<div class="row mb-5">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12">                      
@@ -64,9 +67,6 @@
                 </div>
 			</div>
         </div>
-		<!-- </div> -->
-		<!-- END content -->
-    <!-- </div> -->
 	</div>
 </template>
 <script>
@@ -82,12 +82,14 @@
 				url: null,
 				checkSVG: null,
 				file: '',
-				user: null
+				user: null,
+				complete: false
 			}
 		},
 		created(){
 			this.user = JSON.parse(localStorage.getItem('tpack.user'))
 			this.blogs.id_user = this.user.id
+			this.complete = true
 		},
 		methods: {
 			onFileChange(e) {

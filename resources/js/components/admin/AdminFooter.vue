@@ -5,7 +5,7 @@
 		Copyright <a target="_blank" href="#">TPACK</a>
 		</span>
 		<span class="float-right">
-			<span>Hôm nay: {{date}}/{{month}}/{{year}} {{hour}}:{{minute}}:{{ second }}</span>
+			<span style="color: black;">Hôm nay: {{date}}/{{month}}/{{year}} {{hour}}:{{minute}}:{{ second }}</span>
 		<router-link target="_blank" to="/"><b>TPACK</b></router-link>
 		</span>
 	</footer>

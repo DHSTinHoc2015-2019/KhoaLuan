@@ -14,12 +14,12 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="section-title wow fadeInDown" data-wow-delay=".3s">
-									<h2 class="text-uppercase font-weight-bold" style="color: #005c5c">{{ blogs.title }} <span v-if="isLogin && (blogs.id_user == users.id)"><router-link :to="{ name: 'UserBlogEdit', parmas: {id: blogs.id}}" class="btn btn-success float-right">Chỉnh sửa</router-link></span></h2>
+									<h2 class="text-uppercase font-weight-bold" style="color: #005c5c">{{ blogs.title }} <span v-if="isLogin && (blogs.id_user == users.id)"><router-link :to="{ name: 'UserBlogEdit', params: {id: blogs.id}}" class="btn btn-success float-right">Chỉnh sửa</router-link></span></h2>
 								<div class="post-meta pt-2" style="font-size: 0.9em;">
 									<a class="post-category cat-3" href="javascript:void(0)">Tên danh mục</a>
 									<span>
 										<i class="fa fa-user-circle-o" aria-hidden="true"></i> 
-										<router-link to="javascript:void(0)" class="mr-2 link-item-normal">{{ blogs.name }}</router-link>
+										<router-link :to="{ name: 'ProfileUser', params: {id: blogs.id_user}}" class="mr-2 link-item-normal">{{ blogs.name }}</router-link>
 									</span>
 									<span>
 										<span style="font-weight: bold;" class="mr-2">·</span>
@@ -90,11 +90,11 @@
                     <div class="content" v-html="value_comment.comment_blog_content"></div>
                     <span class="actions">
                     	<button class="action reply" type="button" v-on:click="onReplyComment(index_comment)" v-if="isLogin">Trả lời</button>
-                    	<span class="separator" v-if="isLogin">·</span>
+                    	<!-- <span class="separator" v-if="isLogin">·</span>
                     	<button class="action upvote highlight-font">
                     		<span class="upvote-count">2</span>
                     		<i class="fa fa-thumbs-up"></i>
-                    	</button>
+                    	</button> -->
                     	<span class="separator" v-if="isLogin && value_comment.id_user == users.id">·</span>
                     	<button class="action edit" v-on:click="onEditComment(index_comment)" v-if="isLogin && value_comment.id_user == users.id">Sửa</button>
                     	<span class="separator" v-if="isLogin && value_comment.id_user == users.id">·</span>
@@ -131,8 +131,8 @@
                         <div class="wrapper">
                             <div class="content" v-html="value_detail.comment_detail_blog_content"></div>
                             <div class="actions">
-                            	<button class="action upvote"><span class="upvote-count">0</span><i class="fa fa-thumbs-up"></i></button>
-                            	<span class="separator" v-if="isLogin && value_detail.id_user == users.id">·</span>
+                            	<!-- <button class="action upvote"><span class="upvote-count">0</span><i class="fa fa-thumbs-up"></i></button>
+                            	<span class="separator" v-if="isLogin && value_detail.id_user == users.id">·</span> -->
                     			<button class="action edit" v-if="isLogin && value_detail.id_user == users.id" v-on:click="onEditDetail(index_detail)">Sửa</button>
                     			<span class="separator" v-if="isLogin && value_detail.id_user == users.id">·</span>
                     			<button class="action delete enabled" v-if="isLogin && value_detail.id_user == users.id" v-on:click="ClickDeleteCommentDetail(value_detail.id)">Xóa</button>
