@@ -1,36 +1,44 @@
 <template>
-	<!-- section -->
-	<div class="section section-grey pb-5" id="news" style="background: #ececec">
-		<!-- container -->
-		<div class="container">
-			<!-- row -->
-			<div class="row">
-				<div class="col-md-8" style="border-radius: 0.5rem; background: #fff;border-width: 1px; border-style: solid; border-top-color: #dfdfdf; border-right-color: #d8d8d8; border-bottom-color: #cbcbcb;border-left-color: #d8d8d8;">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12" style="border-bottom: 1px solid #ccc">
-								<div class="section-title wow fadeInDown pt-4" data-wow-delay=".3s">
-									<h2><b class="blog-title">{{ news.title }}</b></h2>
+	<div>
+		<div v-if="!complete" class="pt-5" style="min-height: 50vh">
+            <div class="loading-spinner"></div>
+        </div>
+
+        <!-- section -->
+		<div class="section section-grey pb-5" id="news" style="background: #ececec" v-if="complete">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-8" style="border-radius: 0.5rem; background: #fff;border-width: 1px; border-style: solid; border-top-color: #dfdfdf; border-right-color: #d8d8d8; border-bottom-color: #cbcbcb;border-left-color: #d8d8d8;">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12" style="border-bottom: 1px solid #ccc">
+									<div class="section-title wow fadeInDown pt-4" data-wow-delay=".3s">
+										<h2><b class="blog-title">{{ news.title }}</b></h2>
+									</div>
 								</div>
-							</div>
 
-							<div class="col-md-12 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="300ms" style="text-align:justify">
-								{{ news.news_content}}
-							</div>
+								<div class="col-md-12 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="300ms" style="text-align:justify">
+									{{ news.news_content}}
+								</div>
 
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<div class="col-md-4">
-					<app-news-right-component></app-news-right-component>
+					<div class="col-md-4">
+						<app-news-right-component></app-news-right-component>
+					</div>
 				</div>
+				<!-- /row -->
 			</div>
-			<!-- /row -->
+			<!-- /container -->
 		</div>
-		<!-- /container -->
+		<!-- /section -->
+
 	</div>
-	<!-- /section -->
+	
 </template>
 <style scoped>
 	.imgover {
@@ -85,7 +93,8 @@
 		},
 		data(){
 			return {
-				news: {}
+				news: {},
+				complete: false
 			}
 		},
 		created(){
@@ -111,6 +120,7 @@
 				this.axios.get(`/api/news/readmore/${this.$route.params.id}`).then((response) =>{
 	                // console.log(response.data)
 	                this.news = response.data
+	                this.complete = true
 	            }).catch((error) => {
 	                console.log(error)
 	            })

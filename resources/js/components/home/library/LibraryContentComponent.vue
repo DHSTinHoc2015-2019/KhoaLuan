@@ -1,47 +1,52 @@
 <template>
-	<div>
-		<section>
-		<div class="container mt-5 mb-5">
-            <div class="row" v-viewer>
-            	<div class="col-md-12">
-                    <div class="section-title wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <h2><b class="blog-title">HÌNH ẢNH</b></h2>
+    <div>
+        <div v-if="!complete" class="pt-5" style="min-height: 50vh">
+            <div class="loading-spinner"></div>
+        </div>
+    	<div v-if="complete">
+        	<section>
+        		<div class="container mt-5 mb-5">
+                    <div class="row" v-viewer>
+                    	<div class="col-md-12">
+                            <div class="section-title wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="300ms">
+                                <h2><b class="blog-title">HÌNH ẢNH</b></h2>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="400ms" v-for="(value, index) in images">
+                            <div class="card p-2">
+                               <div class="card">
+          							<a href="javascript:void(0)" title="mô tả">
+                        				<img :src="'images/library/images/' + value.file_name" class="image card-img-top" height="150">
+                    				</a>
+        						</div>
+                            </div> 
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-3 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="400ms" v-for="(value, index) in images">
-                    <div class="card p-2">
-                       <div class="card">
-  							<a href="javascript:void(0)" title="mô tả">
-                				<img :src="'images/library/images/' + value.file_name" class="image card-img-top" height="150">
-            				</a>
-						</div>
-                    </div> 
-                </div>
-            </div>
-        </div>
-	</section>
+        	</section>
 
-	<section style="background-color: gray">
-		<div class="container">
-            <div class="row" v-viewer>
-            	<div class="col-md-12">
-                    <div class="section-title wow fadeInDown animated mt-4" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <h2><b class="blog-title">VIDEO</b></h2>
+        	<!-- <section style="background-color: gray">
+        		<div class="container">
+                    <div class="row" v-viewer>
+                    	<div class="col-md-12">
+                            <div class="section-title wow fadeInDown animated mt-4" data-wow-duration="500ms" data-wow-delay="300ms">
+                                <h2><b class="blog-title">VIDEO</b></h2>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="400ms" v-for="(value, index) in video">
+                            <div class="card p-2">
+                               <div class="card">
+                    				<iframe style="border: 3px solid #02bdd5; width: 100%" height="" :src="value.file_name" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        						</div>
+                            </div> 
+                        </div>
+                        <div class="col-md-12 mb-5"></div>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-3 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="400ms" v-for="(value, index) in video">
-                    <div class="card p-2">
-                       <div class="card">
-            				<iframe style="border: 3px solid #02bdd5; width: 100%" height="" :src="value.file_name" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						</div>
-                    </div> 
-                </div>
-                <div class="col-md-12 mb-5"></div>
-            </div>
 
-        </div>
-	</section>
-	</div>
+                </div>
+        	</section> -->
+    	</div>
+    </div>
 
 </template>
 
@@ -51,7 +56,8 @@
 		    return {
                 images: {},
                 video: {},
-                document: {}
+                document: {},
+                complete: false
 		    }
 	  	},
 		created(){
@@ -64,9 +70,13 @@
                 for (var i = this.video.length - 1; i >= 0; i--) {
                     this.video[i].file_name = this.video[i].file_name.replace("watch?v=", "embed/")
                 }
+                this.complete = true
             }).catch((error) => {
                 console.log(error)
             })
+        },
+        mounted(){
+             
         },
 		methods:{
 

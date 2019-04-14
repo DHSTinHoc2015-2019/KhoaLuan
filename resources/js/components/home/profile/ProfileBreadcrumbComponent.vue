@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-md-8 wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="600ms">
                         <ol class="breadcrumb mt-2">
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Trang chủ</a></li>
+                            <li class="breadcrumb-item"><router-link :to="{path: '/'}"><i class="fa fa-home"></i> Trang chủ</router-link></li>
                             <li class="breadcrumb-item active">Trang cá nhân</li>
                         </ol>
                     </div>

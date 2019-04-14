@@ -1,8 +1,11 @@
 <template>
 	<!-- section -->
 	<div class="section">
+		<div v-if="!complete" class="pt-5" style="min-height: 50vh">
+            <div class="loading-spinner"></div>
+        </div>
 		<!-- container -->
-		<div class="container">
+		<div class="container" v-if="complete">
 			<!-- row -->
 			<div class="row">
 				<div class="col-md-12">
@@ -18,6 +21,11 @@
 								<span style="font-weight: bold;" class="mr-2">·</span>
 								<i class="fa fa-clock-o" aria-hidden="true"></i> 
 								<span class="mr-2"> {{ convertDate(discussion.created_at) }}</span>
+							</span>
+							<span>
+								<span style="font-weight: bold;" class="mr-2">·</span>
+								<i class="fa fa-eye" aria-hidden="true"></i> 
+								<span class="mr-2"> {{ discussion.discussion_view }}</span>
 							</span>
 							<span>
 								<span style="font-weight: bold;" class="mr-2">·</span>
@@ -198,7 +206,8 @@
 				isLikeDiscussion: false,
 				// countComment: 0,
 				countLikeDiscussion: 0,
-				socket : io(localStorage.getItem('tpack.server'))
+				socket : io(localStorage.getItem('tpack.server')),
+				complete: false
 			}
 		},
 		created(){
@@ -218,6 +227,7 @@
 				this.commentdetail.forEach(() =>{
 					this.editDetail.push(false)
 				})
+				this.complete = true
 			})
 
 			this.getDataLikeDiscussion()

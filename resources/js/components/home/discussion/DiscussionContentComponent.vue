@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="large-7 small-8 column lpad">
                                         <span class="overflow-control">
-                                        <router-link :to="{ name: 'DiscussionDetailsComponent', params: {id_type: value_type.id, id_discussion: value.id}}" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion">{{ value.title }}</router-link>
+                                        <a href="javascript:void(0)" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion" v-on:click="incrementView(value.id, value_type.id)">{{ value.title }}</a>
                                         </span>
                                         <span class="overflow-control">
                                         {{ value.discussion_content }}
@@ -47,7 +47,7 @@
                                         <span class="center">{{ value.countLikeDiscussion }}</span>
                                     </div>
                                     <div class="large-1 column lpad">
-                                        <span class="center">678</span>
+                                        <span class="center">{{ value.discussion_view }}</span>
                                     </div>
                                     <div class="large-2 small-4 column pad">
                                         <span>{{ convertDate(value.created_at) }}</span>
@@ -89,6 +89,13 @@
             })
         },
         methods:{
+            incrementView(id, id_discussion_type){
+                this.axios.get('/api/discussion/incrementview/' + id).then((response) =>{
+                    this.$router.push({ name: 'DiscussionDetailsComponent', params: {id_type: id_discussion_type, id_discussion: id}})
+                }).catch(error => {
+                    console.error(error);
+                })
+            },
             convertDate(inputFormat) {
             var d = new Date(inputFormat);
             return [this.pad(d.getDate()), this.pad(d.getMonth()+1), d.getFullYear()].join('/');

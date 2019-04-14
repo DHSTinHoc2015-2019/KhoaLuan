@@ -5,17 +5,17 @@
 			<div class="container-fluid">
 
 				<div class="row">
-						<div class="col-xl-12">
-								<div class="breadcrumb-holder">
-										<h1 class="main-title float-left font-weight-bold text-uppercase">Đề tài thảo luận</h1>
-										<ol class="breadcrumb float-right">
-											<li class="breadcrumb-item">Admin</li>
-											<li class="breadcrumb-item">Đề tài thảo luận</li>
-											<li class="breadcrumb-item active">Thêm</li>
-										</ol>
-										<div class="clearfix"></div>
-								</div>
+					<div class="col-xl-12">
+						<div class="breadcrumb-holder">
+							<h1 class="main-title float-left font-weight-bold text-uppercase">Đề tài thảo luận</h1>
+							<ol class="breadcrumb float-right">
+								<li class="breadcrumb-item">Admin</li>
+								<li class="breadcrumb-item">Đề tài thảo luận</li>
+								<li class="breadcrumb-item active">Thêm</li>
+							</ol>
+							<div class="clearfix"></div>
 						</div>
+					</div>
 				</div>
 				<!-- end row -->
 

@@ -15,6 +15,8 @@ require('../assets/plugins/font-awesome/css/font-awesome.css');
 // import '../assets/js/fastclick.js';
 // import '../assets/js/detect.js';
 import '../assets/plugins/datatable/jquery.dataTables.js';
+
+// Vue.use(NProgress)
 import Viewer from 'v-viewer'
 
 window.Vue = require('vue');
@@ -29,9 +31,7 @@ import App from './App.vue';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 Vue.use(VueAxios, axios);
-
 Vue.use(Viewer)
-
 /*===========Home==============*/
 import HomeComponent from './components/home/HomeComponent.vue';
 import HomeContentComponent from './components/home/home/HomeContentComponent.vue';
@@ -475,6 +475,19 @@ var router = new VueRoute({
 		return { x: 0, y: 0 }
 	}
 });
+
+// router.beforeResolve((to, from, next) => {
+//   if (to.path) {
+//         NProgress.start()
+//         console.log('bat dau')
+//   }
+//   next()
+// });
+
+// router.afterEach(() => {
+//     NProgress.done()
+//     console.log('xong')
+// });
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {

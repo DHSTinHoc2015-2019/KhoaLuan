@@ -7,16 +7,16 @@
 			<div class="container-fluid">
 							
 				<div class="row">
-						<div class="col-xl-12">
-								<div class="breadcrumb-holder">
-										<h1 class="main-title float-left font-weight-bold text-uppercase">Trang các nhân</h1>
-										<ol class="breadcrumb float-right">
-											<li class="breadcrumb-item">Admin</li>
-											<li class="breadcrumb-item active">Trang cá nhân</li>
-										</ol>
-										<div class="clearfix"></div>
-								</div>
+					<div class="col-xl-12">
+						<div class="breadcrumb-holder">
+							<h1 class="main-title float-left font-weight-bold text-uppercase">Trang các nhân</h1>
+							<ol class="breadcrumb float-right">
+								<li class="breadcrumb-item">Admin</li>
+								<li class="breadcrumb-item active">Trang cá nhân</li>
+							</ol>
+							<div class="clearfix"></div>
 						</div>
+					</div>
 				</div>
 				<!-- end row -->
 
@@ -24,7 +24,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12">						
 						<div class="card mb-3">
 							<div class="card-header">
-								<h3><i class="fa fa-table"></i> Trang cá nhân
+								<h3><i class="fa fa-user"></i> Trang cá nhân
 									<router-link class="btn btn-success btn-sm float-right" :to="{ name: 'AdminIntroEdit' }">Chỉnh sửa</router-link></h3>
 							</div>
 
@@ -34,39 +34,39 @@
 										<div class="col-lg-9 col-xl-9">
 											<div class="row">				
 												<div class="col-lg-6">
-												<div class="form-group">
-												<label>Full name (required)</label>
-												<input class="form-control" name="name" type="text" value="Administrator" required />
-												</div>
+													<div class="form-group">
+														<label>Tên</label>
+														<input class="form-control" name="name" type="text" :value="users.name" required />
+													</div>
 												</div>
 
 												<div class="col-lg-6">
-												<div class="form-group">
-												<label>Valid Email (required)</label>
-												<input class="form-control" name="email" type="email" value="office@website.com" required />
-												</div>
+													<div class="form-group">
+														<label>Email</label>
+														<input class="form-control" name="email" type="email" :value="users.email" required />
+													</div>
 												</div>  
 											</div>
 											
 											<div class="row">				
 												<div class="col-lg-6">
-												<div class="form-group">
-												<label>Password (leave empty not to change)</label>
-												<input class="form-control" name="password" type="password" value="" />
-												</div>
+													<div class="form-group">
+														<label>Password (leave empty not to change)</label>
+														<input class="form-control" name="password" type="password" value="" />
+													</div>
 												</div>              			                                
 												
 												<div class="col-lg-6">
-												<div class="form-group">
-												<label>Skype</label>
-												<input class="form-control" name="skype" type="text" value="skypeid" />
-												</div>
+													<div class="form-group">
+														<label>Skype</label>
+														<input class="form-control" name="skype" type="text" value="skypeid" />
+													</div>
 												</div>   
 											</div>
 											
 											<div class="row">
 												<div class="col-lg-12">
-												<button type="button" class="btn btn-primary">Edit profile</button>
+													<button type="button" class="btn btn-primary">Edit profile</button>
 												</div>
 											</div>
 										
@@ -91,8 +91,8 @@
 											<div class="m-b-10"></div>
 											
 											<div class="form-group">
-											<label>Thay đổi ảnh đại diện</label> 
-											<input type="file" name="image" class="form-control">
+												<label>Thay đổi ảnh đại diện</label> 
+												<input type="file" name="image" class="form-control">
 											</div>
 											
 										</div>

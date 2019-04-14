@@ -137,7 +137,7 @@ class DiscussionController extends Controller
     function showWithComment($id){
         $discussion = DB::table('discussions')
             ->join('users', 'id_user', 'users.id')
-            ->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name', 'users.user_image')
+            ->select('discussions.id', 'discussions.title', 'discussions.discussion_content', 'discussions.id_user', 'discussions.id_discussion_type', 'discussions.created_at', 'users.name', 'users.user_image', 'discussions.discussion_like', 'discussions.discussion_view')
             ->where('discussions.id', $id)
             ->first();
 
@@ -173,5 +173,18 @@ class DiscussionController extends Controller
         return response()->json([
             'newdiscussion' => $newdiscussion
         ], 200);
+    }
+
+    function incrementView($id){
+        $discussion = Discussion::findOrFail($id);
+        $discussion->discussion_view = $discussion->discussion_view + 1;
+
+        $status = $discussion->save();
+
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Cập nhật dữ liệu thành công' : "Cập nhật dữ liệu thất bại",
+            'discussion' => $discussion
+        ]);
     }
 }

@@ -5,7 +5,6 @@
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
-							
 						</div>
 						<div class="card-body" v-if="active">
 							<h3 class="text-center">Tài khoản của bạn đã được kích hoạt. Chuyển hướng đến trang chủ trong {{ count }}s</h3>

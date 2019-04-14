@@ -43,6 +43,7 @@ Route::get('/blog/bloghighlight','BlogController@bloghighlight');
 Route::get('/blog/mostview','BlogController@mostView');
 Route::get('/blog/{id}','BlogController@showWithId');
 Route::get('/blog/incrementview/{id}','BlogController@incrementView');
+
 //Chi tiết Blog với comment
 Route::get('/blog/user/{id}','BlogController@userBlogWithComment');
 
@@ -50,6 +51,7 @@ Route::get('/discussionwithtype/{id_discussion_type}/paginate', 'DiscussionContr
 // Route::get('/discussion/user/showwithtype/{id}','DiscussionController@showWithType');
 Route::get('/discussiontype','DiscussionTypeController@index');
 Route::get('/discussion','DiscussionController@index');
+Route::get('/discussion/incrementview/{id}','DiscussionController@incrementView');
 Route::get('/newdiscussion','DiscussionController@newDiscussion');
 //Lấy thảo luận biết đề tài thảo luận + id thảo luận
 Route::get('/discussion/user/{id_type}/{id_discussion}','DiscussionController@userDiscussionWithType');

@@ -1,5 +1,9 @@
 <template>
-    <div style="background: #ececec">
+   <div>
+       <div v-if="!complete" class="pt-5" style="min-height: 50vh">
+            <div class="loading-spinner"></div>
+        </div>
+        <div style="background: #ececec" v-if="complete">
         <app-discussion-type-breadcrumb-component></app-discussion-type-breadcrumb-component>
         <div class="container">
             <div class="row">
@@ -40,7 +44,8 @@
                                             </div>
                                             <div class="large-7 small-8 column lpad">
                                                 <span class="overflow-control">
-                                                <router-link :to="{ name: 'DiscussionDetailsComponent', params: {id_type: value.id_discussion_type, id_discussion: value.id}}" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion">{{ value.title }}</router-link>
+                                                <!-- <router-link :to="{ name: 'DiscussionDetailsComponent', params: {id_type: value.id_discussion_type, id_discussion: value.id}}" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion">{{ value.title }}</router-link> -->
+                                                <a href="javascript:void(0)" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion" v-on:click="incrementView(value.id, value.id_discussion_type)">{{ value.title }}</a>
                                                 </span>
                                                  <span class="overflow-control">
                                                 {{ value.discussion_content }}
@@ -75,6 +80,7 @@
             </div>
         </div>
     </div>
+   </div>
 </template>
 
 <script>
@@ -100,7 +106,8 @@
                 },
                 offset: 4,
                 nameType: '',
-                discussionsWithType: []
+                discussionsWithType: [],
+                complete: false
             }
         },
         mounted (){
@@ -115,12 +122,12 @@
             
         },
         created(){
-            console.log(this.$route.params.id_type)
+            // console.log(this.$route.params.id_type)
             this.discussiontype_id = this.$route.params.id_type
             this.axios.get(`/api/discussionwithtype/${this.$route.params.id_type}/paginate`).then((response) => {
                 this.nameType = response.data.data[0].name_discussion_type
                 this.discussionsWithType = response.data.data
-                console.log(response.data.data)
+                this.complete = true
             }).catch((error) => {
                 console.log(error)
             })
@@ -132,7 +139,6 @@
                         this.nameType = response.data.data[0].name_discussion_type
                         this.discussionsWithType = response.data.data
                         this.pagination = response.data
-                         // console.log(this.pagination)
                     })
             },
             convertDate(inputFormat) {
@@ -141,7 +147,14 @@
             },
             pad(s){
                 return (s < 10) ? '0' + s : s;
-            }
+            },
+            incrementView(id, id_discussion_type){
+                this.axios.get('/api/discussion/incrementview/' + id).then((response) =>{
+                    this.$router.push({ name: 'DiscussionDetailsComponent', params: {id_type: id_discussion_type, id_discussion: id}})
+                }).catch(error => {
+                    console.error(error);
+                })
+            },
         }
     }
 </script>

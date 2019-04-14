@@ -1,6 +1,11 @@
 <template>
-	<!-- section -->
-	<div class="section mb-3" style="background: #ececec">
+	<div>
+		<div v-if="!complete" class="pt-5" style="min-height: 50vh">
+            <div class="loading-spinner"></div>
+        </div>
+
+		<!-- section -->
+	<div class="section mb-3" style="background: #ececec" v-if="complete">
 		<!-- container -->
 		<div class="container">
 			<!-- row -->
@@ -310,6 +315,7 @@
 	
 	</div>
 	<!-- /section -->
+	</div>
 </template>
 
 <script>
@@ -336,6 +342,7 @@
 				countComment: 0,
 				socket : io(localStorage.getItem('tpack.server')),
 				blogMostView: {},
+				complete: false,
             }
         },
         created(){
@@ -407,6 +414,7 @@
 					if(!this.checkSVG){
 						this.url = `images/blog/${this.blogs.blog_image}`
 					}
+					this.complete = true
 				}).catch((error) => {
 					console.log(error)
 				})

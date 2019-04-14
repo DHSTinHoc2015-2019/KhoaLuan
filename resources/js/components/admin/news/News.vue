@@ -24,7 +24,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12">						
 						<div class="card mb-3">
 							<div class="card-header">
-								<h3><i class="fa fa-table"></i> Tin tức
+								<h3><i class="fa fa-newspaper-o"></i> Tin tức
 									<router-link class="btn btn-primary btn-sm float-right" :to="{ name: 'NewsCreate' }">Thêm</router-link></h3>
 							</div>
 

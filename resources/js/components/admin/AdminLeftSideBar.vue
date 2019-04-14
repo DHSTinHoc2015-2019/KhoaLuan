@@ -9,7 +9,7 @@
                     </li>
 
                     <li class="submenu">
-                        <a href="javascript:void(0)"><i class="fa fa-fw fa-table"></i> <span> Trang chủ </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0)"><i class="fa fa-fw fa-home"></i> <span> Trang chủ </span> <span class="menu-arrow"></span></a>
 							<ul class="list-unstyled">
 								<li><router-link to="/admin/thanhphantpack">Thành phần TPACK</router-link></li>
 							</ul>
@@ -20,14 +20,14 @@
                     </li>
 
                     <li class="submenu">
-                        <router-link to="/admin/news"><i class="fa fa-fw fa-tv"></i><span> Tin tức </span> </router-link>
+                        <router-link to="/admin/news"><i class="fa fa-fw fa-newspaper-o"></i><span> Tin tức </span> </router-link>
                     </li>
 					<li class="submenu">
-                        <router-link to="/admin/blog"><i class="fa fa-fw fa-tv"></i><span> Bài viết </span> </router-link>
+                        <router-link to="/admin/blog"><i class="fa fa-fw fa-address-card"></i><span> Bài viết </span> </router-link>
                     </li>
 
                     <li class="submenu">
-                        <a href="javascript:void(0)"><i class="fa fa-fw fa-table"></i> <span> Thảo luận </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0)"><i class="fa fa-fw fa-commenting-o"></i> <span> Thảo luận </span> <span class="menu-arrow"></span></a>
 							<ul class="list-unstyled">
 								<li><router-link to="/admin/discussiontype">Đề tài thảo luận</router-link></li>
 								<li><router-link to="/admin/discussion">Thảo luận</router-link></li>
@@ -35,7 +35,7 @@
                     </li>
 					
 					<li class="submenu">
-                        <router-link :to="{path: '/admin/contact'}"><i class="fa fa-fw fa-tv"></i><span> Liên hệ </span> </router-link>
+                        <router-link :to="{path: '/admin/contact'}"><i class="fa fa-fw fa-telegram"></i><span> Liên hệ </span> </router-link>
                     </li>
 
 					<li class="submenu">

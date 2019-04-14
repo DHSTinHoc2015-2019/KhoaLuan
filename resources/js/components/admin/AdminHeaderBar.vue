@@ -4,7 +4,7 @@
 
 		<!-- LOGO -->
         <div class="headerbar-left">
-            <router-link to="/admin" class="logo"><img alt="logo" src="assets/images/logo.png" /> <span>Admin</span></router-link>
+            <router-link to="/admin" class="logo"><img alt="logo" src="images/logo_big.png" /> <span> Admin</span></router-link>
         </div>
 
         <nav class="navbar-custom">

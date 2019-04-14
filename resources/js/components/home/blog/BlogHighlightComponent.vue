@@ -1,6 +1,9 @@
 <template>
     <div id="highlight-blog">
-        <div class="container">
+        <div v-if="!complete" class="pt-5" style="min-height: 50vh">
+            <div class="loading-spinner"></div>
+        </div>
+        <div class="container" v-if="complete">
             <div class="row">
                 <div class="col-md-12 pl-3 wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="900ms">
                     <div class="separator">
@@ -229,7 +232,8 @@
                 blogs: {},
                 datawowdelay: 150,
                 isLogin: localStorage.getItem('tpack.jwt') != null,
-                users: null
+                users: null,
+                complete: false
             }
         },
         created(){
@@ -237,6 +241,7 @@
             this.axios.get('/api/blog/bloghighlight').then((response) =>{
                 this.blogs = response.data
                 // console.log(this.blogs)
+                this.complete = true
             }).catch(error => {
                 console.error(error);
             }) 

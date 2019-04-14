@@ -22,9 +22,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12">						
 						<div class="card mb-3">
 							<div class="card-header">
-								<h3><i class="fa fa-table"></i> Phản hồi người dùng
-									<!-- <router-link class="btn btn-primary btn-sm float-right" :to="{ name: 'AdminDiscussionTypeCreate' }"><span><i class="fa fa-plus mr-2" aria-hidden="true"></i></span>Thêm</router-link> -->
-								</h3>
+								<h3><i class="fa fa-telegram"></i> Phản hồi người dùng</h3>
 							</div>
 
 							<div class="card-body">

@@ -6,7 +6,6 @@
         <!--  Fixed Navigation
         ==================================== -->
         <header id="navigation">
-            <!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #0eb493"> -->
             <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: teal; border-bottom: 1px solid #000">
                 <div class="container">
                     <router-link to="/" class="navbar-brand font-weight-bold">Trang chủ</router-link>
@@ -53,17 +52,26 @@
                     </div>
                 </div>
             </nav>
-        </header>
 
+        </header>
+        <div class="progress-bar" id="myBar"></div>
         <router-view @loggedIn="change" v-bind:users="users"></router-view>
         <app-footer-component></app-footer-component>
     </div>  
 </template>
 
-
+<style>
+    .progress-bar {
+        position: fixed;
+        height: 3px;
+        background: #fa503a;
+        width: 0%;
+        margin-top: 55px;
+        z-index: 100;
+    }
+</style>
 
 <script>
-    // import NavbarComponent from './NavbarComponent.vue';
     import FooterComponent from './FooterComponent.vue';
 
     export default {
@@ -83,6 +91,13 @@
             }, 1000);
             // console.log("navbar: trang thai dang nhap: " + this.isLoggedIn)
             this.setDefaults();
+
+            window.onscroll = function() {
+                var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                var scrolled = (winScroll / height) * 100;
+                document.getElementById("myBar").style.width = scrolled + "%";
+            };
         },
         init() {
 

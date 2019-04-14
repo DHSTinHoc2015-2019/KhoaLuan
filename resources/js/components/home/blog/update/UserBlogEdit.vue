@@ -1,93 +1,86 @@
 <template>
 	<div>
-		<!-- <div class="content-page"> -->
-		<!-- Start content -->
-        <!-- <div class="content"> -->
-        	<app-user-blog-edit-breadcrumb-component></app-user-blog-edit-breadcrumb-component>
-			<div class="container mt-5">
+    	<app-user-blog-edit-breadcrumb-component></app-user-blog-edit-breadcrumb-component>
+		<div class="container mt-5">
 
-				<div class="row mb-5">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12">                      
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h3><i class="fa fa-pencil"></i> Chỉnh sửa</h3>
-                            </div>
-                                
-                            <div class="card-body">
-                            	<form v-on:submit.prevent="updateBlog">
-                                <div class="row">
-                                	<div class="col-md-12">
+			<div class="row mb-5">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12">                      
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h3><i class="fa fa-pencil"></i> Chỉnh sửa</h3>
+                        </div>
+                            
+                        <div class="card-body">
+                        	<form v-on:submit.prevent="updateBlog">
+                            <div class="row">
+                            	<div class="col-md-12">
+									<div class="form-group">
+										<label class="font-weight-bold">Tiêu đề</label>
+										<input type="text" class="form-control" id="" aria-describedby="" placeholder="Nhập tiêu đề" required="" v-model="blogs.title">
+									</div>
+								</div>
+								<!-- <div class="col-md-12">
+      								<div class="form-check form-group">
+										<input class="form-check-input" type="checkbox" value="" id="defaultCheck1" v-model="blogs.featured">
+										<label class="form-check-label font-weight-bold" v-if="blogs.featured">
+										Nổi bật
+										</label>
+										<label class="form-check-label font-weight-bold" v-if="!blogs.featured">
+										Không nổi bật
+										</label>
+									</div>
+      							</div> -->
+								<div class="col-md-6">
+									<div class="form-group">
 										<div class="form-group">
-											<label class="font-weight-bold">Tiêu đề</label>
-											<input type="text" class="form-control" id="" aria-describedby="" placeholder="Nhập tiêu đề" required="" v-model="blogs.title">
+											<label class="font-weight-bold">Mô tả</label>
+											<textarea class="form-control" id="" rows="10" v-model="blogs.description"></textarea>
 										</div>
 									</div>
-									<!-- <div class="col-md-12">
-          								<div class="form-check form-group">
-											<input class="form-check-input" type="checkbox" value="" id="defaultCheck1" v-model="blogs.featured">
-											<label class="form-check-label font-weight-bold" v-if="blogs.featured">
-											Nổi bật
-											</label>
-											<label class="form-check-label font-weight-bold" v-if="!blogs.featured">
-											Không nổi bật
-											</label>
-										</div>
-          							</div> -->
-									<div class="col-md-6">
-										<div class="form-group">
-											<div class="form-group">
-												<label class="font-weight-bold">Mô tả</label>
-												<textarea class="form-control" id="" rows="10" v-model="blogs.description"></textarea>
-											</div>
-										</div>
-									</div>
-								 	<div class="col-md-6">
-            							<label class="font-weight-bold">Chọn ảnh</label>
-            							<div class="form-group" v-if="!checkSVG">
-            								<input type="file" ref="file" id="file" v-on:change="onFileChange" />
-											<div id="preview">
-												<img v-if="url" :src="url" style="display: block; margin-left: auto; margin-right: auto; max-width: 350px" />
-											</div>                                        
-            							</div>
-            							<div class="form-group" v-if="checkSVG">
-            								<input type="file" ref="file" id="file" v-on:change="onFileChange" />
-											<div id="preview">
-												<img v-if="url" :src="url" style="display: block; margin-left: auto; margin-right: auto; max-width: 350px" />
-											</div>         
-            							</div>
-          							</div>
+								</div>
+							 	<div class="col-md-6">
+        							<label class="font-weight-bold">Chọn ảnh</label>
+        							<div class="form-group" v-if="!checkSVG">
+        								<input type="file" ref="file" id="file" v-on:change="onFileChange" />
+										<div id="preview">
+											<img v-if="url" :src="url" style="display: block; margin-left: auto; margin-right: auto; max-width: 350px" />
+										</div>                                        
+        							</div>
+        							<div class="form-group" v-if="checkSVG">
+        								<input type="file" ref="file" id="file" v-on:change="onFileChange" />
+										<div id="preview">
+											<img v-if="url" :src="url" style="display: block; margin-left: auto; margin-right: auto; max-width: 350px" />
+										</div>         
+        							</div>
+      							</div>
 
-									<div class="col-md-12">
-										<div class="form-group">
-											<label class="font-weight-bold">Nội dung</label>
-											<textarea cols="30" rows="50" id="blogs_content">
-												{{ blogs.blog_content }}
-											</textarea>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="font-weight-bold">Nội dung</label>
+										<textarea cols="30" rows="50" id="blogs_content">
+											{{ blogs.blog_content }}
+										</textarea>
 
-											<input name="image" type="file" id="upload" class="hidden">
-										</div>
+										<input name="image" type="file" id="upload" class="hidden">
 									</div>
-									<!-- Lưu -->
-									<div class="col-md-3"></div>
-									<div class="col-md-3">
-										<button type="submit" class="btn btn-primary float-right"><span class="btn-label"><i class="fa fa-save"></i></span> Lưu lại</button>
-									</div>
-									<div class="col-md-6">
-										<router-link :to="{ name: 'BlogDetails', params: {id: blogid }}" class="btn btn-danger"><span class="btn-label"><i class="fa fa-times"></i></span>Hủy bỏ</router-link>
-									</div>
-									<!-- end lưu -->
-                                </div> <!-- end row -->
+								</div>
+								<!-- Lưu -->
+								<div class="col-md-3"></div>
+								<div class="col-md-3">
+									<button type="submit" class="btn btn-primary float-right"><span class="btn-label"><i class="fa fa-save"></i></span> Lưu lại</button>
+								</div>
+								<div class="col-md-6">
+									<router-link :to="{ name: 'BlogDetails', params: {id: blogid }}" class="btn btn-danger"><span class="btn-label"><i class="fa fa-times"></i></span>Hủy bỏ</router-link>
+								</div>
+								<!-- end lưu -->
+                            </div> <!-- end row -->
 
-                                </form>
-                            </div>  <!-- end card-body -->                        
-                        </div><!-- end card-->                  
-                    </div>
-				</div>
-            </div>
-			<!-- END container-fluid -->
-		<!-- </div> -->
-		<!-- END content -->
-    <!-- </div> -->
+                            </form>
+                        </div>  <!-- end card-body -->                        
+                    </div><!-- end card-->                  
+                </div>
+			</div>
+        </div>
 	</div>
 </template>
 <script>

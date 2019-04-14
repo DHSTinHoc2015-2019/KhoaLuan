@@ -24,10 +24,13 @@
         <link rel="stylesheet" href="bower_components/alertifyjs/css/themes/default.min.css" />
        <!--  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>    -->
         <!-- <link rel="stylesheet" href="bower_components/fontawesome-free-5.6.3-web/css/all.css"> -->
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.css" rel="stylesheet" />
         <meta name="csrf-token" value="{{ csrf_token() }}" />
     </head>
     <body>
         <div id="app">
+          <div id="progress-bar"></div>
           <example-component></example-component>
         </div>
         <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
@@ -57,6 +60,6 @@
         <script src="bower_components/alertifyjs/alertify.min.js"></script>
         <!-- tinymce -->
         <script src='bower_components/tinymce/tinymce.js'></script>
-
+        
     </body>
 </html>

@@ -1,74 +1,80 @@
 <template>
-	<section style="padding-bottom: 40px; background: #ececec" class="wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="300ms">
-			<div class="container">
-				<div class="row">
+    <div>
+        <div v-if="!complete" class="pt-5" style="min-height: 50vh">
+            <div class="loading-spinner"></div>
+        </div>
+    	<section style="padding-bottom: 40px; background: #ececec" class="wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="300ms" v-if="complete">
+    			<div class="container">
+    				<div class="row">
 
-					<div class="col-md-12 pt-5">
-                        <div class="large-12">
-                            <div class="large-12 forum-category rounded top">
-                                <div class="large-8 small-10 column lpad" style="padding: 10px 10px 10px 40px;">
-                                    Thảo luận mới nhất
+    					<div class="col-md-12 pt-5">
+                            <div class="large-12">
+                                <div class="large-12 forum-category rounded top">
+                                    <div class="large-8 small-10 column lpad" style="padding: 10px 10px 10px 40px;">
+                                        Thảo luận mới nhất
+                                    </div>
+                                    <div class="large-4 small-2 column lpad ar">
+                                        <a data-connect>
+                                        <i class="fa fa-caret-square-o-up"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="large-4 small-2 column lpad ar">
-                                    <a data-connect>
-                                    <i class="fa fa-caret-square-o-up"></i>
-                                    </a>
+
+                                <div class="toggleview">
+                                    <div class="large-12 forum-head">
+                                        <div class="large-8 small-8 column lpad">
+                                            ...
+                                        </div>
+                                        <div class="large-1 column lpad">
+                                            Thích
+                                        </div>
+                                        <div class="large-1 column lpad">
+                                            Xem
+                                        </div>
+                                        <div class="large-2 small-4 column lpad">
+                                            ...
+                                        </div>
+                                    </div>
+                                    <div class="large-12 forum-topic" v-for="(value, index) in newdiscussion" style="background: #fff">
+                                        <div class="large-1 column lpad">
+                                            <i class="fa fa-comments" style="color: #0d3f81"></i>
+                                        </div>
+                                        <div class="large-7 small-8 column lpad">
+                                            <span class="overflow-control">
+                                            <a href="javascript:void(0)" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion" v-on:click="incrementView(value.id, value.id_discussion_type)">{{ value.title }}</a>
+                                            </span>
+                                             <span class="overflow-control">
+                                            {{ value.discussion_content }}
+                                            </span>
+                                        </div>
+                                        <div class="large-1 column lpad">
+                                            <span class="center">{{ value.countLikeDiscussion }}</span>
+                                        </div>
+                                        <div class="large-1 column lpad">
+                                            <span class="center">{{ value.discussion_view }}</span>
+                                        </div>
+                                        <div class="large-2 small-4 column pad">
+                                            <span>{{ convertDate(value.created_at) }}</span>
+                                            <span><a href="#" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion">{{ value.name }}</a></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="toggleview">
-                                <div class="large-12 forum-head">
-                                    <div class="large-8 small-8 column lpad">
-                                        ...
-                                    </div>
-                                    <div class="large-1 column lpad">
-                                        Thích
-                                    </div>
-                                    <div class="large-1 column lpad">
-                                        Xem
-                                    </div>
-                                    <div class="large-2 small-4 column lpad">
-                                        ...
-                                    </div>
-                                </div>
-                                <div class="large-12 forum-topic" v-for="(value, index) in newdiscussion" style="background: #fff">
-                                    <div class="large-1 column lpad">
-                                        <i class="fa fa-comments" style="color: #0d3f81"></i>
-                                    </div>
-                                    <div class="large-7 small-8 column lpad">
-                                        <span class="overflow-control">
-                                        <router-link :to="{ name: 'DiscussionDetailsComponent', params: {id_type: value.id_discussion_type, id_discussion: value.id}}" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion">{{ value.title }}</router-link>
-                                        </span>
-                                         <span class="overflow-control">
-                                        {{ value.discussion_content }}
-                                        </span>
-                                    </div>
-                                    <div class="large-1 column lpad">
-                                        <span class="center">{{ value.countLikeDiscussion }}</span>
-                                    </div>
-                                    <div class="large-1 column lpad">
-                                        <span class="center">678</span>
-                                    </div>
-                                    <div class="large-2 small-4 column pad">
-                                        <span>{{ convertDate(value.created_at) }}</span>
-                                        <span><a href="#" style="white-space: nowrap; width: 100%; overflow: hidden; text-overflow: '...';" class="link-item-discussion">{{ value.name }}</a></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
-					</div>
-                    <!-- end col-md-12 -->
-				</div>
-			</div><!-- container -->
-	</section>
+        
+    					</div>
+                        <!-- end col-md-12 -->
+    				</div>
+    			</div><!-- container -->
+    	</section>
+    </div>
 </template>
 
 <script>
 	export default {
         data(){
             return {
-                newdiscussion: {}
+                newdiscussion: {},
+                complete: false
             }
         },
 		mounted (){
@@ -83,6 +89,7 @@
         created(){
             this.axios.get('/api/newdiscussion').then((response) => {
                 this.newdiscussion = response.data.newdiscussion
+                this.complete = true
                  // console.log(response.data.newdiscussion)
             }).catch((error) =>{
                 console.log(error)
@@ -95,7 +102,14 @@
             },
             pad(s){
                 return (s < 10) ? '0' + s : s;
-            }
+            },
+            incrementView(id, id_discussion_type){
+                this.axios.get('/api/discussion/incrementview/' + id).then((response) =>{
+                    this.$router.push({ name: 'DiscussionDetailsComponent', params: {id_type: id_discussion_type, id_discussion: id}})
+                }).catch(error => {
+                    console.error(error);
+                })
+            },
         }
 	}
 </script>

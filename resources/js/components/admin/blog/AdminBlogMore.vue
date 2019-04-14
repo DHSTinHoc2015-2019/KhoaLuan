@@ -24,7 +24,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12">						
 						<div class="card mb-3">
 							<div class="card-header">
-								<h3><i class="fa fa-table"></i> {{ blogs.title }}
+								<h3><i class="fa fa-address-card"></i> {{ blogs.title }}
 									<router-link class="btn btn-success btn-sm float-right" :to="{ name: 'AdminBlogEdit', params: { id: `${this.$route.params.id}`}}">Chỉnh sửa</router-link></h3>
 							</div>
 
