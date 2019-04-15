@@ -81,7 +81,7 @@
 						</div>
 					</form>
 
-					<button class="btn btn-primary" v-on:click="checkAll()">Click</button>
+					<!-- <button class="btn btn-primary" v-on:click="checkAll()">Click</button> -->
 				</div>
 			</div>
 		</div>
@@ -127,7 +127,7 @@
 	            var vm = this
 	            axios.post('api/register', {name, email, password, c_password}).then(response => {
 	                let data = response.data
-	                console.log(data)
+	                // console.log(data)
 	                localStorage.setItem('tpack.user', JSON.stringify(data.user))
 	                localStorage.setItem('tpack.jwt', data.token)
 	                if (localStorage.getItem('tpack.jwt') != null) {

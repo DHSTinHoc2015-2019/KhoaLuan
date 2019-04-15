@@ -7,6 +7,7 @@ use App\User;
 use Validator;
 use Illuminate\Http\Request;
 use App\Mail\SendEmail;
+use App\Mail\SendEmailResetPassword;
 use Mail;
 use DB;
 
@@ -110,5 +111,81 @@ class UserController extends Controller
             'message' => $status ? 'Đổi mật khẩu thành công' : "Đổi mật khẩu thất bại"
         ], 200);
     }
-   
+
+    function findEmailResetPassword($email){
+        $user = DB::table('users')->where('email', $email)->first();
+        if (empty((array) $user)) {
+            
+        } else {
+            config(['mail.driver' => 'smtp', 'mail.host' => 'smtp.gmail.com', 'mail.port' => 587, 'mail.username' => 'tranquangtanqt1190@gmail.com', 'mail.password' => 'oxksatmagyoegxdb', 'mail.encryption' => null]);
+            $token_reset = $this->getTokenResetPassword();
+            DB::table('password_resets')->insert([
+                'email' => $email,
+                'token_reset' => $token_reset,
+                'created_at' => date("Y-m-d"),
+            ]);
+            $to_email = $email;
+            $mailable = new SendEmailResetPassword($token_reset);
+            Mail::to($to_email)->send($mailable);
+        }
+        return response()->json($user, 200);
+    }
+
+    protected function getTokenResetPassword(){
+        return strtoupper(substr(hash_hmac('sha256', str_random(6), config('app.key')),0, 6));
+    }
+
+    function checkResetPassword($email, Request $request){
+        $status = false;
+        $password_reset = DB::table('password_resets')->where('email', $email)->first();
+        if($password_reset->token_reset == $request->token_reset){
+            $status = true;
+            $token = $this->getToken();
+            DB::table('password_resets')->where('email', $email)->update(['token' => $token]);
+            return response()->json([
+                'status' => $status,
+                'token' => $token
+            ], 200);
+        }
+        return response()->json([
+            'status' => $status
+        ], 200);
+    }
+
+    function checkTokenPassword($email, $token){
+        $status = false;
+        $password_reset = DB::table('password_resets')->where('email', $email)->first();
+        if($password_reset->token == $token){
+            $status = true;
+            return response()->json([
+                'status' => $status,
+            ], 200);
+        }
+        return response()->json([
+            'status' => $status
+        ], 200);
+    }
+    
+    function changeForgetPassword(Request $request){
+        DB::table('users')->where('email', $request->email)->update(['password' => bcrypt($request->password)]);
+        $status = 401;
+        $response = ['error' => 'Unauthorised'];
+
+        $login = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+        $payload[$login] = $request->email;
+        $payload['password'] = $request->password;
+        // if (Auth::attempt($request->only(['email', 'password']))) {
+        if (Auth::attempt($payload)) {
+            $status = 200;
+            $response = [
+                'user' => Auth::user(),
+                'token' => Auth::user()->createToken('tpack')->accessToken,
+            ];
+        }
+        DB::table('password_resets')->where('email', $request->email)->delete();
+        return response()->json($response, $status);
+        // return response()->json([
+        //     'status' => $status
+        // ], 200);
+    }
 }

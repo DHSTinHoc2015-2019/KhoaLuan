@@ -32,6 +32,9 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 Vue.use(VueAxios, axios);
 Vue.use(Viewer)
+
+import Chart from 'chart.js';
+
 /*===========Home==============*/
 import HomeComponent from './components/home/HomeComponent.vue';
 import HomeContentComponent from './components/home/home/HomeContentComponent.vue';
@@ -52,6 +55,9 @@ import ContactComponent from './components/home/contact/ContactComponent.vue';
 import ProfileComponent from './components/home/profile/ProfileComponent.vue';
 import ProfileUserComponent from './components/home/profile/user/ProfileUserComponent.vue';
 import ActiveEmailComponent from './components/home/login/ActiveEmailComponent.vue';
+import ForgetPasswordComponent from './components/home/login/ForgetPasswordComponent.vue';
+import ForgetActivePasswordComponent from './components/home/login/ForgetActivePasswordComponent.vue';
+import ForgetPasswordChangeComponent from './components/home/login/ForgetPasswordChangeComponent.vue';
 
 /*===========Admin==============*/
 import AdminComponent from './components/admin/AdminComponent.vue';
@@ -86,7 +92,6 @@ import AdminProfile from './components/admin/profile/AdminProfile.vue';
 
 import AdminContact from './components/admin/contact/AdminContact.vue';
 
-
 import DemoEmailComponent from './components/home/demoemail/DemoEmailComponent.vue';
 
 /*===========Admin demo==============*/
@@ -95,6 +100,8 @@ import DemoAdminKhongCo from './components/admin/demo/DemoAdminKhongCo.vue';
 import DemoUser from './components/admin/demo/DemoUser.vue';
 import DemoTableBasic from './components/admin/demo/DemoTableBasic.vue';
 import DemoUserEdit from './components/admin/demo/DemoUserEdit.vue';
+
+import DemoCharJSComponent from './components/home/democharjs/DemoCharJSComponent.vue'
 
 /*===========Pages==============*/
 import Page404Component from './components/pages/Page404Component.vue';
@@ -469,9 +476,29 @@ var routes = [
                 component: ActiveEmailComponent
             },
             {
+                name: 'ForgetPassword',
+                path: 'quenmatkhau',
+                component: ForgetPasswordComponent
+            },
+            {
+                name: 'ForgetActivePassword',
+                path: 'quenmatkhau/:email',
+                component: ForgetActivePasswordComponent
+            },
+            {
+                name: 'ForgetPasswordChange',
+                path: 'quenmatkhau/:email/:token',
+                component: ForgetPasswordChangeComponent
+            },
+            {
                 name: 'DemoEmail',
                 path: 'demoemail',
                 component: DemoEmailComponent
+            },
+            {
+                name: 'DemoCharJS',
+                path: 'democharjs',
+                component: DemoCharJSComponent
             },
             /*===========Page404==============*/
             // {

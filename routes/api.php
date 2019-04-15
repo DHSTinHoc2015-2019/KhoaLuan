@@ -21,6 +21,10 @@ use Illuminate\Http\Request;
 Route::post('login', 'UserController@login');
 Route::post('register', 'UserController@register');
 Route::get('showuser/{id}', 'UserController@showWithId');
+Route::get('finduserwithemail/{email}', 'UserController@findEmailResetPassword');
+Route::post('checktokenreset/{email}', 'UserController@checkResetPassword');
+Route::post('changeforgetpassword', 'UserController@changeForgetPassword');
+Route::get('checktoken/{email}/{token}', 'UserController@checkTokenPassword');
 Route::get('active/{id}/{activation_code}', 'UserController@activateUser');
 Route::get('demolike/{like}', 'DemoLikeController@index');
 

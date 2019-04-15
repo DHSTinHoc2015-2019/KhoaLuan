@@ -35,9 +35,9 @@
 								Mật khẩu
 							</span>
 
-							<a href="#" class="txt2 bo1 m-l-5">
+							<router-link :to="{ name: 'ForgetPassword'}" class="txt2 bo1 m-l-5">
 								Quên mật khẩu?
-							</a>
+							</router-link>
 						</div>
 						<div class="wrap-input100 validate-input" :data-validate="validation.password.data_validate">
 							<input class="input100" type="password" v-model="password">

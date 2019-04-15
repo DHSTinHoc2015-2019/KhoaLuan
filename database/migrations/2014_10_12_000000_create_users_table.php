@@ -22,6 +22,11 @@ class CreateUsersTable extends Migration
             $table->boolean('is_admin')->default(false);
             $table->string('activation_code')->nullable();
             $table->text('user_image')->nullable();
+            $table->string('birthday')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->text('introduce_yourself')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
