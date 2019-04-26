@@ -5,7 +5,7 @@
 			<div id="sidebar-menu">
 				<ul>
 					<li class="submenu">
-						<a href="javascript:void(0)"><i class="fa fa-fw fa-bars"></i><span> Dashboard </span> </a>
+						<router-link to="/"><i class="fa fa-fw fa-bars"></i><span> TPACK </span> </router-link>
                     </li>
 
                     <li class="submenu">
@@ -27,18 +27,27 @@
                     </li>
 
                     <li class="submenu">
+                        <a href="javascript:void(0)"><i class="fa fa-fw fa-book"></i> <span> Thư viện </span> <span class="menu-arrow"></span></a>
+						<ul class="list-unstyled">
+							<li><router-link to="/admin/library/image">Hình ảnh</router-link></li>
+							<li><router-link to="/admin/library/video">Video</router-link></li>
+							<li><router-link to="/admin/library/document">Tài liệu</router-link></li>
+						</ul>
+                    </li>
+
+                    <li class="submenu">
                         <a href="javascript:void(0)"><i class="fa fa-fw fa-commenting-o"></i> <span> Thảo luận </span> <span class="menu-arrow"></span></a>
-							<ul class="list-unstyled">
-								<li><router-link to="/admin/discussiontype">Đề tài thảo luận</router-link></li>
-								<li><router-link to="/admin/discussion">Thảo luận</router-link></li>
-							</ul>
+						<ul class="list-unstyled">
+							<li><router-link to="/admin/discussiontype">Đề tài thảo luận</router-link></li>
+							<li><router-link to="/admin/discussion">Thảo luận</router-link></li>
+						</ul>
                     </li>
 					
 					<li class="submenu">
                         <router-link :to="{path: '/admin/contact'}"><i class="fa fa-fw fa-telegram"></i><span> Liên hệ </span> </router-link>
                     </li>
 
-					<li class="submenu">
+					<!-- <li class="submenu">
                         <a href="javascript:void(0)"><i class="fa fa-fw fa-table"></i> <span> Demo </span> <span class="menu-arrow"></span></a>
 						<ul class="list-unstyled">
 							<li>
@@ -54,15 +63,15 @@
 								<router-link to="/admin/demotable">Demo Table</router-link>
 							</li>
 						</ul>
-                    </li>
+                    </li> -->
 
-					<li class="submenu">
+					<!-- <li class="submenu">
                         <a href="javascript:void(0)"><i class="fa fa-fw fa-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
 							<ul class="list-unstyled">
 								<li><a href="tables-basic.html">Basic Tables</a></li>
 								<li><a href="tables-datatable.html">Data Tables</a></li>
 							</ul>
-                    </li>
+                    </li> -->
 
                     <li class="submenu">
                         <a href="javascript:void(0)"><i class="fa fa-fw fa-tv"></i><span> Charts </span> </a>

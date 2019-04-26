@@ -51,6 +51,10 @@ import UserDiscussionEdit from './components/home/discussion/update/UserDiscussi
 import NewsComponent from './components/home/news/NewsComponent.vue';
 import NewsDetailsComponent from './components/home/news/newsdetail/NewsDetailsComponent.vue';
 import LibraryComponent from './components/home/library/LibraryComponent.vue';
+// import UserBlogEdit from './components/home/blog/update/UserBlogEdit.vue';
+import UserLibraryImageCreate from './components/home/library/updateimage/UserLibraryImageCreate.vue';
+import UserLibraryVideoCreate from './components/home/library/updatevideo/UserLibraryVideoCreate.vue';
+import UserLibraryDocumentCreate from './components/home/library/updatedocument/UserLibraryDocumentCreate.vue';
 import ContactComponent from './components/home/contact/ContactComponent.vue';
 import ProfileComponent from './components/home/profile/ProfileComponent.vue';
 import ProfileUserComponent from './components/home/profile/user/ProfileUserComponent.vue';
@@ -392,10 +396,32 @@ var routes = [
         		]
         	},
             {
-                name: 'Library',
                 path: 'thuvien',
-                component: LibraryComponent,
-                props: true
+                component: {
+                    render (c) { return c('router-view') }
+                },
+                children: [
+                    {
+                        name: 'Library',
+                        path: '',
+                        component: LibraryComponent,
+                    },
+                    {
+                        name: 'UserLibraryImageCreate',
+                        path: 'danganh',
+                        component: UserLibraryImageCreate,
+                    },
+                    {
+                        name: 'UserLibraryVideoCreate',
+                        path: 'dangvideo',
+                        component: UserLibraryVideoCreate,
+                    },
+                    {
+                        name: 'UserLibraryDocumentCreate',
+                        path: 'dangtailieu',
+                        component: UserLibraryDocumentCreate,
+                    }
+                ]
             },
         	{
         		meta: { label: 'Discussion'},

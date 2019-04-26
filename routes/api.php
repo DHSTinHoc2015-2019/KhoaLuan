@@ -150,6 +150,10 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('/introduction/update','IntroductionController@update');
 
 	Route::post('/changepassword/{id}', 'UserController@changePassword');
+
+	Route::post('/library/image/create', 'LibraryController@createImage');
+	Route::post('/library/video/create', 'LibraryController@createVideo');
+	Route::post('/library/document/create', 'LibraryController@createDocument');
 });
 
 /*=========Demo============*/

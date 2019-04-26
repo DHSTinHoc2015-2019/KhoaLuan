@@ -8,8 +8,13 @@
         		<div class="container mt-5 mb-5">
                     <div class="row" v-viewer>
                     	<div class="col-md-12">
-                            <div class="section-title wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="300ms">
-                                <h2><b class="blog-title">HÌNH ẢNH</b></h2>
+                            <div class="col-md-12 pl-3 wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="900ms">
+                                <div class="separator">
+                                    <h1 class="one">
+                                        <span class="title blog-title font-weight-bold">HÌNH ẢNH</span>
+                                        <span><h5><a href="javascript:void(0)" class="create" v-on:click="CreateImage()">Đăng ảnh mới</a></h5></span>
+                                    </h1>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="400ms" v-for="(value, index) in images">
@@ -30,15 +35,17 @@
                 </div>
         	</section>
 
-        	<section style="background-color: teal" id="scroll-video">
+        	<section style="background-color: teal" id="scroll-video" class="pt-5">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="section-title wow fadeInDown animated mt-4" data-wow-duration="500ms" data-wow-delay="300ms">
-                                <h2><b class="blog-title" style="color: white">VIDEO</b></h2>
+                        <div class="col-md-12 pl-3 wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="900ms">
+                            <div class="separator">
+                                <h1 class="two">
+                                    <span class="title blog-title font-weight-bold">VIDEO</span>
+                                    <span><h5><a href="javascript:void(0)" class="create" v-on:click="CreateVideo()">Đăng video mới</a></h5></span>
+                                </h1>
                             </div>
                         </div>
-                        <!-- <div class="col-md-1"></div> -->
                         <div class="col-md-12 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="400ms">
                             <table class="table table-bordered table-hover">
                                 <thead>
@@ -70,15 +77,17 @@
                 </div>
             </section>
 
-            <section style="background-color: white" id="scroll-document">
+            <section style="background-color: white" id="scroll-document" class="pt-5">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="section-title wow fadeInDown animated mt-4" data-wow-duration="500ms" data-wow-delay="300ms">
-                                <h2><b class="blog-title">TÀI LIỆU</b></h2>
+                        <div class="col-md-12 pl-3 wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="900ms">
+                            <div class="separator">
+                                <h1 class="one">
+                                    <span class="title blog-title font-weight-bold" style="background: #fff">TÀI LIỆU</span>
+                                    <span><h5><a href="javascript:void(0)" class="create" v-on:click="CreateDocument()" style="background: #fff">Đăng tài liệu mới</a></h5></span>
+                                </h1>
                             </div>
                         </div>
-                        <!-- <div class="col-md-1"></div> -->
                         <div class="col-md-12 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="400ms">
                             <table class="table table-bordered table-hover">
                                 <thead>
@@ -99,13 +108,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        <!-- <div class="col-md-1"></div> -->
                         <div class="col-md-12 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="400ms">
                             <div class="section-row">
                                 <pagination-document v-bind:pagination="pagination_document" v-on:click.native="getDocuments(pagination_document.current_page)" :offset="4"></pagination-document>
                             </div>
                         </div>
-                        <!-- <div class="col-md-12 mb-5"></div> -->
                     </div>
                 </div>
             </section>
@@ -142,6 +149,8 @@
 	export default {
 		data() {
 		    return {
+                isLogin: localStorage.getItem('tpack.jwt') != null,
+                users: null,
                 images: {},
                 videos: {},
                 documents: {},
@@ -177,6 +186,7 @@
             PaginationDocument: PaginationDocument,
         },
 		created(){
+            this.users = JSON.parse(localStorage.getItem('tpack.user'))
             this.axios.get('/api/library/paginate/image').then((response) => {
                 // console.log(response.data)
                 this.images = response.data.data
@@ -194,7 +204,7 @@
             })
 
             this.axios.get('/api/library/paginate/document').then((response) => {
-                console.log(response.data)
+                //console.log(response.data)
                 this.documents = response.data.data
                 this.complete = true
             }).catch((error) => {
@@ -230,18 +240,145 @@
                         this.pagination_document = response.data
                     })
             },
+            CreateImage(){
+                if(this.isLogin){
+                    if(this.users.email_verified_at == '' || this.users.email_verified_at == null || this.users.email_verified_at == undefined){
+                        alertify.set('notifier','position', 'buttom-right');
+                        alertify.error('Xin chào '+ this.users.name +'.\n Bạn cần xem thư đến trong '+ this.users.email +' để kích hoạt tài khoản trước khi đăng bài');
+                    } else {
+                        this.$router.push({ name: 'UserLibraryImageCreate'})
+                    }
+                } else {
+                    alertify.set('notifier','position', 'buttom-right');
+                    alertify.error('Bạn cần đăng nhập để thực hiện chức năng này');
+                }
+            },
+            CreateVideo(){
+                if(this.isLogin){
+                    if(this.users.email_verified_at == '' || this.users.email_verified_at == null || this.users.email_verified_at == undefined){
+                        alertify.set('notifier','position', 'buttom-right');
+                        alertify.error('Xin chào '+ this.users.name +'.\n Bạn cần xem thư đến trong '+ this.users.email +' để kích hoạt tài khoản trước khi đăng bài');
+                    } else {
+                        this.$router.push({ name: 'UserLibraryVideoCreate'})
+                    }
+                } else {
+                    alertify.set('notifier','position', 'buttom-right');
+                    alertify.error('Bạn cần đăng nhập để thực hiện chức năng này');
+                }
+            },
+            CreateDocument(){
+                if(this.isLogin){
+                    if(this.users.email_verified_at == '' || this.users.email_verified_at == null || this.users.email_verified_at == undefined){
+                        alertify.set('notifier','position', 'buttom-right');
+                        alertify.error('Xin chào '+ this.users.name +'.\n Bạn cần xem thư đến trong '+ this.users.email +' để kích hoạt tài khoản trước khi đăng bài');
+                    } else {
+                        this.$router.push({ name: 'UserLibraryDocumentCreate'})
+                    }
+                } else {
+                    alertify.set('notifier','position', 'buttom-right');
+                    alertify.error('Bạn cần đăng nhập để thực hiện chức năng này');
+                }
+            }
 		}
 	}
 </script>
 
 <style scoped>
-	.image {
-    cursor: pointer;
-  }
-  .blog-title {
+    .image {
+        cursor: pointer;
+    }
+
+    .blog-title {
         color: #231557; text-transform: uppercase;
     }
-    .table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
-    border: 1px solid #ccc;
-}
+
+    .table-bordered > tbody > tr > td,
+    .table-bordered > tbody > tr > th, 
+    .table-bordered > tfoot > tr > td, 
+    .table-bordered > tfoot > tr > th, 
+    .table-bordered > thead > tr > td, 
+    .table-bordered > thead > tr > th {
+        border: 1px solid #ccc;
+    }
+
+    .separator h1.one .title {
+        background: #f8fafc;
+    }
+
+    .separator h1.one .create {
+        background: #f8fafc;
+    }
+
+    .separator h1.two {
+        margin-top: 0;
+    }
+
+    .separator h1.two:before {
+        content: "";
+        display: block;
+        border-top: solid 1px white;
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+    }
+
+    .separator h1.two .title {
+        background: teal;
+        padding: 0 20px;
+        position: relative;
+        z-index: 5;
+        text-transform: uppercase;
+        color: white;
+    }
+
+    .separator h1.two .create {
+        background: teal;
+        padding: 0 20px;
+        position: relative;
+        z-index: 5;
+        float: right;
+        bottom: 2.2em;
+    }
+
+    .separator h1.two a {
+        text-decoration: none;
+        display: inline-block;
+        position: relative;
+        font-family: Arial;
+        font-weight: bold;
+        padding: 0 0 5px 0;
+        /*color: #e2e61a;*/
+        color: white;
+    }
+    .separator h1.two a:hover{
+        /*color: #e8ce0e;*/
+        color: #e8ce0e;
+    }
+    .separator h1.two a:after {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        visibility: hidden;
+        background-color: #e8ce0e;
+        /*background-color: #e8ce0e;*/
+        color:#e8ce0e;
+        -webkit-transition: all .1s ease;
+        transition: all 0.3s ease;  
+        -webkit-transform: scaleX(0);
+        -ms-transform: scaleX(0);
+        transform: scaleX(0);
+    }
+
+    .separator h1.two a:hover:after {
+        visibility: visible;
+        -webkit-transform: scaleX(1);
+        -ms-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+
 </style>
