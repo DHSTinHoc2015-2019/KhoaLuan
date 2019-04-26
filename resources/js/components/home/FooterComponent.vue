@@ -13,7 +13,7 @@
                                 <div class="card-block" style="min-height: 300px;">
                                     <!--Title-->
                                     <h3 class="text-center font-up font-bold pink-text pb-2" style="color: #005c5c"><strong>Facebook</strong></h3>
-                                       <!-- <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook&tabs=timeline&width=450&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="450" height="300" style="border:3px solid #e91e63;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> -->
+                                       <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook&tabs=timeline&width=450&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="450" height="300" style="border:3px solid #e91e63;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
                                 </div>
                             </div>
                             
@@ -24,74 +24,14 @@
                                 <div class="card-block" style="min-height: 300px;">
                                     <!--Title-->
                                     <h3 class="text-center font-up font-bold pink-text pb-2"><strong style="color: #005c5c">YouTube</strong></h3>
-                                       <!-- <iframe style="border: 3px solid #02bdd5;" width="450" height="300" src="https://www.youtube.com/embed/yMQiHJsePOM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                                       <iframe style="border: 3px solid #02bdd5;" width="450" height="300" src="https://www.youtube.com/embed/yMQiHJsePOM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
-<!-- 
-                        <div class="col-md-4 col-sm-6 wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="400ms">
-                            <div class="footer-single">
-                                <div class="dummy-logo">
-                                    <div class="icon float-left brand">
-                                        <i class="fa fa-globe"></i>
-                                    </div>
-                                    <h2>TPACK</h2>
-                                    <p>Another responsive footer</p>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus felis diam, vulputate in risus eu, porttitor condimentum purus. Phasellus ullamcorper, odio id feugiat bibendum.</p>
-                                <a href="" class="btn btn-footer">Read More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="800ms">
-                            <div class="footer-single useful-links">
-                                <div class="footer-title">
-                                    <h2>Menu</h2>
-                                </div>
-                                <ul class="list-unstyled">
-                                    <li><a href="#">Trang chủ <i class="fa fa-angle-right float-right"></i></a></li>
-                                    <li><a href="#">Giới thiệu <i class="fa fa-angle-right float-right"></i></a></li>
-                                    <li><a href="#">Bản tin <i class="fa fa-angle-right float-right"></i></a></li>
-                                    <li><a href="#">Tài liệu <i class="fa fa-angle-right float-right"></i></a></li>
-                                    <li><a href="#">Thảo luận <i class="fa fa-angle-right float-right"></i></a></li>
-                                    <li><a href="#">Liên hệ <i class="fa fa-angle-right float-right"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                       
-                        <div class="col-md-4 col-sm-6 wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="1200ms">
-                            <div class="footer-single">
-                                <div class="footer-title">
-                                    <h2>Liên hệ</h2>
-                                </div>
-                                <address>
-                                    <i class="fa fa-map-marker"></i><span> Địa chỉ:</span> abc TP Huế<br>
-                                    <i class="fa fa-phone"></i><span> Điện thoại:</span> 0876543210 <br>
-                                    <i class="fa fa-fax"></i><span> Fax:</span> 012 123 2345<br>
-                                    <i class="fa fa-envelope"></i><span> Email:</span> email@gmail.com<br>
-                                </address>
-                            </div>
-                            
-                        </div> -->
                     </div>
                 </div>
             </section>
-            <!-- <section id="footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8 wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="300ms">
-                            <p class="copyright">Copyright: <span>2019</span> Design and Developed by <a href="" target="_blank">TPACK</a>.</p>
-                        </div>
-                        <div class="col-md-4 wow fadeInRight animated" data-wow-duration="500ms" data-wow-delay="300ms">
-                            <ul class="faico float-right">
-                                <li><a class="faicon-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a class="faicon-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a class="faicon-linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a class="faicon-google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>  -->
+
             <div class="container">
                 <form name="contentForm" enctype="multipart/form-data" method="post" action="">
                     <div class="ct-footer-pre text-center-lg">
@@ -113,19 +53,15 @@
                         <h2 class="ct-footer-list-header">Địa chỉ</h2>
                         <address>
                             <span>
-                                Liên hệ<br>
-                           <!--  </span>
-                            Địa chỉ ở đây<br>Orlando, Florida, 32801<br>
-                            <span> -->
-                                Địa chỉ: <a href="javascript:void(0)">đang cập nhật dữ liệu</a>
-                                Điện thoại: <a href="javascript:void(0)">đang cập nhật dữ liệu</a>
-                                Email: <a href="javascript:void(0)">đang cập nhật dữ liệu</a>
-                                Fax: <a href="javascript:void(0)">đang cập nhật dữ liệu</a>
+                                Địa chỉ: <a href="javascript:void(0)">123 Lê Lợi, TP Huế</a><br>
+                                Điện thoại: <a href="javascript:void(0)">0123456789</a><br>
+                                Email: <a href="javascript:void(0)">tpack@gmail.com</a><br>
+                                Fax: <a href="javascript:void(0)">đang cập nhật</a>
                             </span>
                         </address>
                     </li>
                     <li>
-                        <h2 class="ct-footer-list-header">TPACK</h2>
+                        <h2 class="ct-footer-list-header">Menu</h2>
                         <ul>
                             <li>
                                 <router-link :to="{ path: '/gioithieu'}">Giới thiệu</router-link>
@@ -148,83 +84,37 @@
                         </ul>
                     </li>
                     <li>
-                        <h2 class="ct-footer-list-header">TPACK</h2>
+                        <h2 class="ct-footer-list-header">Hỗ trợ</h2>
                         <ul>
                             <li>
-                                <a href="">Nội quy</a>
+                                <router-link :to="{ path: 'hotro'}">Nội quy</router-link>
                             </li>
                             <li>
-                                <a href="">Hỗ trợ, hướng dẫn</a>
+                                <router-link :to="{ path: 'hotro'}">Hỗ trợ, hướng dẫn</router-link>
                             </li>
                             <li>
-                                <a href="">Liên hệ quảng cáo</a>
+                                <router-link :to="{ path: '/lienhe'}">Liên hệ quảng cáo</router-link>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <h2 class="ct-footer-list-header">Liên kết</h2>
                         <ul>
-                            <!-- <li>
-                                <router-link :to="">link liên kết</router-link>
-                            </li> -->
                             <li>
-                                <a href="">link liên kết</a>
+                                <a href="">Tpack</a>
                             </li>
                             <li>
-                                <a href="">link liên kết</a>
+                                <a href="https://www.facebook.com/groups/47147628001/">Group Facebook</a>
                             </li>
                             <li>
-                                <a href="">link liên kết</a>
+                                <a href="https://www.learntechlib.org">Learntechlib</a>
                             </li>
                             <li>
-                                <a href="">link liên kết</a>
-                            </li>
-                            <li>
-                                <a href="">link liên kết</a>
-                            </li>
-                            
+                                <a href="https://quickshout.blogspot.com">Quickshout</a>
+                            </li>                            
                         </ul>
                     </li>
                 </ul>
-               <!--  <div class="ct-footer-meta text-center-sm">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-2">
-                            <img alt="logo" src="https://www.solodev.com/assets/footer/logo.png">
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <address>
-                                <span>WebCorpCo<br></span>123 Easy Street<br>
-                                Orlando, Florida, 32801<br>
-                                <span>Phone: <a href="tel:5555555555">(555) 555-8899</a></span>
-                            </address>
-                        </div>
-                        <div class="col-sm-6 col-md-2 ct-u-paddingTop10">
-                            <a href="" target="_blank"><img alt="app store" src="https://www.solodev.com/assets/footer/appstore.png"></a>
-                        </div>
-                        <div class="col-sm-6 col-md-2 ct-u-paddingTop10">
-                            <a href="" target="_blank"><img alt="google play store" src="https://www.solodev.com/assets/footer/androidstore.png"></a>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <ul class="ct-socials list-unstyled list-inline">
-                                <li>
-                                    <a href="" target="_blank"><img alt="facebook" src="https://www.solodev.com/assets/footer/facebook-white.png"></a>
-                                </li>
-                                <li>
-                                    <a href="" target="_blank"><img alt="twitter" src="https://www.solodev.com/assets/footer/twitter-white.png"></a>
-                                </li>
-                                <li>
-                                    <a href="" target="_blank"><img alt="youtube" src="https://www.solodev.com/assets/footer/youtube-white.png"></a>
-                                </li>
-                                <li>
-                                    <a href="" target="_blank"><img alt="instagram" src="https://www.solodev.com/assets/footer/instagram-white.png"></a>
-                                </li>
-                                <li>
-                                    <a href="" target="_blank"><img alt="pinterest" src="https://www.solodev.com/assets/footer/pinterest-white.png"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> -->
             </div>
            <section id="footer">
                 <div class="container">

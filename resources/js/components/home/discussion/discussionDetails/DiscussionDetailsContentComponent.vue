@@ -37,7 +37,7 @@
 					</div>
 				</div>
 				<div class="col-md-12">
-					<div class="jquery-comments">
+					<div class="jquery-comments pb-5">
 
 						<!-- Thanh navbar comment -->
 			            <ul class="navigation">

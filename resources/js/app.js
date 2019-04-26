@@ -58,6 +58,7 @@ import ActiveEmailComponent from './components/home/login/ActiveEmailComponent.v
 import ForgetPasswordComponent from './components/home/login/ForgetPasswordComponent.vue';
 import ForgetActivePasswordComponent from './components/home/login/ForgetActivePasswordComponent.vue';
 import ForgetPasswordChangeComponent from './components/home/login/ForgetPasswordChangeComponent.vue';
+import UserManualComponent from './components/home/usermanual/UserManualComponent.vue';
 
 /*===========Admin==============*/
 import AdminComponent from './components/admin/AdminComponent.vue';
@@ -464,6 +465,11 @@ var routes = [
                 name: 'Register',
                 path: 'register',
                 component: RegisterComponent
+            },
+            {
+                name: 'UserManual',
+                path: 'hotro',
+                component: UserManualComponent
             },
             {
                 name: 'LoginFacebook',

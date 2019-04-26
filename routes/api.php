@@ -67,11 +67,15 @@ Route::get('/likediscussion/user/{id_discussion}','LikeDiscussionController@inde
 
 Route::get('/likeblog/user/{id}','LikeBlogController@indexUser');
 
-Route::get('/library/all','LibraryController@index');
+Route::get('/library/paginate/image','LibraryController@imagePaginate');
+Route::get('/library/paginate/video','LibraryController@videoPaginate');
+Route::get('/library/paginate/document','LibraryController@documentPaginate');
 
 Route::post('/contact/create','ContactController@create');
 Route::get('/contact/index','ContactController@index');
 Route::get('/contact/delete/{id}','ContactController@delete');
+
+Route::get('/help','RuleController@index');
 
 Route::get('/demo', function (){
 	try {

@@ -19,8 +19,7 @@
 									</div>
 								</div>
 
-								<div class="col-md-12 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="300ms" style="text-align:justify">
-									{{ news.news_content}}
+								<div class="col-md-12 wow fadeInLeft animated mt-3" data-wow-duration="500ms" data-wow-delay="300ms" style="text-align:justify" v-html="news.news_content">
 								</div>
 
 							</div>

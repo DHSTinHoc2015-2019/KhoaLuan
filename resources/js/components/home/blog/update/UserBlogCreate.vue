@@ -43,7 +43,7 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label class="font-weight-bold">Nội dung</label>
-										<textarea cols="30" rows="50" id="blogs_content">
+										<textarea cols="30" rows="20" id="blogs_content">
 											
 										</textarea>
 

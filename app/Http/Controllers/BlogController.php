@@ -55,7 +55,9 @@ class BlogController extends Controller
     	$blog = new Blog();
 
         if($request->hasImage){
+            // ini_set('memory_limit','256M');
             if ($request->hasFile('file')) {
+
                 $imageName = time().$request->blog_image->getClientOriginalName();
                 $request->blog_image->move(public_path('images/blog/'), $imageName);
                 $blog->blog_image = $imageName;

@@ -12,10 +12,6 @@ class DiscussionTypeTableSeeder extends Seeder
     public function run()
     {
         DB::table('discussion_types')->insert([
-            'name_discussion_type' => 'Quy định chung',
-            'created_at' => date("Y-m-d"),
-        ]);
-        DB::table('discussion_types')->insert([
             'name_discussion_type' => 'Kiến thức về nội dung chuyên môn (CK)',
             'created_at' => date("Y-m-d"),
         ]);

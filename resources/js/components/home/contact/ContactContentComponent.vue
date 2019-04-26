@@ -57,10 +57,17 @@
 				<div class="col-sm-12 col-md-4">
 					<h3 class="mb-20 mt-sm-50"><b style="color: #005c5c;">THÔNG TIN LIÊN HỆ</b></h3>
 					
-					Địa chỉ: abc TP Huế
-					Điện thoại: 0876543210
-					Fax: 012 123 2345
-					Email: email@gmail.com
+					<address>
+                        <span>
+                       <!--  </span>
+                        Địa chỉ ở đây<br>Orlando, Florida, 32801<br>
+                        <span> -->
+                            Địa chỉ: 123 Lê Lợi, TP Huế<br>
+                            Điện thoại: 0123456789<br>
+                            Email: tpack@gmail.com<br>
+                            Fax: đang cập nhật
+                        </span>
+                    </address>
 
 
 				</div><!-- col-md-6 -->

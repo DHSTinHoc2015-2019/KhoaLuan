@@ -31,6 +31,10 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('123123'),
             'is_admin' => true,
             'user_image' => '2.jpg',
+            'birthday' => '11-09-1990',
+            'gender' => 'Nam',
+            'phone' => '0974433226',
+            'address' => 'Quảng Trị',
             'remember_token' => str_random(10),
             'created_at' => date("Y-m-d"),
         ]);
