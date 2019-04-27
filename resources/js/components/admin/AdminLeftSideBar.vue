@@ -73,9 +73,9 @@
 							</ul>
                     </li> -->
 
-                    <li class="submenu">
+                   <!--  <li class="submenu">
                         <a href="javascript:void(0)"><i class="fa fa-fw fa-tv"></i><span> Charts </span> </a>
-                    </li>
+                    </li> -->
 
 
             	</ul>

@@ -112,13 +112,6 @@
 		name: 'app',
 		mounted(){
 			localStorage.setItem('tpack.server', 'localhost:3000')
-
-			/* ----------------------------------------------------------- */
-			/*  6. SCROLL TOP BUTTON
-			/* ----------------------------------------------------------- */
-
-			//Check to see if the window is top if not then display button
-
 			jQuery(window).scroll(function(){
 				if ($(this).scrollTop() > 300) {
 					$('.scrollToTop').fadeIn();

@@ -10,7 +10,9 @@
 		</span>
 	</footer>
 </template>
-
+<style>
+	
+</style>
 <script>
 	export default {
 		data(){
@@ -39,35 +41,3 @@
 		}
 	}
 </script>
-<!-- <script>
-	export default {
-		data(){
-			return {
-				now: ''
-			}
-		},
-		mounted(){
-			this.now = this.getNow()
-			console.log(this.getNow())
-		},
-		computed: {
-  createdAtDisplay() {
-    return moment(todo.created_at).format('YYYY-MM-DD h:mm A');
-  }
-},
-		methods:{
-			getNow: function () {
-		    	var currentDate = new Date();
-		    	var date = currentDate.getDate();
-				var month = currentDate.getMonth(); //Be careful! January is 0 not 1
-				var year = currentDate.getFullYear();
-				var hour = currentDate.getHours();
-				var minute = currentDate.getMinutes();
-				var second = currentDate.getSeconds();
-
-				// return dateString = date + "-" +(month + 1) + "-" + year;
-				return date + "/" +(month + 1) + "/" + year + hour + ":" + minute + ":" + second;
-	  		}
-		}
-	}
-</script> -->

@@ -18,7 +18,7 @@ class DiscussionTableSeeder extends Seeder
                 'discussion_content' => $faker->realText(1000),
                 'id_user' => rand(1, 4),
                 'id_discussion_type' => rand(1, 6),
-                'created_at' => date("Y-m-d"),
+                'created_at' => date("Y-m-d", strtotime((0 - rand(1,10)) . ' days' )),
             ]);
         }
 
@@ -27,7 +27,7 @@ class DiscussionTableSeeder extends Seeder
             'discussion_content' => 'Xin chào tất cả mọi người! :) tôi là một sinh viên tiến sĩ và tôi sẽ sử dụng tpack trong luận án của tôi. Cụ thể là mình đang tìm cách đo tpk hoặc tck (bên kia sử dụng quy mô tpack gốc). Ai có thể giới thiệu bài viết cho tôi để đọc được không? Tôi chỉ tìm thấy một vài người. Cảm ơn!',
             'id_user' => rand(1, 4),
             'id_discussion_type' => 6,
-            'created_at' => date("Y-m-d"),
+            'created_at' => date("Y-m-d", strtotime((0 - rand(1,10)) . ' days' )),
         ]);
 
         DB::table('discussions')->insert([
@@ -35,7 +35,7 @@ class DiscussionTableSeeder extends Seeder
             'discussion_content' => 'Xin chào tất cả mọi người! :) tôi là một sinh viên tiến sĩ và tôi sẽ sử dụng tpack trong luận án của tôi. Cụ thể là mình đang tìm cách đo tpk hoặc tck (bên kia sử dụng quy mô tpack gốc). Ai có thể giới thiệu bài viết cho tôi để đọc được không? Tôi chỉ tìm thấy một vài người. Cảm ơn!',
             'id_user' => rand(1, 4),
             'id_discussion_type' => 5,
-            'created_at' => date("Y-m-d"),
+            'created_at' => date("Y-m-d", strtotime((0 - rand(1,10)) . ' days' )),
         ]);
 
         DB::table('discussions')->insert([
@@ -43,7 +43,7 @@ class DiscussionTableSeeder extends Seeder
             'discussion_content' => 'Có hứng thú với tpack không? Đây là một sự so sánh của tpack trên 2 quốc gia. Nếu bạn quan tâm đến việc trở thành một phần của dự án nghiên cứu tpack quốc tế lớn hơn, xin vui lòng liên hệ với tôi. https://onlinelibrary.wiley.com/doi/abs/10.1111/bjet.12707',
             'id_user' => rand(1, 4),
             'id_discussion_type' => 3,
-            'created_at' => date("Y-m-d"),
+            'created_at' => date("Y-m-d", strtotime((0 - rand(1,10)) . ' days' )),
         ]);
     }
 }

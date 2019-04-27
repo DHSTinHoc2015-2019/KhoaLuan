@@ -1409,7 +1409,8 @@ class BlogTableSeeder extends Seeder
 	            'blog_image' => $i.'.jpg',
                 'featured' => true,
 	            'id_user' => rand(1, 4),
-	            'created_at' => date("Y-m-d"),
+                // 'created_at' => date("Y-m-d"),
+	            'created_at' => date("Y-m-d", strtotime( '0 days' )),
 	        ]);
         }
 
@@ -2808,7 +2809,8 @@ class BlogTableSeeder extends Seeder
 <p>&nbsp;</p>',
                 'blog_image' => ($i - 6).'.jpg',
                 'id_user' => rand(1, 4),
-                'created_at' => date("Y-m-d"),
+                // 'created_at' => date("Y-m-d"),
+                'created_at' => date("Y-m-d", strtotime((0 - $i + 6) . " days")),
             ]);
         }
 
@@ -4209,7 +4211,7 @@ class BlogTableSeeder extends Seeder
 <p>&nbsp;</p>',
                 'blog_image' => $imgSVG,
                 'id_user' => rand(1, 4),
-                'created_at' => date("Y-m-d"),
+                'created_at' => date("Y-m-d", strtotime( '-5 days' )),
             ]);
         }
     }
