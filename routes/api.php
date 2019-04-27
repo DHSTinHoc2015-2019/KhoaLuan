@@ -75,6 +75,7 @@ Route::get('/contact/delete/{id}','ContactController@delete');
 
 Route::get('/libraryimage', 'LibraryController@getDataLibraryImage');
 Route::get('/libraryvideo', 'LibraryController@getDataLibraryVideo');
+Route::get('/librarydocument', 'LibraryController@getDataLibraryDocument');
 
 Route::get('/help','RuleController@index');
 
@@ -161,6 +162,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/libraryimage/delete/{id}', 'LibraryController@deleteLibraryImage');
 	Route::post('/libraryvideo/edit/{id}', 'LibraryController@updateLibraryVideo');
 	Route::get('/libraryvideo/delete/{id}', 'LibraryController@deleteLibraryVideo');
+	Route::post('/librarydocument/edit/{id}', 'LibraryController@updateLibraryDocument');
+	Route::get('/librarydocument/delete/{id}', 'LibraryController@deleteLibraryDocument');
 
 });
 

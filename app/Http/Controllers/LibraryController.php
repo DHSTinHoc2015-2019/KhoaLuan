@@ -163,4 +163,48 @@ class LibraryController extends Controller
         ]);
     }
 
+    function getDataLibraryDocument(){
+        $library = DB::table('libraries')
+            ->join('users', 'id_user', 'users.id')
+            ->select('libraries.id', 'libraries.title', 'libraries.file_name', 'libraries.created_at', 'users.name', 'libraries.id_user')
+        ->where('libraries.id_library', 3)
+        ->get();
+        return response()->json($library, 200);
+    }
+
+    function updateLibraryDocument(Request $request, $id){
+        $library = Library::findOrFail($id);
+        if ($request->hasFile('file')) {
+            if (file_exists('images/library/documents/' . $library->file_name)) {
+                unlink('images/library/documents/' . $library->file_name);
+            }
+            $imageName = time().$request->file->getClientOriginalName();
+            $request->file->move(public_path('images/library/documents/'), $imageName);
+            $library->file_name = $imageName;
+        }
+        $library->title = $request->title;
+
+        $status = $library->save();
+        
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Cập nhật tài liệu thành công' : "Cập nhật tài liệu thất bại",
+        ]);
+    }
+
+    function deleteLibraryDocument($id){
+        $library = Library::findOrFail($id);
+
+        if (file_exists('images/library/documents/' . $library->file_name)) {
+            unlink('images/library/documents/' . $library->file_name);
+        }
+
+        $status = $library->delete();
+
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Xóa dữ liệu thành công' : "Xóa dữ liệu thất bại"
+        ]);
+    }
+
 }

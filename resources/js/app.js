@@ -105,6 +105,10 @@ import AdminLibraryVideo from './components/admin/library/video/AdminLibraryVide
 import AdminLibraryVideoCreate from './components/admin/library/video/AdminLibraryVideoCreate.vue';
 import AdminLibraryVideoEdit from './components/admin/library/video/AdminLibraryVideoEdit.vue';
 
+import AdminLibraryDocument from './components/admin/library/document/AdminLibraryDocument.vue';
+import AdminLibraryDocumentCreate from './components/admin/library/document/AdminLibraryDocumentCreate.vue';
+import AdminLibraryDocumentEdit from './components/admin/library/document/AdminLibraryDocumentEdit.vue';
+
 import DemoEmailComponent from './components/home/demoemail/DemoEmailComponent.vue';
 
 /*===========Admin demo==============*/
@@ -301,6 +305,29 @@ var routes = [
                         name: 'AdminLibraryVideoEdit',
                         path: 'edit/:id',
                         component: AdminLibraryVideoEdit
+                    }
+                ]
+            },
+            {
+                path: 'library/document',
+                component:{
+                    render (c) { return c('router-view') }
+                },
+                children:[
+                    {
+                        name: 'AdminLibraryDocument',
+                        path: '',
+                        component: AdminLibraryDocument
+                    },
+                    {
+                        name: 'AdminLibraryDocumentCreate',
+                        path: 'create',
+                        component: AdminLibraryDocumentCreate
+                    },
+                    {
+                        name: 'AdminLibraryDocumentEdit',
+                        path: 'edit/:id',
+                        component: AdminLibraryDocumentEdit
                     }
                 ]
             },
