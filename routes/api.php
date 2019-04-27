@@ -61,8 +61,6 @@ Route::get('/newdiscussion','DiscussionController@newDiscussion');
 //Lấy thảo luận biết đề tài thảo luận + id thảo luận
 Route::get('/discussion/user/{id_type}/{id_discussion}','DiscussionController@userDiscussionWithType');
 
-
-
 Route::get('/likediscussion/user/{id_discussion}','LikeDiscussionController@indexUser');
 
 Route::get('/likeblog/user/{id}','LikeBlogController@indexUser');
@@ -76,6 +74,7 @@ Route::get('/contact/index','ContactController@index');
 Route::get('/contact/delete/{id}','ContactController@delete');
 
 Route::get('/libraryimage', 'LibraryController@getDataLibraryImage');
+Route::get('/libraryvideo', 'LibraryController@getDataLibraryVideo');
 
 Route::get('/help','RuleController@index');
 
@@ -157,9 +156,11 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('/library/video/create', 'LibraryController@createVideo');
 	Route::post('/library/document/create', 'LibraryController@createDocument');
 	
-	Route::get('/libraryimage/show/{id}', 'LibraryController@showLibraryImageId');
+	Route::get('/library/show/{id}', 'LibraryController@showLibrary');
 	Route::post('/libraryimage/edit/{id}', 'LibraryController@updateLibraryImage');
 	Route::get('/libraryimage/delete/{id}', 'LibraryController@deleteLibraryImage');
+	Route::post('/libraryvideo/edit/{id}', 'LibraryController@updateLibraryVideo');
+	Route::get('/libraryvideo/delete/{id}', 'LibraryController@deleteLibraryVideo');
 
 });
 

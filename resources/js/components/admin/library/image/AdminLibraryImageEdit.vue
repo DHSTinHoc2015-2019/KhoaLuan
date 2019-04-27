@@ -11,7 +11,7 @@
 							<ol class="breadcrumb float-right">
 								<li class="breadcrumb-item">Admin</li>
 								<li class="breadcrumb-item">Thư viện hình ảnh</li>
-								<li class="breadcrumb-item active">Thêm</li>
+								<li class="breadcrumb-item active">Chỉnh sửa</li>
 							</ol>
 							<div class="clearfix"></div>
 						</div>
@@ -83,7 +83,7 @@
 			this.library_image.id_user = this.user.id
 			axios.defaults.headers.common['Content-Type'] = 'application/json'
 			axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
-			this.axios.get(`/api/libraryimage/show/${this.$route.params.id}`).then((response) =>{
+			this.axios.get(`/api/library/show/${this.$route.params.id}`).then((response) =>{
 				// console.log(response.data)
 				this.library_image = response.data
 			}).catch((error) => {

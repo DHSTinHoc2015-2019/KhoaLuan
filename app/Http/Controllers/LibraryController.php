@@ -92,7 +92,7 @@ class LibraryController extends Controller
         return response()->json($library, 200);
     }
 
-    function showLibraryImageId($id){
+    function showLibrary($id){
         return response()->json(Library::findOrFail($id), 200);
     }
 
@@ -123,6 +123,38 @@ class LibraryController extends Controller
             unlink('images/library/images/' . $library->file_name);
         }
 
+        $status = $library->delete();
+
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Xóa dữ liệu thành công' : "Xóa dữ liệu thất bại"
+        ]);
+    }
+
+    function getDataLibraryVideo(){
+        $library = DB::table('libraries')
+            ->join('users', 'id_user', 'users.id')
+            ->select('libraries.id', 'libraries.title', 'libraries.file_name', 'libraries.created_at', 'users.name', 'libraries.id_user')
+        ->where('libraries.id_library', 2)
+        ->get();
+        return response()->json($library, 200);
+    }
+
+    function updateLibraryVideo(Request $request, $id){
+        $library = Library::findOrFail($id);
+        $library->file_name = $request->file_name;
+        $library->title = $request->title;
+
+        $status = $library->save();
+        
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Cập nhật hình ảnh thành công' : "Cập nhật hình ảnh thất bại",
+        ]);
+    }
+
+    function deleteLibraryVideo($id){
+        $library = Library::findOrFail($id);
         $status = $library->delete();
 
         return response()->json([

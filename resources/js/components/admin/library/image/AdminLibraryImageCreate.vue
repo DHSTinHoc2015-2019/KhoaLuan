@@ -49,7 +49,7 @@
 									<button type="submit" class="btn btn-primary float-right"><span class="btn-label"><i class="fa fa-save"></i></span> Lưu lại</button>
 								</div>
 								<div class="col-md-6">
-									<router-link :to="{ path: '/library/image'}" class="btn btn-danger"><span class="btn-label"><i class="fa fa-times"></i></span>Hủy bỏ</router-link>
+									<router-link :to="{ name: 'AdminLibraryImage'}" class="btn btn-danger"><span class="btn-label"><i class="fa fa-times"></i></span>Hủy bỏ</router-link>
 								</div>
 								<!-- end lưu -->
                             </div> <!-- end row -->
