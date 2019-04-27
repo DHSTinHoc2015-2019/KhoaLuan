@@ -83,4 +83,52 @@ class LibraryController extends Controller
         ]);
     }
 
+    function getDataLibraryImage(){
+        $library = DB::table('libraries')
+            ->join('users', 'id_user', 'users.id')
+            ->select('libraries.id', 'libraries.title', 'libraries.file_name', 'libraries.created_at', 'users.name', 'libraries.id_user')
+        ->where('libraries.id_library', 1)
+        ->get();
+        return response()->json($library, 200);
+    }
+
+    function showLibraryImageId($id){
+        return response()->json(Library::findOrFail($id), 200);
+    }
+
+    function updateLibraryImage(Request $request, $id){
+        $library = Library::findOrFail($id);
+        if ($request->hasFile('file')) {
+            if (file_exists('images/library/images/' . $library->file_name)) {
+                unlink('images/library/images/' . $library->file_name);
+            }
+            $imageName = time().$request->file->getClientOriginalName();
+            $request->file->move(public_path('images/library/images/'), $imageName);
+            $library->file_name = $imageName;
+        }
+        $library->title = $request->title;
+
+        $status = $library->save();
+        
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Cập nhật hình ảnh thành công' : "Cập nhật hình ảnh thất bại",
+        ]);
+    }
+
+    function deleteLibraryImage($id){
+        $library = Library::findOrFail($id);
+
+        if (file_exists('images/library/images/' . $library->file_name)) {
+            unlink('images/library/images/' . $library->file_name);
+        }
+
+        $status = $library->delete();
+
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Xóa dữ liệu thành công' : "Xóa dữ liệu thất bại"
+        ]);
+    }
+
 }

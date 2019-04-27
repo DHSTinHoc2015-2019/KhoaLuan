@@ -97,6 +97,10 @@ import AdminProfile from './components/admin/profile/AdminProfile.vue';
 
 import AdminContact from './components/admin/contact/AdminContact.vue';
 
+import AdminLibraryImage from './components/admin/library/image/AdminLibraryImage.vue';
+import AdminLibraryImageCreate from './components/admin/library/image/AdminLibraryImageCreate.vue';
+import AdminLibraryImageEdit from './components/admin/library/image/AdminLibraryImageEdit.vue';
+
 import DemoEmailComponent from './components/home/demoemail/DemoEmailComponent.vue';
 
 /*===========Admin demo==============*/
@@ -247,6 +251,29 @@ var routes = [
                         name: 'AdminDiscussionTypeEdit',
                         path: 'edit/:id',
                         component: AdminDiscussionTypeEdit
+                    }
+                ]
+            },
+            {
+                path: 'library/image',
+                component:{
+                    render (c) { return c('router-view') }
+                },
+                children:[
+                    {
+                        name: 'AdminLibraryImage',
+                        path: '',
+                        component: AdminLibraryImage
+                    },
+                    {
+                        name: 'AdminLibraryImageCreate',
+                        path: 'create',
+                        component: AdminLibraryImageCreate
+                    },
+                    {
+                        name: 'AdminLibraryImageEdit',
+                        path: 'edit/:id',
+                        component: AdminLibraryImageEdit
                     }
                 ]
             },

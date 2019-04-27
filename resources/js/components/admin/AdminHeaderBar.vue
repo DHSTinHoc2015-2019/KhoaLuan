@@ -231,7 +231,10 @@
                   }
 
                   if($("#main").hasClass("enlarged")) {
-                    $(".left ul").removeAttr("style");
+                    if($(".left ul")[0].hasAttribute("style")){
+                        $(".left ul").removeAttr("style");
+                    }
+                    
                   } else {
                     $(".subdrop").siblings("ul:first").show();
                   }
