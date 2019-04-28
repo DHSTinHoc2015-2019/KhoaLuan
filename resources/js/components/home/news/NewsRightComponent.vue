@@ -11,7 +11,7 @@
 					<div class="container">
 						<div class="post post-widget pt-4 pb-4" v-for="(value, index) in news" v-if="index != news.length - 1">
 							<a class="post-img imgover-small" href="javascript:void(0)" v-if="!checkImageSVG(index)">
-								<img v-bind:src="`images/news/${value.news_image}`" alt="" style="max-height: 200px">
+								<img v-bind:src="`images/news/${value.news_image}`" alt="" style="max-height: 200px" class="img-thumbnail">
 							</a>
 							<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVG(index)" v-html="value.news_image">
 							</a>
@@ -24,7 +24,7 @@
 
 						<div class="post post-widget pt-4 pb-4" style="border-bottom: 0px;" v-for="(value, index) in news" v-if="index == news.length - 1">
 							<a class="post-img imgover-small" href="javascript:void(0)" v-if="!checkImageSVG(index)">
-								<img v-bind:src="`images/news/${value.news_image}`" alt="" style="max-height: 200px">
+								<img v-bind:src="`images/news/${value.news_image}`" alt="" style="max-height: 200px" class="img-thumbnail">
 							</a>
 							<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVG(index)" v-html="value.news_image" style="max-height: 100px; max-width: 100px;border-right: 8px solid black;border-bottom: 8px solid black;">
 							</a>

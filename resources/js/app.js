@@ -51,7 +51,6 @@ import UserDiscussionEdit from './components/home/discussion/update/UserDiscussi
 import NewsComponent from './components/home/news/NewsComponent.vue';
 import NewsDetailsComponent from './components/home/news/newsdetail/NewsDetailsComponent.vue';
 import LibraryComponent from './components/home/library/LibraryComponent.vue';
-// import UserBlogEdit from './components/home/blog/update/UserBlogEdit.vue';
 import UserLibraryImageCreate from './components/home/library/updateimage/UserLibraryImageCreate.vue';
 import UserLibraryVideoCreate from './components/home/library/updatevideo/UserLibraryVideoCreate.vue';
 import UserLibraryDocumentCreate from './components/home/library/updatedocument/UserLibraryDocumentCreate.vue';
@@ -63,6 +62,7 @@ import ForgetPasswordComponent from './components/home/login/ForgetPasswordCompo
 import ForgetActivePasswordComponent from './components/home/login/ForgetActivePasswordComponent.vue';
 import ForgetPasswordChangeComponent from './components/home/login/ForgetPasswordChangeComponent.vue';
 import UserManualComponent from './components/home/usermanual/UserManualComponent.vue';
+import SearchComponent from './components/home/search/SearchComponent.vue';
 
 /*===========Admin==============*/
 import AdminComponent from './components/admin/AdminComponent.vue';
@@ -125,6 +125,17 @@ import Page404Component from './components/pages/Page404Component.vue';
 import LoginComponent from './components/home/login/LoginComponent.vue';
 import RegisterComponent from './components/home/login/RegisterComponent.vue';
 import LoginFacebookComponent from './components/home/login/LoginFacebookComponent.vue';
+// Vue.http.interceptors.push((request, next) =>{
+//     next(response => {
+//         if(response.status == 400){
+//             console.log(response.status)
+//         } else if(response.status == 500){
+//             console.log(response.status)
+//         }
+//     })
+// })
+
+
 
 var routes = [
     /*===========Admin==============*/
@@ -604,6 +615,11 @@ var routes = [
                 component: ForgetPasswordChangeComponent
             },
             {
+                name: 'Search',
+                path: 'timkiem/:tukhoa',
+                component: SearchComponent
+            },
+            {
                 name: 'DemoEmail',
                 path: 'demoemail',
                 component: DemoEmailComponent
@@ -627,6 +643,8 @@ var routes = [
   	
 ];
 
+
+
 var router = new VueRoute({
 	mode: 'history', 
 	routes: routes,
@@ -635,18 +653,15 @@ var router = new VueRoute({
 	}
 });
 
-// router.beforeResolve((to, from, next) => {
-//   if (to.path) {
-//         NProgress.start()
-//         console.log('bat dau')
-//   }
-//   next()
-// });
-
-// router.afterEach(() => {
-//     NProgress.done()
-//     console.log('xong')
-// });
+axios.interceptors.response.use(function (response) {
+    // Do something with response data
+    return response;
+}, function (error) {
+    // Do something with response error
+    router.push({ path : '/'})
+    console.log(error.response)
+    return Promise.reject(error);
+});
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {

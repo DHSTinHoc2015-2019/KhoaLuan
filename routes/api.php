@@ -92,10 +92,13 @@ Route::get('/demo', function (){
 
 Route::get('/demoemail', 'DemoEmailController@index');
 Route::get('/demosendemail', 'DemoEmailController@sendEmail');
-Route::get('/homeadmin', 'HomeController@index');
+
+Route::get('/search/{keyword}', 'HomeController@search');
+
+// Route::get('/homeadmin', 'HomeController@index');
 
 Route::group(['middleware' => 'auth:api'], function(){
-	// Route::get('/homeadmin', 'HomeController@index');
+	Route::get('/homeadmin', 'HomeController@index');
 
 	Route::post('/hometpack/update/{id}', 'HomeTpackController@update');
 	Route::post('/hometpack/create', 'HomeTpackController@create');

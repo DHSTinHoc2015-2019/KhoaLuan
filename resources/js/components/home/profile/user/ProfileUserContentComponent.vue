@@ -75,7 +75,10 @@
 			                            <div class="col-md-6">
 			                                <label>Họ và tên</label>
 			                            </div>
-			                            <div class="col-md-6">
+			                            <div class="col-md-6" v-if="user.display_name != null">
+			                                <p>{{user.display_name}}</p>
+			                            </div>
+			                            <div class="col-md-6" v-else>
 			                                <p>Đang cập nhật</p>
 			                            </div>
 			                        </div>
@@ -83,16 +86,22 @@
 			                            <div class="col-md-6">
 			                                <label>Ngày sinh</label>
 			                            </div>
-			                            <div class="col-md-6">
-			                                <p>Đang cập nhật</p>
+			                            <div class="col-md-6" v-if="user.birthday != null">
+			                                <p>{{user.birthday}}</p>
+			                            </div>
+			                            <div class="col-md-6" v-else>
+			                                 <p>Đang cập nhật</p>
 			                            </div>
 			                        </div>
 			                        <div class="row">
 			                            <div class="col-md-6">
 			                                <label>Giới tính</label>
 			                            </div>
-			                            <div class="col-md-6">
-			                                <p>Đang cập nhật</p>
+			                            <div class="col-md-6" v-if="user.gender != null">
+			                                <p>{{user.gender}}</p>
+			                            </div>
+			                            <div class="col-md-6" v-else>
+			                                 <p>Đang cập nhật</p>
 			                            </div>
 			                        </div>
 			                        <div class="row">
@@ -107,7 +116,10 @@
 			                            <div class="col-md-6">
 			                                <label>Điện thoại</label>
 			                            </div>
-			                            <div class="col-md-6">
+			                            <div class="col-md-6" v-if="user.phone != null">
+			                                 <p>{{user.phone}}</p>
+			                            </div>
+			                            <div class="col-md-6" v-else>
 			                                 <p>Đang cập nhật</p>
 			                            </div>
 			                        </div>
@@ -115,7 +127,10 @@
 			                            <div class="col-md-6">
 			                                <label>Địa chỉ</label>
 			                            </div>
-			                            <div class="col-md-6">
+			                            <div class="col-md-6" v-if="user.address != null">
+			                                 <p>{{user.address}}</p>
+			                            </div>
+			                            <div class="col-md-6" v-else>
 			                                 <p>Đang cập nhật</p>
 			                            </div>
 			                        </div>
@@ -196,7 +211,6 @@
 		created(){
 			this.axios.get(`/api/showuser/${this.$route.params.id}`).then((response) =>{
 				this.user = response.data
-				// console.log(response.data)
 			})
 			this.complete = true
 		},

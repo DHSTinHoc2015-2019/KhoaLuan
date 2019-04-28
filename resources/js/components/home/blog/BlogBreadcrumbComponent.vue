@@ -24,7 +24,7 @@
                     <div class="col-md-4 wow fadeInRight animated" data-wow-duration="500ms" data-wow-delay="600ms">
                         <form class="form-inline">
                             <input class="form-control mr-sm-2 mt-3" type="search" placeholder="Nhập từ khóa">
-                            <button class="btn btn-primary mt-3" type="submit">Tìm kiếm</button>
+                            <button class="btn btn-primary mt-3" type="button" v-on:click="search()">Tìm kiếm</button>
                         </form>
                     </div>
                 </div>
@@ -90,3 +90,19 @@
         color: #000;
     }
 </style>
+
+<script>
+    export default {
+        methods:{
+            search(){
+                var keyword = document.getElementsByTagName('input')[0].value.trim()
+                if(keyword.length == 0){
+                    alertify.set('notifier','position', 'top-center');
+                    alertify.error('Bạn chưa nhập từ khóa. Vui lòng nhập lại');
+                } else {
+                    this.$router.push({ name: 'Search', params: { tukhoa: keyword}})
+                }
+            }
+        }
+    }
+</script>

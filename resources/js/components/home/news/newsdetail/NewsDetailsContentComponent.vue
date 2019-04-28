@@ -121,7 +121,7 @@
 	                this.news = response.data
 	                this.complete = true
 	            }).catch((error) => {
-	                console.log(error)
+	                // alert(error.response.status)
 	            })
 			}
 		}

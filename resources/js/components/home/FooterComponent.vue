@@ -87,10 +87,10 @@
                         <h2 class="ct-footer-list-header">Hỗ trợ</h2>
                         <ul>
                             <li>
-                                <router-link :to="{ path: 'hotro'}">Nội quy</router-link>
+                                <router-link :to="{ path: '/hotro'}">Nội quy</router-link>
                             </li>
                             <li>
-                                <router-link :to="{ path: 'hotro'}">Hỗ trợ, hướng dẫn</router-link>
+                                <router-link :to="{ path: '/hotro'}">Hỗ trợ, hướng dẫn</router-link>
                             </li>
                             <li>
                                 <router-link :to="{ path: '/lienhe'}">Liên hệ quảng cáo</router-link>

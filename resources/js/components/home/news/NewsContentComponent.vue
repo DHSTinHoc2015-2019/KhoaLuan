@@ -22,7 +22,7 @@
 							<div class="col-md-12 wow fadeInLeft animated news-all" data-wow-duration="500ms" data-wow-delay="300ms" v-for="(value, index) in news">
 								<div class="post post-row">
 									<a class="post-img imgover" href="javascript:void(0)" v-if="!checkImageSVG(index)">
-										<img v-bind:src="`images/news/${value.news_image}`" alt="" style="max-height: 200px">
+										<img v-bind:src="`images/news/${value.news_image}`" alt="" style="max-height: 200px" class="img-thumbnail">
 									</a>
 									<a class="post-img imgover" href="javascript:void(0)" v-if="checkImageSVG(index)" v-html="value.news_image">
 									</a>

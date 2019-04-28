@@ -74,7 +74,10 @@
 			                            <div class="col-md-6">
 			                                <label>Họ và tên</label>
 			                            </div>
-			                            <div class="col-md-6">
+			                            <div class="col-md-6" v-if="users.display_name != null">
+			                                <p>{{users.display_name}}</p>
+			                            </div>
+			                            <div class="col-md-6" v-else>
 			                                <p>Đang cập nhật</p>
 			                            </div>
 			                        </div>
@@ -82,16 +85,22 @@
 			                            <div class="col-md-6">
 			                                <label>Ngày sinh</label>
 			                            </div>
-			                            <div class="col-md-6">
-			                                <p>Đang cập nhật</p>
+			                            <div class="col-md-6" v-if="users.birthday != null">
+			                                <p>{{users.birthday}}</p>
+			                            </div>
+			                            <div class="col-md-6" v-else>
+			                                 <p>Đang cập nhật</p>
 			                            </div>
 			                        </div>
 			                        <div class="row">
 			                            <div class="col-md-6">
 			                                <label>Giới tính</label>
 			                            </div>
-			                            <div class="col-md-6">
-			                                <p>Đang cập nhật</p>
+			                            <div class="col-md-6" v-if="users.gender != null">
+			                                <p>{{users.gender}}</p>
+			                            </div>
+			                            <div class="col-md-6" v-else>
+			                                 <p>Đang cập nhật</p>
 			                            </div>
 			                        </div>
 			                        <div class="row">
@@ -106,7 +115,10 @@
 			                            <div class="col-md-6">
 			                                <label>Điện thoại</label>
 			                            </div>
-			                            <div class="col-md-6">
+			                            <div class="col-md-6" v-if="users.phone != null">
+			                                 <p>{{users.phone}}</p>
+			                            </div>
+			                            <div class="col-md-6" v-else>
 			                                 <p>Đang cập nhật</p>
 			                            </div>
 			                        </div>
@@ -114,7 +126,10 @@
 			                            <div class="col-md-6">
 			                                <label>Địa chỉ</label>
 			                            </div>
-			                            <div class="col-md-6">
+			                            <div class="col-md-6" v-if="users.address != null">
+			                                 <p>{{users.address}}</p>
+			                            </div>
+			                            <div class="col-md-6" v-else>
 			                                 <p>Đang cập nhật</p>
 			                            </div>
 			                        </div>
