@@ -16,16 +16,17 @@ class CreateHomesTable extends Migration
         Schema::create('homes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('header');
-            $table->string('header_animation');
-            $table->string('header_content');
+            $table->text('header_animation');
+            $table->text('header_content');
             $table->string('email')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('fax')->nullable();
-            $table->string('address-facebook')->nullable();
-            $table->string('address-twitter')->nullable();
-            $table->string('address-linkedin')->nullable();
-            $table->string('address-google')->nullable();
+            $table->text('facebook')->nullable();
+            $table->text('twitter')->nullable();
+            $table->text('linkedin')->nullable();
+            $table->text('youtube')->nullable();
+            $table->text('video_youtube_intro')->nullable();
             $table->timestamps();
         });
     }

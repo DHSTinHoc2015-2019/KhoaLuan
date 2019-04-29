@@ -6,14 +6,10 @@ require('../assets/css/home/style.css');
 require('../assets/css/home/blog.css');
 require('../assets/css/home/discussion.css');
 require('../assets/css/admin/style.css');
-/*===========Admin==============*/
 require('../assets/plugins/datatable/dataTables.bootstrap4.css');
 
-// require('../assets/css/login/util.css');
-require('../assets/plugins/font-awesome/css/font-awesome.css');
- // window.$ = window.jQuery = require('jquery');
-// import '../assets/js/fastclick.js';
-// import '../assets/js/detect.js';
+/*===========Admin==============*/
+
 import '../assets/plugins/datatable/jquery.dataTables.js';
 
 // Vue.use(NProgress)
@@ -62,7 +58,7 @@ import ForgetPasswordComponent from './components/home/login/ForgetPasswordCompo
 import ForgetActivePasswordComponent from './components/home/login/ForgetActivePasswordComponent.vue';
 import ForgetPasswordChangeComponent from './components/home/login/ForgetPasswordChangeComponent.vue';
 import UserManualComponent from './components/home/usermanual/UserManualComponent.vue';
-import SearchComponent from './components/home/search/SearchComponent.vue';
+import SearchComponent from './components/pages/SearchComponent.vue';
 
 /*===========Admin==============*/
 import AdminComponent from './components/admin/AdminComponent.vue';
@@ -109,6 +105,8 @@ import AdminLibraryDocument from './components/admin/library/document/AdminLibra
 import AdminLibraryDocumentCreate from './components/admin/library/document/AdminLibraryDocumentCreate.vue';
 import AdminLibraryDocumentEdit from './components/admin/library/document/AdminLibraryDocumentEdit.vue';
 
+import AdminSiteInfo from './components/admin/siteinfo/AdminSiteInfo.vue';
+
 import DemoEmailComponent from './components/home/demoemail/DemoEmailComponent.vue';
 
 /*===========Admin demo==============*/
@@ -148,6 +146,31 @@ var routes = [
                 name: 'Admin',
                 path: '',
                 component: AdminHome
+            },
+            {
+                path: 'siteinfo',
+                component: {
+                    render (c) { return c('router-view') }
+                },
+                children: [
+                    {
+                        name: 'AdminSiteInfo',
+                        path: '',
+                        component: AdminSiteInfo
+                    },
+                    // {
+                    //     name: 'ThanhPhanTpackEdit',
+                    //     path: 'edit/:id',
+                    //     component: ThanhPhanTpackEdit,
+                    //     props: true
+                    // },
+                    // {
+                    //     name: 'ThanhPhanTpackCreate',
+                    //     path: 'create',
+                    //     component: ThanhPhanTpackCreate,
+                    //     props: true
+                    // }
+                ]
             },
             {
                 path: 'thanhphantpack',
@@ -658,7 +681,7 @@ axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     // Do something with response error
-    router.push({ path : '/'})
+    // router.push({ path : '/'})
     console.log(error.response)
     return Promise.reject(error);
 });

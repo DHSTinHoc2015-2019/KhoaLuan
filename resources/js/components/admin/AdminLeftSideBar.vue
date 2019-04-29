@@ -11,6 +11,7 @@
                     <li class="submenu">
                         <a href="javascript:void(0)"><i class="fa fa-fw fa-home"></i> <span> Trang chủ </span> <span class="menu-arrow"></span></a>
 							<ul class="list-unstyled">
+								<li><router-link to="/admin/siteinfo">Thông tin chung</router-link></li>
 								<li><router-link to="/admin/thanhphantpack">Thành phần TPACK</router-link></li>
 							</ul>
                     </li>

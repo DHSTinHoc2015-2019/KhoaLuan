@@ -60,7 +60,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">      
                         <div class="card mb-3">
                             <div class="card-header">
-                                <h3><i class="fa fa-line-chart"></i> <b>Thảo luận trong 300 ngày qua</b></h3>
+                                <h3><i class="fa fa-line-chart"></i> <b>Thảo luận trong 30 ngày qua</b></h3>
                             </div>
                                 
                             <div class="card-body">
@@ -117,7 +117,7 @@
             axios.defaults.headers.common['Content-Type'] = 'application/json'
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
             this.axios.get(`/api/homeadmin`).then((response) =>{
-                console.log(response.data)
+                // console.log(response.data)
                 this.sumuser = response.data.sumuser
                 this.sumblog = response.data.sumblog
                 this.sumfeedback = response.data.sumfeedback

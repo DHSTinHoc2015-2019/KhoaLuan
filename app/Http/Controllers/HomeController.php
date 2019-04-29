@@ -8,6 +8,7 @@ use App\Blog;
 use App\Library;
 use App\Contact;
 use App\News;
+use App\Home;
 use DB;
 
 class HomeController extends Controller
@@ -70,6 +71,13 @@ class HomeController extends Controller
             'news' => $news,
             'blogs' => $blogs,
             'discussions' => $discussions,
+        ], 200);
+    }
+
+    function listInfo(){
+        $homes = DB::table('homes')->get()->first();
+        return response()->json([
+            'homes' => $homes
         ], 200);
     }
 }

@@ -99,6 +99,7 @@ Route::get('/search/{keyword}', 'HomeController@search');
 
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/homeadmin', 'HomeController@index');
+	Route::get('/listhomeinfo', 'HomeController@listInfo');
 
 	Route::post('/hometpack/update/{id}', 'HomeTpackController@update');
 	Route::post('/hometpack/create', 'HomeTpackController@create');
