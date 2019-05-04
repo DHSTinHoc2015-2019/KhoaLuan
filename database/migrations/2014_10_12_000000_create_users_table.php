@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('is_admin')->default(false);
             $table->string('activation_code')->nullable();
+            $table->string('display_name')->nullable();
             $table->text('user_image')->nullable();
             $table->string('birthday')->nullable();
             $table->string('gender')->nullable();

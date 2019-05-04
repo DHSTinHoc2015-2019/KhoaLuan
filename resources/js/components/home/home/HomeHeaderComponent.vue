@@ -30,8 +30,8 @@
 </template>
 
 <style>
-    @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700);
-    @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700);
+    /*@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700);*/
+    /*@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700);*/
         #hero-area {
             background: url("../../../../assets/images/tpack.jpg") no-repeat 50%;
             background-size: cover;

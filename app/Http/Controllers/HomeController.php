@@ -76,8 +76,10 @@ class HomeController extends Controller
 
     function listInfo(){
         $homes = DB::table('homes')->get()->first();
+        $links = DB::table('links')->get();
         return response()->json([
-            'homes' => $homes
+            'homes' => $homes,
+            'links' => $links
         ], 200);
     }
 }

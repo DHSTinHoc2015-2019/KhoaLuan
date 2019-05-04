@@ -3,8 +3,8 @@
 // Route::get('/', function () {
 //     return view('tpack');
 // });
-Route::get('/redirect/{social}', 'SocialAuthController@redirect');
-Route::get('/callback/{social}', 'SocialAuthController@callback');
+// Route::get('/redirect/{social}', 'SocialAuthController@redirect');
+// Route::get('/callback/{social}', 'SocialAuthController@callback');
 Route::any('{all}', function () {
     return view('tpack');
 })->where(['all' => '.*']);

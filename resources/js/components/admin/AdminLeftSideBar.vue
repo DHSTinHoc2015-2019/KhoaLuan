@@ -47,6 +47,9 @@
 					<li class="submenu">
                         <router-link :to="{path: '/admin/contact'}"><i class="fa fa-fw fa-telegram"></i><span> Liên hệ </span> </router-link>
                     </li>
+                    <li class="submenu">
+                        <router-link :to="{path: '/admin/account'}"><i class="fa fa-user"></i><span> Người dùng </span> </router-link>
+                    </li>
 
 					<!-- <li class="submenu">
                         <a href="javascript:void(0)"><i class="fa fa-fw fa-table"></i> <span> Demo </span> <span class="menu-arrow"></span></a>

@@ -171,6 +171,13 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('/librarydocument/edit/{id}', 'LibraryController@updateLibraryDocument');
 	Route::get('/librarydocument/delete/{id}', 'LibraryController@deleteLibraryDocument');
 
+	Route::get('/users/index', 'UserController@index');
+	Route::post('/users/create', 'UserController@create');
+	Route::post('/users/edit/{id}', 'UserController@edit');
+	Route::get('/users/showid/{id}', 'UserController@showid');
+	Route::get('/users/delete/{id}', 'UserController@delete');
+
+
 });
 
 /*=========Demo============*/

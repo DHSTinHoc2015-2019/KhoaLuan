@@ -27,6 +27,7 @@ class CreateHomesTable extends Migration
             $table->text('linkedin')->nullable();
             $table->text('youtube')->nullable();
             $table->text('video_youtube_intro')->nullable();
+            $table->text('link_serve_nodejs')->nullable();
             $table->timestamps();
         });
     }

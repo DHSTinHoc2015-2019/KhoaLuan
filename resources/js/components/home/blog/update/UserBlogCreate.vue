@@ -26,7 +26,7 @@
 									<div class="form-group">
 										<div class="form-group">
 											<label class="font-weight-bold">Mô tả</label>
-											<textarea class="form-control" id="" rows="10" v-model="blogs.description"></textarea>
+											<textarea class="form-control" id="" rows="5" v-model="blogs.description"></textarea>
 										</div>
 									</div>
 								</div>

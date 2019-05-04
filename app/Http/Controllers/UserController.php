@@ -15,7 +15,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        return response()->json(User::all()->get());
+        $user = DB::table('users')->get();
+        return response()->json($user, 200);
+        // return response()->json("aaaaaaaa", 200);
     }
 
     public function login(Request $request){
@@ -187,5 +189,86 @@ class UserController extends Controller
         // return response()->json([
         //     'status' => $status
         // ], 200);
+    }
+
+    function create(Request $request){
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->is_admin = filter_var((string)$request->is_admin, FILTER_VALIDATE_BOOLEAN)? 1 : 0;
+        $user->display_name = $request->display_name;
+        $user->birthday =  $request->birthday;
+        $user->gender = $request->gender;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->introduce_yourself = $request->introduce_yourself;
+        $user->password = bcrypt($request->password);
+
+        if ($request->hasFile('file')) {
+            $imageName = time().$request->file->getClientOriginalName();
+            $request->file->move(public_path('images/users/'), $imageName);
+            $user->user_image = $imageName;
+        }
+
+        $user->email_verified_at = date("Y-m-d");
+
+        $status = $user->save();
+
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Thêm tài khoản thành công' : "Thêm tài khoản thất bại",
+        ]);
+    }
+
+    public function showid($id){
+        $user = User::findOrFail($id);
+        return response()->json([
+            'user' => $user
+        ], 200);
+    }
+
+    public function edit(Request $request, $id){
+        $user = User::findOrFail($id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->is_admin = filter_var((string)$request->is_admin, FILTER_VALIDATE_BOOLEAN)? 1 : 0;
+        $user->display_name = $request->display_name;
+        $user->birthday =  $request->birthday;
+        $user->gender = $request->gender;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->introduce_yourself = $request->introduce_yourself;
+
+        if ($request->hasFile('file')) {
+            $imageName = time().$request->file->getClientOriginalName();
+            $request->file->move(public_path('images/users/'), $imageName);
+            if (file_exists('images/users/' . $user->user_image)) {
+                unlink('images/users/' . $user->user_image);
+            }
+            $user->user_image = $imageName;
+        }
+
+        $status = $user->save();
+
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Chỉnh sửa tài khoản thành công' : "Chỉnh sửa tài khoản thất bại",
+        ]);
+    }
+
+     public function delete($id){
+        $user = User::findOrFail($id);
+
+        if (file_exists('images/users/' . $user->user_image)) {
+            unlink('images/users/' . $user->user_image);
+        }
+
+        $status = $user->delete();
+
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Xóa dữ liệu thành công' : "Xóa dữ liệu thất bại"
+        ]);
     }
 }

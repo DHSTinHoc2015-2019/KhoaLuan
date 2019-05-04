@@ -2355,7 +2355,7 @@
         display: block;
     }
 
-    button,
+   /* button,
     .button {
         cursor: pointer;
         font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
@@ -2370,7 +2370,6 @@
         padding-right: 2rem;
         padding-bottom: 1.0625rem;
         padding-left: 2rem;
-        /*font-size: 1rem;*/
         background-color: #008cba;
         border-color: #0079a1;
         color: white;
@@ -2382,7 +2381,7 @@
         -webkit-appearance: none;
         border: none;
         font-weight: normal !important;
-    }
+    }*/
 
     button:hover,
     button:focus,
@@ -6014,7 +6013,7 @@
 
     /* We use this to get basic styling on all basic form elements */
 
-    input[type="text"],
+ /*   input[type="text"],
     input[type="password"],
     input[type="date"],
     input[type="datetime"],
@@ -6038,7 +6037,6 @@
         box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
         color: rgba(0, 0, 0, 0.75);
         display: block;
-        /*font-size: 0.875rem;*/
         margin: 0 0 1rem 0;
         padding: 0.5rem;
         height: 2.3125rem;
@@ -6049,7 +6047,7 @@
         -webkit-transition: -webkit-box-shadow 0.45s, border-color 0.45s ease-in-out;
         -moz-transition: -moz-box-shadow 0.45s, border-color 0.45s ease-in-out;
         transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
-    }
+    }*/
 
     input[type="text"]:focus,
     input[type="password"]:focus,

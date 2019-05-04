@@ -7,16 +7,16 @@
 			<div class="container-fluid">
 							
 				<div class="row">
-						<div class="col-xl-12">
-								<div class="breadcrumb-holder">
-										<h1 class="main-title float-left font-weight-bold text-uppercase">Thành phần Tpack</h1>
-										<ol class="breadcrumb float-right">
-											<li class="breadcrumb-item">Admin</li>
-											<li class="breadcrumb-item active">Thành phần Tpack</li>
-										</ol>
-										<div class="clearfix"></div>
-								</div>
+					<div class="col-xl-12">
+						<div class="breadcrumb-holder">
+							<h1 class="main-title float-left font-weight-bold text-uppercase">Thành phần TPACK</h1>
+							<ol class="breadcrumb float-right">
+								<li class="breadcrumb-item">Admin</li>
+								<li class="breadcrumb-item active">Thành phần TPACK</li>
+							</ol>
+							<div class="clearfix"></div>
 						</div>
+					</div>
 				</div>
 				<!-- end row -->
 
@@ -24,7 +24,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-12">						
 						<div class="card mb-3">
 							<div class="card-header">
-								<h3><i class="fa fa-table"></i> Thành phần Tpack
+								<h3><i class="fa fa-table"></i> Thành phần TPACK
 									<router-link class="btn btn-primary btn-sm float-right" :to="{ name: 'ThanhPhanTpackCreate' }">Thêm</router-link></h3>
 							</div>
 
@@ -80,7 +80,7 @@
 		},
 		created: function(){
 			var vm = this
-			this.axios.get('/api/listhometpack/').then(function(response){
+			this.axios.get('/api/listhometpack').then(function(response){
 				vm.hometpacks = response.data
 			}).catch(error => {
                 console.error(error);

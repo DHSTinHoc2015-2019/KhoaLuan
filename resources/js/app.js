@@ -107,6 +107,10 @@ import AdminLibraryDocumentEdit from './components/admin/library/document/AdminL
 
 import AdminSiteInfo from './components/admin/siteinfo/AdminSiteInfo.vue';
 
+import AdminAccount from './components/admin/account/AdminAccount.vue';
+import AdminAccountCreate from './components/admin/account/AdminAccountCreate.vue';
+import AdminAccountEdit from './components/admin/account/AdminAccountEdit.vue';
+
 import DemoEmailComponent from './components/home/demoemail/DemoEmailComponent.vue';
 
 /*===========Admin demo==============*/
@@ -397,6 +401,29 @@ var routes = [
                         component: AdminDiscussionMore
                     }
                 ]
+            },,
+            {
+                path: 'account',
+                component:{
+                    render (c) { return c('router-view') }
+                },
+                children:[
+                    {
+                        name: 'AdminAccount',
+                        path: '',
+                        component: AdminAccount
+                    },
+                    {
+                        name: 'AdminAccountCreate',
+                        path: 'create',
+                        component: AdminAccountCreate
+                    },,
+                    {
+                        name: 'AdminAccountEdit',
+                        path: 'edit/:id',
+                        component: AdminAccountEdit
+                    },
+                ]
             },
             {
                 name: 'AdminProfile',
@@ -653,11 +680,11 @@ var routes = [
                 component: DemoCharJSComponent
             },
             /*===========Page404==============*/
-            // {
-            //     name: 'Page404',
-            //     path: '*',
-            //     component: Page404Component
-            // }
+            {
+                name: 'Page404',
+                path: '*',
+                component: Page404Component
+            }
         	
 
         ]
