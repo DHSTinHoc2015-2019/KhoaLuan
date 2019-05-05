@@ -16,4 +16,9 @@ class RuleController extends Controller
     		'usermanual' => $usermanual
     	], 200);
     }
+
+    function show($id){
+    	$rule = Rule::findOrFail($id);
+    	return response()->json($rule, 200);
+    }
 }

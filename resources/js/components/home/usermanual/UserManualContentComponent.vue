@@ -1,8 +1,11 @@
 <template>
 	<!-- section -->
 	<div class="section">
+		<div v-if="!complete" class="pt-5" style="min-height: 50vh">
+            <div class="loading-spinner"></div>
+        </div>
 		<!-- container -->
-		<div class="container">
+		<div class="container" v-if="complete">
 			<!-- row -->
 			<div class="row">
 				<div class="col-md-6 wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="300ms">
@@ -11,7 +14,7 @@
 				    <div class="numberlist">
 				        <ol>
 				            <li v-for="(value, index) in rules">
-				            	<a href="javascript:void(0)">{{ value.title }}</a>
+				            	<router-link :to="{name:'RuleDetail', params: {id: value.id}}">{{ value.title }}</router-link>
 				            </li>
 				        </ol>
 				    </div>
@@ -24,7 +27,7 @@
 					    <div class="numberlist">
 					        <ol>
 					            <li v-for="(value, index) in usermanual">
-					            	<a href="javascript:void(0)">{{ value.title }}</a>
+					            	<router-link :to="{ name: 'UserManualDetail', params: {id: value.id}}">{{ value.title }}</router-link>
 					            </li>
 					        </ol>
 					    </div>
@@ -43,7 +46,8 @@
 		data() {
 			return {
 				rules: {},
-				usermanual: {}
+				usermanual: {},
+				complete: false
 			}
 		},
 		created(){
@@ -51,6 +55,7 @@
 				// console.log(response.data)
 				this.rules = response.data.rule
 				this.usermanual = response.data.usermanual
+				this.complete = true
 			})
 		}
 	}

@@ -34,26 +34,30 @@ Route::get('/callback/{social}', 'SocialAuthController@callback');
 /*=========Homepage============*/
 Route::get('listhometpack', 'HomeTpackController@index');
 Route::get('/introduction','IntroductionController@index');
-Route::get('/news','NewsController@index');
-Route::get('/news/paginate', 'NewsController@paginate');
-Route::get('/news/showall','NewsController@showAll');
-Route::get('/news/readmore/{id}','NewsController@show');
-Route::get('/news/featured','NewsController@showFeatured');
 
-Route::get('/blog','BlogController@index');
-Route::get('/blog/paginate', 'BlogController@paginate');
-Route::get('/blog/readmore/{id}','BlogController@show');
-Route::get('/blog/new','BlogController@new');
-Route::get('/blog/bloghighlight','BlogController@bloghighlight');
-Route::get('/blog/mostview','BlogController@mostView');
-Route::get('/blog/{id}','BlogController@showWithId');
-Route::get('/blog/incrementview/{id}','BlogController@incrementView');
+Route::group(['prefix'=>'news'], function(){
+    Route::get('','NewsController@index');
+	Route::get('paginate', 'NewsController@paginate');
+	Route::get('showall','NewsController@showAll');
+	Route::get('readmore/{id}','NewsController@show');
+	Route::get('featured','NewsController@showFeatured');
+});
 
-//Chi tiết Blog với comment
-Route::get('/blog/user/{id}','BlogController@userBlogWithComment');
+Route::group(['prefix'=>'blog'], function(){
+    Route::get('','BlogController@index');
+	Route::get('paginate', 'BlogController@paginate');
+	Route::get('readmore/{id}','BlogController@show');
+	Route::get('new','BlogController@new');
+	Route::get('bloghighlight','BlogController@bloghighlight');
+	Route::get('mostview','BlogController@mostView');
+	Route::get('{id}','BlogController@showWithId');
+	Route::get('incrementview/{id}','BlogController@incrementView');
+	//Chi tiết Blog với comment
+	Route::get('user/{id}','BlogController@userBlogWithComment');
+});
+
 
 Route::get('/discussionwithtype/{id_discussion_type}/paginate', 'DiscussionController@paginate');
-// Route::get('/discussion/user/showwithtype/{id}','DiscussionController@showWithType');
 Route::get('/discussiontype','DiscussionTypeController@index');
 Route::get('/discussion','DiscussionController@index');
 Route::get('/discussion/incrementview/{id}','DiscussionController@incrementView');
@@ -65,13 +69,17 @@ Route::get('/likediscussion/user/{id_discussion}','LikeDiscussionController@inde
 
 Route::get('/likeblog/user/{id}','LikeBlogController@indexUser');
 
-Route::get('/library/paginate/image','LibraryController@imagePaginate');
-Route::get('/library/paginate/video','LibraryController@videoPaginate');
-Route::get('/library/paginate/document','LibraryController@documentPaginate');
+Route::group(['prefix'=>'library/paginate'], function(){
+    Route::get('image','LibraryController@imagePaginate');
+	Route::get('video','LibraryController@videoPaginate');
+	Route::get('document','LibraryController@documentPaginate');
+});
 
-Route::post('/contact/create','ContactController@create');
-Route::get('/contact/index','ContactController@index');
-Route::get('/contact/delete/{id}','ContactController@delete');
+Route::group(['prefix'=>'contact'], function(){
+    Route::post('create','ContactController@create');
+	Route::get('index','ContactController@index');
+	Route::get('delete/{id}','ContactController@delete');
+});
 
 Route::get('/libraryimage', 'LibraryController@getDataLibraryImage');
 Route::get('/libraryvideo', 'LibraryController@getDataLibraryVideo');
@@ -79,17 +87,13 @@ Route::get('/librarydocument', 'LibraryController@getDataLibraryDocument');
 
 Route::get('/help','RuleController@index');
 
-Route::get('/demo', function (){
-	try {
-		$blog = DB::table('like_discussions')->where('id_discussion', 1)->where('is_liked', true)->get();
-		return response()->json($blog, 200);
-	} catch (Exception $e) {
-		$blog = App\Blog::findOrFail(1);
-		return response()->json($blog, 200);
-	}
-	
+Route::group(['prefix'=>'usermanual'], function(){
+   	Route::get('show/{id}', 'UserManualController@show');
 });
 
+Route::group(['prefix'=>'rule'], function(){
+   	Route::get('show/{id}', 'RuleController@show');
+});
 Route::get('/demoemail', 'DemoEmailController@index');
 Route::get('/demosendemail', 'DemoEmailController@sendEmail');
 
@@ -100,90 +104,131 @@ Route::get('/listhomeinfo', 'HomeController@listInfo');
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/homeadmin', 'HomeController@index');
 	
-
-	Route::post('/hometpack/update/{id}', 'HomeTpackController@update');
-	Route::post('/hometpack/create', 'HomeTpackController@create');
-	Route::get('/hometpack/delete/{id}', 'HomeTpackController@delete');
-	Route::get('/hometpack/{id}', 'HomeTpackController@show');
-
-	Route::get('/news/edit/{id}','NewsController@showedit');
-	Route::post('/news/update/{id}','NewsController@update');
-	Route::post('/news/create','NewsController@create');
-	Route::get('/news/delete/{id}','NewsController@delete');
-
-	Route::post('/blog/create','BlogController@create');
-	Route::get('/blog/delete/{id}','BlogController@delete');
-	Route::get('/blog/show/{id}','BlogController@show');
-	Route::post('/blog/update/{id}','BlogController@update');
-	Route::post('/blog/updateuser/{id}','BlogController@updateUser');
-	//Lấy toàn bộ comment, commentdetai, blog với id_blog
-	Route::get('/blog/showwithcomment/{id}','BlogController@showWithComment');
-
-	Route::post('/discussiontype/create', 'DiscussionTypeController@create');
-	Route::get('/discussiontype/delete/{id}', 'DiscussionTypeController@delete');
-	Route::get('/discussiontype/show/{id}','DiscussionTypeController@show');
-	Route::post('/discussiontype/update/{id}','DiscussionTypeController@update');
-
-	Route::get('/discussion/showall','DiscussionController@showAll');
-	Route::post('/discussion/create', 'DiscussionController@create');
-	Route::get('/discussion/delete/{id}', 'DiscussionController@delete');
-	Route::get('/discussion/show/{id}','DiscussionController@show');
-	Route::get('/discussion/showwithtype/{id}','DiscussionController@showWithType');
-	Route::post('/discussion/update/{id}','DiscussionController@update');
-	//Lấy toàn bộ comment, commentdetai, dicussion với id_discussion
-	Route::get('/discussion/showwithcomment/{id}','DiscussionController@showWithComment');
-
-	Route::post('/commentdiscussion/create', 'CommentDiscussionController@create');
-	Route::get('/commentdiscussion/delete/{id}','CommentDiscussionController@delete');
-	Route::post('/commentdiscussion/update','CommentDiscussionController@update');
-
-	Route::post('/commentblog/create', 'CommentBlogController@create');
-	Route::get('/commentblog/delete/{id}','CommentBlogController@delete');
-	Route::post('/commentblog/update','CommentBlogController@update');
+	Route::group(['prefix'=>'hometpack'], function(){
+	    Route::post('update/{id}', 'HomeTpackController@update');
+		Route::post('create', 'HomeTpackController@create');
+		Route::get('delete/{id}', 'HomeTpackController@delete');
+		Route::get('{id}', 'HomeTpackController@show');
+	});
 	
-	Route::get('/likediscussion/admin/{id_user}/{id_discussion}','LikeDiscussionController@indexAdmin');
-	Route::post('/likediscussion/admin/change','LikeDiscussionController@change');
+	Route::group(['prefix'=>'news'], function(){
+	    Route::get('edit/{id}','NewsController@showedit');
+		Route::post('update/{id}','NewsController@update');
+		Route::post('create','NewsController@create');
+		Route::get('delete/{id}','NewsController@delete');
+	});
+	
+	Route::group(['prefix'=>'blog'], function(){
+	    Route::post('create','BlogController@create');
+		Route::get('delete/{id}','BlogController@delete');
+		Route::get('show/{id}','BlogController@show');
+		Route::post('update/{id}','BlogController@update');
+		Route::post('updateuser/{id}','BlogController@updateUser');
+		//Lấy toàn bộ comment, commentdetai, blog với id_blog
+		Route::get('showwithcomment/{id}','BlogController@showWithComment');
+	});
+	
+	Route::group(['prefix'=>'discussiontype'], function(){
+	    Route::post('create', 'DiscussionTypeController@create');
+		Route::get('delete/{id}', 'DiscussionTypeController@delete');
+		Route::get('show/{id}','DiscussionTypeController@show');
+		Route::post('update/{id}','DiscussionTypeController@update');
+	});
 
-	Route::post('/commentdetaildiscussion/create','CommentDetailDiscussionController@create');
-	Route::post('/commentdetaildiscussion/update','CommentDetailDiscussionController@update');
-	Route::get('/commentdetaildiscussion/delete/{id}','CommentDetailDiscussionController@delete');
+	Route::group(['prefix'=>'discussion'], function(){
+	    Route::get('showall','DiscussionController@showAll');
+		Route::post('create', 'DiscussionController@create');
+		Route::get('delete/{id}', 'DiscussionController@delete');
+		Route::get('show/{id}','DiscussionController@show');
+		Route::get('showwithtype/{id}','DiscussionController@showWithType');
+		Route::post('update/{id}','DiscussionController@update');
+		//Lấy toàn bộ comment, commentdetai, dicussion với id_discussion
+		Route::get('showwithcomment/{id}','DiscussionController@showWithComment');
+	});
 
-	Route::post('/commentdetailblog/create','CommentDetailBlogController@create');
-	Route::post('/commentdetailblog/update','CommentDetailBlogController@update');
-	Route::get('/commentdetailblog/delete/{id}','CommentDetailBlogController@delete');
+	Route::group(['prefix'=>'commentdiscussion'], function(){
+	    Route::post('create', 'CommentDiscussionController@create');
+		Route::get('delete/{id}','CommentDiscussionController@delete');
+		Route::post('update','CommentDiscussionController@update');
+	});
 
-	Route::get('/likeblog/admin/{id_user}/{id_blog}','LikeBlogController@indexAdmin');
-	Route::post('/likeblog/admin/change','LikeBlogController@change');
+	Route::group(['prefix'=>'commentblog'], function(){
+	    Route::post('create', 'CommentBlogController@create');
+		Route::get('delete/{id}','CommentBlogController@delete');
+		Route::post('update','CommentBlogController@update');
+	});
+
+	Route::group(['prefix'=>'likediscussion/admin'], function(){
+	    Route::get('{id_user}/{id_discussion}','LikeDiscussionController@indexAdmin');
+		Route::post('change','LikeDiscussionController@change');
+	});
+
+	Route::group(['prefix'=>'commentdetaildiscussion'], function(){
+	    Route::post('create','CommentDetailDiscussionController@create');
+		Route::post('update','CommentDetailDiscussionController@update');
+		Route::get('delete/{id}','CommentDetailDiscussionController@delete');
+	});
+
+	Route::group(['prefix'=>'commentdetailblog'], function(){
+	    Route::post('create','CommentDetailBlogController@create');
+		Route::post('update','CommentDetailBlogController@update');
+		Route::get('delete/{id}','CommentDetailBlogController@delete');
+	});
+
+	Route::group(['prefix'=>'likeblog/admin'], function(){
+	    Route::get('{id_user}/{id_blog}','LikeBlogController@indexAdmin');
+		Route::post('change','LikeBlogController@change');
+	});
+
 
 	Route::post('/introduction/update','IntroductionController@update');
 
 	Route::post('/changepassword/{id}', 'UserController@changePassword');
 
-	Route::post('/library/image/create', 'LibraryController@createImage');
-	Route::post('/library/video/create', 'LibraryController@createVideo');
-	Route::post('/library/document/create', 'LibraryController@createDocument');
+	Route::group(['prefix'=>'library'], function(){
+	   	Route::post('image/create', 'LibraryController@createImage');
+		Route::post('video/create', 'LibraryController@createVideo');
+		Route::post('document/create', 'LibraryController@createDocument');
+		Route::get('show/{id}', 'LibraryController@showLibrary');
+	});
+
+	Route::group(['prefix'=>'libraryimage'], function(){
+	   	Route::post('edit/{id}', 'LibraryController@updateLibraryImage');
+		Route::get('delete/{id}', 'LibraryController@deleteLibraryImage');
+	});
+
+	Route::group(['prefix'=>'libraryvideo'], function(){
+	   	Route::post('edit/{id}', 'LibraryController@updateLibraryVideo');
+		Route::get('delete/{id}', 'LibraryController@deleteLibraryVideo');
+	});
+
+	Route::group(['prefix'=>'librarydocument'], function(){
+	   	Route::post('edit/{id}', 'LibraryController@updateLibraryDocument');
+		Route::get('delete/{id}', 'LibraryController@deleteLibraryDocument');
+	});
 	
-	Route::get('/library/show/{id}', 'LibraryController@showLibrary');
-	Route::post('/libraryimage/edit/{id}', 'LibraryController@updateLibraryImage');
-	Route::get('/libraryimage/delete/{id}', 'LibraryController@deleteLibraryImage');
-	Route::post('/libraryvideo/edit/{id}', 'LibraryController@updateLibraryVideo');
-	Route::get('/libraryvideo/delete/{id}', 'LibraryController@deleteLibraryVideo');
-	Route::post('/librarydocument/edit/{id}', 'LibraryController@updateLibraryDocument');
-	Route::get('/librarydocument/delete/{id}', 'LibraryController@deleteLibraryDocument');
+	Route::group(['prefix'=>'users'], function(){
+	   	Route::get('index', 'UserController@index');
+		Route::post('create', 'UserController@create');
+		Route::post('edit/{id}', 'UserController@edit');
+		Route::get('showid/{id}', 'UserController@showid');
+		Route::get('delete/{id}', 'UserController@delete');
+	});
 
-	Route::get('/users/index', 'UserController@index');
-	Route::post('/users/create', 'UserController@create');
-	Route::post('/users/edit/{id}', 'UserController@edit');
-	Route::get('/users/showid/{id}', 'UserController@showid');
-	Route::get('/users/delete/{id}', 'UserController@delete');
+	Route::group(['prefix'=>'homes/edit'], function(){
+	   	Route::post('headers', 'HomeController@editHeader');
+		Route::post('contact', 'HomeController@editContact');
+		Route::post('social', 'HomeController@editSocial');
+		Route::post('linknodejs', 'HomeController@editLinkNodejs');
+	});
 
-	Route::post('/homes/edit/headers', 'HomeController@editHeader');
-	Route::post('/homes/edit/contact', 'HomeController@editContact');
-	Route::post('/homes/edit/social', 'HomeController@editSocial');
-	Route::post('/homes/edit/linknodejs', 'HomeController@editLinkNodejs');
+	Route::group(['prefix'=>'links'], function(){
+	   	Route::post('create', 'LinkController@create');
+		Route::get('delete/{id}', 'LinkController@delete');
+	});
 
-	Route::post('/links/create', 'LinkController@create');
-	Route::get('/links/delete/{id}', 'LinkController@delete');
+
+
 
 });
 

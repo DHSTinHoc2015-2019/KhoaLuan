@@ -58,6 +58,8 @@ import ForgetPasswordComponent from './components/home/login/ForgetPasswordCompo
 import ForgetActivePasswordComponent from './components/home/login/ForgetActivePasswordComponent.vue';
 import ForgetPasswordChangeComponent from './components/home/login/ForgetPasswordChangeComponent.vue';
 import UserManualComponent from './components/home/usermanual/UserManualComponent.vue';
+import UserManualDetailComponent from './components/home/usermanual/usermanualdetail/UserManualDetailComponent.vue';
+import RuleDetailComponent from './components/home/usermanual/ruledetail/RuleDetailComponent.vue';
 import SearchComponent from './components/pages/SearchComponent.vue';
 
 /*===========Admin==============*/
@@ -635,9 +637,27 @@ var routes = [
                 component: RegisterComponent
             },
             {
-                name: 'UserManual',
                 path: 'hotro',
-                component: UserManualComponent
+                component: {
+                    render (c) { return c('router-view') }
+                },
+                children:[
+                    {
+                        path: '',
+                        component: UserManualComponent,
+                        name: 'UserManual'
+                    },
+                    {
+                        path: 'huongdansudung/:id',
+                        component: UserManualDetailComponent,
+                        name: 'UserManualDetail'
+                    },
+                    {
+                        name: 'RuleDetail',
+                        path: 'noiquy/:id',
+                        component: RuleDetailComponent
+                    },
+                ]
             },
             {
                 name: 'LoginFacebook',
