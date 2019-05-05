@@ -1,6 +1,11 @@
 <template>
-	<!-- section -->
-	<div class="section mb-5">
+	
+	<div>
+		<div v-if="!complete" class="pt-5" style="min-height: 50vh">
+            <div class="loading-spinner"></div>
+        </div>
+        <!-- section -->
+        <div class="section mb-5" v-if="complete">
 		<!-- container -->
 		<div class="container">
 			<!-- row -->
@@ -13,18 +18,21 @@
 		<!-- /container -->
 	</div>
 	<!-- /section -->
+	</div>
 </template>
 
 <script>
 	export default {
 		data() {
 			return {
-				intros: {}
+				intros: {},
+				complete: false
 			}
 		},
 		created(){
 			this.axios.get('/api/introduction').then((response) => {
 				this.intros = response.data
+				this.complete = true
 			})
 		}
 	}

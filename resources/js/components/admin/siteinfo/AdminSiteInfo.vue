@@ -310,7 +310,6 @@
 	export default {
 		data(){
 			return {
-				library_video: {},
 				contentanimation: '',
 				homes: {},
 				showlistani: false,
@@ -448,8 +447,6 @@
 				})	
 			},
 			getData(){
-				axios.defaults.headers.common['Content-Type'] = 'application/json'
-				axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('tpack.jwt')
 				this.axios.get('/api/listhomeinfo').then((response) => {
 					// console.log(response.data)
 					this.homes = response.data.homes
