@@ -82,4 +82,61 @@ class HomeController extends Controller
             'links' => $links
         ], 200);
     }
+
+    function editHeader(Request $request){
+        $home = Home::findOrFail(1);
+        $home->header = $request->header;
+        $home->header_content = $request->header_content;
+        $home->header_animation = $request->header_animation;
+
+        $status = $home->save();
+        
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Cập nhật dữ liệu thành công' : "Cập nhật dữ liệu thất bại",
+        ]);
+    }
+
+    function editContact(Request $request){
+        $home = Home::findOrFail(1);
+        $home->email = $request->email;
+        $home->phone = $request->phone;
+        $home->address = $request->address;
+        $home->fax = $request->fax;
+
+        $status = $home->save();
+        
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Cập nhật dữ liệu thành công' : "Cập nhật dữ liệu thất bại",
+        ]);
+    }
+
+    function editSocial(Request $request){
+        $home = Home::findOrFail(1);
+        $home->facebook = $request->facebook;
+        $home->twitter = $request->twitter;
+        $home->linkedin = $request->linkedin;
+        $home->youtube = $request->youtube;
+        $home->video_youtube_intro = $request->video_youtube_intro;
+
+        $status = $home->save();
+        
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Cập nhật dữ liệu thành công' : "Cập nhật dữ liệu thất bại",
+        ]);
+    }
+
+    function editLinkNodejs(Request $request){
+        $home = Home::findOrFail(1);
+        $home->link_serve_nodejs = $request->link_serve_nodejs;
+
+        $status = $home->save();
+        
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Cập nhật dữ liệu thành công' : "Cập nhật dữ liệu thất bại",
+        ]);
+    }
 }

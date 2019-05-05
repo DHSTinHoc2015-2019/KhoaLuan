@@ -177,6 +177,13 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/users/showid/{id}', 'UserController@showid');
 	Route::get('/users/delete/{id}', 'UserController@delete');
 
+	Route::post('/homes/edit/headers', 'HomeController@editHeader');
+	Route::post('/homes/edit/contact', 'HomeController@editContact');
+	Route::post('/homes/edit/social', 'HomeController@editSocial');
+	Route::post('/homes/edit/linknodejs', 'HomeController@editLinkNodejs');
+
+	Route::post('/links/create', 'LinkController@create');
+	Route::get('/links/delete/{id}', 'LinkController@delete');
 
 });
 

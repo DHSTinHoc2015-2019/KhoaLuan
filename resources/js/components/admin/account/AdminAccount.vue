@@ -118,10 +118,6 @@
 			} );
 		},
 		methods:{
-			checkImageSVG(index){
-				
-				return false;
-			},
 			deleteUser(index, id){
 				var vm = this
 				alertify.confirm('Thông báo', 'Bạn muốn xóa dữ liệu?', function(){ 
