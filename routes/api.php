@@ -91,10 +91,16 @@ Route::group(['prefix'=>'usermanual'], function(){
    	Route::get('show/{id}', 'UserManualController@show');
 });
 
+Route::group(['prefix'=>'usermanual'], function(){
+   	// Route::get('show/{id}', 'RuleController@show');
+   	Route::get('getlist', 'UserManualController@getList');
+});
+
 Route::group(['prefix'=>'rule'], function(){
    	Route::get('show/{id}', 'RuleController@show');
    	Route::get('getlist', 'RuleController@getList');
 });
+
 Route::get('/demoemail', 'DemoEmailController@index');
 Route::get('/demosendemail', 'DemoEmailController@sendEmail');
 
@@ -233,6 +239,13 @@ Route::group(['middleware' => 'auth:api'], function(){
 	   	Route::post('update/{id}', 'RuleController@update');
 	   	Route::get('show/{id}', 'RuleController@show');
 		Route::get('delete/{id}', 'RuleController@delete');
+	});
+
+	Route::group(['prefix'=>'usermanuals'], function(){
+	   	Route::post('create', 'UserManualController@create');
+	   	Route::post('update/{id}', 'UserManualController@update');
+	   	Route::get('show/{id}', 'UserManualController@show');
+		Route::get('delete/{id}', 'UserManualController@delete');
 	});
 
 });

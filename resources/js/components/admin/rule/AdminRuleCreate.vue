@@ -79,7 +79,7 @@
 		mounted(){
 			$(document).ready(function() {
 				if( tinymce.editors.length > 0 ){
-					for( i = 0; i < tinymce.editors.length; i++ ){
+					for(var i = 0; i < tinymce.editors.length; i++ ){
             			tinymce.editors[ i ].remove();
          			}
       			}

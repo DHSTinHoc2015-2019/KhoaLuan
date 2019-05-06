@@ -113,6 +113,10 @@ import AdminRule from './components/admin/rule/AdminRule.vue';
 import AdminRuleCreate from './components/admin/rule/AdminRuleCreate.vue';
 import AdminRuleEdit from './components/admin/rule/AdminRuleEdit.vue';
 
+import AdminUserManual from './components/admin/usermanual/AdminUserManual.vue';
+import AdminUserManualCreate from './components/admin/usermanual/AdminUserManualCreate.vue';
+import AdminUserManualEdit from './components/admin/usermanual/AdminUserManualEdit.vue';
+
 import AdminAccount from './components/admin/account/AdminAccount.vue';
 import AdminAccountCreate from './components/admin/account/AdminAccountCreate.vue';
 import AdminAccountEdit from './components/admin/account/AdminAccountEdit.vue';
@@ -383,6 +387,29 @@ var routes = [
                         name: 'AdminRuleEdit',
                         path: 'edit/:id',
                         component: AdminRuleEdit
+                    }
+                ]
+            },
+            {
+                path: 'usermanual',
+                component:{
+                    render (c) { return c('router-view') }
+                },
+                children:[
+                    {
+                        name: 'AdminUserManual',
+                        path: '',
+                        component: AdminUserManual
+                    },
+                    {
+                        name: 'AdminUserManualCreate',
+                        path: 'create',
+                        component: AdminUserManualCreate
+                    },
+                    {
+                        name: 'AdminUserManualEdit',
+                        path: 'edit/:id',
+                        component: AdminUserManualEdit
                     }
                 ]
             },
