@@ -286,6 +286,7 @@
 <style scoped>
     .image {
         cursor: pointer;
+        height: 150px;
     }
 
     .blog-title {
