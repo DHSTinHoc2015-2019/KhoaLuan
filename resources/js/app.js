@@ -109,6 +109,10 @@ import AdminLibraryDocumentEdit from './components/admin/library/document/AdminL
 
 import AdminSiteInfo from './components/admin/siteinfo/AdminSiteInfo.vue';
 
+import AdminRule from './components/admin/rule/AdminRule.vue';
+import AdminRuleCreate from './components/admin/rule/AdminRuleCreate.vue';
+import AdminRuleEdit from './components/admin/rule/AdminRuleEdit.vue';
+
 import AdminAccount from './components/admin/account/AdminAccount.vue';
 import AdminAccountCreate from './components/admin/account/AdminAccountCreate.vue';
 import AdminAccountEdit from './components/admin/account/AdminAccountEdit.vue';
@@ -163,19 +167,7 @@ var routes = [
                         name: 'AdminSiteInfo',
                         path: '',
                         component: AdminSiteInfo
-                    },
-                    // {
-                    //     name: 'ThanhPhanTpackEdit',
-                    //     path: 'edit/:id',
-                    //     component: ThanhPhanTpackEdit,
-                    //     props: true
-                    // },
-                    // {
-                    //     name: 'ThanhPhanTpackCreate',
-                    //     path: 'create',
-                    //     component: ThanhPhanTpackCreate,
-                    //     props: true
-                    // }
+                    }
                 ]
             },
             {
@@ -368,6 +360,29 @@ var routes = [
                         name: 'AdminLibraryDocumentEdit',
                         path: 'edit/:id',
                         component: AdminLibraryDocumentEdit
+                    }
+                ]
+            },
+            {
+                path: 'rule',
+                component:{
+                    render (c) { return c('router-view') }
+                },
+                children:[
+                    {
+                        name: 'AdminRule',
+                        path: '',
+                        component: AdminRule
+                    },
+                    {
+                        name: 'AdminRuleCreate',
+                        path: 'create',
+                        component: AdminRuleCreate
+                    },
+                    {
+                        name: 'AdminRuleEdit',
+                        path: 'edit/:id',
+                        component: AdminRuleEdit
                     }
                 ]
             },

@@ -93,6 +93,7 @@ Route::group(['prefix'=>'usermanual'], function(){
 
 Route::group(['prefix'=>'rule'], function(){
    	Route::get('show/{id}', 'RuleController@show');
+   	Route::get('getlist', 'RuleController@getList');
 });
 Route::get('/demoemail', 'DemoEmailController@index');
 Route::get('/demosendemail', 'DemoEmailController@sendEmail');
@@ -227,8 +228,12 @@ Route::group(['middleware' => 'auth:api'], function(){
 		Route::get('delete/{id}', 'LinkController@delete');
 	});
 
-
-
+	Route::group(['prefix'=>'rules'], function(){
+	   	Route::post('create', 'RuleController@create');
+	   	Route::post('update/{id}', 'RuleController@update');
+	   	Route::get('show/{id}', 'RuleController@show');
+		Route::get('delete/{id}', 'RuleController@delete');
+	});
 
 });
 
